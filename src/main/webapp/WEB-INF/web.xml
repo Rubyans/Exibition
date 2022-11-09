@@ -1,0 +1,41 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>autorized</servlet-name>
+    <servlet-class>app.servlets.AuthorizationServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>autorized</servlet-name>
+    <url-pattern>/auto</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>registration</servlet-name>
+    <servlet-class>app.servlets.RegistrationServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>registration</servlet-name>
+    <url-pattern>/reg</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>app.filter.FilterEncoding</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>
