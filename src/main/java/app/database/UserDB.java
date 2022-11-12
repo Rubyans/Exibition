@@ -1,12 +1,9 @@
 package app.database;
 
-import app.Encrypt.EncryptforDB;
+import app.database.Encrypt.EncryptforDB;
 import app.entities.User;
 
-import java.security.MessageDigest;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class UserDB {
 
@@ -24,7 +21,7 @@ public class UserDB {
             try (Connection conn = DriverManager.getConnection(url)) {
 
 
-                PreparedStatement statement = conn.prepareStatement("select first_name,last_name,email,role from authorized_user where login = ? and password = ?");
+                PreparedStatement statement = conn.prepareStatement("select first_name,last_name,email,role from exhibitiondb.authorized_user where login = ? and password = ?");
                 statement.setString(1, login);
                 statement.setString(2, hashPassword);
 
@@ -51,7 +48,7 @@ public class UserDB {
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection conn = DriverManager.getConnection(url)) {
 
-                PreparedStatement statement = conn.prepareStatement("INSERT authorized_user(first_name, last_name, login, password, email, role) VALUES (?,?,?,?,?,?)");
+                PreparedStatement statement = conn.prepareStatement("INSERT exhibitiondb.authorized_user(first_name, last_name, login, password, email, role) VALUES (?,?,?,?,?,?)");
                 statement.setString(1, firstName);
                 statement.setString(2, lastName);
                 statement.setString(3, login);

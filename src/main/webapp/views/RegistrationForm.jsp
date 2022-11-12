@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
-<body>
 <head>
     <title></title>
     <meta charset="UTF-8"/>
-    <link href="./styleRegistration/registrationForm.css" rel="stylesheet"/>
+    <link href="./Style/styleRegistration/formRegistationnew.css" rel="stylesheet"/>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>
+<body>
 <div>
     <%
 
@@ -15,7 +15,6 @@
     %>
     <script>
             sweetAlert("Реєстрування", "Даний логін вже існує", "error");
-
     </script>
     <%
     } else if(request.getAttribute("UserAdd")=="true") {
@@ -40,8 +39,8 @@
 <form action="reg"  id="regForm" method="POST">
 
     <div class="container" >
-        <h1>Реєстрація</h1>
-        <p>Будь ласка заповніть форму для створення акаунту.</p>
+        <h1 class="hcheck">Реєстрація</h1>
+        <p class="pcheck">Будь ласка заповніть форму для створення акаунту.</p>
         <hr>
 
         <label for="firstname"><b>Прізвище</b></label>
@@ -73,9 +72,9 @@
             </div>
     </div>
 
-</form>
 
-<script src="./styleRegistration/Autorizedvalidate.js"></script>
+</form>
+<script src="./JS/Autorizedvalidate.js"></script>
 <script>
 function checkPassword() {
     var x = document.getElementById("psw");

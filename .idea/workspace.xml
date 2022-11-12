@@ -4,31 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="343ac60a-8367-4fc8-91d9-9129c7ec50ec" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/Encrypt/EncryptforDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/UserDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/filter/FilterEncoding.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelAuthorization.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/AuthorizationServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/RegistrationServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AutorizedForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/mysql-connector-j-8.0.31.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/styleRegistration/Autorizedvalidate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/styleRegistration/registrationForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/AdminMenu.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/UserAutoMenu.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/UserMenu.jsp" afterDir="false" />
+    <list default="true" id="343ac60a-8367-4fc8-91d9-9129c7ec50ec" name="Changes" comment="ok">
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/GuestDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/UserGuest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelGuest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/AdminServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/GuestServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/checkGuest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/Style/styleAdmin/AdminMenu.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/Style/styleGuest/guestForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/GuestForm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Encrypt/EncryptforDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/Encrypt/EncryptforDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/UserDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/AuthorizationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/AuthorizationServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/AutorizedForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AutorizedMain.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/styleRegistration/Autorizedvalidate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/Autorizedvalidate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/styleRegistration/registrationForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Style/styleRegistration/formRegistationnew.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/AdminMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/AdminMenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,19 +58,24 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/projectjava/Exibition/src/main/webapp&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/projectjava/Exibition/src/main/webapp/WEB-INF/lib&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projectjava\Exibition\src\main\webapp\WEB-INF\lib" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\WEB-INF" />
       <recent name="D:\projectjava\Exibition\src\main\webapp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\projectjava\Exibition\src\main\webapp\styleRegistration" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\Style\styleRegistration" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\JS" />
       <recent name="D:\projectjava\Exibition\src\main\webapp" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\styleAutorized" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\views" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\views\registration" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\Style\styleIndex" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\WEB-INF" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="app.servlets" />
@@ -115,6 +117,14 @@
       <option name="presentableId" value="Default" />
       <updated>1667678206727</updated>
     </task>
+    <task id="LOCAL-00001" summary="ok">
+      <created>1667957936701</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667957936701</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,5 +137,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="ok" />
   </component>
 </project>

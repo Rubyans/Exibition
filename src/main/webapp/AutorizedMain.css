@@ -37,25 +37,30 @@ hr {
 
 /* Set a style for all buttons */
 button {
-  background-color: #7c4caf;
+  background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
   margin: 0 auto;
-  margin-top:15px;
-  display: block;
   border: none;
   cursor: pointer;
-  width: 60%;
+  width: 100%;
   opacity: 0.9;
+
 }
 
 button:hover {
   opacity:1;
 }
 
+.loginbutton{
+    background-color: #7c4caf;
+    margin-top:15px;
+    display: block;
+    width:60%;
+}
 /* hyperlink to registration form */
 
-.forgot{
+.hyperlink{
     color: #9e9898;
     float:right;
 }
@@ -65,7 +70,6 @@ button:hover {
   padding: 16px;
 }
 
-/* Clear floats */
 
 .modal {
     display: none; /* Hidden by default */

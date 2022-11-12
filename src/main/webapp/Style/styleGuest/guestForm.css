@@ -1,0 +1,72 @@
+table {
+    border-spacing: 0;
+    width: 99%;
+    margin-left:0.5%;
+    font-size: 14px;
+    text-align: center;
+}
+
+th, td:first-child {
+    background: #AFCDE7;
+    color: white;
+    padding: 16px;
+}
+th, td {
+border-style: solid;
+border-width: 0 1px 1px 0;
+border-color: white;
+}
+
+td
+{
+background: #D8E6F3;
+}
+
+th:first-child, td:first-child {
+text-align: left;
+}
+
+
+.text{
+    text-align:center;
+}
+#guestForm{
+    border:1px solid #ccc;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 20px;
+  margin: 8px 3px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+
+}
+
+button:hover {
+  opacity:1;
+}
+
+
+.buttonAuto
+{
+    margin-left:0.3%;
+    width:30%;
+}
+
+.sortButton {
+  background-color: #02d4f9;
+}
+.autoButton {
+  background-color: #7c4caf;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.updateButton, .sortButton,.autoButton {
+   width: 30%;
+}

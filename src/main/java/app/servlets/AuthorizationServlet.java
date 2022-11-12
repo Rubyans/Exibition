@@ -15,17 +15,20 @@ public class AuthorizationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String PathJsp = null;
-        if(req.getAttribute("UserRoleCheck").equals("false")) {
-            PathJsp="index.jsp";
+
+        System.out.println("role "+req.getAttribute("UserRoleCheck"));
+        if(req.getAttribute("UserRoleCheck")==null)
+        {
+            if(req.getSession().getAttribute("UserRole").equals("1")) {
+                PathJsp = "views/AdminMenu.html";
+
+            } else if (req.getSession().getAttribute("UserRole").equals("2")) {
+                PathJsp = "views/UserAutoMenu.jsp";
+            }
         }
-
-        if (req.getSession().getAttribute("UserRole").equals("1")) {
-            PathJsp = "views/AdminMenu.jsp";
-
-        } else if (req.getSession().getAttribute("UserRole").equals("2")) {
-            PathJsp = "views/UserAutoMenu.jsp";
-        } else {
-            PathJsp = "";
+        else
+        {
+            PathJsp="index.jsp";
         }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(PathJsp);
         requestDispatcher.forward(req, resp);
