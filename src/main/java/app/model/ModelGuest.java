@@ -34,9 +34,9 @@ public class ModelGuest {
     }
     public Boolean checkNull()
     {
-        for(UserGuest user:model)
+        for(UserGuest guest:model)
         {
-            if(user!=null)
+            if(guest!=null)
                 return false;
         }
         return true;

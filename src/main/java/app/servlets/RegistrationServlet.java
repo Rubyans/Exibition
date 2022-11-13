@@ -2,6 +2,8 @@ package app.servlets;
 
 import app.database.UserDB;
 import app.entities.User;
+import app.model.ModelGuest;
+import app.model.ModelRegistration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,10 +16,20 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("attrib= "+req.getAttribute("UserAdd"));
+
+        System.out.println("doGet");
+
+
+        ModelRegistration model = ModelRegistration.getInstance();
+
+        if(model.checkString()!=null)
+        {
+            req.setAttribute("UserAdd",model.returnString());
+        }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/RegistrationForm.jsp");
         requestDispatcher.forward(req, resp);
         req.removeAttribute("UserAdd");
+        model.delete();
     }
 
     @Override
@@ -30,12 +42,10 @@ public class RegistrationServlet extends HttpServlet {
         String login=req.getParameter("login");
         String password = req.getParameter("password");
 
-        String CheckAddUser=UserDB.registrationDB(firstName,lastName,email,login,password);
-        req.setAttribute("UserAdd",CheckAddUser);
+        ModelRegistration model=ModelRegistration.getInstance();
+        model.add(UserDB.registrationDB(firstName,lastName,email,login,password));
 
-        doGet(req,resp);
-
-        System.out.println("good?");
+        resp.sendRedirect("/exibition/reg");
 
     }
 }

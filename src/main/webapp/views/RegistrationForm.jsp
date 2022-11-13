@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
@@ -9,32 +10,24 @@
 </head>
 <body>
 <div>
-    <%
-
-    if(request.getAttribute("UserAdd")=="false") {
-    %>
-    <script>
-            sweetAlert("Реєстрування", "Даний логін вже існує", "error");
-    </script>
-    <%
-    } else if(request.getAttribute("UserAdd")=="true") {
-    %>
-    <script>
-            sweetAlert("Реєстрування", "Ви успішно зареєструвались", "success");
-            setTimeout(() => document.location.href = "/exibition/", 8000);
-
-    </script>
-    <%
-    }
-    else if(request.getAttribute("UserAdd") == null){
-    %>
-    <script>
-            swal("Реєстрація", "Заповніть форму");
-
-    </script>
-    <%
-    }
-    %>
+    <c:choose>
+        <c:when test="${requestScope.UserAdd eq false}">
+          <script>
+            sweetAlert("Реєстрування", "Даний логін вже існує або утворилися проблеми з БД", "error");
+          </script>
+        </c:when>
+        <c:when test="${requestScope.UserAdd eq true}">
+            <script>
+                sweetAlert("Реєстрування", "Ви успішно зареєструвались", "success");
+                setTimeout(() => document.location.href = "/exibition/", 8000);
+            </script>
+        </c:when>
+        <c:when test="${not requestScope.UserAdd}">
+            <script>
+                swal("Реєстрація", "Заповніть форму");
+            </script>
+        </c:when>
+    </c:choose>
 </div>
 <form action="reg"  id="regForm" method="POST">
 

@@ -18,7 +18,8 @@ public class UserDB {
         String role = "false";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(url)) {
+            try (Connection conn = DriverManager.getConnection(url))
+            {
 
 
                 PreparedStatement statement = conn.prepareStatement("select first_name,last_name,email,role from exhibitiondb.authorized_user where login = ? and password = ?");
@@ -36,10 +37,11 @@ public class UserDB {
                 conn.close();
                 return new User(firstName, lastName, login, hashPassword, email, role);
             }
-        } catch (Exception ex) {
-            System.out.println(ex);
         }
-        return null;
+        catch (Exception ex)
+        {
+            return null;
+        }
     }
 
     public static String registrationDB(String firstName, String lastName, String email, String login, String password) {
@@ -61,9 +63,10 @@ public class UserDB {
                 return "true";
             }
         } catch (Exception ex) {
-            System.out.println(ex);
+           ex.printStackTrace();
         }
         return "false";
+
     }
 
 

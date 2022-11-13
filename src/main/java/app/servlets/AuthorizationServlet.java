@@ -3,6 +3,7 @@ package app.servlets;
 import app.database.UserDB;
 import app.entities.User;
 import app.model.ModelAuthorization;
+import app.model.ModelGuest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,50 +15,48 @@ import java.io.IOException;
 public class AuthorizationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String PathJsp = null;
 
-        System.out.println("role "+req.getAttribute("UserRoleCheck"));
-        if(req.getAttribute("UserRoleCheck")==null)
-        {
-            if(req.getSession().getAttribute("UserRole").equals("1")) {
-                PathJsp = "views/AdminMenu.html";
+        String PathJsp = "index.jsp";
 
-            } else if (req.getSession().getAttribute("UserRole").equals("2")) {
-                PathJsp = "views/UserAutoMenu.jsp";
+        ModelAuthorization model = ModelAuthorization.getInstance();
+
+        if (model.listUser() != null) {
+            if (model.checkNull() == true) {
+                PathJsp = "index.jsp";
+                req.setAttribute("Error", true);
+            } else {
+                if (model.roleCheck().equals("1")) {
+                    req.getSession().setAttribute("UserRole", model.roleCheck());
+                    PathJsp = "views/UserAutoMenu.jsp";
+
+                } else if (model.roleCheck().equals("2")) {
+                    req.getSession().setAttribute("UserRole", model.roleCheck());
+                    PathJsp = "views/AdminMenu.html";
+                } else {
+                    req.setAttribute("UserRoleCheck", model.roleCheck());
+                }
             }
         }
-        else
-        {
-            PathJsp="index.jsp";
-        }
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher(PathJsp);
-        requestDispatcher.forward(req, resp);
+        req.getRequestDispatcher(PathJsp).forward(req, resp);
         req.removeAttribute("UserRoleCheck");
+        req.removeAttribute("Error");
+        ModelAuthorization.delete();
+
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        ModelGuest.delete();
+
         String login = req.getParameter("loginUser");
         String password = req.getParameter("passwordUser");
 
-        User user=UserDB.authorizationuser(login,password);
+        ModelAuthorization model = ModelAuthorization.getInstance();
+        model.add(UserDB.authorizationuser(login, password));
 
-        System.out.println("userrole "+user.getRole());
-        if(user.getRole().equals("false"))
-        {
-            req.setAttribute("UserRoleCheck",user.getRole());
-        }
-        else
-        {
-            System.out.println("session");
-            req.getSession().setAttribute("UserRole",user.getRole());
+        resp.sendRedirect("/exibition/auto");
 
-            if(user.getRole().equals("false")!=true) {
-                ModelAuthorization model = ModelAuthorization.getInstance();
-                model.add(user);
-            }
-        }
-        doGet(req, resp);
     }
 }

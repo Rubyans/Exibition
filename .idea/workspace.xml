@@ -4,27 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="343ac60a-8367-4fc8-91d9-9129c7ec50ec" name="Changes" comment="ok">
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/GuestDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/UserGuest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelGuest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/AdminServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/GuestServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/checkGuest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Style/styleAdmin/AdminMenu.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Style/styleGuest/guestForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/GuestForm.jsp" afterDir="false" />
+    <list default="true" id="343ac60a-8367-4fc8-91d9-9129c7ec50ec" name="Changes" comment="firstCommit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelRegistration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Encrypt/EncryptforDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/Encrypt/EncryptforDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/database/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/UserDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/ModelAuthorization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelAuthorization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/ModelGuest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelGuest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/AuthorizationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/AuthorizationServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AutorizedForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AutorizedMain.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/RegistrationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/RegistrationServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/styleRegistration/Autorizedvalidate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/Autorizedvalidate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/styleRegistration/registrationForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Style/styleRegistration/formRegistationnew.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/AdminMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/AdminMenu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667957936701</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="firstCommit">
+      <created>1668291710211</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668291710211</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -140,6 +135,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="ok" />
+    <MESSAGE value="firstCommit" />
+    <option name="LAST_COMMIT_MESSAGE" value="firstCommit" />
   </component>
 </project>
