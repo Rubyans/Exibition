@@ -1,3 +1,5 @@
+* {box-sizing: border-box}
+
 table {
     border-spacing: 0;
     width: 99%;
@@ -37,7 +39,7 @@ text-align: left;
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #3E8E7E;
   color: white;
   padding: 8px 20px;
   margin: 8px 3px;
@@ -60,7 +62,7 @@ button:hover {
 }
 
 .sortButton {
-  background-color: #02d4f9;
+  background-color: #7CD1B8;
 }
 .autoButton {
   background-color: #7c4caf;

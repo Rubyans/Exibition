@@ -22,22 +22,25 @@ public class AuthorizationServlet extends HttpServlet {
 
         if (model.listUser() != null) {
             if (model.checkNull() == true) {
-                PathJsp = "index.jsp";
                 req.setAttribute("Error", true);
+                req.getRequestDispatcher(PathJsp).forward(req, resp);
             } else {
                 if (model.roleCheck().equals("1")) {
                     req.getSession().setAttribute("UserRole", model.roleCheck());
-                    PathJsp = "views/UserAutoMenu.jsp";
+                    resp.sendRedirect("/exhibition/user");
 
                 } else if (model.roleCheck().equals("2")) {
                     req.getSession().setAttribute("UserRole", model.roleCheck());
-                    PathJsp = "views/AdminMenu.html";
+                    resp.sendRedirect("/exhibition/adminmain");
                 } else {
                     req.setAttribute("UserRoleCheck", model.roleCheck());
+                    req.getRequestDispatcher(PathJsp).forward(req, resp);
+
                 }
             }
         }
-        req.getRequestDispatcher(PathJsp).forward(req, resp);
+        else
+            req.getRequestDispatcher(PathJsp).forward(req, resp);
         req.removeAttribute("UserRoleCheck");
         req.removeAttribute("Error");
         ModelAuthorization.delete();
@@ -56,7 +59,7 @@ public class AuthorizationServlet extends HttpServlet {
         ModelAuthorization model = ModelAuthorization.getInstance();
         model.add(UserDB.authorizationuser(login, password));
 
-        resp.sendRedirect("/exibition/auto");
+        resp.sendRedirect("/exhibition/auto");
 
     }
 }

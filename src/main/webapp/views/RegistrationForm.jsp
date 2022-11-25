@@ -4,7 +4,7 @@
 <head>
     <title></title>
     <meta charset="UTF-8"/>
-    <link href="./Style/styleRegistration/formRegistationnew.css" rel="stylesheet"/>
+    <link href="./style/styleRegistration/FormRegistration.css" rel="stylesheet"/>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>
@@ -53,7 +53,7 @@
 
         <input type="checkbox" onclick="checkPassword()">Переглянути пароль
         <div class="clearfix">
-            <button onclick="location.href='/exibition/'" class="backmainbtn">До авторизації</button>
+            <button onclick="location.href='/exhibition/'" class="backmainbtn">До авторизації</button>
             <button type="submit" class="signupbtn">Зареєструватися</button>
         </div>
         <div id="message">

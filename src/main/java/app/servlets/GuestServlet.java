@@ -1,7 +1,6 @@
 package app.servlets;
 
-import app.database.GuestDB;
-import app.database.UserDB;
+import app.database.admin.GuestDB;
 import app.entities.UserGuest;
 import app.model.ModelGuest;
 
@@ -53,7 +52,7 @@ public class GuestServlet extends HttpServlet {
         String updateButton = req.getParameter("updateButton");
         ModelGuest.delete();
         if (req.getParameter("autoButton") != null) {
-            resp.sendRedirect("/exibition/");
+            resp.sendRedirect("/exhibition/");
         } else if (updateButton != null)
         {
             ModelGuest model = ModelGuest.getInstance();
@@ -67,7 +66,7 @@ public class GuestServlet extends HttpServlet {
                 model.add(null);
             }
 
-            resp.sendRedirect("/exibition/guest");
+            resp.sendRedirect("/exhibition/guest");
         }
     }
 

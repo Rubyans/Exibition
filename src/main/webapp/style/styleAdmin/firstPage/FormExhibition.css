@@ -1,0 +1,185 @@
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+
+#adminForm{
+    border:1px solid #ccc;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+
+}
+
+button {
+  background-color: #8D72E1;
+  color: white;
+  padding: 8px 20px;
+  margin: 8px 3px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+
+}
+button:hover {
+  opacity:1;
+}
+
+.buttonAdmin
+{
+    display: flex;
+    justify-content: space-between;
+    margin-left:0.3%;
+    width:30%;
+}
+
+
+div.wrapper {
+   width:50%;
+   border: 1px solid #f1f1f1;
+   background-color:#6ECCAF;
+}
+
+div.left_block {
+    float:left;
+    width:43%;
+    margin-left: 0.5%;
+    margin-top:1%;
+}
+
+div.right_block {
+    float:right;
+    width:43%;
+    margin-right: 1%;
+    margin-top:1%;
+}
+
+#addDiv{
+    margin-left:5px;
+}
+
+.h6Add{
+   margin:0px;
+   text-align:center;
+}
+.SelectAdd{
+
+    width: 100%;
+    margin: 7px 4px 7px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+
+input[type=text],input[type=date],input[type=number] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 10px 4px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus,input[type=date]:focus,input[type=number]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+
+
+
+
+div.InputDelDiv{
+    width:50%;
+    margin-left:24%;
+    margin-top:1%;
+    margin-bottom:2%;
+}
+
+div.delDiv {
+    display: flex;
+    justify-content: space-between;
+    width:29.6%;
+    margin-left:0.4%;
+    border: 1px solid #f1f1f1;
+    background-color:#F38BA0;
+
+}
+
+
+.delButtonServlet{
+    display: block;
+    width:30%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:#EB1D36;
+}
+
+
+
+.addButtonServlet{
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 70%;
+   background-color:#1C7947;
+}
+
+
+.pagination{
+    margin-top:5%;
+    margin-bottom:5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    font-size: 10pt;
+    color: black;
+    padding: 0.5% 1% 0.5% 1%;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: #DFDFDE;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+
+
+table {
+    border-spacing: 0;
+    width: 99%;
+    margin-left:0.5%;
+    font-size: 14px;
+    text-align: center;
+}
+
+th, td:first-child {
+    background: #6A67CE;
+    color: white;
+    padding: 16px;
+}
+th, td {
+border-style: solid;
+border-width: 0 1px 1px 0;
+border-color: white;
+}
+
+td
+{
+    background: #BDF2D5;
+}
+
+th:first-child, td:first-child {
+text-align: left;
+}
+
+.text{
+    text-align:center;
+
+

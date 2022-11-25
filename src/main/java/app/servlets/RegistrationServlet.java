@@ -45,7 +45,7 @@ public class RegistrationServlet extends HttpServlet {
         ModelRegistration model=ModelRegistration.getInstance();
         model.add(UserDB.registrationDB(firstName,lastName,email,login,password));
 
-        resp.sendRedirect("/exibition/reg");
+        resp.sendRedirect("/exhibition/reg");
 
     }
 }

@@ -40,13 +40,45 @@
 
 
   <servlet>
-    <servlet-name>adminmenu</servlet-name>
-    <servlet-class>app.servlets.AdminServlet</servlet-class>
+    <servlet-name>adminmain</servlet-name>
+    <servlet-class>app.servlets.admin.firstPage.AdminExhibitionServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminmenu</servlet-name>
+    <servlet-name>adminmain</servlet-name>
     <url-pattern>/adminmain</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>adminSecondPage</servlet-name>
+    <servlet-class>app.servlets.admin.secondPage.AdminHallServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminSecondPage</servlet-name>
+    <url-pattern>/adminhall</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>adminThirdPage</servlet-name>
+    <servlet-class>app.servlets.admin.thirdPage.AdminAddressServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminThirdPage</servlet-name>
+    <url-pattern>/adminaddress</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>adminFouthPage</servlet-name>
+    <servlet-class>app.servlets.admin.fourthPage.AdminFourthServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminFouthPage</servlet-name>
+    <url-pattern>/adminauthor</url-pattern>
   </servlet-mapping>
 
 

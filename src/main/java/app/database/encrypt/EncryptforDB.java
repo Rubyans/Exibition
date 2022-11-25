@@ -1,4 +1,4 @@
-package app.database.Encrypt;
+package app.database.encrypt;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

@@ -1,13 +1,10 @@
-package app.database;
+package app.database.admin;
 
 
-import app.database.Encrypt.EncryptforDB;
-import app.entities.User;
 import app.entities.UserGuest;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -18,7 +18,7 @@ public class UserGuest {
     {
         this.nameExibition=nameExibition;
         this.descriptionExibition=descriptionExibition;
-        this.expositionName=new ArrayList<>(expositionName);;
+        this.expositionName=new ArrayList<>(expositionName);
         this.price=price;
         this.dateStart=dateStart;
         this.dateEnd=dateEnd;

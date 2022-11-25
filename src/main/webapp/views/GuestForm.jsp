@@ -3,12 +3,11 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Виставки</title>
-        <link href="./Style/styleGuest/guestForm.css" rel="stylesheet"/>
+        <title>Гость</title>
+        <link href="./style/styleGuest/FormGuest.css" rel="stylesheet"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     </head>
-</head>
 <body>
 <form action="guest"  id="guestForm" method="POST">
 <h3 class="text">Вітаємо шановного гостя</p><h3>

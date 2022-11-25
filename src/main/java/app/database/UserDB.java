@@ -1,6 +1,6 @@
 package app.database;
 
-import app.database.Encrypt.EncryptforDB;
+import app.database.encrypt.EncryptforDB;
 import app.entities.User;
 
 import java.sql.*;
