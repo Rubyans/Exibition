@@ -1,20 +1,27 @@
 package app.model.adminModels.thirdPage;
 
-import app.entities.adminEntities.secondPage.HallShow;
 import app.entities.adminEntities.thirdPage.AddressShow;
-import app.model.adminModels.secondPage.ModelShowHall;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModelShowAddress
 {
-    private static ModelShowAddress instance = new ModelShowAddress();
+    private static volatile ModelShowAddress instance;
     private static List<AddressShow> model;
 
     public static ModelShowAddress getInstance() {
 
-        return instance;
+        ModelShowAddress result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelShowAddress.class) {
+            if (instance == null) {
+                instance = new ModelShowAddress();
+            }
+            return instance;
+        }
     }
     private ModelShowAddress() {
         model = new ArrayList<>();

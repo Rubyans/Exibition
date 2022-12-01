@@ -14,138 +14,151 @@ public class FirstPageDB {
 
     private static Connection conn;
 
-    static {
-        try {
-            conn = DriverManager.getConnection(url);
-            conn.setAutoCommit(false);
-            savepoint = conn.setSavepoint("savepointMain");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+
+    public static Connection checkConnection()
+    {
+        return conn;
+    }
+    public static void startConnnection()
+    {
+        System.out.println("COOOOOOOOOOOOOOOONNN "+conn);
+        if(conn==null)
+        {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+                try {
+                    conn = DriverManager.getConnection(url);
+                    conn.setAutoCommit(false);
+                    savepoint = conn.setSavepoint("savepointMain");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
+    }
+    public static void nullConnection()
+    {
+        conn=null;
     }
 
     public static List<AdminShow> exibitionShow() {
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try {
-                List<AdminShow> admin = new ArrayList<>();
-                List<String> nameEx = new ArrayList<>();
+            List<AdminShow> admin = new ArrayList<>();
+            List<String> nameEx = new ArrayList<>();
 
-                String nameExhibition = null;
-                String descriptionExibition = null;
-                BigDecimal price = null;
-                Date dateStart = null;
-                Date dateEnd = null;
+            String nameExhibition = null;
+            String descriptionExibition = null;
+            BigDecimal price = null;
+            Date dateStart = null;
+            Date dateEnd = null;
 
-                List<String> expositionName = new ArrayList<>();
-                List<String> nameHell = new ArrayList<>();
-                List<String> nameAuthor = new ArrayList<>();
-                List<String> nameview = new ArrayList<>();
-                List<String> addressExibition = new ArrayList<>();
+            List<String> expositionName = new ArrayList<>();
+            List<String> nameHell = new ArrayList<>();
+            List<String> nameAuthor = new ArrayList<>();
+            List<String> nameview = new ArrayList<>();
+            List<String> addressExibition = new ArrayList<>();
 
 
-                PreparedStatement statement = conn.prepareStatement("SELECT name FROM exhibitiondb.exhibition", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                ResultSet setName = statement.executeQuery();
-                while (setName.next()) {
-                    nameEx.add(setName.getString(1));
-                }
-                statement.close();
-
-                for (String name : nameEx) {
-                    PreparedStatement resStatment = conn.prepareStatement("Select exhibition.name,description,work_art.name,price,\n" +
-                            "date_start,date_end,hall.name,author.first_name,author.last_name,nameview,city,street_or_square,number_home\n" +
-                            "FROM exhibitiondb.exhibition INNER JOIN exhibitiondb.exposition ON exhibition.exhibition_id=exposition.exhibition_fk\n" +
-                            "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id\n" +
-                            "INNER JOIN exhibitiondb.view_workart ON view_workart.artview_fk=work_art.art_id\n" +
-                            "INNER JOIN exhibitiondb.view_art ON view_art.view_id=view_workart.view_fk\n" +
-                            "INNER JOIN exhibitiondb.author_workart ON work_art.art_id=author_workart.wart_fk\n" +
-                            "INNER JOIN exhibitiondb.author ON author.author_id=author_workart.author_fk\n" +
-                            "INNER JOIN exhibitiondb.exhibition_with_address ON exhibition.exhibition_id=exhibition_with_address.ex_fk\n" +
-                            "INNER JOIN exhibitiondb.exhibition_address ON exhibition_address.address_id=exhibition_with_address.address_fk\n" +
-                            "INNER JOIN exhibitiondb.exhibition_with_hall ON exhibition.exhibition_id=exhibition_with_hall.exhi_fk\n" +
-                            "INNER JOIN exhibitiondb.hall ON hall.hall_id=exhibition_with_hall.hall_fk \n" +
-                            "where exhibition.name='" + name + "';", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                    ResultSet resultSet = resStatment.executeQuery();
-                    while (resultSet.next()) {
-                        nameExhibition = resultSet.getString(1);
-                        descriptionExibition = resultSet.getString(2);
-                        expositionName.add(resultSet.getString(3));
-                        price = resultSet.getBigDecimal(4);
-                        dateStart = resultSet.getDate(5);
-                        dateEnd = resultSet.getDate(6);
-                        nameHell.add(resultSet.getString(7));
-                        nameAuthor.add(resultSet.getString(8) + " " + resultSet.getString(9));
-                        nameview.add(resultSet.getString(10));
-                        addressExibition.add(resultSet.getString(11) + ", " + resultSet.getString(12) + " " + resultSet.getString(13));
-                    }
-                    if (nameExhibition != null)
-                        admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd, nameHell, nameAuthor, nameview, addressExibition));
-                    nameExhibition = null;
-                    descriptionExibition = null;
-                    price = null;
-                    dateStart = null;
-                    dateEnd = null;
-                    expositionName.clear();
-                    nameHell.clear();
-                    nameAuthor.clear();
-                    nameview.clear();
-                    addressExibition.clear();
-                }
-                return admin;
-            } catch (Exception e) {
-                e.printStackTrace();
+            PreparedStatement statement = conn.prepareStatement("SELECT name FROM exhibitiondb.exhibition", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet setName = statement.executeQuery();
+            while (setName.next()) {
+                nameEx.add(setName.getString(1));
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            statement.close();
+
+            for (String name : nameEx) {
+                PreparedStatement resStatment = conn.prepareStatement("Select exhibition.name,description,work_art.name,price,\n" +
+                        "date_start,date_end,hall.name,author.first_name,author.last_name,nameview,city,street_or_square,number_home\n" +
+                        "FROM exhibitiondb.exhibition INNER JOIN exhibitiondb.exposition ON exhibition.exhibition_id=exposition.exhibition_fk\n" +
+                        "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id\n" +
+                        "INNER JOIN exhibitiondb.view_workart ON view_workart.artview_fk=work_art.art_id\n" +
+                        "INNER JOIN exhibitiondb.view_art ON view_art.view_id=view_workart.view_fk\n" +
+                        "INNER JOIN exhibitiondb.author_workart ON work_art.art_id=author_workart.wart_fk\n" +
+                        "INNER JOIN exhibitiondb.author ON author.author_id=author_workart.author_fk\n" +
+                        "INNER JOIN exhibitiondb.exhibition_with_address ON exhibition.exhibition_id=exhibition_with_address.ex_fk\n" +
+                        "INNER JOIN exhibitiondb.exhibition_address ON exhibition_address.address_id=exhibition_with_address.address_fk\n" +
+                        "INNER JOIN exhibitiondb.exhibition_with_hall ON exhibition.exhibition_id=exhibition_with_hall.exhi_fk\n" +
+                        "INNER JOIN exhibitiondb.hall ON hall.hall_id=exhibition_with_hall.hall_fk \n" +
+                        "where exhibition.name='" + name + "';", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                ResultSet resultSet = resStatment.executeQuery();
+                while (resultSet.next()) {
+                    nameExhibition = resultSet.getString(1);
+                    descriptionExibition = resultSet.getString(2);
+                    expositionName.add(resultSet.getString(3));
+                    price = resultSet.getBigDecimal(4);
+                    dateStart = resultSet.getDate(5);
+                    dateEnd = resultSet.getDate(6);
+                    nameHell.add(resultSet.getString(7));
+                    nameAuthor.add(resultSet.getString(8) + " " + resultSet.getString(9));
+                    nameview.add(resultSet.getString(10));
+                    addressExibition.add(resultSet.getString(11) + ", " + resultSet.getString(12) + " " + resultSet.getString(13));
+                }
+                if (nameExhibition != null)
+                    admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd, nameHell, nameAuthor, nameview, addressExibition));
+                nameExhibition = null;
+                descriptionExibition = null;
+                price = null;
+                dateStart = null;
+                dateEnd = null;
+                expositionName.clear();
+                nameHell.clear();
+                nameAuthor.clear();
+                nameview.clear();
+                addressExibition.clear();
+            }
+            return admin;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return null;
     }
 
     public static List<AdminAddShow> ShowAddFirstPage() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try {
-                List<AdminAddShow> AdminAddFirstPage = new ArrayList<>();
+            List<AdminAddShow> AdminAddFirstPage = new ArrayList<>();
 
-                List<String> hall = new ArrayList<>();
-                List<String> address = new ArrayList<>();
-                List<String> art = new ArrayList<>();
+            List<String> hall = new ArrayList<>();
+            List<String> address = new ArrayList<>();
+            List<String> art = new ArrayList<>();
 
-                PreparedStatement statement = conn.prepareStatement("SELECT name FROM exhibitiondb.hall", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                ResultSet setHall = statement.executeQuery();
-                while (setHall.next()) {
-                    hall.add(setHall.getString(1));
-                }
-
-                statement = conn.prepareStatement("SELECT country,city,street_or_square,number_home FROM exhibitiondb.exhibition_address", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                ResultSet setAddress = statement.executeQuery();
-                while (setAddress.next()) {
-                    address.add(setAddress.getString(1) + " " + setAddress.getString(2) + " " + setAddress.getString(3) + " " + setAddress.getString(4));
-                }
-
-                statement = conn.prepareStatement("SELECT name FROM work_art", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                ResultSet setArt = statement.executeQuery();
-                while (setArt.next()) {
-                    art.add(setArt.getString(1));
-                }
-
-                AdminAddFirstPage.add(new AdminAddShow(hall, address, art));
-
-                statement.close();
-                return AdminAddFirstPage;
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            PreparedStatement statement = conn.prepareStatement("SELECT name FROM exhibitiondb.hall", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet setHall = statement.executeQuery();
+            while (setHall.next()) {
+                hall.add(setHall.getString(1));
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+
+            statement = conn.prepareStatement("SELECT country,city,street_or_square,number_home FROM exhibitiondb.exhibition_address", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet setAddress = statement.executeQuery();
+            while (setAddress.next()) {
+                address.add(setAddress.getString(1) + " " + setAddress.getString(2) + " " + setAddress.getString(3) + " " + setAddress.getString(4));
+            }
+
+            statement = conn.prepareStatement("SELECT name FROM work_art", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet setArt = statement.executeQuery();
+            while (setArt.next()) {
+                art.add(setArt.getString(1));
+            }
+
+            AdminAddFirstPage.add(new AdminAddShow(hall, address, art));
+
+            statement.close();
+            return AdminAddFirstPage;
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     public static Boolean AddFirstPage(String nameExibition, String description, Double price, String start, String end, List<String> hall, List<String> address, List<String> workArt) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             Savepoint savepointAdd = conn.setSavepoint("SavepointAdd");
             try {
 
@@ -253,7 +266,6 @@ public class FirstPageDB {
 
     public static Boolean DelFirstPage(String nameExibition) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             Savepoint savepointDel = conn.setSavepoint("SavepointDel");
             try {
 

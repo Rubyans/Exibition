@@ -10,53 +10,64 @@ import java.util.List;
 public class SecondPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
-
     private static Connection connHall;
-
-    static {
-        try {
-            connHall = DriverManager.getConnection(url);
-            connHall.setAutoCommit(false);
-            savepoint = connHall.setSavepoint("savepointMain");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    public static Connection checkConnection()
+    {
+        return connHall;
+    }
+    public static void startConnnection()
+    {
+        System.out.println("COOOOOOOOOOOOOOOONNN "+connHall);
+        if(connHall==null)
+        {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+                try {
+                    connHall = DriverManager.getConnection(url);
+                    connHall.setAutoCommit(false);
+                    savepoint = connHall.setSavepoint("savepointMain");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
+    }
+    public static void nullConnection()
+    {
+        connHall=null;
     }
 
     public static List<HallShow> hallShow() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try {
+            List<HallShow> hall = new ArrayList<>();
 
-                List<HallShow> hall = new ArrayList<>();
-
-                String nameHall = null;
-                BigDecimal square = null;
+            String nameHall = null;
+            BigDecimal square = null;
 
 
-                PreparedStatement statement = connHall.prepareStatement("SELECT name,square FROM exhibitiondb.hall", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                ResultSet setHall = statement.executeQuery();
-                while (setHall.next()) {
-                    nameHall = setHall.getString(1);
-                    square = setHall.getBigDecimal(2);
-                    hall.add(new HallShow(nameHall, square));
-                }
-                statement.close();
-
-
-                return hall;
-            } catch (Exception e) {
-                e.printStackTrace();
+            PreparedStatement statement = connHall.prepareStatement("SELECT name,square FROM exhibitiondb.hall", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet setHall = statement.executeQuery();
+            while (setHall.next()) {
+                nameHall = setHall.getString(1);
+                square = setHall.getBigDecimal(2);
+                hall.add(new HallShow(nameHall, square));
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            statement.close();
+
+
+            return hall;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     public static Boolean hallAdd(String nameExibition, Double square) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             Savepoint savepointAdd = connHall.setSavepoint("SavepointAdd");
             try {
 
@@ -79,10 +90,8 @@ public class SecondPageDB {
 
     public static Boolean hallDel(String nameHall) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             Savepoint savepointDel = connHall.setSavepoint("SavepointDel");
             try {
-
                 PreparedStatement ExhibitionDel = connHall.prepareStatement("DELETE FROM exhibitiondb.hall WHERE name=?");
                 ExhibitionDel.setString(1, nameHall);
                 int row = ExhibitionDel.executeUpdate();

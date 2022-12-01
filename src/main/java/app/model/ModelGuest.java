@@ -3,17 +3,24 @@ package app.model;
 import app.entities.UserGuest;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ModelGuest {
-    private static  ModelGuest instance = new ModelGuest();
+    private static volatile ModelGuest instance;
     private static List<UserGuest> model;
 
     public static ModelGuest getInstance() {
 
-        return instance;
+        ModelGuest result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized (ModelGuest.class) {
+            if (instance == null) {
+                instance = new ModelGuest();
+            }
+            return instance;
+        }
     }
     private ModelGuest() {
         model = new ArrayList<>();

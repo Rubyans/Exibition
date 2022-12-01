@@ -7,12 +7,21 @@ import java.util.List;
 
 public class ModelShowAuthor
 {
-    private static ModelShowAuthor instance = new ModelShowAuthor();
+    private static volatile ModelShowAuthor instance;
     private static List<AuthorShow> model;
 
     public static ModelShowAuthor getInstance() {
 
-        return instance;
+        ModelShowAuthor result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelShowAuthor.class) {
+            if (instance == null) {
+                instance = new ModelShowAuthor();
+            }
+            return instance;
+        }
     }
     private ModelShowAuthor() {
         model = new ArrayList<>();

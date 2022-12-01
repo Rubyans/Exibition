@@ -19,7 +19,7 @@
         <c:when test="${requestScope.UserAdd eq true}">
             <script>
                 sweetAlert("Реєстрування", "Ви успішно зареєструвались", "success");
-                setTimeout(() => document.location.href = "/exibition/", 8000);
+                setTimeout(() => document.location.href = "/exhibition/", 8000);
             </script>
         </c:when>
         <c:when test="${not requestScope.UserAdd}">

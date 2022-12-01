@@ -4,61 +4,68 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="343ac60a-8367-4fc8-91d9-9129c7ec50ec" name="Changes" comment="secondCommit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/firstPage/FirstPageDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/fourthPage/FourthPageDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/secondPage/SecondPageDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/thirdPage/ThirdPageDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/adminEntities/firstPage/AdminAddShow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/adminEntities/firstPage/AdminShow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/adminEntities/fourthPage/AuthorShow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/adminEntities/secondPage/HallShow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/adminEntities/thirdPage/AddressShow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelAddExhibition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelAddShow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelDel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelShow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelAddAuthor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelDelAuthor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelShowAuthor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelAddHall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelDelHall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelShowHall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelAddAddress.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelDelAddress.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelShowAddress.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/firstPage/AdminExhibitionServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/fourthPage/AdminFourthServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/secondPage/AdminHallServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/thirdPage/AdminAddressServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/firstPage/FormExhibition.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/fourthPage/FormAuthor.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/secondPage/FormHall.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/thirdPage/FormAddress.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/firstPage/AdminFirstMenu.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/fourthPage/AdminFourthMenu.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/secondPage/AdminSecondMenu.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/thirdPage/AdminThirdMenu.jsp" afterDir="false" />
+    <list default="true" id="343ac60a-8367-4fc8-91d9-9129c7ec50ec" name="Changes" comment="thirdCommit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/fifthPage/FifthPageDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/seventhPage/SeventhPageDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/sixthPage/SixthPageDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/adminEntities/fifthPage/ArtShow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/adminEntities/seventhPage/UserAutorizedShow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/entities/adminEntities/sixthPage/ViewShow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fifthPage/ModelAddArt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fifthPage/ModelDelArt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fifthPage/ModelShowArt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/seventhPage/ModelAddAmountAutorized.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/seventhPage/ModelAddUserAutorized.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/seventhPage/ModelDelUserAutorized.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/seventhPage/ModelShowUserAutorized.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/sixthPage/ModelAddView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/sixthPage/ModelDelView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/sixthPage/ModelShowView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/fifthPage/AdminFifthServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/seventhPage/AdminSeventhServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/sixthPage/AdminSixthServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/fifthPage/FormArt12.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/seventhPage/FormUserAutorized123.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/thirdPage/FormAddress12.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/fifthPage/AdminFifthMenu.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/seventhPage/AdminSeventhMenu.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/sixthPage/AdminSixthMenu.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/Encrypt/EncryptforDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/encrypt/EncryptforDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/GuestDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/GuestDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/UserDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/UserDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/entities/UserGuest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/entities/UserGuest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/AdminServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/admin/firstPage/FirstPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/firstPage/FirstPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/admin/fourthPage/FourthPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/fourthPage/FourthPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/admin/secondPage/SecondPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/secondPage/SecondPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/admin/thirdPage/ThirdPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/admin/thirdPage/ThirdPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/ModelAuthorization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelAuthorization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/ModelGuest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelGuest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/ModelRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/ModelRegistration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelAddExhibition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelAddExhibition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelAddShow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelAddShow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelDel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelDel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelShow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/firstPage/ModelShow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelAddAuthor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelAddAuthor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelDelAuthor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelDelAuthor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelShowAuthor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/fourthPage/ModelShowAuthor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelAddHall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelAddHall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelDelHall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelDelHall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelShowHall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/secondPage/ModelShowHall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelAddAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelAddAddress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelDelAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelDelAddress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelShowAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/model/adminModels/thirdPage/ModelShowAddress.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/AuthorizationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/AuthorizationServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/GuestServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/GuestServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/RegistrationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/RegistrationServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AutorizedMain.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/FormAutorized.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Style/styleAdmin/AdminMenu.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Style/styleGuest/guestForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleGuest/FormGuest.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Style/styleRegistration/formRegistationnew.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleRegistration/FormRegistration.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/admin/firstPage/AdminExhibitionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/firstPage/AdminExhibitionServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/admin/fourthPage/AdminFourthServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/fourthPage/AdminFourthServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/admin/secondPage/AdminHallServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/secondPage/AdminHallServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/servlets/admin/thirdPage/AdminAddressServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/servlets/admin/thirdPage/AdminAddressServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/AdminMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/GuestForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/GuestForm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/firstPage/FormExhibition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/firstPage/FormExhibition12.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/fourthPage/FormAuthor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/fourthPage/FormAuthor123.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/secondPage/FormHall.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/sixthPage/FormView1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/thirdPage/FormAddress.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/secondPage/FormHall1.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/UserAutoMenu.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/UserMenu.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/firstPage/AdminFirstMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/firstPage/AdminFirstMenu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/fourthPage/AdminFourthMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/fourthPage/AdminFourthMenu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/secondPage/AdminSecondMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/secondPage/AdminSecondMenu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/thirdPage/AdminThirdMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/thirdPage/AdminThirdMenu.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,23 +93,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/projectjava/Exibition/src/main/webapp/style/styleAdmin/fouthPage",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/projectjava/Exibition/src/main/java/app/model/adminModels/seventhPage&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projectjava\Exibition\src\main\webapp\style\styleAdmin\fouthPage" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\WEB-INF\lib" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\WEB-INF" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp" />
+      <recent name="D:\projectjava\Exibition\src\main\java\app\model\adminModels\seventhPage" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\style\styleAdmin\seventhPage" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\views\adminMenu\seventhPage" />
+      <recent name="D:\projectjava\Exibition\src\main\java\app\model\adminModels\sixthPage" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\style\styleAdmin\sixthPage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projectjava\Exibition\src\main\webapp" />
@@ -113,6 +121,13 @@
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="app.servlets" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="app.model.adminModels.seventhPage" />
+      <recent name="app.entities.adminEntities.seventhPage" />
+      <recent name="app.database.admin.seventhPage" />
+      <recent name="app.servlets.admin.seventhPage" />
+      <recent name="app.servlets.admin.sixthPage" />
     </key>
   </component>
   <component name="RunManager">
@@ -172,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668378010440</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="thirdCommit">
+      <created>1669417770669</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1669417770669</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,6 +212,7 @@
     <MESSAGE value="ok" />
     <MESSAGE value="firstCommit" />
     <MESSAGE value="secondCommit" />
-    <option name="LAST_COMMIT_MESSAGE" value="secondCommit" />
+    <MESSAGE value="thirdCommit" />
+    <option name="LAST_COMMIT_MESSAGE" value="thirdCommit" />
   </component>
 </project>

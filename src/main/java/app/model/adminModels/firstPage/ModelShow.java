@@ -6,12 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModelShow {
-    private static ModelShow instance = new ModelShow();
+    private static volatile ModelShow instance;
     private static List<AdminShow> model;
 
     public static ModelShow getInstance() {
-
-        return instance;
+        ModelShow result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelShow.class) {
+            if (instance == null) {
+                instance = new ModelShow();
+            }
+            return instance;
+        }
     }
     private ModelShow() {
         model = new ArrayList<>();

@@ -4,7 +4,7 @@
     <head>
         <title>Адміністратор</title>
         <meta charset="UTF-8"/>
-        <link href="./style/styleAdmin/secondPage/FormHall.css" rel="stylesheet"/>
+        <link href="./style/styleAdmin/secondPage/FormHall1.css" rel="stylesheet"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     </head>
@@ -35,7 +35,10 @@
     </c:if>
 
     <form action="adminhall"  id="hallForm" class="hallForm" method="POST">
-        <h3 class="text">Список залів</p><h3>
+         <div class="nameExit">
+            <h3 class="h3Add">Список залів</p></h3>
+            <button class="exitButton" name="exitButton">Вийти</button>
+         </div>
         <div class="buttonHall">
             <button class="updateButton" name="updateButton" >Оновити</button>
             <button class="addButton" id="one" name="addButton"   onclick="addFunc()" type="Button">Додавання</button>
@@ -84,15 +87,15 @@
             </c:if>
             </table>
             <div class="pagination">
-
-              <a href="/exhibition/adminmain">«</a>
-              <a href="/exhibition/adminmain">1</a>
-              <a class="active" href="/exhibition/adminhall">2</a>
-              <a href="/exhibition/adminaddress">3</a>
-              <a href="/exhibition/adminauthor"">4</a>
-              <a href="#">5</a>
-              <a href="#">6</a>
-              <a href="/exhibition/adminaddress">»</a>
+                <a href="/exhibition/adminmain">«</a>
+                <a href="/exhibition/adminmain">1</a>
+                <a class="active" href="/exhibition/adminhall">2</a>
+                <a href="/exhibition/adminaddress">3</a>
+                <a href="/exhibition/adminauthor">4</a>
+                <a href="/exhibition/adminart">5</a>
+                <a href="/exhibition/adminview">6</a>
+                <a href="/exhibition/userautorized">7</a>
+                <a href="/exhibition/adminaddress">»</a>
             </div>
     </form>
     <script>

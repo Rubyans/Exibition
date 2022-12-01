@@ -7,12 +7,21 @@ import java.util.List;
 
 public class ModelShowHall
 {
-    private static ModelShowHall instance = new ModelShowHall();
+    private static volatile ModelShowHall instance;
     private static List<HallShow> model;
 
     public static ModelShowHall getInstance() {
 
-        return instance;
+        ModelShowHall result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelShowHall.class) {
+            if (instance == null) {
+                instance = new ModelShowHall();
+            }
+            return instance;
+        }
     }
     private ModelShowHall() {
         model = new ArrayList<>();

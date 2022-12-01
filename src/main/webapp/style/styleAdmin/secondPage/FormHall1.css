@@ -2,7 +2,7 @@
 
 /* Full-width input fields */
 
-#AddressForm{
+#hallForm{
     border:1px solid #ccc;
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 
@@ -23,7 +23,23 @@ button:hover {
   opacity:1;
 }
 
-.buttonAddress
+
+.nameExit{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.exitButton
+{
+    margin-left:40%;
+    width:7%;
+}
+
+.h3Add{
+    margin-left:40%;
+}
+
+.buttonHall
 {
     display: flex;
     justify-content: space-between;

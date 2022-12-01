@@ -81,6 +81,36 @@
     <url-pattern>/adminauthor</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>adminFifthPage</servlet-name>
+    <servlet-class>app.servlets.admin.fifthPage.AdminFifthServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminFifthPage</servlet-name>
+    <url-pattern>/adminart</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>adminSixthPage</servlet-name>
+    <servlet-class>app.servlets.admin.sixthPage.AdminSixthServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminSixthPage</servlet-name>
+    <url-pattern>/adminview</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>adminSeventhPage</servlet-name>
+    <servlet-class>app.servlets.admin.seventhPage.AdminSeventhServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminSeventhPage</servlet-name>
+    <url-pattern>/userautorized</url-pattern>
+  </servlet-mapping>
+
 
   <filter>
     <filter-name>encodingFilter</filter-name>

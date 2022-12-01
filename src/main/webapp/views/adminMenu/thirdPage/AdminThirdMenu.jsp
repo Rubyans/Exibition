@@ -4,7 +4,7 @@
     <head>
         <title>Адміністратор</title>
         <meta charset="UTF-8"/>
-        <link href="./style/styleAdmin/thirdPage/FormAddress.css" rel="stylesheet"/>
+        <link href="./style/styleAdmin/thirdPage/FormAddress12.css" rel="stylesheet"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     </head>
@@ -35,7 +35,10 @@
     </c:if>
 
     <form action="adminaddress"  id="AddressForm" class="AddressForm" method="POST">
-        <h3 class="text">Список адрес</p><h3>
+        <div class="nameExit">
+            <h3 class="h3Add">Список адрес</p></h3>
+            <button class="exitButton" name="exitButton">Вийти</button>
+        </div>
         <div class="buttonAddress">
             <button class="updateButton" name="updateButton" >Оновити</button>
             <button class="addButton" id="one" name="addButton"   onclick="addFunc()" type="Button">Додавання</button>
@@ -92,15 +95,15 @@
             </c:if>
             </table>
             <div class="pagination">
-
-              <a href="/exhibition/adminhall">«</a>
-              <a href="/exhibition/adminmain">1</a>
-              <a href="/exhibition/adminhall">2</a>
-              <a class="active" href="/exhibition/adminaddress">3</a>
-              <a href="/exhibition/adminauthor">4</a>
-              <a href="#">5</a>
-              <a href="#">6</a>
-              <a href="/exhibition/adminauthor">»</a>
+                <a href="/exhibition/adminhall">«</a>
+                <a href="/exhibition/adminmain">1</a>
+                <a href="/exhibition/adminhall">2</a>
+                <a class="active" href="/exhibition/adminaddress">3</a>
+                <a href="/exhibition/adminauthor">4</a>
+                <a href="/exhibition/adminart">5</a>
+                <a href="/exhibition/adminview">6</a>
+                <a href="/exhibition/userautorized">7</a>
+                <a href="/exhibition/adminauthor">»</a>
             </div>
     </form>
 

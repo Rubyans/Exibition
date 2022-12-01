@@ -2,12 +2,21 @@ package app.model.adminModels.firstPage;
 
 public class ModelAddExhibition
 {
-    private static ModelAddExhibition instance = new ModelAddExhibition();
+    private static volatile ModelAddExhibition instance;
     private static String model;
 
     public static ModelAddExhibition getInstance() {
 
-        return instance;
+        ModelAddExhibition result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelAddExhibition.class) {
+            if (instance == null) {
+                instance = new ModelAddExhibition();
+            }
+            return instance;
+        }
     }
     private ModelAddExhibition() {
         model = null;

@@ -4,7 +4,7 @@
     <head>
         <title>Адміністратор</title>
         <meta charset="UTF-8"/>
-        <link href="./style/styleAdmin/firstPage/FormExhibition.css" rel="stylesheet"/>
+        <link href="./style/styleAdmin/firstPage/FormExhibition12.css" rel="stylesheet"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     </head>
@@ -32,7 +32,10 @@
     </c:if>
 
     <form action="adminmain"  id="adminForm" class="adminForm" method="POST">
-        <h3 class="text">Список виставок</p><h3>
+        <div class="nameExit">
+             <h3 class="h3Add">Список виставок</p></h3>
+            <button class="exitButton" name="exitButton">Вийти</button>
+        </div>
         <div class="buttonAdmin">
             <button class="updateButton" name="updateButton" >Оновити</button>
             <button class="addButton" id="one"  name="addButton"   onclick="addFunc()" type="Button">Додавання</button>
@@ -81,7 +84,7 @@
 
         <div class="delDiv" id="delDiv" style="display: none;">
                 <div class="InputDelDiv">
-                    <input class="inputDel" type="text" id="InputDelName" placeholder="Введіть назву залу" name="nameExhibitionDel">
+                    <input class="inputDel" type="text" id="InputDelName" placeholder="Введіть назву виставки" name="nameExhibitionDel">
                 </div>
                 <button class="delButtonServlet" name="delButtonServlet">Видалити</button>
         </div>
@@ -144,15 +147,15 @@
                 </c:if>
             </table>
             <div class="pagination">
-
-              <a href="/exhibition/adminmain">«</a>
-              <a class="active" href="/exhibition/adminmain">1</a>
-              <a href="/exhibition/adminhall">2</a>
-              <a href="/exhibition/adminaddress">3</a>
-              <a href="/exhibition/adminauthor">4</a>
-              <a href="#">5</a>
-              <a href="#">6</a>
-              <a href="/exhibition/adminhall">»</a>
+                <a href="/exhibition/adminmain">«</a>
+                <a class="active" href="/exhibition/adminmain">1</a>
+                <a href="/exhibition/adminhall">2</a>
+                <a href="/exhibition/adminaddress">3</a>
+                <a href="/exhibition/adminauthor">4</a>
+                <a href="/exhibition/adminart">5</a>
+                <a href="/exhibition/adminview">6</a>
+                <a href="/exhibition/userautorized">7</a>
+                <a href="/exhibition/adminhall">»</a>
             </div>
     </form>
    <script>

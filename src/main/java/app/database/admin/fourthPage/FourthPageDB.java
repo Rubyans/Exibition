@@ -13,14 +13,34 @@ public class FourthPageDB
 
     private static Connection connAuthor;
 
-    static {
-        try {
-            connAuthor = DriverManager.getConnection(url);
-            connAuthor.setAutoCommit(false);
-            savepoint = connAuthor.setSavepoint("savepointMain");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    public static Connection checkConnection()
+    {
+        return connAuthor;
+    }
+    public static void startConnnection()
+    {
+        System.out.println("COOOOOOOOOOOOOOOONNN "+connAuthor);
+        if(connAuthor==null)
+        {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+                try {
+                    connAuthor = DriverManager.getConnection(url);
+                    connAuthor.setAutoCommit(false);
+                    savepoint = connAuthor.setSavepoint("savepointMain");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
+    }
+    public static void nullConnection()
+    {
+        connAuthor=null;
     }
     public static List<AuthorShow> authorShow() {
         try {
@@ -57,7 +77,6 @@ public class FourthPageDB
     }
     public static Boolean authorAdd(String firstName,String lastName,String email) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             Savepoint savepointAdd = connAuthor.setSavepoint("SavepointAdd");
             try {
 
@@ -80,7 +99,6 @@ public class FourthPageDB
     }
     public static Boolean authorDel(String email) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             Savepoint savepointDel = connAuthor.setSavepoint("SavepointDel");
             try {
 

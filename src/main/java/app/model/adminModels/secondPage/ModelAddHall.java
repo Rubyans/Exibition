@@ -1,15 +1,23 @@
 package app.model.adminModels.secondPage;
 
-import app.model.adminModels.firstPage.ModelAddExhibition;
 
 public class ModelAddHall
 {
-    private static ModelAddHall instance = new ModelAddHall();
+    private static volatile ModelAddHall instance;
     private static String model;
 
     public static ModelAddHall getInstance() {
 
-        return instance;
+        ModelAddHall result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelAddHall.class) {
+            if (instance == null) {
+                instance = new ModelAddHall();
+            }
+            return instance;
+        }
     }
     private ModelAddHall() {
         model = null;

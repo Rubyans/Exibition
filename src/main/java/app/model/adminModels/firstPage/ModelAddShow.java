@@ -6,15 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModelAddShow {
-    private static ModelAddShow instance = new ModelAddShow();
+    private static volatile ModelAddShow instance;
     private static List<AdminAddShow> model;
+    private ModelAddShow() { model = new ArrayList<>(); }
 
     public static ModelAddShow getInstance() {
 
-        return instance;
-    }
-    private ModelAddShow() {
-        model = new ArrayList<>();
+        ModelAddShow result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelAddShow.class) {
+            if (instance == null) {
+                instance = new ModelAddShow();
+            }
+            return instance;
+        }
     }
 
     public static void delete()

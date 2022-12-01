@@ -1,11 +1,8 @@
 package app.servlets;
 
 import app.database.UserDB;
-import app.entities.User;
 import app.model.ModelAuthorization;
-import app.model.ModelGuest;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +48,6 @@ public class AuthorizationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ModelGuest.delete();
 
         String login = req.getParameter("loginUser");
         String password = req.getParameter("passwordUser");

@@ -1,13 +1,23 @@
 package app.model.adminModels.fourthPage;
 
 
+
 public class ModelAddAuthor {
-    private static ModelAddAuthor instance = new ModelAddAuthor();
+    private static volatile ModelAddAuthor instance;
     private static String model;
 
     public static ModelAddAuthor getInstance() {
 
-        return instance;
+        ModelAddAuthor result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelAddAuthor.class) {
+            if (instance == null) {
+                instance = new ModelAddAuthor();
+            }
+            return instance;
+        }
     }
     private ModelAddAuthor() {
         model = null;

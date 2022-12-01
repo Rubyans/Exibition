@@ -19,6 +19,8 @@ public class AdminHallServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if(SecondPageDB.checkConnection()==null)
+            SecondPageDB.startConnnection();
 
         if (req.getSession().getAttribute("UserRole") == null)
         {
@@ -32,6 +34,7 @@ public class AdminHallServlet extends HttpServlet {
             if (showHall.listShow() != null) {
                 if (showHall.checkNull() == true) {
                     req.setAttribute("Error", true);
+                    SecondPageDB.nullConnection();
                 } else {
                     List<HallShow> names = showHall.listShow();
                     req.setAttribute("SecondPageShow", names);
@@ -69,6 +72,11 @@ public class AdminHallServlet extends HttpServlet {
         ModelShowHall.delete();
         ModelAddHall.delete();
         ModelDelHall.delete();
+
+
+        if(SecondPageDB.checkConnection()==null)
+            SecondPageDB.startConnnection();
+
 
         if (req.getParameter("updateButton") != null)
         {
@@ -110,7 +118,8 @@ public class AdminHallServlet extends HttpServlet {
             SecondPageDB.RoleBackCommit();
         else if (req.getParameter("saveButton") != null)
             SecondPageDB.saveCommit();
-
+        else if(req.getParameter("exitButton")!=null)
+            req.getSession().removeAttribute("UserRole");
         resp.sendRedirect("/exhibition/adminhall");
     }
 

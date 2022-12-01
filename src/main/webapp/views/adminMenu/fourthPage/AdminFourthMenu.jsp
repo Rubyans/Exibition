@@ -4,7 +4,7 @@
     <head>
         <title>Адміністратор</title>
         <meta charset="UTF-8"/>
-        <link href="./style/styleAdmin/fourthPage/FormAuthor.css" rel="stylesheet"/>
+        <link href="./style/styleAdmin/fourthPage/FormAuthor123.css" rel="stylesheet"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     </head>
@@ -24,7 +24,7 @@
 
     <c:if test="${requestScope.AddError}">
         <script>
-            sweetAlert("Помилка", "Даний автор вже існує, введіть іншу дані!", "error");
+            sweetAlert("Помилка", "Даний автор вже існує, введіть інші дані!", "error");
         </script>
     </c:if>
 
@@ -35,7 +35,10 @@
     </c:if>
 
     <form action="adminauthor"  id="AuthorForm" class="AuthorForm" method="POST">
-        <h3 class="text">Список авторів</p><h3>
+        <div class="nameExit">
+            <h3 class="h3Add">Список авторів</p></h3>
+            <button class="exitButton" name="exitButton">Вийти</button>
+        </div>
         <div class="buttonAuthor">
             <button class="updateButton" name="updateButton" >Оновити</button>
             <button class="addButton" id="one" name="addButton"   onclick="addFunc()" type="Button">Додавання</button>
@@ -87,15 +90,15 @@
             </c:if>
             </table>
             <div class="pagination">
-
-              <a href="/exhibition/adminaddress">«</a>
-              <a href="/exhibition/adminmain">1</a>
-              <a href="/exhibition/adminhall">2</a>
-              <a href="/exhibition/adminaddress">3</a>
-              <a class="active" href="/exhibition/adminauthor">4</a>
-              <a href="#">5</a>
-              <a href="#">6</a>
-              <a href="/exhibition/admin???">»</a>
+                <a href="/exhibition/adminaddress">«</a>
+                <a href="/exhibition/adminmain">1</a>
+                <a href="/exhibition/adminhall">2</a>
+                <a href="/exhibition/adminaddress">3</a>
+                <a class="active" href="/exhibition/adminauthor">4</a>
+                <a href="/exhibition/adminart">5</a>
+                <a href="/exhibition/adminview">6</a>
+                <a href="/exhibition/userautorized">7</a>
+                <a href="/exhibition/adminart">»</a>
             </div>
     </form>
 
@@ -114,9 +117,9 @@
 
                     }else{
                         document.getElementById("addDiv").style.display='none';
-                        document.getElementById("InputFirstNameAd").required = true;
-                        document.getElementById("InputLastNameAd").required = true;
-                        document.getElementById("InputEmailAd").required = true;
+                        document.getElementById("InputFirstNameAd").required = false;
+                        document.getElementById("InputLastNameAd").required = false;
+                        document.getElementById("InputEmailAd").required = false;
                     }
                 }
                 else

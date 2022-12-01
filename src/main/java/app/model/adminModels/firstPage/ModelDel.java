@@ -2,12 +2,21 @@ package app.model.adminModels.firstPage;
 
 public class ModelDel {
 
-    private static ModelDel instance = new ModelDel();
+    private static volatile ModelDel instance;
     private static String model;
 
     public static ModelDel getInstance() {
 
-        return instance;
+        ModelDel result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelDel.class) {
+            if (instance == null) {
+                instance = new ModelDel();
+            }
+            return instance;
+        }
     }
     private ModelDel() {
         model = null;

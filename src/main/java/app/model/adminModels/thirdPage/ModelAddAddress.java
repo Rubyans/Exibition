@@ -1,15 +1,24 @@
 package app.model.adminModels.thirdPage;
 
-import app.model.adminModels.secondPage.ModelAddHall;
+
 
 public class ModelAddAddress
 {
-    private static ModelAddAddress instance = new ModelAddAddress();
+    private static volatile ModelAddAddress instance;
     private static String model;
 
     public static ModelAddAddress getInstance() {
 
-        return instance;
+        ModelAddAddress result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelAddAddress.class) {
+            if (instance == null) {
+                instance = new ModelAddAddress();
+            }
+            return instance;
+        }
     }
     private ModelAddAddress() {
         model = null;

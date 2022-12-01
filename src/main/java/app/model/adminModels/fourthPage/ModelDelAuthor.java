@@ -3,12 +3,21 @@ package app.model.adminModels.fourthPage;
 
 public class ModelDelAuthor
 {
-    private static ModelDelAuthor instance = new ModelDelAuthor();
+    private static volatile ModelDelAuthor instance;
     private static String model;
 
     public static ModelDelAuthor getInstance() {
 
-        return instance;
+        ModelDelAuthor result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelDelAuthor.class) {
+            if (instance == null) {
+                instance = new ModelDelAuthor();
+            }
+            return instance;
+        }
     }
     private ModelDelAuthor() {
         model = null;

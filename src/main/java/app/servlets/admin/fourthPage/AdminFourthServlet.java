@@ -29,8 +29,12 @@ public class AdminFourthServlet extends HttpServlet {
             ModelAddAuthor modelAddAuthor = ModelAddAuthor.getInstance();
             ModelDelAuthor modelDelAuthor = ModelDelAuthor.getInstance();
 
+            if(FourthPageDB.checkConnection()==null)
+                FourthPageDB.startConnnection();
+
             if (modelShowAuthor.listShow() != null) {
                 if (modelShowAuthor.checkNull() == true) {
+                    FourthPageDB.nullConnection();
                     req.setAttribute("Error", true);
                 } else {
                     List<AuthorShow> address = modelShowAuthor.listShow();
@@ -69,6 +73,9 @@ public class AdminFourthServlet extends HttpServlet {
         ModelShowAuthor.delete();
         ModelAddAuthor.delete();
         ModelDelAuthor.delete();
+
+        if(FourthPageDB.checkConnection()==null)
+            FourthPageDB.startConnnection();
 
         if (req.getParameter("updateButton") != null)
         {
@@ -112,7 +119,8 @@ public class AdminFourthServlet extends HttpServlet {
             FourthPageDB.RoleBackCommit();
         else if (req.getParameter("saveButton") != null)
             FourthPageDB.saveCommit();
-
+        else if(req.getParameter("exitButton")!=null)
+            req.getSession().removeAttribute("UserRole");
         resp.sendRedirect("/exhibition/adminauthor");
     }
 }

@@ -3,12 +3,21 @@ package app.model.adminModels.thirdPage;
 
 public class ModelDelAddress
 {
-    private static ModelDelAddress instance = new ModelDelAddress();
+    private static volatile ModelDelAddress instance;
     private static String model;
 
     public static ModelDelAddress getInstance() {
 
-        return instance;
+        ModelDelAddress result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized(ModelDelAddress.class) {
+            if (instance == null) {
+                instance = new ModelDelAddress();
+            }
+            return instance;
+        }
     }
     private ModelDelAddress() {
         model = null;

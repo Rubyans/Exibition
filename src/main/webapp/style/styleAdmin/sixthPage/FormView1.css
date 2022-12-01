@@ -2,7 +2,7 @@
 
 /* Full-width input fields */
 
-#adminForm{
+#ViewForm{
     border:1px solid #ccc;
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 
@@ -23,7 +23,22 @@ button:hover {
   opacity:1;
 }
 
-.buttonAdmin
+.nameExit{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.exitButton
+{
+    margin-left:37%;
+    width:7%;
+}
+
+.h3Add{
+    margin-left:43%;
+}
+
+.buttonView
 {
     display: flex;
     justify-content: space-between;
@@ -60,16 +75,8 @@ div.right_block {
    margin:0px;
    text-align:center;
 }
-.SelectAdd{
 
-    width: 100%;
-    margin: 7px 4px 7px 0;
-    border: none;
-    background: #f1f1f1;
-}
-
-
-input[type=text],input[type=date],input[type=number] {
+input[type=text] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 10px 4px;
@@ -78,11 +85,10 @@ input[type=text],input[type=date],input[type=number] {
   background: #f1f1f1;
 }
 
-input[type=text]:focus,input[type=date]:focus,input[type=number]:focus {
+input[type=text]:focus {
   background-color: #ddd;
   outline: none;
 }
-
 
 
 

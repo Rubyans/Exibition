@@ -21,6 +21,11 @@ public class AdminExhibitionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
+        System.out.println("doGet");
+
+        if(FirstPageDB.checkConnection()==null)
+            FirstPageDB.startConnnection();
+
         if (req.getSession().getAttribute("UserRole") == null) {
             resp.sendRedirect("/exhibition/");
         } else {
@@ -41,7 +46,9 @@ public class AdminExhibitionServlet extends HttpServlet {
                 List<AdminAddShow> add = AddModelShow.listShow();
                 req.setAttribute("AddShow", add);
 
-            } else {
+            } else
+            {
+                FirstPageDB.nullConnection();
                 req.setAttribute("Error", true);
             }
 
@@ -49,6 +56,7 @@ public class AdminExhibitionServlet extends HttpServlet {
             if (showModel.listShow() != null)
             {
                 if (showModel.checkNull() == true) {
+                    FirstPageDB.nullConnection();
                     req.setAttribute("Error", true);
                 } else {
                     List<AdminShow> names = showModel.listShow();
@@ -89,7 +97,10 @@ public class AdminExhibitionServlet extends HttpServlet {
         ModelAddExhibition.delete();
         ModelDel.delete();
 
-        System.out.println("Nice");
+        if(FirstPageDB.checkConnection()==null)
+            FirstPageDB.startConnnection();
+
+        System.out.println("doPost");
 
         if (req.getParameter("updateButton") != null) {
             ModelShow showModel = ModelShow.getInstance();
@@ -137,7 +148,8 @@ public class AdminExhibitionServlet extends HttpServlet {
             FirstPageDB.RoleBackCommit();
         else if (req.getParameter("saveButton") != null)
             FirstPageDB.SaveCommit();
-
+        else if(req.getParameter("exitButton")!=null)
+            req.getSession().removeAttribute("UserRole");
         resp.sendRedirect("/exhibition/adminmain");
     }
 }

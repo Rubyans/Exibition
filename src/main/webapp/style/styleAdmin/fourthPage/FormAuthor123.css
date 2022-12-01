@@ -23,6 +23,21 @@ button:hover {
   opacity:1;
 }
 
+.nameExit{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.exitButton
+{
+    margin-left:38%;
+    width:7%;
+}
+
+.h3Add{
+    margin-left:42%;
+}
+
 .buttonAuthor
 {
     display: flex;
@@ -79,8 +94,8 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus {
 
 
 div.InputDelDiv{
-    width:50%;
-    margin-left:24%;
+    width:60%;
+    margin-left:19%;
     margin-top:1%;
     margin-bottom:2%;
 }
