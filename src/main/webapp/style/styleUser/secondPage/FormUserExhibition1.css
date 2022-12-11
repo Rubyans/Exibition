@@ -1,0 +1,119 @@
+* {box-sizing: border-box}
+
+body {
+    background-color:#BA94D1;
+}
+
+#UserExhibitionForm {
+    border:1px solid #ccc;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    background-color:white;
+}
+
+button {
+    background-color: #6A67CE;
+    color: white;
+    padding: 8px 20px;
+    margin: 8px 3px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+button:hover {
+    opacity:1;
+}
+
+.nameExit {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.exitButton {
+    margin-left:37%;
+    width:7%;
+    background-color:#EB1D36;
+}
+
+.h3Add {
+    margin-left:43%;
+}
+
+.h6Add {
+    margin:0px;
+    text-align:center;
+}
+
+.buttonUser {
+    display: flex;
+    justify-content: space-between;
+    margin-left:0.3%;
+    width:10%;
+}
+
+table {
+    border-spacing: 0;
+    width: 99%;
+    margin-left:0.5%;
+    font-size: 14px;
+    text-align: center;
+}
+
+th, td:first-child {
+    background: #7c4caf;
+    color: white;
+    padding: 16px;
+}
+
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+}
+
+td {
+    background: #BDF2D5;
+}
+
+th:first-child, td:first-child {
+    text-align: left;
+}
+
+.text{
+    text-align:center;
+}
+
+.pagination {
+    margin-top:5%;
+    margin-bottom:5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    font-size: 10pt;
+    color: black;
+    padding: 0.7% 0.7% 0.7% 0.7%;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: #DFDFDE;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.buttonPagination {
+    border: 0;
+    background-color:white;
+    cursor: pointer;
+}
+

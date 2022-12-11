@@ -17,17 +17,14 @@ public class AdminSixthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession().getAttribute("UserRole") == null)
-        {
+        if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
             resp.sendRedirect("/exhibition/");
-        }
-        else
-        {
-            ModelShowView modelShowView=ModelShowView.getInstance();
+        } else {
+            ModelShowView modelShowView = ModelShowView.getInstance();
             ModelAddView modelAddView = ModelAddView.getInstance();
             ModelDelView modelDelView = ModelDelView.getInstance();
 
-            if(SixthPageDB.checkConnection()==null)
+            if (SixthPageDB.checkConnection() == null)
                 SixthPageDB.startConnnection();
 
             if (modelShowView.listShow() != null) {
@@ -38,21 +35,17 @@ public class AdminSixthServlet extends HttpServlet {
                     List<ViewShow> art = modelShowView.listShow();
                     req.setAttribute("SixthPageShow", art);
                 }
-            }
-            else if (modelAddView.modelCheck() != null) {
+            } else if (modelAddView.modelCheck() != null) {
                 if (modelAddView.modelCheck().equals("false"))
                     req.setAttribute("AddError", true);
                 else if (modelAddView.modelCheck().equals("true"))
                     req.setAttribute("TrueAdd", true);
-
-            }
-            else if (modelDelView.modelCheck() != null) {
+            } else if (modelDelView.modelCheck() != null) {
                 if (modelDelView.modelCheck().equals("false"))
                     req.setAttribute("DelError", true);
-                else if(modelDelView.modelCheck().equals("true"))
-                    req.setAttribute("TrueDel",true);
+                else if (modelDelView.modelCheck().equals("true"))
+                    req.setAttribute("TrueDel", true);
             }
-
             req.getRequestDispatcher("views/adminMenu/sixthPage/AdminSixthMenu.jsp").forward(req, resp);
             req.removeAttribute("SixthPageShow");
             req.removeAttribute("Error");
@@ -60,7 +53,6 @@ public class AdminSixthServlet extends HttpServlet {
             req.removeAttribute("DelError");
             req.removeAttribute("TrueDel");
             req.removeAttribute("TrueAdd");
-
             ModelShowView.delete();
             ModelAddView.delete();
             ModelDelView.delete();
@@ -69,55 +61,76 @@ public class AdminSixthServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ModelShowView.delete();
-        ModelAddView.delete();
-        ModelDelView.delete();
-
-        if(SixthPageDB.checkConnection()==null)
+        if (SixthPageDB.checkConnection() == null)
             SixthPageDB.startConnnection();
-
-        if (req.getParameter("updateButton") != null)
-        {
+        if (req.getParameter("updateButton") != null) {
             ModelShowView modelShowView = ModelShowView.getInstance();
-
             try {
                 for (ViewShow view : SixthPageDB.viewShow())
                     modelShowView.add(view);
             } catch (Exception e) {
                 modelShowView.add(null);
             }
-        }
-        else if (req.getParameter("addButtonView")!=null)
-        {
-            String name= req.getParameter("NameView");
+            resp.sendRedirect("/exhibition/adminview");
 
+        } else if (req.getParameter("addButtonView") != null) {
+            String name = req.getParameter("NameView");
             ModelAddView modelAddView = ModelAddView.getInstance();
             boolean checkDel = SixthPageDB.viewAdd(name);
             if (checkDel == true)
                 modelAddView.add(true);
             else
                 modelAddView.add(false);
+            resp.sendRedirect("/exhibition/adminview");
 
-        }
-        else if (req.getParameter("delButtonView") != null) {
-
+        } else if (req.getParameter("delButtonView") != null) {
             ModelDelView modelDelView = ModelDelView.getInstance();
-
             String name = req.getParameter("viewDel");
-
-            System.out.println("nnnnnnaaa"+name);
             boolean checkDel = SixthPageDB.viewDel(name);
             if (checkDel == true)
                 modelDelView.add(true);
             else
                 modelDelView.add(false);
-        }
-        else if(req.getParameter("roleBackButton") != null)
+            resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("roleBackButton") != null) {
             SixthPageDB.RoleBackCommit();
-        else if (req.getParameter("saveButton") != null)
+            resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("saveButton") != null) {
             SixthPageDB.saveCommit();
-        else if(req.getParameter("exitButton")!=null)
+            resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("exitButton") != null) {
             req.getSession().removeAttribute("UserRole");
-        resp.sendRedirect("/exhibition/adminview");
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("AdminMainPagination") != null) {
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminmain");
+        } else if (req.getParameter("UserAutorizedPagination") != null) {
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("AdminHallPagination") != null) {
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("AdminAddressPagination") != null) {
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("AdminAuthorPagination") != null) {
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("AdminArtPagination") != null) {
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminart");
+        } else if (req.getParameter("AdminViewPagination") != null) {
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminview");
+        }
     }
 }

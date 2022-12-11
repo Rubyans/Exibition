@@ -17,7 +17,7 @@ public class AdminAddressServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession().getAttribute("UserRole") == null) {
+        if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
             resp.sendRedirect("/exhibition/");
         } else {
             ModelShowAddress modelShowAddress = ModelShowAddress.getInstance();
@@ -47,8 +47,6 @@ public class AdminAddressServlet extends HttpServlet {
                 else if (modelDelAddress.modelCheck().equals("true"))
                     req.setAttribute("TrueDel", true);
             }
-
-
             req.getRequestDispatcher("views/adminMenu/thirdPage/AdminThirdMenu.jsp").forward(req, resp);
             req.removeAttribute("ThirdPageShow");
             req.removeAttribute("Error");
@@ -60,46 +58,36 @@ public class AdminAddressServlet extends HttpServlet {
             ModelAddAddress.delete();
             ModelDelAddress.delete();
         }
-
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ModelShowAddress.delete();
-        ModelAddAddress.delete();
-        ModelDelAddress.delete();
-
         if (ThirdPageDB.checkConnection() == null)
             ThirdPageDB.startConnnection();
 
-
         if (req.getParameter("updateButton") != null) {
             ModelShowAddress modelShowAddress = ModelShowAddress.getInstance();
-
             try {
                 for (AddressShow address : ThirdPageDB.addressShow())
                     modelShowAddress.add(address);
             } catch (Exception e) {
                 modelShowAddress.add(null);
             }
+            resp.sendRedirect("/exhibition/adminaddress");
         } else if (req.getParameter("addButtonAddress") != null) {
             String country = req.getParameter("countryAddress");
             String city = req.getParameter("cityAddress");
             String street = req.getParameter("streetAddress");
             int numberHouse = Integer.parseInt(req.getParameter("houseAddress"));
-
             ModelAddAddress modelAddAddress = ModelAddAddress.getInstance();
             boolean checkDel = ThirdPageDB.addressAdd(country, city, street, numberHouse);
             if (checkDel == true)
                 modelAddAddress.add(true);
             else
                 modelAddAddress.add(false);
-
+            resp.sendRedirect("/exhibition/adminaddress");
         } else if (req.getParameter("delButtonAddress") != null) {
-
             int Unumber = Integer.parseInt(req.getParameter("addressDel"));
-
             ModelDelAddress modelDelAddress = ModelDelAddress.getInstance();
 
             boolean checkDel = ThirdPageDB.addressDel(Unumber);
@@ -107,13 +95,47 @@ public class AdminAddressServlet extends HttpServlet {
                 modelDelAddress.add(true);
             } else
                 modelDelAddress.add(false);
-        } else if (req.getParameter("roleBackButton") != null)
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("roleBackButton") != null) {
             ThirdPageDB.RoleBackCommit();
-        else if (req.getParameter("saveButton") != null)
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("saveButton") != null) {
             ThirdPageDB.saveCommit();
-        else if (req.getParameter("exitButton") != null)
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("exitButton") != null) {
             req.getSession().removeAttribute("UserRole");
-        resp.sendRedirect("/exhibition/adminaddress");
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminmain");
+        } else if (req.getParameter("AdminMainPagination") != null) {
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminmain");
+        } else if (req.getParameter("UserAutorizedPagination") != null) {
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("AdminHallPagination") != null) {
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("AdminAddressPagination") != null) {
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("AdminAuthorPagination") != null) {
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("AdminArtPagination") != null) {
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminart");
+        } else if (req.getParameter("AdminViewPagination") != null) {
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminview");
+        }
 
 
     }

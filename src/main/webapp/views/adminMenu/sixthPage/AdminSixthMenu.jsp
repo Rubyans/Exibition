@@ -49,7 +49,7 @@
 
         <div id="addDiv" style="display: none;">
             <div class="wrapper">
-                <div class="left_block">
+                <div class="InputAddDiv">
                     <input type="text" id="InputNameView" placeholder="Введіть назву жанра" name="NameView" >
                 </div>
                 <div class="buttonAdd">
@@ -67,11 +67,13 @@
 
     <table id="myTable">
             <tr>
-                <th>назва жанру</th>
+                <th>Унікальний номер</th>
+                <th>Назва жанру</th>
             </tr>
             <c:if test="${not requestScope.Error}">
                         <c:forEach var="view" items="${SixthPageShow}">
                             <tr>
+                                <td>${view.getId()}</td>
                                 <td>${view.getName()}</td>
                             </tr>
                         </c:forEach>
@@ -83,60 +85,17 @@
             </c:if>
             </table>
             <div class="pagination">
-                <a href="/exhibition/adminart">«</a>
-                <a href="/exhibition/adminmain">1</a>
-                <a href="/exhibition/adminhall">2</a>
-                <a href="/exhibition/adminaddress">3</a>
-                <a href="/exhibition/adminauthor">4</a>
-                <a href="/exhibition/adminart">5</a>
-                <a class="active" href="/exhibition/adminview">6</a>
-                <a href="/exhibition/userautorized">7</a>
-                <a href="/exhibition/userautorized">»</a>
+                <a><input class="buttonPagination" type="submit" name="AdminArtPagination" value="«"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminMainPagination" value="1"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminHallPagination" value="2"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminAddressPagination" value="3"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminAuthorPagination" value="4"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminArtPagination" value="5"></a>
+                <a class="active"><input class="buttonPagination" type="submit" name="AdminViewPagination" value="6"></a>
+                <a><input class="buttonPagination" type="submit" name="UserAutorizedPagination" value="7"></a>
+                <a><input class="buttonPagination" type="submit" name="UserAutorizedPagination" value="»"></a>
             </div>
     </form>
-
-    <script>
-           function addFunc(){
-
-                displayAnother= document.getElementById("delDiv").style.display;
-                if(displayAnother=='none')
-                {
-                    display = document.getElementById("addDiv").style.display;
-                    if(display=='none'){
-                        document.getElementById("addDiv").style.display='block';
-                        document.getElementById("InputNameView").required = true;
-                    }else{
-                        document.getElementById("addDiv").style.display='none';
-                        document.getElementById("InputNameView").required = false;
-                    }
-                }
-                else
-                {
-                    document.getElementById("delDiv").style.display='block';
-                    delFunc();
-                    addFunc();
-                }
-           };
-
-           function delFunc(){
-                displayAnother= document.getElementById("addDiv").style.display;
-                if(displayAnother=='none'){
-                    display = document.getElementById("delDiv").style.display;
-                    if(display=='none'){
-                        document.getElementById("delDiv").style.display='block';
-                        document.getElementById("InputDelView").required = true;
-                    }
-                    else{
-                        document.getElementById("delDiv").style.display='none';
-                        document.getElementById("InputDelView").required = false;
-                    }
-                }
-                else{
-                    document.getElementById("addDiv").style.display='block';
-                    addFunc();
-                    delFunc();
-                }
-           };
-    </script>
+    <script src="./JS/adminJS/sixthPage/AdminSixthMenu.js" type="text/javascript"></script>
 </body>
 </html>

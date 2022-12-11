@@ -111,6 +111,29 @@
     <url-pattern>/userautorized</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>UserMenu</servlet-name>
+    <servlet-class>app.servlets.user.firstPage.UserServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UserMenu</servlet-name>
+    <url-pattern>/user</url-pattern>
+  </servlet-mapping>
+
+
+
+  <servlet>
+    <servlet-name>UserExhibitionMenu</servlet-name>
+    <servlet-class>app.servlets.user.secondPage.UserExhibitionServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UserExhibitionMenu</servlet-name>
+    <url-pattern>/userexhibition</url-pattern>
+  </servlet-mapping>
+
+
 
   <filter>
     <filter-name>encodingFilter</filter-name>

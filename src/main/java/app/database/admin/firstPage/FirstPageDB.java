@@ -11,42 +11,35 @@ import java.util.List;
 public class FirstPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
-
     private static Connection conn;
 
-
-
-    public static Connection checkConnection()
-    {
+    public static Connection checkConnection() {
         return conn;
-    }
-    public static void startConnnection()
+    } //function checks connection
+
+    public static void startConnnection() //function creates connection with DB
     {
-        System.out.println("COOOOOOOOOOOOOOOONNN "+conn);
-        if(conn==null)
-        {
+        if (conn == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
                 try {
                     conn = DriverManager.getConnection(url);
                     conn.setAutoCommit(false);
-                    savepoint = conn.setSavepoint("savepointMain");
+                    savepoint = conn.setSavepoint("savepointMain"); //savepoint(transacion)
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    public static void nullConnection()
-    {
-        conn=null;
-    }
 
-    public static List<AdminShow> exibitionShow() {
+    public static void nullConnection() {
+        conn = null;
+    } //function gives null value
+
+    public static List<AdminShow> exibitionShow() { //function shows(SELECT) exhibitions data
 
         try {
             List<AdminShow> admin = new ArrayList<>();
@@ -111,6 +104,7 @@ public class FirstPageDB {
                 nameAuthor.clear();
                 nameview.clear();
                 addressExibition.clear();
+                resStatment.close();
             }
             return admin;
         } catch (Exception e) {
@@ -120,7 +114,7 @@ public class FirstPageDB {
         return null;
     }
 
-    public static List<AdminAddShow> ShowAddFirstPage() {
+    public static List<AdminAddShow> ShowAddFirstPage() { //function shows information for <select></select>
         try {
             List<AdminAddShow> AdminAddFirstPage = new ArrayList<>();
 
@@ -157,16 +151,16 @@ public class FirstPageDB {
         return null;
     }
 
-    public static Boolean AddFirstPage(String nameExibition, String description, Double price, String start, String end, List<String> hall, List<String> address, List<String> workArt) {
+    public static Boolean AddFirstPage(String nameExibition, String description, Double price,
+                                       String start, String end, List<String> hall,
+                                       List<String> address, List<String> workArt) { //function adds exhibitions-data
         try {
             Savepoint savepointAdd = conn.setSavepoint("SavepointAdd");
             try {
-
-                int ExhibitionPK = 0;
+                Integer ExhibitionPK = 0;
                 List<Integer> HellPK = new ArrayList<>();
                 List<Integer> AddressPK = new ArrayList<>();
                 List<Integer> WorkArtPK = new ArrayList<>();
-
 
                 PreparedStatement ExhibitionADD = conn.prepareStatement("INSERT into exhibitiondb.exhibition (name,description,price,date_start,date_end) values (?,?,?,?,?)");
                 ExhibitionADD.setString(1, nameExibition);
@@ -176,7 +170,6 @@ public class FirstPageDB {
                 ExhibitionADD.setString(5, end);
                 ExhibitionADD.execute();
                 ExhibitionADD.close();
-
 
                 PreparedStatement PreparedExhPK = conn.prepareStatement("SELECT exhibition_id from exhibitiondb.exhibition where name=?");
                 PreparedExhPK.setString(1, nameExibition);
@@ -264,14 +257,14 @@ public class FirstPageDB {
         return false;
     }
 
-    public static Boolean DelFirstPage(String nameExibition) {
+    public static Boolean DelFirstPage(String nameExibition) { //function dels exhibitions data
         try {
             Savepoint savepointDel = conn.setSavepoint("SavepointDel");
             try {
 
                 PreparedStatement ExhibitionDel = conn.prepareStatement("DELETE FROM exhibitiondb.exhibition WHERE name=?");
                 ExhibitionDel.setString(1, nameExibition);
-                int row = ExhibitionDel.executeUpdate();
+                Integer row = ExhibitionDel.executeUpdate();
                 ExhibitionDel.close();
 
                 if (row > 0)
@@ -288,7 +281,23 @@ public class FirstPageDB {
         return false;
     }
 
-    public static void SaveCommit() {
+    public static boolean exitConnection() //function closes con
+    {
+        try {
+            if (savepoint != null) {
+                conn.rollback(savepoint);
+                conn.commit();
+                conn.close();
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void SaveCommit() { //function saves data
         try {
             conn.commit();
             savepoint = conn.setSavepoint("savepointMain");
@@ -298,7 +307,7 @@ public class FirstPageDB {
 
     }
 
-    public static void RoleBackCommit() {
+    public static void RoleBackCommit() { //function roleback data
         try {
             if (savepoint != null)
                 conn.rollback(savepoint);

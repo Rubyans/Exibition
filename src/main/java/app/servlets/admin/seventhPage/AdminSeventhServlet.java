@@ -19,7 +19,7 @@ public class AdminSeventhServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession().getAttribute("UserRole") == null) {
+        if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
             resp.sendRedirect("/exhibition/");
         } else {
             ModelShowUserAutorized modelShowUserAutorized = ModelShowUserAutorized.getInstance();
@@ -42,22 +42,17 @@ public class AdminSeventhServlet extends HttpServlet {
                     req.setAttribute("AddError", true);
                 else if (modelAddUserAutorized.modelCheck().equals("true"))
                     req.setAttribute("TrueAdd", true);
-            } else if (modelAddAmountAutorized.modelCheck()!=null)
-            {
-                System.out.println("mooo "+modelAddAmountAutorized.modelCheck());
-
-                if(modelAddAmountAutorized.modelCheck().equals("true"))
-                    req.setAttribute("AddAmount",true);
+            } else if (modelAddAmountAutorized.modelCheck() != null) {
+                if (modelAddAmountAutorized.modelCheck().equals("true"))
+                    req.setAttribute("AddAmount", true);
                 else if (modelAddAmountAutorized.modelCheck().equals("false"))
                     req.setAttribute("AddAmountError", true);
-            }
-            else if (modelDelUserAutorized.modelCheck() != null) {
+            } else if (modelDelUserAutorized.modelCheck() != null) {
                 if (modelDelUserAutorized.modelCheck().equals("false"))
                     req.setAttribute("DelError", true);
                 else if (modelDelUserAutorized.modelCheck().equals("true"))
                     req.setAttribute("TrueDel", true);
             }
-
             req.getRequestDispatcher("views/adminMenu/seventhPage/AdminSeventhMenu.jsp").forward(req, resp);
             req.removeAttribute("SeventhPageShow");
             req.removeAttribute("Error");
@@ -82,13 +77,13 @@ public class AdminSeventhServlet extends HttpServlet {
 
         if (req.getParameter("updateButton") != null) {
             ModelShowUserAutorized modelShowUserAutorized = ModelShowUserAutorized.getInstance();
-
             try {
                 for (UserAutorizedShow userAuto : SeventhPageDB.UserAuto())
                     modelShowUserAutorized.add(userAuto);
             } catch (Exception e) {
                 modelShowUserAutorized.add(null);
             }
+            resp.sendRedirect("/exhibition/userautorized");
         } else if (req.getParameter("addButtonAuto") != null) {
 
             Double amount = 0.0;
@@ -100,14 +95,13 @@ public class AdminSeventhServlet extends HttpServlet {
             if (req.getParameter("amount") != "")
                 amount = Double.valueOf(req.getParameter("amount"));
             String role = req.getParameter("role");
-
             ModelAddUserAutorized modelAddUserAutorized = ModelAddUserAutorized.getInstance();
             boolean checkDel = SeventhPageDB.UserAutoAdd(fistName, lastName, login, password, email, amount, role);
             if (checkDel == true)
                 modelAddUserAutorized.add(true);
             else
                 modelAddUserAutorized.add(false);
-
+            resp.sendRedirect("/exhibition/userautorized");
         } else if (req.getParameter("delButtonAuto") != null) {
             ModelDelUserAutorized modelDelUserAutorized = ModelDelUserAutorized.getInstance();
             String email = req.getParameter("autoDel");
@@ -116,24 +110,56 @@ public class AdminSeventhServlet extends HttpServlet {
                 modelDelUserAutorized.add(true);
             else
                 modelDelUserAutorized.add(false);
+            resp.sendRedirect("/exhibition/userautorized");
         } else if (req.getParameter("ButtonMoney") != null) {
             String email = req.getParameter("emailMoney");
-
             Double money = Double.valueOf(req.getParameter("money"));
             ModelAddAmountAutorized modelAddAmountAutorized = ModelAddAmountAutorized.getInstance();
             boolean checkAmount = SeventhPageDB.UserAmountAdd(email, money);
-
             if (checkAmount == true)
                 modelAddAmountAutorized.add(true);
             else
                 modelAddAmountAutorized.add(false);
-        } else if (req.getParameter("roleBackButton") != null)
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("roleBackButton") != null) {
             SeventhPageDB.RoleBackCommit();
-        else if (req.getParameter("saveButton") != null)
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("saveButton") != null) {
             SeventhPageDB.saveCommit();
-        else if (req.getParameter("exitButton") != null)
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("exitButton") != null) {
             req.getSession().removeAttribute("UserRole");
-
-        resp.sendRedirect("/exhibition/userautorized");
+            SeventhPageDB.exitConnection();
+            SeventhPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("AdminMainPagination") != null) {
+            SeventhPageDB.exitConnection();
+            SeventhPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminmain");
+        } else if (req.getParameter("UserAutorizedPagination") != null) {
+            SeventhPageDB.exitConnection();
+            SeventhPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("AdminHallPagination") != null) {
+            SeventhPageDB.exitConnection();
+            SeventhPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("AdminAddressPagination") != null) {
+            SeventhPageDB.exitConnection();
+            SeventhPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("AdminAuthorPagination") != null) {
+            SeventhPageDB.exitConnection();
+            SeventhPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("AdminArtPagination") != null) {
+            SeventhPageDB.exitConnection();
+            SeventhPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminart");
+        } else if (req.getParameter("AdminViewPagination") != null) {
+            SeventhPageDB.exitConnection();
+            SeventhPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminview");
+        }
     }
 }

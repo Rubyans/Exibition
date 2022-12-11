@@ -5,7 +5,7 @@
 <head>
     <title></title>
     <meta charset="UTF-8"/>
-    <link href="FormAutorized.css" rel="stylesheet"/>
+    <link href="FormAutorized1.css" rel="stylesheet"/>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>
@@ -40,7 +40,7 @@
         <input type="checkbox" onclick="checkPassword()">Переглянути пароль
         <a href="/exhibition/reg" class="hyperlink">Не зареєструвались?</a>
         <div class="clearfix">
-            <button type="submit" class="loginbutton">Увійти</button>
+            <button type="submit" class="loginButton" name="loginButton">Увійти</button>
         </div>
     </div>
 </form>

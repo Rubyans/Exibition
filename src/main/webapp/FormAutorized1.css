@@ -1,0 +1,72 @@
+* {box-sizing: border-box}
+
+
+
+body {
+    background-color:#BA94D1;
+}
+
+.autoForm {
+    border:1px solid #ccc;
+   position: fixed; top: 50%; left: 50%;
+     -webkit-transform: translate(-50%, -50%);
+     -ms-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%);
+     background-color:white;
+}
+
+input[type=checkbox] {
+    margin-bottom: 10px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=checkbox]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+
+}
+
+button:hover {
+    opacity:1;
+}
+
+.loginButton {
+    background-color: #7c4caf;
+    margin-top:15px;
+    display: block;
+    width:60%;
+}
+
+.hyperlink {
+    color: #9e9898;
+    float:right;
+}
+
+.container {
+    padding: 16px;
+}
+

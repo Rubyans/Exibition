@@ -1,7 +1,6 @@
 package app.servlets.admin.secondPage;
 
 
-
 import app.database.admin.secondPage.SecondPageDB;
 import app.entities.adminEntities.secondPage.HallShow;
 import app.model.adminModels.secondPage.ModelAddHall;
@@ -19,17 +18,14 @@ public class AdminHallServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if(SecondPageDB.checkConnection()==null)
+        if (SecondPageDB.checkConnection() == null)
             SecondPageDB.startConnnection();
 
-        if (req.getSession().getAttribute("UserRole") == null)
-        {
+        if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
             resp.sendRedirect("/exhibition/");
-        }
-        else
-        {
+        } else {
             ModelShowHall showHall = ModelShowHall.getInstance();
-            ModelAddHall modelAddHall= ModelAddHall.getInstance();
+            ModelAddHall modelAddHall = ModelAddHall.getInstance();
             ModelDelHall modelDelHall = ModelDelHall.getInstance();
             if (showHall.listShow() != null) {
                 if (showHall.checkNull() == true) {
@@ -45,14 +41,13 @@ public class AdminHallServlet extends HttpServlet {
                 else if (modelAddHall.modelCheck().equals("true"))
                     req.setAttribute("TrueAdd", true);
 
-            }else if (modelDelHall.modelCheck() != null) {
+            } else if (modelDelHall.modelCheck() != null) {
                 if (modelDelHall.modelCheck().equals("false"))
                     req.setAttribute("DelError", true);
-                else if(modelDelHall.modelCheck().equals("true"))
-                    req.setAttribute("TrueDel",true);
+                else if (modelDelHall.modelCheck().equals("true"))
+                    req.setAttribute("TrueDel", true);
             }
 
-            System.out.println("dsgffg");
             req.getRequestDispatcher("views/adminMenu/secondPage/AdminSecondMenu.jsp").forward(req, resp);
             req.removeAttribute("SecondPageShow");
             req.removeAttribute("Error");
@@ -69,58 +64,78 @@ public class AdminHallServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ModelShowHall.delete();
-        ModelAddHall.delete();
-        ModelDelHall.delete();
 
-
-        if(SecondPageDB.checkConnection()==null)
+        if (SecondPageDB.checkConnection() == null)
             SecondPageDB.startConnnection();
-
-
-        if (req.getParameter("updateButton") != null)
-        {
+        if (req.getParameter("updateButton") != null) {
             ModelShowHall showHall = ModelShowHall.getInstance();
-
             try {
                 for (HallShow hall : SecondPageDB.hallShow())
                     showHall.add(hall);
             } catch (Exception e) {
                 showHall.add(null);
             }
-        } else if (req.getParameter("addButtonHall")!=null)
-        {
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("addButtonHall") != null) {
             String nameHall = req.getParameter("nameHall");
             String square = req.getParameter("square");
             ModelAddHall modelAddHall = ModelAddHall.getInstance();
-
-            boolean checkDel = SecondPageDB.hallAdd(nameHall,Double.valueOf(square));
+            boolean checkDel = SecondPageDB.hallAdd(nameHall, Double.valueOf(square));
             if (checkDel == true)
                 modelAddHall.add(true);
             else
                 modelAddHall.add(false);
-
-        }
-        else if (req.getParameter("delButtonHall") != null) {
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("delButtonHall") != null) {
 
             String nameHall = req.getParameter("nameDel");
             ModelDelHall modelDelHall = ModelDelHall.getInstance();
-            System.out.println("NameHall "+nameHall);
             boolean checkDel = SecondPageDB.hallDel(nameHall);
             if (checkDel == true) {
-                System.out.println("TRUUUUE");
                 modelDelHall.add(true);
-            }
-            else
+            } else
                 modelDelHall.add(false);
-        }
-        else if(req.getParameter("roleBackButton") != null)
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("roleBackButton") != null) {
             SecondPageDB.RoleBackCommit();
-        else if (req.getParameter("saveButton") != null)
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("saveButton") != null) {
             SecondPageDB.saveCommit();
-        else if(req.getParameter("exitButton")!=null)
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("exitButton") != null) {
             req.getSession().removeAttribute("UserRole");
-        resp.sendRedirect("/exhibition/adminhall");
+            SecondPageDB.exitConnection();
+            SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("AdminMainPagination") != null) {
+            SecondPageDB.exitConnection();
+            SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminmain");
+        } else if (req.getParameter("UserAutorizedPagination") != null) {
+            SecondPageDB.exitConnection();
+            SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("AdminHallPagination") != null) {
+            SecondPageDB.exitConnection();
+            SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("AdminAddressPagination") != null) {
+            SecondPageDB.exitConnection();
+            SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("AdminAuthorPagination") != null) {
+            SecondPageDB.exitConnection();
+            SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("AdminArtPagination") != null) {
+            SecondPageDB.exitConnection();
+            SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminart");
+        } else if (req.getParameter("AdminViewPagination") != null) {
+            SecondPageDB.exitConnection();
+            SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminview");
+        }
     }
 
 }

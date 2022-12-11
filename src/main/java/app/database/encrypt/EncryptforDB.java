@@ -7,7 +7,7 @@ import java.util.Formatter;
 
 public class EncryptforDB
 {
-    public static String encrypt(String text)
+    public static String encrypt(String text) // function encodes the password in sha-1
     {
         String sha1 = "";
         try
@@ -28,7 +28,7 @@ public class EncryptforDB
         return sha1;
     }
 
-    private static String byteToHex(final byte[] hash)
+    private static String byteToHex(final byte[] hash) // function convert bytes to hexadecimal
     {
         Formatter formatter = new Formatter();
         for (byte b : hash)

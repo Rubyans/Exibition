@@ -7,7 +7,6 @@ import app.model.adminModels.fourthPage.ModelDelAuthor;
 import app.model.adminModels.fourthPage.ModelShowAuthor;
 
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,17 +18,14 @@ public class AdminFourthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession().getAttribute("UserRole") == null)
-        {
+        if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
             resp.sendRedirect("/exhibition/");
-        }
-        else
-        {
-            ModelShowAuthor modelShowAuthor=ModelShowAuthor.getInstance();
+        } else {
+            ModelShowAuthor modelShowAuthor = ModelShowAuthor.getInstance();
             ModelAddAuthor modelAddAuthor = ModelAddAuthor.getInstance();
             ModelDelAuthor modelDelAuthor = ModelDelAuthor.getInstance();
 
-            if(FourthPageDB.checkConnection()==null)
+            if (FourthPageDB.checkConnection() == null)
                 FourthPageDB.startConnnection();
 
             if (modelShowAuthor.listShow() != null) {
@@ -40,21 +36,17 @@ public class AdminFourthServlet extends HttpServlet {
                     List<AuthorShow> address = modelShowAuthor.listShow();
                     req.setAttribute("FouthPageShow", address);
                 }
-            }
-            else if (modelAddAuthor.modelCheck() != null) {
+            } else if (modelAddAuthor.modelCheck() != null) {
                 if (modelAddAuthor.modelCheck().equals("false"))
                     req.setAttribute("AddError", true);
                 else if (modelAddAuthor.modelCheck().equals("true"))
                     req.setAttribute("TrueAdd", true);
-
-            }
-            else if (modelDelAuthor.modelCheck() != null) {
+            } else if (modelDelAuthor.modelCheck() != null) {
                 if (modelDelAuthor.modelCheck().equals("false"))
                     req.setAttribute("DelError", true);
-                else if(modelDelAuthor.modelCheck().equals("true"))
-                    req.setAttribute("TrueDel",true);
+                else if (modelDelAuthor.modelCheck().equals("true"))
+                    req.setAttribute("TrueDel", true);
             }
-
             req.getRequestDispatcher("views/adminMenu/fourthPage/AdminFourthMenu.jsp").forward(req, resp);
             req.removeAttribute("FouthPageShow");
             req.removeAttribute("Error");
@@ -70,57 +62,80 @@ public class AdminFourthServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ModelShowAuthor.delete();
-        ModelAddAuthor.delete();
-        ModelDelAuthor.delete();
 
-        if(FourthPageDB.checkConnection()==null)
+        if (FourthPageDB.checkConnection() == null)
             FourthPageDB.startConnnection();
 
-        if (req.getParameter("updateButton") != null)
-        {
+        if (req.getParameter("updateButton") != null) {
             ModelShowAuthor modelShowAuthor = ModelShowAuthor.getInstance();
-
             try {
                 for (AuthorShow author : FourthPageDB.authorShow())
                     modelShowAuthor.add(author);
             } catch (Exception e) {
                 modelShowAuthor.add(null);
             }
-        }
-        else if (req.getParameter("addButtonAuthor")!=null)
-        {
-            String firstName= req.getParameter("firstNameAuthor");
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("addButtonAuthor") != null) {
+            String firstName = req.getParameter("firstNameAuthor");
             String lastName = req.getParameter("lastNameAuthor");
             String email = req.getParameter("emailAuthor");
 
             ModelAddAuthor modelAddAuthor = ModelAddAuthor.getInstance();
-            boolean checkDel = FourthPageDB.authorAdd(firstName,lastName,email);
+            boolean checkDel = FourthPageDB.authorAdd(firstName, lastName, email);
             if (checkDel == true)
                 modelAddAuthor.add(true);
             else
                 modelAddAuthor.add(false);
-
-        }
-        else if (req.getParameter("delButtonAuthor") != null) {
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("delButtonAuthor") != null) {
 
             ModelDelAuthor modelDelAuthor = ModelDelAuthor.getInstance();
-
             String email = req.getParameter("authorDel");
-
-
             boolean checkDel = FourthPageDB.authorDel(email);
             if (checkDel == true)
                 modelDelAuthor.add(true);
             else
                 modelDelAuthor.add(false);
-        }
-        else if(req.getParameter("roleBackButton") != null)
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("roleBackButton") != null) {
             FourthPageDB.RoleBackCommit();
-        else if (req.getParameter("saveButton") != null)
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("saveButton") != null) {
             FourthPageDB.saveCommit();
-        else if(req.getParameter("exitButton")!=null)
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("exitButton") != null) {
             req.getSession().removeAttribute("UserRole");
-        resp.sendRedirect("/exhibition/adminauthor");
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("AdminMainPagination") != null) {
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminmain");
+        } else if (req.getParameter("UserAutorizedPagination") != null) {
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/userautorized");
+        } else if (req.getParameter("AdminHallPagination") != null) {
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminhall");
+        } else if (req.getParameter("AdminAddressPagination") != null) {
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("AdminAuthorPagination") != null) {
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("AdminArtPagination") != null) {
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminart");
+        } else if (req.getParameter("AdminViewPagination") != null) {
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminview");
+        }
     }
 }

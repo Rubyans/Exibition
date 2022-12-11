@@ -1,8 +1,8 @@
 package app.servlets;
 
-import app.database.UserDB;
-import app.entities.User;
-import app.model.ModelGuest;
+import app.database.UserAutorizationDB;
+import app.database.UserRegistrationDB;
+import app.entities.UserRegistration;
 import app.model.ModelRegistration;
 
 import javax.servlet.RequestDispatcher;
@@ -17,35 +17,46 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("doGet");
-
-
+        if (UserRegistrationDB.checkConnection() == null)
+            UserRegistrationDB.startConnnection();
         ModelRegistration model = ModelRegistration.getInstance();
 
-        if(model.checkString()!=null)
-        {
-            req.setAttribute("UserAdd",model.returnString());
+        if (model.checkString() != null) {
+            if (model.returnString().equals("true")) {
+                UserRegistrationDB.exitConnection();
+                UserRegistrationDB.nullConnection();
+                req.setAttribute("UserAddTrue", true);
+            } else if (model.returnString().equals("false"))
+                req.setAttribute("UserAddError", true);
         }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/RegistrationForm.jsp");
         requestDispatcher.forward(req, resp);
-        req.removeAttribute("UserAdd");
+        req.removeAttribute("UserAddTrue");
+        req.removeAttribute("UserAddError");
         model.delete();
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("doPost");
-        String firstName=req.getParameter("firstName");
-        String lastName=req.getParameter("lastName");
-        String email=req.getParameter("email");
-        String login=req.getParameter("login");
-        String password = req.getParameter("password");
+        if (UserRegistrationDB.checkConnection() == null)
+            UserRegistrationDB.startConnnection();
 
-        ModelRegistration model=ModelRegistration.getInstance();
-        model.add(UserDB.registrationDB(firstName,lastName,email,login,password));
+        if (req.getParameter("registrationButton") != null) {
+            String firstName = req.getParameter("firstName");
+            String lastName = req.getParameter("lastName");
+            String email = req.getParameter("email");
+            String login = req.getParameter("login");
+            String password = req.getParameter("password");
 
-        resp.sendRedirect("/exhibition/reg");
+            ModelRegistration model = ModelRegistration.getInstance();
+            model.add(UserRegistrationDB.registrationDB(firstName, lastName, email, login, password).getCheckRegistration());
+
+            resp.sendRedirect("/exhibition/reg");
+        } else if (req.getParameter("autorizedButton") != null) {
+            UserRegistrationDB.exitConnection();
+            UserAutorizationDB.nullConnection();
+        }
 
     }
 }

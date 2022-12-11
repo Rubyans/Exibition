@@ -6,22 +6,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThirdPageDB
-{
+public class ThirdPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
-
     private static Connection connAddress;
 
-    public static Connection checkConnection()
-    {
+    public static Connection checkConnection() {
         return connAddress;
     }
-    public static void startConnnection()
+
+    public static void startConnnection() //function creates connect
     {
-        System.out.println("COOOOOOOOOOOOOOOONNN "+connAddress);
-        if(connAddress==null)
-        {
+        if (connAddress == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
                 try {
@@ -31,37 +27,36 @@ public class ThirdPageDB
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    public static void nullConnection()
-    {
-        connAddress=null;
+
+    public static void nullConnection() {
+        connAddress = null;
     }
-    public static List<AddressShow> addressShow() {
+
+    public static List<AddressShow> addressShow() { //function shows address
         try {
 
             List<AddressShow> address = new ArrayList<>();
 
-            int Unumber;
+            Integer Unumber;
             String country = null;
-            String city=null;
-            String street=null;
-            int numberHouse;
+            String city = null;
+            String street = null;
+            Integer numberHouse;
 
             PreparedStatement statement = connAddress.prepareStatement("SELECT* FROM exhibitiondb.exhibition_address", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet setAddress = statement.executeQuery();
             while (setAddress.next()) {
-                Unumber=setAddress.getInt(1);
-                country=setAddress.getString(2);
-                city=setAddress.getString(3);
-                street=setAddress.getString(4);
-                numberHouse=setAddress.getInt(5);
-                address.add(new AddressShow(Unumber,country,city,street,numberHouse));
+                Unumber = setAddress.getInt(1);
+                country = setAddress.getString(2);
+                city = setAddress.getString(3);
+                street = setAddress.getString(4);
+                numberHouse = setAddress.getInt(5);
+                address.add(new AddressShow(Unumber, country, city, street, numberHouse));
             }
             statement.close();
             return address;
@@ -70,7 +65,8 @@ public class ThirdPageDB
         }
         return null;
     }
-    public static Boolean addressAdd(String country,String city,String street,int numberHouse) {
+
+    public static Boolean addressAdd(String country, String city, String street, int numberHouse) { //function adds address data
         try {
             Savepoint savepointAdd = connAddress.setSavepoint("SavepointAdd");
             try {
@@ -93,14 +89,14 @@ public class ThirdPageDB
         }
         return false;
     }
-    public static Boolean addressDel(int Unumber) {
+
+    public static Boolean addressDel(int Unumber) { //function deletes address data
         try {
             Savepoint savepointDel = connAddress.setSavepoint("SavepointDel");
             try {
-
                 PreparedStatement AddressDel = connAddress.prepareStatement("DELETE FROM exhibitiondb.exhibition_address WHERE address_id=?");
                 AddressDel.setInt(1, Unumber);
-                int row = AddressDel.executeUpdate();
+                Integer row = AddressDel.executeUpdate();
                 AddressDel.close();
 
                 if (row > 0)
@@ -116,25 +112,37 @@ public class ThirdPageDB
         }
         return false;
     }
-    public static void saveCommit() {
+
+    public static boolean exitConnection() { //function closes connect with DB
+        try {
+            if (savepoint != null) {
+                connAddress.rollback(savepoint);
+                connAddress.commit();
+                connAddress.close();
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void saveCommit() { //function saves data
         try {
             connAddress.commit();
-            savepoint=connAddress.setSavepoint("savepointMain");
-        }
-        catch (SQLException e)
-        {
+            savepoint = connAddress.setSavepoint("savepointMain");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
-    public static void RoleBackCommit() {
-        try
-        {
-            if(savepoint!=null)
+
+    public static void RoleBackCommit() { //function roleback data
+        try {
+            if (savepoint != null)
                 connAddress.rollback(savepoint);
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

@@ -52,7 +52,23 @@
                 <div class="left_block">
                     <input type="text" id="InputNameArt" placeholder="Введіть назву мистецтва" name="NameArt" >
                     <br><input type="number" id="InputCreationArt" placeholder="Введіть рік створення" name="CreationArt" >
-                    <br><input type="number" id="InputPriceArt" placeholder="Введіть ціну витвору мистецтва" step="any" name="PriceArt" >
+                    <br><input type="number" id="InputPriceArt" placeholder="Введіть ціну витвору" step="any" name="PriceArt" >
+                </div>
+                <div class="right_block">
+                    <c:forEach var="addFirstPage" items="${AddShow}">
+                        <h6 class="h6Add">Оберіть автора</h6>
+                        <select class="SelectAdd" name="author" id="SelectAuthor" multiple>
+                            <c:forEach var="fullName" items="${addFirstPage.getFullName()}">
+                                <option value="${fullName}">${fullName}</option>
+                            </c:forEach>
+                        </select>
+                        <h6 class="h6Add">Оберіть жанр</h6>
+                        <select class="SelectAdd" name="view" id="SelectView" multiple>
+                            <c:forEach var="viewArt" items="${addFirstPage.getView()}">
+                                <option value="${viewArt}">${viewArt}</option>
+                            </c:forEach>
+                        </select>
+                    </c:forEach>
                 </div>
                 <div class="buttonAdd">
                     <button class="addButtonServlet" name="addButtonArt">Додати</button>
@@ -72,6 +88,8 @@
                 <th>Витвір мистецтва</th>
                 <th>Рік створення</th>
                 <th>Ціна</th>
+                <th>Жанр</th>
+                <th>Автор</th>
             </tr>
 
             <c:if test="${not requestScope.Error}">
@@ -80,6 +98,16 @@
                                 <td>${art.getName()}</td>
                                 <td>${art.getCreation()}</td>
                                 <td>${art.getPrice()}</td>
+                                <td>
+                                    <c:forEach var="nameView" items="${art.getNameView()}">
+                                        ${nameView}<br>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <c:forEach var="author" items="${art.getFullName()}">
+                                        ${author}<br>
+                                    </c:forEach>
+                                </td>
                             </tr>
                         </c:forEach>
             </c:if>
@@ -90,65 +118,17 @@
             </c:if>
             </table>
             <div class="pagination">
-                <a href="/exhibition/adminauthor">«</a>
-                <a href="/exhibition/adminmain">1</a>
-                <a href="/exhibition/adminhall">2</a>
-                <a href="/exhibition/adminaddress">3</a>
-                <a href="/exhibition/adminauthor">4</a>
-                <a class="active" href="/exhibition/adminart">5</a>
-                <a href="/exhibition/adminview">6</a>
-                <a href="/exhibition/userautorized">7</a>
-                <a href="/exhibition/adminview">»</a>
+                <a><input class="buttonPagination" type="submit" name="AdminAuthorPagination" value="«"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminMainPagination" value="1"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminHallPagination" value="2"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminAddressPagination" value="3"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminAuthorPagination" value="4"></a>
+                <a class="active"><input class="buttonPagination" type="submit" name="AdminArtPagination" value="5"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminViewPagination" value="6"></a>
+                <a><input class="buttonPagination" type="submit" name="UserAutorizedPagination" value="7"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminViewPagination" value="»"></a>
             </div>
     </form>
-
-    <script>
-           function addFunc(){
-
-                displayAnother= document.getElementById("delDiv").style.display;
-                if(displayAnother=='none')
-                {
-                    display = document.getElementById("addDiv").style.display;
-                    if(display=='none'){
-                        document.getElementById("addDiv").style.display='block';
-                        document.getElementById("InputNameArt").required = true;
-                        document.getElementById("InputCreationArt").required = true;
-                        document.getElementById("InputPriceArt").required = true;
-
-                    }else{
-                        document.getElementById("addDiv").style.display='none';
-                        document.getElementById("InputNameArt").required = false;
-                        document.getElementById("InputCreationArt").required = false;
-                        document.getElementById("InputPriceArt").required = false;
-                    }
-                }
-                else
-                {
-                    document.getElementById("delDiv").style.display='block';
-                    delFunc();
-                    addFunc();
-                }
-           };
-
-           function delFunc(){
-                displayAnother= document.getElementById("addDiv").style.display;
-                if(displayAnother=='none'){
-                    display = document.getElementById("delDiv").style.display;
-                    if(display=='none'){
-                        document.getElementById("delDiv").style.display='block';
-                        document.getElementById("InputDelArt").required = true;
-                    }
-                    else{
-                        document.getElementById("delDiv").style.display='none';
-                        document.getElementById("InputDelArt").required = false;
-                    }
-                }
-                else{
-                    document.getElementById("addDiv").style.display='block';
-                    addFunc();
-                    delFunc();
-                }
-           };
-    </script>
+    <script src="./JS/adminJS/fifthPage/AdminFifthMenu1.js" type="text/javascript"></script>
 </body>
 </html>

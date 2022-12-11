@@ -15,9 +15,8 @@ public class SecondPageDB {
     {
         return connHall;
     }
-    public static void startConnnection()
+    public static void startConnnection() //function creates connect with DB
     {
-        System.out.println("COOOOOOOOOOOOOOOONNN "+connHall);
         if(connHall==null)
         {
             try {
@@ -39,9 +38,9 @@ public class SecondPageDB {
     public static void nullConnection()
     {
         connHall=null;
-    }
+    } //function gives a value of null
 
-    public static List<HallShow> hallShow() {
+    public static List<HallShow> hallShow() { //function show halls data
         try {
             List<HallShow> hall = new ArrayList<>();
 
@@ -66,7 +65,7 @@ public class SecondPageDB {
         return null;
     }
 
-    public static Boolean hallAdd(String nameExibition, Double square) {
+    public static Boolean hallAdd(String nameExibition, Double square) { //function adds hall data
         try {
             Savepoint savepointAdd = connHall.setSavepoint("SavepointAdd");
             try {
@@ -88,7 +87,7 @@ public class SecondPageDB {
         return false;
     }
 
-    public static Boolean hallDel(String nameHall) {
+    public static Boolean hallDel(String nameHall) { //function deletes halls data
         try {
             Savepoint savepointDel = connHall.setSavepoint("SavepointDel");
             try {
@@ -111,7 +110,21 @@ public class SecondPageDB {
         return false;
     }
 
-    public static void saveCommit() {
+    public static boolean exitConnection() { //function closes connect with DB
+        try {
+            if (savepoint != null) {
+                connHall.rollback(savepoint);
+                connHall.commit();
+                connHall.close();
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static void saveCommit() { //function saves data
         try {
             connHall.commit();
             savepoint = connHall.setSavepoint("savepointMain");
@@ -121,7 +134,7 @@ public class SecondPageDB {
 
     }
 
-    public static void RoleBackCommit() {
+    public static void RoleBackCommit() { //function roleback commit(data)
         try {
             if (savepoint != null)
                 connHall.rollback(savepoint);

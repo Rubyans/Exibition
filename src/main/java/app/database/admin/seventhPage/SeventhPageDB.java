@@ -10,14 +10,13 @@ import java.util.List;
 public class SeventhPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
-
     private static Connection connUserAutorized;
 
     public static Connection checkConnection() {
         return connUserAutorized;
     }
 
-    public static void startConnnection() {
+    public static void startConnnection() { //function creates connect with DB
         if (connUserAutorized == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
@@ -38,9 +37,8 @@ public class SeventhPageDB {
         connUserAutorized = null;
     }
 
-    public static List<UserAutorizedShow> UserAuto() {
+    public static List<UserAutorizedShow> UserAuto() { //function shows userAutorized
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try {
 
                 List<UserAutorizedShow> userAuto = new ArrayList<>();
@@ -72,11 +70,10 @@ public class SeventhPageDB {
         return null;
     }
 
-    public static Boolean UserAutoAdd(String fistName,String lastName,String login,String password,String email,Double amount,String role) {
+    public static Boolean UserAutoAdd(String fistName, String lastName, String login, String password, String email, Double amount, String role) { //function adds UserAutorized
         try {
             Savepoint savepointAdd = connUserAutorized.setSavepoint("SavepointAdd");
             try {
-
                 PreparedStatement UserAdd = connUserAutorized.prepareStatement("INSERT into exhibitiondb.authorized_user (first_name,last_name,login,password,email,amount,role) values (?,?,?,?,?,?,?)");
                 UserAdd.setString(1, fistName);
                 UserAdd.setString(2, lastName);
@@ -98,11 +95,11 @@ public class SeventhPageDB {
         }
         return false;
     }
-    public static Boolean UserAmountAdd(String email,Double amount) {
+
+    public static Boolean UserAmountAdd(String email, Double amount) { //function adds Amount for UserAutorized
         try {
             Savepoint SavepointAmount = connUserAutorized.setSavepoint("SavepointAmount");
             try {
-
                 PreparedStatement AmountAdd = connUserAutorized.prepareStatement("UPDATE exhibitiondb.authorized_user SET amount = ? WHERE email = ?");
                 AmountAdd.setDouble(1, amount);
                 AmountAdd.setString(2, email);
@@ -113,18 +110,16 @@ public class SeventhPageDB {
                 e.printStackTrace();
                 connUserAutorized.rollback(SavepointAmount);
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public static Boolean UserAutoDel(String email) {
+    public static Boolean UserAutoDel(String email) { //function deletes userAutorized data
         try {
             Savepoint savepointDel = connUserAutorized.setSavepoint("SavepointDel");
             try {
-
                 PreparedStatement userDel = connUserAutorized.prepareStatement("DELETE FROM exhibitiondb.authorized_user WHERE email=?");
                 userDel.setString(1, email);
                 int row = userDel.executeUpdate();
@@ -144,7 +139,22 @@ public class SeventhPageDB {
         return false;
     }
 
-    public static void saveCommit() {
+    public static boolean exitConnection() { //function closes connect
+        try {
+            if (savepoint != null) {
+                connUserAutorized.rollback(savepoint);
+                connUserAutorized.commit();
+                connUserAutorized.close();
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void saveCommit() { //function saves data
         try {
             connUserAutorized.commit();
             savepoint = connUserAutorized.setSavepoint("savepointMain");
@@ -154,7 +164,7 @@ public class SeventhPageDB {
 
     }
 
-    public static void RoleBackCommit() {
+    public static void RoleBackCommit() { //function roleback data
         try {
             if (savepoint != null)
                 connUserAutorized.rollback(savepoint);

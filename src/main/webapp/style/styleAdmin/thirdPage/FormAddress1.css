@@ -1,15 +1,18 @@
 * {box-sizing: border-box}
 
-/* Full-width input fields */
 
-#UserAutorizedForm{
+body {
+    background-color:#BA94D1;
+}
+
+#AddressForm {
     border:1px solid #ccc;
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-
+    background-color:white;
 }
 
 button {
-  background-color: #8D72E1;
+  background-color: #6A67CE;
   color: white;
   padding: 8px 20px;
   margin: 8px 3px;
@@ -17,38 +20,39 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
-
 }
+
 button:hover {
   opacity:1;
 }
 
-.nameExit{
+.nameExit {
     display: flex;
     justify-content: center;
     align-items: baseline;
 }
-.exitButton
-{
-    margin-left:28%;
+
+.exitButton {
+    margin-left:38%;
     width:7%;
+    background-color:#EB1D36;
 }
 
-.h3Add{
-    margin-left:35%;
+.h3Add {
+    margin-left:42%;
 }
 
-.buttonAuto
-{
+.buttonAddress {
     display: flex;
     justify-content: space-between;
     margin-left:0.3%;
     width:30%;
 }
 
-
 div.wrapper {
-   width:50%;
+   width:36.0%;
+   margin-left:0.21%;
+   margin-bottom:0.6%;
    border: 1px solid #f1f1f1;
    background-color:#6ECCAF;
 }
@@ -67,47 +71,32 @@ div.right_block {
     margin-top:1%;
 }
 
-#addDiv,#addDivUser,#addDivMoney{
+#addDiv {
     margin-left:5px;
 }
 
-
-.h6Add{
+.h6Add {
    margin:0px;
-   margin-bottom:1%;
    text-align:center;
 }
 
-input[type=text],input[type=number],input[type=email] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 10px 4px;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-input[type=text]:focus,input[type=number]:focus,input[type=email]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-div.SelectDiv{
-    margin-top:1%;
-}
-
-.SelectRole{
-    width: 30%;
+input[type=text],input[type=date],input[type=number] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 10px 4px;
+    display: inline-block;
     border: none;
     background: #f1f1f1;
-    margin: 0 auto;
-    display: block;
 }
 
+input[type=text]:focus,input[type=date]:focus,input[type=number]:focus {
+    background-color: #ddd;
+    outline: none;
+}
 
-div.InputDelDiv{
+div.InputDelDiv {
     width:60%;
-    margin-left:19%;
+    margin-left:20%;
     margin-top:1%;
     margin-bottom:2%;
 }
@@ -115,15 +104,15 @@ div.InputDelDiv{
 div.delDiv {
     display: flex;
     justify-content: space-between;
-    width:29.6%;
-    margin-left:0.4%;
+    width:36%;
+    margin-left:0.45%;
+    margin-bottom:0.6%;
     border: 1px solid #f1f1f1;
     background-color:#F38BA0;
-
 }
 
 
-.delButtonServlet{
+.delButtonServlet {
     display: block;
     width:30%;
     margin-left: auto;
@@ -131,28 +120,16 @@ div.delDiv {
     background-color:#EB1D36;
 }
 
-
-
-.addButtonServlet{
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-   width: 70%;
-   background-color:#1C7947;
-}
-
-.buttonAdd{
-    display: flex;
-    justify-content: space-around;
-}
-
-.addButtonUser,.addButtonMoney{
-    width:45%;
+.addButtonServlet {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
     background-color:#1C7947;
 }
 
 
-.pagination{
+.pagination {
     margin-top:5%;
     margin-bottom:5%;
     margin-left: auto;
@@ -164,7 +141,7 @@ div.delDiv {
 .pagination a {
     font-size: 10pt;
     color: black;
-    padding: 0.5% 1% 0.5% 1%;
+    padding: 0.7% 0.7% 0.7% 0.7%;
     text-decoration: none;
     transition: background-color .3s;
 }
@@ -174,10 +151,15 @@ div.delDiv {
     color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
 
-
-
+.buttonPagination {
+    border: 0;
+    background-color:white;
+    cursor: pointer;
+}
 
 table {
     border-spacing: 0;
@@ -188,26 +170,27 @@ table {
 }
 
 th, td:first-child {
-    background: #6A67CE;
+    background: #7c4caf;
     color: white;
     padding: 16px;
 }
+
 th, td {
-border-style: solid;
-border-width: 0 1px 1px 0;
-border-color: white;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
 }
 
-td
-{
+td {
     background: #BDF2D5;
 }
 
 th:first-child, td:first-child {
-text-align: left;
+    text-align: left;
 }
 
 .text{
     text-align:center;
+}
 
 

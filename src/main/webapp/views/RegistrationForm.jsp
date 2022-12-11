@@ -4,19 +4,19 @@
 <head>
     <title></title>
     <meta charset="UTF-8"/>
-    <link href="./style/styleRegistration/FormRegistration.css" rel="stylesheet"/>
+    <link href="./style/styleRegistration/FormRegistration12.css" rel="stylesheet"/>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
 <div>
     <c:choose>
-        <c:when test="${requestScope.UserAdd eq false}">
+        <c:when test="${requestScope.UserAddError}">
           <script>
-            sweetAlert("Реєстрування", "Даний логін вже існує або утворилися проблеми з БД", "error");
+            sweetAlert("Реєстрування", "Даний логін або пошта вже існує", "error");
           </script>
         </c:when>
-        <c:when test="${requestScope.UserAdd eq true}">
+        <c:when test="${requestScope.UserAddTrue}">
             <script>
                 sweetAlert("Реєстрування", "Ви успішно зареєструвались", "success");
                 setTimeout(() => document.location.href = "/exhibition/", 8000);
@@ -53,8 +53,8 @@
 
         <input type="checkbox" onclick="checkPassword()">Переглянути пароль
         <div class="clearfix">
-            <button onclick="location.href='/exhibition/'" class="backmainbtn">До авторизації</button>
-            <button type="submit" class="signupbtn">Зареєструватися</button>
+            <button class="backmainbtn" name="autorizedButton">До авторизації</button>
+            <button class="signupbtn" name="registrationButton">Зареєструватися</button>
         </div>
         <div id="message">
                 <h3 class="h3Tx">Пароль повинен складатися з:</h3>

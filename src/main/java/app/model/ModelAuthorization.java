@@ -1,6 +1,6 @@
 package app.model;
 
-import app.entities.User;
+import app.entities.UserAutorization;
 
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class ModelAuthorization {
     private static volatile ModelAuthorization instance;
 
-    private static List<User> model;
+    private static List<UserAutorization> model;
 
     public static ModelAuthorization getInstance() {
         ModelAuthorization result = instance;
@@ -34,23 +34,25 @@ public class ModelAuthorization {
         return model.get(0).getRole();
     }
 
+    public String getId() {return String.valueOf(model.get(0).getUserId()); }
+
     public static void delete() {
         model.clear();
     }
 
-    public void add(User user) {
-        model.add(user);
+    public void add(UserAutorization userAutorization) {
+        model.add(userAutorization);
     }
 
-    public List<User> listUser() {
+    public List<UserAutorization> listUser() {
         if (model.size() == 0)
             return null;
         return model;
     }
 
     public Boolean checkNull() {
-        for (User user : model) {
-            if (user != null)
+        for (UserAutorization userAutorization : model) {
+            if (userAutorization != null)
                 return false;
         }
         return true;
@@ -58,7 +60,7 @@ public class ModelAuthorization {
 
     public List<String> list() {
         return model.stream()
-                .map(User::getFirstName)
+                .map(UserAutorization::getFirstName)
                 .collect(Collectors.toList());
     }
 }

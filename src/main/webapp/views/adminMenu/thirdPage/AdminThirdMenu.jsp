@@ -4,7 +4,7 @@
     <head>
         <title>Адміністратор</title>
         <meta charset="UTF-8"/>
-        <link href="./style/styleAdmin/thirdPage/FormAddress12.css" rel="stylesheet"/>
+        <link href="./style/styleAdmin/thirdPage/FormAddress1.css" rel="stylesheet"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     </head>
@@ -95,68 +95,17 @@
             </c:if>
             </table>
             <div class="pagination">
-                <a href="/exhibition/adminhall">«</a>
-                <a href="/exhibition/adminmain">1</a>
-                <a href="/exhibition/adminhall">2</a>
-                <a class="active" href="/exhibition/adminaddress">3</a>
-                <a href="/exhibition/adminauthor">4</a>
-                <a href="/exhibition/adminart">5</a>
-                <a href="/exhibition/adminview">6</a>
-                <a href="/exhibition/userautorized">7</a>
-                <a href="/exhibition/adminauthor">»</a>
+                <a><input class="buttonPagination" type="submit" name="AdminHallPagination" value="«"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminMainPagination" value="1"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminHallPagination" value="2"></a>
+                <a class="active"><input class="buttonPagination" type="submit" name="AdminAddressPagination" value="3"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminAuthorPagination" value="4"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminArtPagination" value="5"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminViewPagination" value="6"></a>
+                <a><input class="buttonPagination" type="submit" name="UserAutorizedPagination" value="7"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminAuthorPagination" value="»"></a>
             </div>
     </form>
-
-    <script>
-           function addFunc(){
-
-                displayAnother= document.getElementById("delDiv").style.display;
-                if(displayAnother=='none')
-                {
-                    display = document.getElementById("addDiv").style.display;
-                    if(display=='none'){
-                        document.getElementById("addDiv").style.display='block';
-                        document.getElementById("InputCountryAd").required = true;
-                        document.getElementById("InputCityAd").required = true;
-                        document.getElementById("InputStreetAd").required = true;
-                        document.getElementById("InputHouseAd").required = true;
-
-
-                    }else{
-                        document.getElementById("addDiv").style.display='none';
-                        document.getElementById("InputCountryAd").required = false;
-                        document.getElementById("InputCityAd").required = false;
-                        document.getElementById("InputStreetAd").required = false;
-                        document.getElementById("InputHouseAd").required = false;
-                    }
-                }
-                else
-                {
-                    document.getElementById("delDiv").style.display='block';
-                    delFunc();
-                    addFunc();
-                }
-           };
-
-           function delFunc(){
-                displayAnother= document.getElementById("addDiv").style.display;
-                if(displayAnother=='none'){
-                    display = document.getElementById("delDiv").style.display;
-                    if(display=='none'){
-                        document.getElementById("delDiv").style.display='block';
-                        document.getElementById("InputDelAddress").required = true;
-                    }
-                    else{
-                        document.getElementById("delDiv").style.display='none';
-                        document.getElementById("InputDelAddress").required = false;
-                    }
-                }
-                else{
-                    document.getElementById("addDiv").style.display='block';
-                    addFunc();
-                    delFunc();
-                }
-           };
-    </script>
+    <script src="./JS/adminJS/thirdPage/AdminThirdMenu.js" type="text/javascript"></script>
 </body>
 </html>

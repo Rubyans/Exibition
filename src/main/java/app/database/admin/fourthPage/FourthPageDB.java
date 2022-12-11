@@ -6,24 +6,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FourthPageDB
-{
+public class FourthPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
 
     private static Connection connAuthor;
 
-    public static Connection checkConnection()
-    {
+    public static Connection checkConnection() {
         return connAuthor;
     }
-    public static void startConnnection()
+
+    public static void startConnnection() //function creates connect with DB
     {
-        System.out.println("COOOOOOOOOOOOOOOONNN "+connAuthor);
-        if(connAuthor==null)
-        {
+        if (connAuthor == null) {
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
                 try {
                     connAuthor = DriverManager.getConnection(url);
                     connAuthor.setAutoCommit(false);
@@ -31,18 +27,17 @@ public class FourthPageDB
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    public static void nullConnection()
-    {
-        connAuthor=null;
+
+    public static void nullConnection() {
+        connAuthor = null;
     }
-    public static List<AuthorShow> authorShow() {
+
+    public static List<AuthorShow> authorShow() { //function shows author
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try {
@@ -51,17 +46,17 @@ public class FourthPageDB
 
 
                 String firstName = null;
-                String lastName=null;
-                String email=null;
+                String lastName = null;
+                String email = null;
 
                 PreparedStatement statement = connAuthor.prepareStatement("SELECT first_name,last_name,email FROM exhibitiondb.author", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 ResultSet setAuthor = statement.executeQuery();
                 while (setAuthor.next()) {
-                    firstName=setAuthor.getString(1);
-                    lastName=setAuthor.getString(2);
-                    email=setAuthor.getString(3);
+                    firstName = setAuthor.getString(1);
+                    lastName = setAuthor.getString(2);
+                    email = setAuthor.getString(3);
 
-                    author.add(new AuthorShow(firstName,lastName,email));
+                    author.add(new AuthorShow(firstName, lastName, email));
                 }
                 statement.close();
 
@@ -75,7 +70,8 @@ public class FourthPageDB
         }
         return null;
     }
-    public static Boolean authorAdd(String firstName,String lastName,String email) {
+
+    public static Boolean authorAdd(String firstName, String lastName, String email) { //function adds author data
         try {
             Savepoint savepointAdd = connAuthor.setSavepoint("SavepointAdd");
             try {
@@ -97,7 +93,8 @@ public class FourthPageDB
         }
         return false;
     }
-    public static Boolean authorDel(String email) {
+
+    public static Boolean authorDel(String email) { //function deletes authors data
         try {
             Savepoint savepointDel = connAuthor.setSavepoint("SavepointDel");
             try {
@@ -120,25 +117,37 @@ public class FourthPageDB
         }
         return false;
     }
-    public static void saveCommit() {
+
+    public static boolean exitConnection() { //function closes commit
+        try {
+            if (savepoint != null) {
+                connAuthor.rollback(savepoint);
+                connAuthor.commit();
+                connAuthor.close();
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void saveCommit() { //function saves commit
         try {
             connAuthor.commit();
-            savepoint=connAuthor.setSavepoint("savepointMain");
-        }
-        catch (SQLException e)
-        {
+            savepoint = connAuthor.setSavepoint("savepointMain");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
-    public static void RoleBackCommit() {
-        try
-        {
-            if(savepoint!=null)
+
+    public static void RoleBackCommit() { //function roleback data
+        try {
+            if (savepoint != null)
                 connAuthor.rollback(savepoint);
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
