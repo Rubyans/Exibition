@@ -25,6 +25,20 @@ button:hover {
     opacity:1;
 }
 
+div.languageDiv {
+    display:flex;
+    width:99.5%;
+    justify-content: flex-end;
+    margin-top:0.5%;
+}
+
+.languageButton {
+    width:2.5%;
+    padding:0;
+    margin:0;
+    margin-left:1%;
+}
+
 .nameExit {
     display: flex;
     justify-content: center;
@@ -32,17 +46,23 @@ button:hover {
 }
 
 .exitButton {
-    margin-left:35%;
+    margin-left:34%;
     width:7%;
     background-color:#EB1D36;
 }
 
 .h3Add {
-    margin-left:42%;
+    margin-left:43%;
 }
 
 .h6Add {
     margin:0px;
+    text-align:center;
+}
+.h6Acc {
+    margin:0px;
+    margin-top:1%;
+    margin-bottom:1%;
     text-align:center;
 }
 
@@ -87,7 +107,12 @@ div.right_block {
     border: none;
     background: #f1f1f1;
 }
-
+.SelectAccess {
+    width: 50.4%;
+    margin-left:25.5%;
+    border: none;
+    background: #f1f1f1;
+}
 
 input[type=text],input[type=date],input[type=number] {
     width: 100%;
@@ -103,9 +128,9 @@ input[type=text]:focus,input[type=date]:focus,input[type=number]:focus {
     outline: none;
 }
 
-div.InputDelDiv {
+div.InputDelDiv,div.InputAccessDiv {
     width:50%;
-    margin-left:24%;
+    margin-left:25%;
     margin-top:1%;
     margin-bottom:2%;
 }
@@ -113,7 +138,7 @@ div.InputDelDiv {
 div.delDiv {
     display: flex;
     justify-content: space-between;
-    width:36%;
+    width:42%;
     margin-left:0.43%;
     margin-bottom:0.6%;
     border: 1px solid #f1f1f1;
@@ -127,6 +152,29 @@ div.delDiv {
     margin-left: auto;
     margin-right: auto;
     background-color:#EB1D36;
+}
+
+div.accessDiv {
+    display: flex;
+    justify-content: space-between;
+    width:42%;
+    margin-left:0.43%;
+    margin-bottom:0.6%;
+    border: 1px solid #f1f1f1;
+    background-color:#6ECCAF;
+}
+
+div.checkAccess {
+    margin-top:1%;
+    margin-bottom:1%;
+}
+
+.accessButtonServlet {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 30%;
+   background-color:#1C7947;
 }
 
 .addButtonServlet {

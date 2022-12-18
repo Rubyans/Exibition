@@ -3,6 +3,8 @@ package app.database.user.firstPage;
 import app.entities.userEntities.firstPage.UserShowAdd;
 import app.entities.userEntities.firstPage.UserShowExhibition;
 import app.entities.userEntities.firstPage.UserShowMoney;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,9 +17,7 @@ public class FirstPageDB {
     private static Savepoint savepoint;
     private static Connection connUserEx;
 
-    public static Connection checkConnection() {
-        return connUserEx;
-    }
+    private static final Logger LOGGER = LogManager.getLogger(FirstPageDB.class);
 
     public static void startConnnection() { //function creates connect with DB
         if (connUserEx == null) {
@@ -27,18 +27,22 @@ public class FirstPageDB {
                     connUserEx = DriverManager.getConnection(url);
                     connUserEx.setAutoCommit(false);
                     savepoint = connUserEx.setSavepoint("savepointMain");
+                    LOGGER.debug("startConnnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnnection " + e.getMessage());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                LOGGER.error("startConnnection " + ex.getMessage());
             }
         }
     }
-
+    public static Connection checkConnection() {
+        return connUserEx;
+    }
     public static void nullConnection() {
         connUserEx = null;
     }
+
     public static List<UserShowExhibition> userShowEx(String userId) { //function shows exhibition data
         try {
             try {
@@ -70,7 +74,7 @@ public class FirstPageDB {
                         mapExhibition.put(nameEx, 1);
                     }
                 }
-                PreparedStatement statement = connUserEx.prepareStatement("SELECT name,price,date_start,date_end FROM exhibitiondb.exhibition", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                PreparedStatement statement = connUserEx.prepareStatement("SELECT name,price,date_start,date_end FROM exhibitiondb.exhibition WHERE exhibition.access='1';", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 ResultSet setUser = statement.executeQuery();
                 while (setUser.next()) {
                     nameExhibition = setUser.getString(1);
@@ -86,20 +90,19 @@ public class FirstPageDB {
                 }
                 statement.close();
                 statementTicket.close();
-
+                LOGGER.debug("userShowEx in debug");
                 return user;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("userShowEx " + e.getMessage());
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error("userShowEx " + ex.getMessage());
         }
         return null;
     }
 
     public static List<UserShowAdd> ShowAddExhibition() { //function shows exhibitions data
         try {
-
             List<UserShowAdd> userAdd = new ArrayList<>();
             String nameExhibition = null;
 
@@ -110,15 +113,15 @@ public class FirstPageDB {
                 userAdd.add(new UserShowAdd(nameExhibition));
             }
             statement.close();
+            LOGGER.debug("ShowAddExhibition in debug");
             return userAdd;
-
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("ShowAddExhibition " + e.getMessage());
         }
         return null;
     }
 
-    public static List<UserShowMoney> ShowMoney(String userId) { //function shows money of userAutorized
+    public static List<UserShowMoney> showMoney(String userId) { //function shows money of userAutorized
         try {
 
             List<UserShowMoney> userMoney = new ArrayList<>();
@@ -131,10 +134,11 @@ public class FirstPageDB {
                 userMoney.add(new UserShowMoney(amount));
             }
             statement.close();
+            LOGGER.debug("ShowMoney in debug");
             return userMoney;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("ShowMoney " + e.getMessage());
         }
         return null;
     }
@@ -181,15 +185,18 @@ public class FirstPageDB {
                     statementUpdate.setInt(2, Integer.parseInt(userId));
                     statementUpdate.execute();
                     statementUpdate.close();
+                    LOGGER.debug("ticketAdd in debug");
                     return true;
-                } else
+                } else {
+                    LOGGER.debug("ticketAdd in debug");
                     return false;
+                }
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("ticketAdd " + e.getMessage());
                 connUserEx.rollback(savepointAdd);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("ticketAdd " + ex.getMessage());
         }
         return false;
     }
@@ -201,22 +208,25 @@ public class FirstPageDB {
                 connUserEx.rollback(savepoint);
                 connUserEx.commit();
                 connUserEx.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
             return false;
         }
     }
 
-    public static boolean SaveCommit() { //function saves commit
+    public static boolean saveCommit() { //function saves commit
         try {
             connUserEx.commit();
             savepoint = connUserEx.setSavepoint("savepointMain");
+            LOGGER.debug("SaveCommit in debug");
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SaveCommit " + e.getMessage());
             return false;
         }
 
@@ -226,11 +236,13 @@ public class FirstPageDB {
         try {
             if (savepoint != null) {
                 connUserEx.rollback(savepoint);
+                LOGGER.debug("RoleBackCommit in debug");
                 return true;
             }
+            LOGGER.debug("RoleBackCommit in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("RoleBackCommit " + e.getMessage());
             return false;
         }
     }

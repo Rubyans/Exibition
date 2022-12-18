@@ -5,18 +5,20 @@ import app.entities.adminEntities.fifthPage.ArtShow;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelShowArt
-{
-    private static volatile ModelShowArt instance;
-    private static List<ArtShow> model;
+public class ModelShowArt { //singleton pattern model
+    //used to store class objects with the results of a show request
+    private static volatile ModelShowArt instance; //the field must be valid for validation to work
+    private static List<ArtShow> model; //data storage list
 
     public static ModelShowArt getInstance() {
-
+        // double-checked locking is used to
+        // prevent multiple lone objects from being created
+        // if the method is called from multiple threads at the same time.
         ModelShowArt result = instance;
         if (result != null) {
             return result;
         }
-        synchronized(ModelShowArt.class) {
+        synchronized (ModelShowArt.class) {
             if (instance == null) {
                 instance = new ModelShowArt();
             }
@@ -26,22 +28,18 @@ public class ModelShowArt
     private ModelShowArt() {
         model = new ArrayList<>();
     }
-
-    public static void delete()
-    {
+    public static void delete() { //deletes object
         model.clear();
-    }
-
-    public void add(ArtShow art) {
+    } //deletes object
+    public void add(ArtShow art) { //adds object
         model.add(art);
-    }
-    public List<ArtShow> listShow()
-    {
-        if(model.size()==0)
+    } //adds object
+    public List<ArtShow> listShow() { //returns list
+        if (model.size() == 0)
             return null;
         return model;
     }
-    public Boolean checkNull() {
+    public Boolean checkNull() { //checks list for null values
         for (ArtShow art : model) {
             if (art != null)
                 return false;

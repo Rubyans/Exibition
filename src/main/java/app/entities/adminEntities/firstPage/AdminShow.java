@@ -10,8 +10,9 @@ import java.util.stream.Collectors;
 public class AdminShow { //the class is used to store exhibition-related data.
     private String nameExibition;
     private String descriptionExibition;
+    private String accessExhibition;
     private List<String> expositionName;
-    private BigDecimal price;
+    private Double price;
     private Date dateStart;
     private Date dateEnd;
     private List<String> nameHall;
@@ -19,8 +20,8 @@ public class AdminShow { //the class is used to store exhibition-related data.
     private List<String> nameview;
     private List<String> addressExibition;
 
-    public AdminShow(String nameExibition, String descriptionExibition, List<String> expositionName, BigDecimal price,
-                     Date dateStart, Date dateEnd, List<String> nameHall, List<String> nameAuthor, List<String> nameview, List<String> addressExibition) {
+    public AdminShow(String nameExibition, String descriptionExibition, List<String> expositionName, Double price,
+                     Date dateStart, Date dateEnd, String accessExhibition, List<String> nameHall, List<String> nameAuthor, List<String> nameview, List<String> addressExibition) {
         //the constructor stores lists and data fields that will be displayed in the table in the future
         this.nameExibition = nameExibition;
         this.descriptionExibition = descriptionExibition;
@@ -28,6 +29,7 @@ public class AdminShow { //the class is used to store exhibition-related data.
         this.price = price;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+        this.accessExhibition = accessExhibition;
         this.nameHall = new ArrayList<>(nameHall);
         this.nameAuthor = new ArrayList<>(nameAuthor);
         this.nameview = new ArrayList<>(nameview);
@@ -39,9 +41,11 @@ public class AdminShow { //the class is used to store exhibition-related data.
     public String getNameExhibition() {
         return nameExibition;
     }
+
     public String getDescriptionExibition() {
         return descriptionExibition;
     }
+
     public List<String> getExpositionName() {
 
         int tempCount = 0;
@@ -58,15 +62,25 @@ public class AdminShow { //the class is used to store exhibition-related data.
             return expositionName.stream().distinct().collect(Collectors.toList());
         }
     }
-    public BigDecimal getPrice() {
+
+    public Double getPrice() {
         return price;
     }
+
     public Date getDateStart() {
         return dateStart;
     }
+
     public Date getDateEnd() {
         return dateEnd;
     }
+
+    public String getAccessExhibition() {
+        if (accessExhibition.equals("1"))
+            return "Дозволено";
+        return "Заборонено";
+    }
+
     public List<String> getNameHall() { //the function removes the same data
         int tempCount = 0;
         String tempName = nameHall.get(0);
@@ -82,6 +96,7 @@ public class AdminShow { //the class is used to store exhibition-related data.
             return nameHall.stream().distinct().collect(Collectors.toList());
         }
     }
+
     public List<String> getNameAuthor() { //the function removes the same data
         int tempCount = 0;
         String tempName = nameAuthor.get(0);
@@ -97,6 +112,7 @@ public class AdminShow { //the class is used to store exhibition-related data.
             return nameAuthor.stream().distinct().collect(Collectors.toList());
         }
     }
+
     public List<String> getNameview() { //the function removes the same data
         int tempCount = 0;
         String tempName = nameview.get(0);
@@ -112,6 +128,7 @@ public class AdminShow { //the class is used to store exhibition-related data.
             return nameview.stream().distinct().collect(Collectors.toList());
         }
     }
+
     public List<String> getAddressExibition() { //the function removes the same data
         int tempCount = 0;
         String tempName = addressExibition.get(0);
@@ -129,14 +146,47 @@ public class AdminShow { //the class is used to store exhibition-related data.
 
     ///////////////////setFunctions//////////////////////////
 
-    public void setNameExibition(String nameExibition) { this.nameExibition = nameExibition; }
-    public void setDescriptionExibition(String descriptionExibition) {this.descriptionExibition = descriptionExibition; }
-    public void setExpositionName(List<String> expositionName) { this.expositionName = new ArrayList<>(expositionName); }
-    public void setDateStart(Date dateStart) { this.dateStart = dateStart; }
-    public void setDateEnd(Date dateEnd) { this.dateEnd = dateEnd; }
-    public void setNameview(List<String> nameview) { this.nameview = new ArrayList<>(nameview); }
-    public void setNameHall(List<String> nameHall) { this.nameHall = new ArrayList<>(nameHall); }
-    public void setNameAuthor(List<String> nameAuthor) { this.nameAuthor = new ArrayList<>(nameAuthor); }
-    public void setAddressExibition(List<String> addressExibition) { this.addressExibition = new ArrayList<>(addressExibition); }
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public void setNameExibition(String nameExibition) {
+        this.nameExibition = nameExibition;
+    }
+
+    public void setDescriptionExibition(String descriptionExibition) {
+        this.descriptionExibition = descriptionExibition;
+    }
+
+    public void setExpositionName(List<String> expositionName) {
+        this.expositionName = new ArrayList<>(expositionName);
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public void setNameview(List<String> nameview) {
+        this.nameview = new ArrayList<>(nameview);
+    }
+
+    public void setNameHall(List<String> nameHall) {
+        this.nameHall = new ArrayList<>(nameHall);
+    }
+
+    public void setNameAuthor(List<String> nameAuthor) {
+        this.nameAuthor = new ArrayList<>(nameAuthor);
+    }
+
+    public void setAddressExibition(List<String> addressExibition) {
+        this.addressExibition = new ArrayList<>(addressExibition);
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setAccessExhibition(String accessExhibition) {
+        this.accessExhibition = accessExhibition;
+    }
 }

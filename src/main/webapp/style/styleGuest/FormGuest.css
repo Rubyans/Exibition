@@ -19,14 +19,25 @@ button {
     cursor: pointer;
     width: 100%;
     opacity: 0.9;
-
 }
 
 button:hover {
     opacity:1;
 }
 
+div.languageDiv {
+    display:flex;
+    width:99%;
+    justify-content: flex-end;
+    margin-top:1%;
+}
 
+.languageButton {
+    width:3%;
+    padding:0;
+    margin:0;
+    margin-left:1%;
+}
 .buttonAuto {
     margin-left:0.3%;
     width:30%;
@@ -69,4 +80,5 @@ th:first-child, td:first-child {
 
 .text {
     text-align:center;
+    margin-top:0;
 }

@@ -1,6 +1,8 @@
 package app.database.admin.thirdPage;
 
 import app.entities.adminEntities.thirdPage.AddressShow;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,10 +12,7 @@ public class ThirdPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
     private static Connection connAddress;
-
-    public static Connection checkConnection() {
-        return connAddress;
-    }
+    private static final Logger LOGGER = LogManager.getLogger(ThirdPageDB.class);
 
     public static void startConnnection() //function creates connect
     {
@@ -24,13 +23,18 @@ public class ThirdPageDB {
                     connAddress = DriverManager.getConnection(url);
                     connAddress.setAutoCommit(false);
                     savepoint = connAddress.setSavepoint("savepointMain");
+                    LOGGER.debug("startConnnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnnection " + e.getMessage());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                LOGGER.error("startConnnection " + ex.getMessage());
             }
         }
+    }
+
+    public static Connection checkConnection() {
+        return connAddress;
     }
 
     public static void nullConnection() {
@@ -39,7 +43,6 @@ public class ThirdPageDB {
 
     public static List<AddressShow> addressShow() { //function shows address
         try {
-
             List<AddressShow> address = new ArrayList<>();
 
             Integer Unumber;
@@ -59,9 +62,10 @@ public class ThirdPageDB {
                 address.add(new AddressShow(Unumber, country, city, street, numberHouse));
             }
             statement.close();
+            LOGGER.debug("addressShow in debug");
             return address;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("addressShow " + e.getMessage());
         }
         return null;
     }
@@ -70,7 +74,6 @@ public class ThirdPageDB {
         try {
             Savepoint savepointAdd = connAddress.setSavepoint("SavepointAdd");
             try {
-
                 PreparedStatement AddressAdd = connAddress.prepareStatement("INSERT into exhibitiondb.exhibition_address (country,city,street_or_square,number_home) values (?,?,?,?)");
                 AddressAdd.setString(1, country);
                 AddressAdd.setString(2, city);
@@ -78,19 +81,19 @@ public class ThirdPageDB {
                 AddressAdd.setInt(4, numberHouse);
                 AddressAdd.execute();
                 AddressAdd.close();
+                LOGGER.debug("addressAdd in debug");
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("addressAdd " + e.getMessage());
                 connAddress.rollback(savepointAdd);
             }
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("addressAdd " + ex.getMessage());
         }
         return false;
     }
 
-    public static Boolean addressDel(int Unumber) { //function deletes address data
+    public static Boolean addressDel(Integer Unumber) { //function deletes address data
         try {
             Savepoint savepointDel = connAddress.setSavepoint("SavepointDel");
             try {
@@ -99,16 +102,18 @@ public class ThirdPageDB {
                 Integer row = AddressDel.executeUpdate();
                 AddressDel.close();
 
-                if (row > 0)
+                if (row > 0) {
+                    LOGGER.debug("addressDel in debug");
                     return true;
+                }
+                LOGGER.debug("addressDel in debug");
                 return false;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("addressDel " + e.getMessage());
                 connAddress.rollback(savepointDel);
             }
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("addressDel " + ex.getMessage());
         }
         return false;
     }
@@ -119,11 +124,13 @@ public class ThirdPageDB {
                 connAddress.rollback(savepoint);
                 connAddress.commit();
                 connAddress.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
             return false;
         }
     }
@@ -132,8 +139,9 @@ public class ThirdPageDB {
         try {
             connAddress.commit();
             savepoint = connAddress.setSavepoint("savepointMain");
+            LOGGER.debug("exitConnection in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
         }
 
     }
@@ -142,11 +150,9 @@ public class ThirdPageDB {
         try {
             if (savepoint != null)
                 connAddress.rollback(savepoint);
+            LOGGER.debug("RoleBackCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("RoleBackCommit " + e.getMessage());
         }
-
     }
-
-
 }

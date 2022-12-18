@@ -2,19 +2,18 @@ package app.database.admin.fifthPage;
 
 import app.entities.adminEntities.fifthPage.ArtAddShow;
 import app.entities.adminEntities.fifthPage.ArtShow;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FifthPageDB {
+    private static final Logger LOGGER = LogManager.getLogger(FifthPageDB.class);
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
     private static Connection connArt;
-
-    public static Connection checkConnection() {
-        return connArt;
-    } //checking database connections
 
     public static void startConnnection() { //create database connections
         if (connArt == null) {
@@ -24,14 +23,18 @@ public class FifthPageDB {
                     connArt = DriverManager.getConnection(url);
                     connArt.setAutoCommit(false);
                     savepoint = connArt.setSavepoint("savepointMain"); //create savepoint for transactions
+                    LOGGER.debug("startConnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnection " + e.getMessage());
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("startConnection " + e.getMessage());
             }
         }
     }
+    public static Connection checkConnection() {
+        return connArt;
+    } //checking database connections
 
     public static void nullConnection() {
         connArt = null;
@@ -79,12 +82,13 @@ public class FifthPageDB {
                     fullName.clear();
                     statementArt.close();
                 }
+                LOGGER.debug("artShow in debug");
                 return art;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("artShow " + e.getMessage());
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error("artShow " + ex.getMessage());
         }
         return null;
     }
@@ -116,12 +120,13 @@ public class FifthPageDB {
                 statementView.close();
 
                 artAddShow.add(new ArtAddShow(firstName, lastName, email, view));
+                LOGGER.debug("addArtShow in debug");
                 return artAddShow;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("addArtShow " + e.getMessage());
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error("addArtShow " + ex.getMessage());
         }
         return null;
     }
@@ -187,14 +192,14 @@ public class FifthPageDB {
                     statementAddAuthor.execute();
                     statementAddAuthor.close();
                 }
+                LOGGER.debug("artAdd in debug");
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("artAdd " + e.getMessage());
                 connArt.rollback(savepointAdd);
             }
         } catch (Exception e) {
-
-            e.printStackTrace();
+            LOGGER.error("artAdd " + e.getMessage());
         }
         return false;
     }
@@ -207,30 +212,35 @@ public class FifthPageDB {
                 artDel.setString(1, email);
                 Integer row = artDel.executeUpdate();
                 artDel.close();
-                if (row > 0)
+                if (row > 0) {
+                    LOGGER.debug("artDel in debug");
                     return true;
+                }
+                LOGGER.debug("artDel in debug");
                 return false;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("artDel in debug");
                 connArt.rollback(savepointDel);
             }
         } catch (Exception e) {
-
-            e.printStackTrace();
+            LOGGER.error("artDel in debug");
         }
         return false;
     }
+
     public static boolean exitConnection() { //function exits(close) connection
         try {
             if (savepoint != null) {
                 connArt.rollback(savepoint);
                 connArt.commit();
                 connArt.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
             return false;
         }
     }
@@ -239,8 +249,9 @@ public class FifthPageDB {
         try {
             connArt.commit();
             savepoint = connArt.setSavepoint("savepointMain");
+            LOGGER.debug("saveCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("saveCommit " + e.getMessage());
         }
 
     }
@@ -249,8 +260,9 @@ public class FifthPageDB {
         try {
             if (savepoint != null)
                 connArt.rollback(savepoint);
+            LOGGER.debug("RoleBackCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("RoleBackCommit " + e.getMessage());
         }
 
     }

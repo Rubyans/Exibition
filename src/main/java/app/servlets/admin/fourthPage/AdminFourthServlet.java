@@ -4,7 +4,10 @@ import app.database.admin.fourthPage.FourthPageDB;
 import app.entities.adminEntities.fourthPage.AuthorShow;
 import app.model.adminModels.fourthPage.ModelAddAuthor;
 import app.model.adminModels.fourthPage.ModelDelAuthor;
+import app.model.adminModels.fourthPage.ModelLanguageAdminFourth;
 import app.model.adminModels.fourthPage.ModelShowAuthor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import javax.servlet.ServletException;
@@ -16,14 +19,33 @@ import java.util.List;
 
 public class AdminFourthServlet extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(AdminFourthServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
-            resp.sendRedirect("/exhibition/");
+            resp.sendRedirect("/exhibition/auto");
         } else {
             ModelShowAuthor modelShowAuthor = ModelShowAuthor.getInstance();
             ModelAddAuthor modelAddAuthor = ModelAddAuthor.getInstance();
             ModelDelAuthor modelDelAuthor = ModelDelAuthor.getInstance();
+            ModelLanguageAdminFourth modelLanguageAdminFourth = ModelLanguageAdminFourth.getInstance();
+
+            if (modelLanguageAdminFourth.modelCheck() != null) {
+                if (modelLanguageAdminFourth.modelCheck().equals("en")) {
+                    req.getSession().setAttribute("language", "en");
+                }
+                if (modelLanguageAdminFourth.modelCheck().equals("ua")) {
+                    req.getSession().setAttribute("language", "ua");
+                }
+            }
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageEnglish", true);
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
+                    req.setAttribute("languageUkraine", true);
+                }
+            }
 
             if (FourthPageDB.checkConnection() == null)
                 FourthPageDB.startConnnection();
@@ -54,9 +76,12 @@ public class AdminFourthServlet extends HttpServlet {
             req.removeAttribute("DelError");
             req.removeAttribute("TrueDel");
             req.removeAttribute("TrueAdd");
+            req.removeAttribute("languageEnglish");
+            req.removeAttribute("languageUkraine");
             ModelShowAuthor.delete();
             ModelAddAuthor.delete();
             ModelDelAuthor.delete();
+            ModelLanguageAdminFourth.delete();
         }
     }
 
@@ -71,7 +96,9 @@ public class AdminFourthServlet extends HttpServlet {
             try {
                 for (AuthorShow author : FourthPageDB.authorShow())
                     modelShowAuthor.add(author);
+                LOGGER.debug("doPost in debug");
             } catch (Exception e) {
+                LOGGER.error("doPost " + e.getMessage());
                 modelShowAuthor.add(null);
             }
             resp.sendRedirect("/exhibition/adminauthor");
@@ -136,6 +163,18 @@ public class AdminFourthServlet extends HttpServlet {
             FourthPageDB.exitConnection();
             FourthPageDB.nullConnection();
             resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("AdminStatisticsExhibition") != null) {
+            FourthPageDB.exitConnection();
+            FourthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminstatistics");
+        } else if (req.getParameter("englishButton") != null) {
+            ModelLanguageAdminFourth modelLanguageAdminFourth = ModelLanguageAdminFourth.getInstance();
+            modelLanguageAdminFourth.add("en");
+            resp.sendRedirect("/exhibition/adminauthor");
+        } else if (req.getParameter("ukraineButton") != null) {
+            ModelLanguageAdminFourth modelLanguageAdminFourth = ModelLanguageAdminFourth.getInstance();
+            modelLanguageAdminFourth.add("ua");
+            resp.sendRedirect("/exhibition/adminauthor");
         }
     }
 }

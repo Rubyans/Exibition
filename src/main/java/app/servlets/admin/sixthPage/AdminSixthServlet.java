@@ -4,7 +4,10 @@ import app.database.admin.sixthPage.SixthPageDB;
 import app.entities.adminEntities.sixthPage.ViewShow;
 import app.model.adminModels.sixthPage.ModelAddView;
 import app.model.adminModels.sixthPage.ModelDelView;
+import app.model.adminModels.sixthPage.ModelLanguageAdminSixth;
 import app.model.adminModels.sixthPage.ModelShowView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +18,33 @@ import java.util.List;
 
 public class AdminSixthServlet extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(AdminSixthServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
-            resp.sendRedirect("/exhibition/");
+            resp.sendRedirect("/exhibition/auto");
         } else {
             ModelShowView modelShowView = ModelShowView.getInstance();
             ModelAddView modelAddView = ModelAddView.getInstance();
             ModelDelView modelDelView = ModelDelView.getInstance();
+            ModelLanguageAdminSixth modelLanguageAdminSixth = ModelLanguageAdminSixth.getInstance();
 
+            if (modelLanguageAdminSixth.modelCheck() != null) {
+                if (modelLanguageAdminSixth.modelCheck().equals("en")) {
+                    req.getSession().setAttribute("language", "en");
+                }
+                if (modelLanguageAdminSixth.modelCheck().equals("ua")) {
+                    req.getSession().setAttribute("language", "ua");
+                }
+            }
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageEnglish", true);
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
+                    req.setAttribute("languageUkraine", true);
+                }
+            }
             if (SixthPageDB.checkConnection() == null)
                 SixthPageDB.startConnnection();
 
@@ -53,9 +74,12 @@ public class AdminSixthServlet extends HttpServlet {
             req.removeAttribute("DelError");
             req.removeAttribute("TrueDel");
             req.removeAttribute("TrueAdd");
+            req.removeAttribute("languageEnglish");
+            req.removeAttribute("languageUkraine");
             ModelShowView.delete();
             ModelAddView.delete();
             ModelDelView.delete();
+            ModelLanguageAdminSixth.delete();
         }
     }
 
@@ -68,8 +92,10 @@ public class AdminSixthServlet extends HttpServlet {
             try {
                 for (ViewShow view : SixthPageDB.viewShow())
                     modelShowView.add(view);
+                LOGGER.debug("doPost in debug");
             } catch (Exception e) {
                 modelShowView.add(null);
+                LOGGER.debug("doPost " + e.getMessage());
             }
             resp.sendRedirect("/exhibition/adminview");
 
@@ -130,6 +156,18 @@ public class AdminSixthServlet extends HttpServlet {
         } else if (req.getParameter("AdminViewPagination") != null) {
             SixthPageDB.exitConnection();
             SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("AdminStatisticsExhibition") != null) {
+            SixthPageDB.exitConnection();
+            SixthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminstatistics");
+        } else if (req.getParameter("englishButton") != null) {
+            ModelLanguageAdminSixth modelLanguageAdminSixth = ModelLanguageAdminSixth.getInstance();
+            modelLanguageAdminSixth.add("en");
+            resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("ukraineButton") != null) {
+            ModelLanguageAdminSixth modelLanguageAdminSixth = ModelLanguageAdminSixth.getInstance();
+            modelLanguageAdminSixth.add("ua");
             resp.sendRedirect("/exhibition/adminview");
         }
     }

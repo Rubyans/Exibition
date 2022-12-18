@@ -2,6 +2,7 @@ package app.servlets.user.secondPage;
 
 import app.database.user.secondPage.SecondPageDB;
 import app.entities.userEntities.secondPage.UserShowExhibition;
+import app.model.userModels.secondPage.ModelLanguageUserSecond;
 import app.model.userModels.secondPage.ModelShowExhibition;
 
 import javax.servlet.ServletException;
@@ -15,10 +16,27 @@ public class UserExhibitionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("UserRole") == null) {
-            resp.sendRedirect("/exhibition/");
+            resp.sendRedirect("/exhibition/auto");
         } else {
             ModelShowExhibition modelShowExhibition = ModelShowExhibition.getInstance();
+            ModelLanguageUserSecond modelLanguageUserSecond = ModelLanguageUserSecond.getInstance();
 
+            if (modelLanguageUserSecond.modelCheck() != null) {
+                if (modelLanguageUserSecond.modelCheck().equals("en")) {
+                    req.getSession().setAttribute("language", "en");
+                }
+                if (modelLanguageUserSecond.modelCheck().equals("ua")) {
+                    req.getSession().setAttribute("language", "ua");
+                }
+            }
+
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageEnglish", true);
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
+                    req.setAttribute("languageUkraine", true);
+                }
+            }
             if (SecondPageDB.checkConnection() == null)
                 SecondPageDB.startConnnection();
 
@@ -35,7 +53,10 @@ public class UserExhibitionServlet extends HttpServlet {
             req.getRequestDispatcher("views/userMenu/secondPage/UserSecondMenu.jsp").forward(req, resp);
             req.removeAttribute("SecondPage");
             req.removeAttribute("Error");
+            req.removeAttribute("languageEnglish");
+            req.removeAttribute("languageUkraine");
             ModelShowExhibition.delete();
+            ModelLanguageUserSecond.delete();
         }
     }
 
@@ -61,15 +82,21 @@ public class UserExhibitionServlet extends HttpServlet {
             SecondPageDB.nullConnection();
             req.getSession().removeAttribute("UserRole");
             resp.sendRedirect("/exhibition/userexhibition");
-        }
-        else if (req.getParameter("UserPagination") != null) {
+        } else if (req.getParameter("UserPagination") != null) {
             SecondPageDB.exitConnection();
             SecondPageDB.nullConnection();
             resp.sendRedirect("/exhibition/user");
-        }
-        else if (req.getParameter("UserExhibitionPagination") != null) {
+        } else if (req.getParameter("UserExhibitionPagination") != null) {
             SecondPageDB.exitConnection();
             SecondPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/userexhibition");
+        } else if (req.getParameter("englishButton") != null) {
+            ModelLanguageUserSecond modelLanguageUserSecond = ModelLanguageUserSecond.getInstance();
+            modelLanguageUserSecond.add("en");
+            resp.sendRedirect("/exhibition/userexhibition");
+        } else if (req.getParameter("ukraineButton") != null) {
+            ModelLanguageUserSecond modelLanguageUserSecond = ModelLanguageUserSecond.getInstance();
+            modelLanguageUserSecond.add("ua");
             resp.sendRedirect("/exhibition/userexhibition");
         }
     }

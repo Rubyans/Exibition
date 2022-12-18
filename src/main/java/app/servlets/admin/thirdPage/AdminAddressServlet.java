@@ -4,7 +4,10 @@ import app.database.admin.thirdPage.ThirdPageDB;
 import app.entities.adminEntities.thirdPage.AddressShow;
 import app.model.adminModels.thirdPage.ModelAddAddress;
 import app.model.adminModels.thirdPage.ModelDelAddress;
+import app.model.adminModels.thirdPage.ModelLanguageAdminThird;
 import app.model.adminModels.thirdPage.ModelShowAddress;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,14 +18,33 @@ import java.util.List;
 
 public class AdminAddressServlet extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(AdminAddressServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
-            resp.sendRedirect("/exhibition/");
+            resp.sendRedirect("/exhibition/auto");
         } else {
             ModelShowAddress modelShowAddress = ModelShowAddress.getInstance();
             ModelAddAddress modelAddAddress = ModelAddAddress.getInstance();
             ModelDelAddress modelDelAddress = ModelDelAddress.getInstance();
+            ModelLanguageAdminThird modelLanguageAdminThird = ModelLanguageAdminThird.getInstance();
+
+            if (modelLanguageAdminThird.modelCheck() != null) {
+                if (modelLanguageAdminThird.modelCheck().equals("en")) {
+                    req.getSession().setAttribute("language", "en");
+                }
+                if (modelLanguageAdminThird.modelCheck().equals("ua")) {
+                    req.getSession().setAttribute("language", "ua");
+                }
+            }
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageEnglish", true);
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
+                    req.setAttribute("languageUkraine", true);
+                }
+            }
 
             if (ThirdPageDB.checkConnection() == null)
                 ThirdPageDB.startConnnection();
@@ -54,9 +76,12 @@ public class AdminAddressServlet extends HttpServlet {
             req.removeAttribute("DelError");
             req.removeAttribute("TrueDel");
             req.removeAttribute("TrueAdd");
+            req.removeAttribute("languageEnglish");
+            req.removeAttribute("languageUkraine");
             ModelShowAddress.delete();
             ModelAddAddress.delete();
             ModelDelAddress.delete();
+            ModelLanguageAdminThird.delete();
         }
     }
 
@@ -70,15 +95,17 @@ public class AdminAddressServlet extends HttpServlet {
             try {
                 for (AddressShow address : ThirdPageDB.addressShow())
                     modelShowAddress.add(address);
+                LOGGER.debug("doPost in debug");
             } catch (Exception e) {
                 modelShowAddress.add(null);
+                LOGGER.error("doPost " + e.getMessage());
             }
             resp.sendRedirect("/exhibition/adminaddress");
         } else if (req.getParameter("addButtonAddress") != null) {
             String country = req.getParameter("countryAddress");
             String city = req.getParameter("cityAddress");
             String street = req.getParameter("streetAddress");
-            int numberHouse = Integer.parseInt(req.getParameter("houseAddress"));
+            Integer numberHouse = Integer.parseInt(req.getParameter("houseAddress"));
             ModelAddAddress modelAddAddress = ModelAddAddress.getInstance();
             boolean checkDel = ThirdPageDB.addressAdd(country, city, street, numberHouse);
             if (checkDel == true)
@@ -87,9 +114,8 @@ public class AdminAddressServlet extends HttpServlet {
                 modelAddAddress.add(false);
             resp.sendRedirect("/exhibition/adminaddress");
         } else if (req.getParameter("delButtonAddress") != null) {
-            int Unumber = Integer.parseInt(req.getParameter("addressDel"));
+            Integer Unumber = Integer.parseInt(req.getParameter("addressDel"));
             ModelDelAddress modelDelAddress = ModelDelAddress.getInstance();
-
             boolean checkDel = ThirdPageDB.addressDel(Unumber);
             if (checkDel == true) {
                 modelDelAddress.add(true);
@@ -135,8 +161,18 @@ public class AdminAddressServlet extends HttpServlet {
             ThirdPageDB.exitConnection();
             ThirdPageDB.nullConnection();
             resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("AdminStatisticsExhibition") != null) {
+            ThirdPageDB.exitConnection();
+            ThirdPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminstatistics");
+        } else if (req.getParameter("englishButton") != null) {
+            ModelLanguageAdminThird modelLanguageAdminThird = ModelLanguageAdminThird.getInstance();
+            modelLanguageAdminThird.add("en");
+            resp.sendRedirect("/exhibition/adminaddress");
+        } else if (req.getParameter("ukraineButton") != null) {
+            ModelLanguageAdminThird modelLanguageAdminThird = ModelLanguageAdminThird.getInstance();
+            modelLanguageAdminThird.add("ua");
+            resp.sendRedirect("/exhibition/adminaddress");
         }
-
-
     }
 }

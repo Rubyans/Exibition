@@ -1,18 +1,20 @@
-package app.model;
+package app.model.authorizationModels;
 
 import app.entities.UserAutorization;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class ModelAuthorization {
-    private static volatile ModelAuthorization instance;
-
+public class ModelAuthorization { //singleton pattern model
+    //used to store data for authorization
+    private static volatile ModelAuthorization instance; //the field must be valid for validation to work
     private static List<UserAutorization> model;
 
     public static ModelAuthorization getInstance() {
+        // double-checked locking is used to
+        // prevent multiple lone objects from being created
+        // if the method is called from multiple threads at the same time.
         ModelAuthorization result = instance;
         if (result != null) {
             return result;
@@ -29,38 +31,25 @@ public class ModelAuthorization {
         model = new ArrayList<>();
     }
 
-
-    public String roleCheck() {
-        return model.get(0).getRole();
-    }
-
-    public String getId() {return String.valueOf(model.get(0).getUserId()); }
-
     public static void delete() {
         model.clear();
-    }
+    } //deletes object
 
     public void add(UserAutorization userAutorization) {
         model.add(userAutorization);
-    }
+    } //adds object
 
-    public List<UserAutorization> listUser() {
+    public List<UserAutorization> listUser() { //checks size of list
         if (model.size() == 0)
             return null;
         return model;
     }
 
-    public Boolean checkNull() {
+    public Boolean checkNull() { //checks objects of list
         for (UserAutorization userAutorization : model) {
             if (userAutorization != null)
                 return false;
         }
         return true;
-    }
-
-    public List<String> list() {
-        return model.stream()
-                .map(UserAutorization::getFirstName)
-                .collect(Collectors.toList());
     }
 }

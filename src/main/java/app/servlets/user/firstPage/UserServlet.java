@@ -4,7 +4,10 @@ import app.database.user.firstPage.FirstPageDB;
 import app.entities.userEntities.firstPage.UserShowAdd;
 import app.entities.userEntities.firstPage.UserShowExhibition;
 import app.entities.userEntities.firstPage.UserShowMoney;
+import app.model.userModels.firstPage.ModelLanguageUserFirst;
 import app.model.userModels.firstPage.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +18,13 @@ import java.util.List;
 
 public class UserServlet extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(UserServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if (req.getSession().getAttribute("UserRole") == null) {
-            resp.sendRedirect("/exhibition/");
+            resp.sendRedirect("/exhibition/auto");
         } else {
             ModelShowExhibition modelShowExhibition = ModelShowExhibition.getInstance();
             ModelShowAdd modelShowAdd = ModelShowAdd.getInstance();
@@ -27,6 +32,25 @@ public class UserServlet extends HttpServlet {
             ModelAddTicket modelAddTicket = ModelAddTicket.getInstance();
             ModelRoleBackCommit modelRoleBackCommit = ModelRoleBackCommit.getInstance();
             ModelSaveCommit modelSaveCommit = ModelSaveCommit.getInstance();
+            ModelLanguageUserFirst modelLanguageUserFirst = ModelLanguageUserFirst.getInstance();
+
+            if (modelLanguageUserFirst.modelCheck() != null) {
+                if (modelLanguageUserFirst.modelCheck().equals("en")) {
+                    req.getSession().setAttribute("language", "en");
+                }
+                if (modelLanguageUserFirst.modelCheck().equals("ua")) {
+                    req.getSession().setAttribute("language", "ua");
+                }
+            }
+
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageEnglish", true);
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
+                    req.setAttribute("languageUkraine", true);
+                }
+            }
+
             if (FirstPageDB.checkConnection() == null)
                 FirstPageDB.startConnnection();
 
@@ -35,12 +59,13 @@ public class UserServlet extends HttpServlet {
                     modelShowAdd.add(showAdd);
                 }
                 String userId = (String) req.getSession().getAttribute("UserId");
-                for (UserShowMoney showMoney : FirstPageDB.ShowMoney(userId))
+                for (UserShowMoney showMoney : FirstPageDB.showMoney(userId))
                     modelShowMoney.add(showMoney);
-
+                LOGGER.debug("doGet in debug");
             } catch (Exception e) {
                 modelShowAdd.add(null);
                 modelShowMoney.add(null);
+                LOGGER.error("doGet " + e.getMessage());
             }
 
             if (modelShowAdd.listShow() != null) {
@@ -87,12 +112,15 @@ public class UserServlet extends HttpServlet {
             req.removeAttribute("SaveCommitTrue");
             req.removeAttribute("RoleBackCommitError");
             req.removeAttribute("RoleBackCommitTrue");
+            req.removeAttribute("languageEnglish");
+            req.removeAttribute("languageUkraine");
             ModelShowExhibition.delete();
             ModelShowMoney.delete();
             ModelShowAdd.delete();
             ModelAddTicket.delete();
             ModelRoleBackCommit.delete();
             ModelSaveCommit.delete();
+            ModelLanguageUserFirst.delete();
         }
     }
 
@@ -109,8 +137,10 @@ public class UserServlet extends HttpServlet {
                 for (UserShowExhibition user : FirstPageDB.userShowEx(userId)) {
                     modelShowExhibition.add(user);
                 }
+                LOGGER.debug("doGet in debug");
             } catch (Exception e) {
                 modelShowExhibition.add(null);
+                LOGGER.error("doPost " + e.getMessage());
             }
             resp.sendRedirect("/exhibition/user");
         } else if (req.getParameter("addButtonTicket") != null) {
@@ -134,7 +164,7 @@ public class UserServlet extends HttpServlet {
             resp.sendRedirect("/exhibition/user");
         } else if (req.getParameter("saveButton") != null) {
             ModelSaveCommit modelSaveCommit = ModelSaveCommit.getInstance();
-            boolean checkAdd = FirstPageDB.SaveCommit();
+            boolean checkAdd = FirstPageDB.saveCommit();
             if (checkAdd == true)
                 modelSaveCommit.add(true);
             else
@@ -153,6 +183,14 @@ public class UserServlet extends HttpServlet {
             FirstPageDB.exitConnection();
             FirstPageDB.nullConnection();
             resp.sendRedirect("/exhibition/userexhibition");
+        } else if (req.getParameter("englishButton") != null) {
+            ModelLanguageUserFirst modelLanguageUserFirst = ModelLanguageUserFirst.getInstance();
+            modelLanguageUserFirst.add("en");
+            resp.sendRedirect("/exhibition/user");
+        } else if (req.getParameter("ukraineButton") != null) {
+            ModelLanguageUserFirst modelLanguageUserFirst = ModelLanguageUserFirst.getInstance();
+            modelLanguageUserFirst.add("ua");
+            resp.sendRedirect("/exhibition/user");
         }
     }
 }

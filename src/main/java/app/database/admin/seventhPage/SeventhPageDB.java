@@ -2,6 +2,8 @@ package app.database.admin.seventhPage;
 
 
 import app.entities.adminEntities.seventhPage.UserAutorizedShow;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,10 +13,7 @@ public class SeventhPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
     private static Connection connUserAutorized;
-
-    public static Connection checkConnection() {
-        return connUserAutorized;
-    }
+    private static final Logger LOGGER = LogManager.getLogger(SeventhPageDB.class);
 
     public static void startConnnection() { //function creates connect with DB
         if (connUserAutorized == null) {
@@ -24,29 +23,32 @@ public class SeventhPageDB {
                     connUserAutorized = DriverManager.getConnection(url);
                     connUserAutorized.setAutoCommit(false);
                     savepoint = connUserAutorized.setSavepoint("savepointMain");
+                    LOGGER.debug("startConnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnnection " + e.getMessage());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                LOGGER.error("startConnnection " + ex.getMessage());
             }
         }
+    }
+
+    public static Connection checkConnection() {
+        return connUserAutorized;
     }
 
     public static void nullConnection() {
         connUserAutorized = null;
     }
 
-    public static List<UserAutorizedShow> UserAuto() { //function shows userAutorized
+    public static List<UserAutorizedShow> userAuto() { //function shows userAutorized
         try {
             try {
-
                 List<UserAutorizedShow> userAuto = new ArrayList<>();
-
-                String fistName, lastName, login, password, email, role;
+                String fistName, lastName, login, password, email, role,access;
                 Double amount;
 
-                PreparedStatement statement = connUserAutorized.prepareStatement("SELECT first_name,last_name,login,password,email,amount,role FROM exhibitiondb.authorized_user", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                PreparedStatement statement = connUserAutorized.prepareStatement("SELECT first_name,last_name,login,password,email,amount,role,access FROM exhibitiondb.authorized_user", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 ResultSet setUser = statement.executeQuery();
                 while (setUser.next()) {
                     fistName = setUser.getString(1);
@@ -56,21 +58,22 @@ public class SeventhPageDB {
                     email = setUser.getString(5);
                     amount = setUser.getDouble(6);
                     role = setUser.getString(7);
-
-                    userAuto.add(new UserAutorizedShow(fistName, lastName, login, password, email, amount, role));
+                    access=setUser.getString(8);
+                    userAuto.add(new UserAutorizedShow(fistName, lastName, login, password, email, amount, role,access));
                 }
                 statement.close();
+                LOGGER.debug("userAuto in debug");
                 return userAuto;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("userAuto " + e.getMessage());
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error("userAuto " + ex.getMessage());
         }
         return null;
     }
 
-    public static Boolean UserAutoAdd(String fistName, String lastName, String login, String password, String email, Double amount, String role) { //function adds UserAutorized
+    public static Boolean userAutoAdd(String fistName, String lastName, String login, String password, String email, Double amount, String role) { //function adds UserAutorized
         try {
             Savepoint savepointAdd = connUserAutorized.setSavepoint("SavepointAdd");
             try {
@@ -84,19 +87,19 @@ public class SeventhPageDB {
                 UserAdd.setString(7, role);
                 UserAdd.execute();
                 UserAdd.close();
+                LOGGER.debug("UserAutoAdd in debug");
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("UserAutoAdd " + e.getMessage());
                 connUserAutorized.rollback(savepointAdd);
             }
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("UserAutoAdd " + ex.getMessage());
         }
         return false;
     }
 
-    public static Boolean UserAmountAdd(String email, Double amount) { //function adds Amount for UserAutorized
+    public static Boolean userAmountAdd(String email, Double amount) { //function adds Amount for UserAutorized
         try {
             Savepoint SavepointAmount = connUserAutorized.setSavepoint("SavepointAmount");
             try {
@@ -105,36 +108,66 @@ public class SeventhPageDB {
                 AmountAdd.setString(2, email);
                 AmountAdd.execute();
                 AmountAdd.close();
+                LOGGER.debug("userAmountAdd in debug");
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("userAmountAdd " + e.getMessage());
                 connUserAutorized.rollback(SavepointAmount);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("userAmountAdd " + ex.getMessage());
         }
         return false;
     }
 
-    public static Boolean UserAutoDel(String email) { //function deletes userAutorized data
+    public static Boolean userAutoDel(String email) { //function deletes userAutorized data
         try {
             Savepoint savepointDel = connUserAutorized.setSavepoint("SavepointDel");
             try {
                 PreparedStatement userDel = connUserAutorized.prepareStatement("DELETE FROM exhibitiondb.authorized_user WHERE email=?");
                 userDel.setString(1, email);
-                int row = userDel.executeUpdate();
+                Integer row = userDel.executeUpdate();
                 userDel.close();
 
-                if (row > 0)
+                if (row > 0) {
+                    LOGGER.debug("userAutoDel in debug");
                     return true;
+                }
+                LOGGER.debug("userAutoDel in debug");
                 return false;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("userAutoDel " + e.getMessage());
                 connUserAutorized.rollback(savepointDel);
             }
         } catch (Exception e) {
+            LOGGER.error("userAutoDel " + e.getMessage());
+        }
+        return false;
+    }
 
-            e.printStackTrace();
+    public static Boolean AccessFirstPage(String emailUser, String access) { //function access users data
+        try {
+            Savepoint savepointAccess = connUserAutorized.setSavepoint("SavepointAccess");
+            try {
+
+                PreparedStatement statementChange = connUserAutorized.prepareStatement("UPDATE exhibitiondb.authorized_user SET access = ? WHERE email = ?");
+                statementChange.setString(1, access);
+                statementChange.setString(2, emailUser);
+                Integer row = statementChange.executeUpdate();
+                statementChange.close();
+
+                if (row > 0) {
+                    LOGGER.debug("AccessFirstPage in debug");
+                    return true;
+                }
+                LOGGER.debug("AccessFirstPage in debug");
+                return false;
+            } catch (Exception e) {
+                LOGGER.error("AccessFirstPage " + e.getMessage());
+                connUserAutorized.rollback(savepointAccess);
+            }
+        } catch (Exception ex) {
+            LOGGER.error("AccessFirstPage " + ex.getMessage());
         }
         return false;
     }
@@ -145,11 +178,13 @@ public class SeventhPageDB {
                 connUserAutorized.rollback(savepoint);
                 connUserAutorized.commit();
                 connUserAutorized.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
             return false;
         }
     }
@@ -158,19 +193,19 @@ public class SeventhPageDB {
         try {
             connUserAutorized.commit();
             savepoint = connUserAutorized.setSavepoint("savepointMain");
+            LOGGER.debug("saveCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("saveCommit " + e.getMessage());
         }
-
     }
 
     public static void RoleBackCommit() { //function roleback data
         try {
             if (savepoint != null)
                 connUserAutorized.rollback(savepoint);
+            LOGGER.debug("RoleBackCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("RoleBackCommit " + e.getMessage());
         }
-
     }
 }

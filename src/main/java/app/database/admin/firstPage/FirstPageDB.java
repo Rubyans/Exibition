@@ -2,6 +2,8 @@ package app.database.admin.firstPage;
 
 import app.entities.adminEntities.firstPage.AdminAddShow;
 import app.entities.adminEntities.firstPage.AdminShow;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -12,6 +14,7 @@ public class FirstPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
     private static Connection conn;
+    private static final Logger LOGGER = LogManager.getLogger(FirstPageDB.class);
 
     public static Connection checkConnection() {
         return conn;
@@ -26,11 +29,12 @@ public class FirstPageDB {
                     conn = DriverManager.getConnection(url);
                     conn.setAutoCommit(false);
                     savepoint = conn.setSavepoint("savepointMain"); //savepoint(transacion)
+                    LOGGER.debug("startConnnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnnection " + e.getMessage());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                LOGGER.error("startConnnection " + ex.getMessage());
             }
         }
     }
@@ -47,7 +51,9 @@ public class FirstPageDB {
 
             String nameExhibition = null;
             String descriptionExibition = null;
-            BigDecimal price = null;
+            String access=null;
+
+            Double price = null;
             Date dateStart = null;
             Date dateEnd = null;
 
@@ -67,7 +73,7 @@ public class FirstPageDB {
 
             for (String name : nameEx) {
                 PreparedStatement resStatment = conn.prepareStatement("Select exhibition.name,description,work_art.name,price,\n" +
-                        "date_start,date_end,hall.name,author.first_name,author.last_name,nameview,city,street_or_square,number_home\n" +
+                        "date_start,date_end,access,hall.name,author.first_name,author.last_name,nameview,city,street_or_square,number_home\n" +
                         "FROM exhibitiondb.exhibition INNER JOIN exhibitiondb.exposition ON exhibition.exhibition_id=exposition.exhibition_fk\n" +
                         "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id\n" +
                         "INNER JOIN exhibitiondb.view_workart ON view_workart.artview_fk=work_art.art_id\n" +
@@ -84,18 +90,20 @@ public class FirstPageDB {
                     nameExhibition = resultSet.getString(1);
                     descriptionExibition = resultSet.getString(2);
                     expositionName.add(resultSet.getString(3));
-                    price = resultSet.getBigDecimal(4);
+                    price = resultSet.getDouble(4);
                     dateStart = resultSet.getDate(5);
                     dateEnd = resultSet.getDate(6);
-                    nameHell.add(resultSet.getString(7));
-                    nameAuthor.add(resultSet.getString(8) + " " + resultSet.getString(9));
-                    nameview.add(resultSet.getString(10));
-                    addressExibition.add(resultSet.getString(11) + ", " + resultSet.getString(12) + " " + resultSet.getString(13));
+                    access=resultSet.getString(7);
+                    nameHell.add(resultSet.getString(8));
+                    nameAuthor.add(resultSet.getString(9) + " " + resultSet.getString(10));
+                    nameview.add(resultSet.getString(11));
+                    addressExibition.add(resultSet.getString(12) + ", " + resultSet.getString(13) + " " + resultSet.getString(14));
                 }
                 if (nameExhibition != null)
-                    admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd, nameHell, nameAuthor, nameview, addressExibition));
+                    admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd,access, nameHell, nameAuthor, nameview, addressExibition));
                 nameExhibition = null;
                 descriptionExibition = null;
+                access=null;
                 price = null;
                 dateStart = null;
                 dateEnd = null;
@@ -106,11 +114,11 @@ public class FirstPageDB {
                 addressExibition.clear();
                 resStatment.close();
             }
+            LOGGER.debug("exibitionShow in debug");
             return admin;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("exibitionShow " + e.getMessage());
         }
-
         return null;
     }
 
@@ -143,10 +151,10 @@ public class FirstPageDB {
             AdminAddFirstPage.add(new AdminAddShow(hall, address, art));
 
             statement.close();
+            LOGGER.debug("ShowAddFirstPage in debug");
             return AdminAddFirstPage;
-
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("ShowAddFirstPage " + e.getMessage());
         }
         return null;
     }
@@ -162,12 +170,13 @@ public class FirstPageDB {
                 List<Integer> AddressPK = new ArrayList<>();
                 List<Integer> WorkArtPK = new ArrayList<>();
 
-                PreparedStatement ExhibitionADD = conn.prepareStatement("INSERT into exhibitiondb.exhibition (name,description,price,date_start,date_end) values (?,?,?,?,?)");
+                PreparedStatement ExhibitionADD = conn.prepareStatement("INSERT into exhibitiondb.exhibition (name,description,price,date_start,date_end,access) values (?,?,?,?,?,?)");
                 ExhibitionADD.setString(1, nameExibition);
                 ExhibitionADD.setString(2, description);
                 ExhibitionADD.setDouble(3, price);
                 ExhibitionADD.setString(4, start);
                 ExhibitionADD.setString(5, end);
+                ExhibitionADD.setInt(5, 1);
                 ExhibitionADD.execute();
                 ExhibitionADD.close();
 
@@ -244,15 +253,14 @@ public class FirstPageDB {
                     PreparedArtswithExh.execute();
                 }
                 PreparedArtswithExh.close();
+                LOGGER.debug("AddFirstPage in debug");
                 return true;
-
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("AddFirstPage " + e.getMessage());
                 conn.rollback(savepointAdd);
             }
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("AddFirstPage " + ex.getMessage());
         }
         return false;
     }
@@ -267,16 +275,44 @@ public class FirstPageDB {
                 Integer row = ExhibitionDel.executeUpdate();
                 ExhibitionDel.close();
 
-                if (row > 0)
+                if (row > 0) {
+                    LOGGER.debug("DelFirstPage in debug");
                     return true;
+                }
+                LOGGER.debug("DelFirstPage in debug");
                 return false;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("DelFirstPage " + e.getMessage());
                 conn.rollback(savepointDel);
             }
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            LOGGER.error("DelFirstPage " + ex.getMessage());
+        }
+        return false;
+    }
+    public static Boolean AccessFirstPage(String nameExhibition,String access) { //function dels exhibitions data
+        try {
+            Savepoint savepointAccess = conn.setSavepoint("SavepointAccess");
+            try {
 
-            e.printStackTrace();
+                PreparedStatement statementChange = conn.prepareStatement("UPDATE exhibitiondb.exhibition SET access = ? WHERE name = ?");
+                statementChange.setString(1, access);
+                statementChange.setString(2, nameExhibition);
+                Integer row = statementChange.executeUpdate();
+                statementChange.close();
+
+                if (row > 0) {
+                    LOGGER.debug("AccessFirstPage in debug");
+                    return true;
+                }
+                LOGGER.debug("AccessFirstPage in debug");
+                return false;
+            } catch (Exception e) {
+                LOGGER.error("AccessFirstPage " + e.getMessage());
+                conn.rollback(savepointAccess);
+            }
+        } catch (Exception ex) {
+            LOGGER.error("AccessFirstPage " + ex.getMessage());
         }
         return false;
     }
@@ -288,11 +324,13 @@ public class FirstPageDB {
                 conn.rollback(savepoint);
                 conn.commit();
                 conn.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
             return false;
         }
     }
@@ -301,18 +339,19 @@ public class FirstPageDB {
         try {
             conn.commit();
             savepoint = conn.setSavepoint("savepointMain");
+            LOGGER.debug("SaveCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("SaveCommit " + e.getMessage());
         }
-
     }
 
     public static void RoleBackCommit() { //function roleback data
         try {
             if (savepoint != null)
                 conn.rollback(savepoint);
+            LOGGER.debug("RoleBackCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("RoleBackCommit " + e.getMessage());
         }
 
     }

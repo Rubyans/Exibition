@@ -1,7 +1,8 @@
 package app.database.admin.sixthPage;
 
-
 import app.entities.adminEntities.sixthPage.ViewShow;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,12 +11,8 @@ import java.util.List;
 public class SixthPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
-
     private static Connection connView;
-
-    public static Connection checkConnection() {
-        return connView;
-    }
+    private static final Logger LOGGER = LogManager.getLogger(SixthPageDB.class);
 
     public static void startConnnection() { //function creates connect with DB
         if (connView == null) {
@@ -25,18 +22,23 @@ public class SixthPageDB {
                     connView = DriverManager.getConnection(url);
                     connView.setAutoCommit(false);
                     savepoint = connView.setSavepoint("savepointMain");
+                    LOGGER.debug("startConnnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnnection " + e.getMessage());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                LOGGER.error("startConnnection " + ex.getMessage());
             }
         }
     }
 
-    public static void nullConnection() {
+    public static Connection checkConnection() {
+        return connView;
+    }
+
+    public static void nullConnection() { //function gives a value of null
         connView = null;
-    } //function gives a value of null
+    }
 
     public static List<ViewShow> viewShow() { //function shows views data
         try {
@@ -53,12 +55,13 @@ public class SixthPageDB {
                     view.add(new ViewShow(viewId, name));
                 }
                 statement.close();
+                LOGGER.debug("viewShow in debug");
                 return view;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("viewShow " + e.getMessage());
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error("viewShow " + ex.getMessage());
         }
         return null;
     }
@@ -71,14 +74,14 @@ public class SixthPageDB {
                 viewAdd.setString(1, name);
                 viewAdd.execute();
                 viewAdd.close();
+                LOGGER.debug("viewAdd in debug");
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("viewAdd " + e.getMessage());
                 connView.rollback(savepointAdd);
             }
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("viewAdd " + ex.getMessage());
         }
         return false;
     }
@@ -91,17 +94,18 @@ public class SixthPageDB {
                 viewDel.setString(1, email);
                 Integer row = viewDel.executeUpdate();
                 viewDel.close();
-
-                if (row > 0)
+                if (row > 0) {
+                    LOGGER.debug("viewAdd in debug");
                     return true;
+                }
+                LOGGER.debug("viewAdd in debug");
                 return false;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("viewAdd " + e.getMessage());
                 connView.rollback(savepointDel);
             }
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("viewAdd " + ex.getMessage());
         }
         return false;
     }
@@ -112,11 +116,13 @@ public class SixthPageDB {
                 connView.rollback(savepoint);
                 connView.commit();
                 connView.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
             return false;
         }
     }
@@ -125,8 +131,9 @@ public class SixthPageDB {
         try {
             connView.commit();
             savepoint = connView.setSavepoint("savepointMain");
+            LOGGER.debug("saveCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("saveCommit " + e.getMessage());
         }
 
     }
@@ -135,8 +142,9 @@ public class SixthPageDB {
         try {
             if (savepoint != null)
                 connView.rollback(savepoint);
+            LOGGER.debug("RoleBackCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("RoleBackCommit " + e.getMessage());
         }
 
     }

@@ -7,9 +7,10 @@ public class UserAutorization { //the class is used to store data related to the
     private String login;
     private String password;
     private String email;
-    public String role;
+    private String role;
+    private  String access;
 
-    public UserAutorization(Integer userId, String firstName, String lastName, String login, String password, String email, String role) {
+    public UserAutorization(Integer userId, String firstName, String lastName, String login, String password, String email, String role,String access) {
         //the constructor receives authorized data for further validation
         this.userId = userId;
         this.firstName = firstName;
@@ -18,13 +19,12 @@ public class UserAutorization { //the class is used to store data related to the
         this.password = password;
         this.email = email;
         this.role = role;
+        this.access=access;
     }
 
     ///////////////////getFunctions//////////////////////////
 
-    public Integer getUserId() {
-        return userId;
-    }
+    public String getUserId() { return userId.toString(); }
     public String getRole() {
         return role;
     }
@@ -43,6 +43,7 @@ public class UserAutorization { //the class is used to store data related to the
     public String getEmail() {
         return email;
     }
+    public String getAccess() { return access; }
 
     ///////////////////setFunctions//////////////////////////
 
@@ -73,7 +74,5 @@ public class UserAutorization { //the class is used to store data related to the
         this.role = role;
     }
 
-
-
-
+    public void setAccess(String access) { this.access = access; }
 }

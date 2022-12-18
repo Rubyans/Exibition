@@ -1,6 +1,8 @@
 package app.database.user.secondPage;
 
 import app.entities.userEntities.secondPage.UserShowExhibition;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -12,10 +14,7 @@ public class SecondPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
     private static Connection connUserEx;
-
-    public static Connection checkConnection() {
-        return connUserEx;
-    }
+    private static final Logger LOGGER = LogManager.getLogger(SecondPageDB.class);
 
     public static void startConnnection() { //function creates connect with DB
         if (connUserEx == null) {
@@ -25,13 +24,18 @@ public class SecondPageDB {
                     connUserEx = DriverManager.getConnection(url);
                     connUserEx.setAutoCommit(false);
                     savepoint = connUserEx.setSavepoint("savepointMain");
+                    LOGGER.debug("startConnnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnnection " + e.getMessage());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                LOGGER.error("startConnnection " + ex.getMessage());
             }
         }
+    }
+
+    public static Connection checkConnection() {
+        return connUserEx;
     }
 
     public static void nullConnection() {
@@ -82,7 +86,7 @@ public class SecondPageDB {
                         "INNER JOIN exhibitiondb.exhibition_address ON exhibition_address.address_id=exhibition_with_address.address_fk\n" +
                         "INNER JOIN exhibitiondb.exhibition_with_hall ON exhibition.exhibition_id=exhibition_with_hall.exhi_fk\n" +
                         "INNER JOIN exhibitiondb.hall ON hall.hall_id=exhibition_with_hall.hall_fk \n" +
-                        "where exhibition.name='" + name + "';", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        "where exhibition.name='" + name + "' AND exhibition.access='1';", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 ResultSet resultSet = resStatment.executeQuery();
                 while (resultSet.next()) {
                     nameExhibition = resultSet.getString(1);
@@ -109,11 +113,11 @@ public class SecondPageDB {
                 nameview.clear();
                 addressExibition.clear();
             }
+            LOGGER.debug("ShowExhibition in debug");
             return user;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("ShowExhibition " + e.getMessage());
         }
-
         return null;
     }
 
@@ -123,22 +127,25 @@ public class SecondPageDB {
                 connUserEx.rollback(savepoint);
                 connUserEx.commit();
                 connUserEx.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
             return false;
         }
     }
 
-    public static boolean SaveCommit() { //function saves data
+    public static boolean saveCommit() { //function saves data
         try {
             connUserEx.commit();
             savepoint = connUserEx.setSavepoint("savepointMain");
+            LOGGER.debug("saveCommit in debug");
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("saveCommit "+e.getMessage());
             return false;
         }
 
@@ -148,11 +155,13 @@ public class SecondPageDB {
         try {
             if (savepoint != null) {
                 connUserEx.rollback(savepoint);
+                LOGGER.debug("RoleBackCommit in debug");
                 return true;
             }
+            LOGGER.debug("RoleBackCommit in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("RoleBackCommit "+e.getMessage());
             return false;
         }
     }

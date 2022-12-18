@@ -25,13 +25,27 @@ button:hover {
     opacity:1;
 }
 
+div.languageDiv {
+    display:flex;
+    width:99.5%;
+    justify-content: flex-end;
+    margin-top:0.5%;
+}
+
+.languageButton {
+    width:2.5%;
+    padding:0;
+    margin:0;
+    margin-left:1%;
+}
+
 .nameExit {
     display: flex;
     justify-content: center;
     align-items: baseline;
 }
 .exitButton {
-    margin-left:38%;
+    margin-left:36%;
     width:7%;
     background-color:#EB1D36;
 }

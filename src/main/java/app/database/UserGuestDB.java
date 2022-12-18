@@ -2,6 +2,8 @@ package app.database;
 
 
 import app.entities.UserGuest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -9,9 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserGuestDB {
+
+    private static final Logger LOGGER = LogManager.getLogger(UserGuestDB.class);
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Connection connGuest;
     private static Savepoint savepoint;
+
     public static void startConnnection() { //function creates connect with DB
         if (connGuest == null) {
             try {
@@ -20,41 +25,48 @@ public class UserGuestDB {
                     connGuest = DriverManager.getConnection(url);
                     connGuest.setAutoCommit(false);
                     savepoint = connGuest.setSavepoint("savepointMain");
+                    LOGGER.debug("startConnnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnnection " + e.getMessage());
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("startConnnection " + e.getMessage());
             }
         }
     }
+
     public static Connection checkConnection() {
         return connGuest;
     }
+
     public static void nullConnection() {
         connGuest = null;
     } //function gives a value of null
+
     public static boolean exitConnection() { //function closes connect with DB
         try {
             if (savepoint != null) {
                 connGuest.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection " + e.getMessage());
             return false;
         }
     }
+
     public static List<UserGuest> authorizationUser() { //function shows exhibitions data
         try {
             PreparedStatement statement = connGuest.prepareStatement("SELECT exhibition.name,description,work_art.name,price,date_start,date_end " +
                             "FROM exhibitiondb.exhibition INNER JOIN exhibitiondb.exposition ON exhibition.exhibition_id=exposition.exhibition_fk " +
-                            "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id", ResultSet.TYPE_SCROLL_SENSITIVE,
+                            "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id WHERE exhibition.access='1';", ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
 
             ResultSet resultSet = statement.executeQuery();
-            int rowCount = 0;
+            Integer rowCount = 0;
             if (resultSet.last()) {
                 rowCount = resultSet.getRow();
                 resultSet.beforeFirst();
@@ -71,7 +83,7 @@ public class UserGuestDB {
             resultSet.first();
             String temp = resultSet.getString(1);
             resultSet.beforeFirst();
-            int count = 0;
+            Integer count = 0;
             for (int i = 0; i < rowCount; i++) {
                 resultSet.next();
 
@@ -114,9 +126,10 @@ public class UserGuestDB {
                 }
             }
             statement.close();
+            LOGGER.debug("exitConnection in debug");
             return guest;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error("exitConnection " + ex.getMessage());
         }
         return null;
     }

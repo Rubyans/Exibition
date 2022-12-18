@@ -7,8 +7,9 @@ public class UserAutorizedShow { //the class is used to display the data associa
     private String email;
     private String role;
     private Double amount;
+    private String access;
 
-    public UserAutorizedShow(String firstName, String lastName, String login, String password, String email, Double amount, String role) {
+    public UserAutorizedShow(String firstName, String lastName, String login, String password, String email, Double amount, String role,String access) {
         //the constructor gets data from the table of authorized database users
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,6 +18,7 @@ public class UserAutorizedShow { //the class is used to display the data associa
         this.email = email;
         this.amount = amount;
         this.role = role;
+        this.access=access;
     }
 
     ///////////////////getFunctions//////////////////////////
@@ -44,7 +46,11 @@ public class UserAutorizedShow { //the class is used to display the data associa
             return "Адміністратор";
         return "Користувач";
     }
-
+    public String getAccess() {
+        if(access.equals("1"))
+            return "Дозволено";
+        return "Заборонено";
+    }
     ///////////////////setFunctions//////////////////////////
 
     public void setAmount(Double amount) {
@@ -66,4 +72,5 @@ public class UserAutorizedShow { //the class is used to display the data associa
     public void setRole(String role) {
         this.role = role;
     }
+    public void setAccess(String access) { this.access = access; }
 }

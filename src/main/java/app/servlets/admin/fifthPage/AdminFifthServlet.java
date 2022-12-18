@@ -1,12 +1,12 @@
 package app.servlets.admin.fifthPage;
 
-
 import app.database.admin.fifthPage.FifthPageDB;
-import app.database.admin.firstPage.FirstPageDB;
 import app.entities.adminEntities.fifthPage.ArtAddShow;
 import app.entities.adminEntities.fifthPage.ArtShow;
-import app.entities.adminEntities.firstPage.AdminAddShow;
 import app.model.adminModels.fifthPage.*;
+import app.model.adminModels.fourthPage.ModelLanguageAdminFourth;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,15 +17,34 @@ import java.util.List;
 
 public class AdminFifthServlet extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(AdminFifthServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
-            resp.sendRedirect("/exhibition/");
+            resp.sendRedirect("/exhibition/auto");
         } else {
             ModelShowArt modelShowArt = ModelShowArt.getInstance();
             ModelAddArt modelAddArt = ModelAddArt.getInstance();
             ModelDelArt modelDelArt = ModelDelArt.getInstance();
             ModelAddShow modelAddShow = ModelAddShow.getInstance();
+            ModelLanguageAdminFifth modelLanguageAdminFifth = ModelLanguageAdminFifth.getInstance();
+
+            if (modelLanguageAdminFifth.modelCheck() != null) {
+                if (modelLanguageAdminFifth.modelCheck().equals("en")) {
+                    req.getSession().setAttribute("language", "en");
+                }
+                if (modelLanguageAdminFifth.modelCheck().equals("ua")) {
+                    req.getSession().setAttribute("language", "ua");
+                }
+            }
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageEnglish", true);
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
+                    req.setAttribute("languageUkraine", true);
+                }
+            }
 
             if (FifthPageDB.checkConnection() == null)
                 FifthPageDB.startConnnection();
@@ -33,7 +52,9 @@ public class AdminFifthServlet extends HttpServlet {
             try {
                 for (ArtAddShow addShow : FifthPageDB.addArtShow())
                     modelAddShow.add(addShow);
+                LOGGER.debug("doGet in debug");
             } catch (Exception e) {
+                LOGGER.error("doGet " + e.getMessage());
                 modelAddShow.add(null);
             }
 
@@ -52,10 +73,6 @@ public class AdminFifthServlet extends HttpServlet {
                     req.setAttribute("Error", true);
                 } else {
                     List<ArtShow> art = modelShowArt.listShow();
-                    for(ArtShow arts: art)
-                    {
-                        System.out.println("ss"+ arts.getFullName());
-                    }
                     req.setAttribute("FifthPageShow", art);
                 }
             } else if (modelAddArt.modelCheck() != null) {
@@ -78,10 +95,13 @@ public class AdminFifthServlet extends HttpServlet {
             req.removeAttribute("DelError");
             req.removeAttribute("TrueDel");
             req.removeAttribute("TrueAdd");
+            req.removeAttribute("languageEnglish");
+            req.removeAttribute("languageUkraine");
             ModelShowArt.delete();
             ModelAddArt.delete();
             ModelDelArt.delete();
             ModelAddShow.delete();
+            ModelLanguageAdminFourth.delete();
         }
     }
 
@@ -96,18 +116,20 @@ public class AdminFifthServlet extends HttpServlet {
             try {
                 for (ArtShow art : FifthPageDB.artShow())
                     modelShowArt.add(art);
+                LOGGER.debug("doPost in debug");
             } catch (Exception e) {
+                LOGGER.error("doPost " + e.getMessage());
                 modelShowArt.add(null);
             }
             resp.sendRedirect("/exhibition/adminart");
         } else if (req.getParameter("addButtonArt") != null) {
             String name = req.getParameter("NameArt");
-            int yearCreation = Integer.parseInt(req.getParameter("CreationArt"));
+            Integer yearCreation = Integer.parseInt(req.getParameter("CreationArt"));
             Double price = Double.parseDouble(req.getParameter("PriceArt"));
-            List<String> author=List.of(req.getParameterValues("author"));
-            List<String> view=List.of(req.getParameterValues("view"));
+            List<String> author = List.of(req.getParameterValues("author"));
+            List<String> view = List.of(req.getParameterValues("view"));
             ModelAddArt modelAddArt = ModelAddArt.getInstance();
-            boolean checkDel = FifthPageDB.artAdd(name, yearCreation, price,author,view);
+            boolean checkDel = FifthPageDB.artAdd(name, yearCreation, price, author, view);
             if (checkDel == true)
                 modelAddArt.add(true);
             else
@@ -162,6 +184,19 @@ public class AdminFifthServlet extends HttpServlet {
             FifthPageDB.exitConnection();
             FifthPageDB.nullConnection();
             resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("AdminStatisticsExhibition") != null) {
+            FifthPageDB.exitConnection();
+            FifthPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminstatistics");
+        } else if (req.getParameter("englishButton") != null) {
+            ModelLanguageAdminFifth modelLanguageAdminFifth = ModelLanguageAdminFifth.getInstance();
+            modelLanguageAdminFifth.add("en");
+            resp.sendRedirect("/exhibition/adminart");
+        } else if (req.getParameter("ukraineButton") != null) {
+            ModelLanguageAdminFifth modelLanguageAdminFifth = ModelLanguageAdminFifth.getInstance();
+            modelLanguageAdminFifth.add("ua");
+            resp.sendRedirect("/exhibition/adminart");
         }
+
     }
 }

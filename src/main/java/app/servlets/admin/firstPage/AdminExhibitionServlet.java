@@ -3,10 +3,9 @@ package app.servlets.admin.firstPage;
 import app.database.admin.firstPage.FirstPageDB;
 import app.entities.adminEntities.firstPage.AdminAddShow;
 import app.entities.adminEntities.firstPage.AdminShow;
-import app.model.adminModels.firstPage.ModelAddExhibition;
-import app.model.adminModels.firstPage.ModelAddShow;
-import app.model.adminModels.firstPage.ModelDel;
-import app.model.adminModels.firstPage.ModelShow;
+import app.model.adminModels.firstPage.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,24 +16,47 @@ import java.util.List;
 
 public class AdminExhibitionServlet extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(AdminExhibitionServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
-            resp.sendRedirect("/exhibition/");
+            resp.sendRedirect("/exhibition/auto");
         } else {
             ModelShow showModel = ModelShow.getInstance();
             ModelAddShow AddModelShow = ModelAddShow.getInstance();
             ModelAddExhibition modelAddExhibition = ModelAddExhibition.getInstance();
             ModelDel modelDel = ModelDel.getInstance();
+            ModelLanguageAdminFirst modelLanguageAdminFirst = ModelLanguageAdminFirst.getInstance();
+            ModelChangeAccess modelChangeAccess = ModelChangeAccess.getInstance();
+            if (modelLanguageAdminFirst.modelCheck() != null) {
+                if (modelLanguageAdminFirst.modelCheck().equals("en")) {
+                    req.getSession().setAttribute("language", "en");
+                }
+                if (modelLanguageAdminFirst.modelCheck().equals("ua")) {
+                    req.getSession().setAttribute("language", "ua");
+                }
+            }
+
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageEnglish", true);
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
+                    req.setAttribute("languageUkraine", true);
+                }
+            }
+
             if (FirstPageDB.checkConnection() == null)
                 FirstPageDB.startConnnection();
 
             try {
                 for (AdminAddShow addShow : FirstPageDB.ShowAddFirstPage())
                     AddModelShow.add(addShow);
+                LOGGER.debug("doGet in debug");
             } catch (Exception e) {
                 AddModelShow.add(null);
+                LOGGER.error("doGet " + e.getMessage());
             }
 
             if (AddModelShow.listShow() != null) {
@@ -55,6 +77,11 @@ public class AdminExhibitionServlet extends HttpServlet {
                     req.setAttribute("FirstPage", names);
                     req.setAttribute("Error", false);
                 }
+            } else if (modelChangeAccess.modelCheck() != null) {
+                if (modelChangeAccess.modelCheck().equals("false"))
+                    req.setAttribute("ChangeError", true);
+                else if (modelChangeAccess.modelCheck().equals("true"))
+                    req.setAttribute("TrueChange", true);
             } else if (modelAddExhibition.modelCheck() != null) {
                 if (modelAddExhibition.modelCheck().equals("false"))
                     req.setAttribute("AddError", true);
@@ -74,10 +101,16 @@ public class AdminExhibitionServlet extends HttpServlet {
             req.removeAttribute("DelError");
             req.removeAttribute("TrueAdd");
             req.removeAttribute("TrueDel");
+            req.removeAttribute("ChangeError");
+            req.removeAttribute("TrueChange");
+            req.removeAttribute("languageEnglish");
+            req.removeAttribute("languageUkraine");
             ModelShow.delete();
             ModelAddShow.delete();
             ModelAddExhibition.delete();
             ModelDel.delete();
+            ModelLanguageAdminFirst.delete();
+            ModelChangeAccess.delete();
         }
 
     }
@@ -93,7 +126,9 @@ public class AdminExhibitionServlet extends HttpServlet {
             try {
                 for (AdminShow show : FirstPageDB.exibitionShow())
                     showModel.add(show);
+                LOGGER.debug("doPost in debug");
             } catch (Exception e) {
+                LOGGER.error("doPost " + e.getMessage());
                 showModel.add(null);
             }
             resp.sendRedirect("/exhibition/adminmain");
@@ -123,6 +158,16 @@ public class AdminExhibitionServlet extends HttpServlet {
                 modelDel.add(true);
             else
                 modelDel.add(false);
+            resp.sendRedirect("/exhibition/adminmain");
+        } else if (req.getParameter("accessButtonServlet") != null) {
+            String access = req.getParameter("access");
+            String nameExhibition = req.getParameter("nameExhibitionAccess");
+            ModelChangeAccess modelChangeAccess = ModelChangeAccess.getInstance();
+            boolean checkAccess = FirstPageDB.AccessFirstPage(nameExhibition, access);
+            if (checkAccess == true)
+                modelChangeAccess.add(true);
+            else
+                modelChangeAccess.add(false);
             resp.sendRedirect("/exhibition/adminmain");
         } else if (req.getParameter("roleBackButton") != null) {
             FirstPageDB.RoleBackCommit();
@@ -163,7 +208,18 @@ public class AdminExhibitionServlet extends HttpServlet {
             FirstPageDB.exitConnection();
             FirstPageDB.nullConnection();
             resp.sendRedirect("/exhibition/adminview");
+        } else if (req.getParameter("AdminStatisticsExhibition") != null) {
+            FirstPageDB.exitConnection();
+            FirstPageDB.nullConnection();
+            resp.sendRedirect("/exhibition/adminstatistics");
+        } else if (req.getParameter("englishButton") != null) {
+            ModelLanguageAdminFirst modelLanguageAdminFirst = ModelLanguageAdminFirst.getInstance();
+            modelLanguageAdminFirst.add("en");
+            resp.sendRedirect("/exhibition/adminmain");
+        } else if (req.getParameter("ukraineButton") != null) {
+            ModelLanguageAdminFirst modelLanguageAdminFirst = ModelLanguageAdminFirst.getInstance();
+            modelLanguageAdminFirst.add("ua");
+            resp.sendRedirect("/exhibition/adminmain");
         }
-
     }
 }

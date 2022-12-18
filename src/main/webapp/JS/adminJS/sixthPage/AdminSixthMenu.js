@@ -1,3 +1,49 @@
+var words = {
+        en: [
+           { id: "genreHello", text: "List of genres" },
+           { id: "exitButton", text: "Exit" },
+           { id: "updateButton", text: "Update" },
+           { id: "addButton", text: "Adding" },
+           { id: "deleteButton", text: "Delete" },
+           { id: "roleBackButton", text: "RoleBack" },
+           { id: "saveButton", text: "Save" },
+           { id: "InputNameView", text: "Enter genre name" },
+           { id: "InputDelView", text: "Enter genre name" },
+           { id: "delButtonView", text: "Delete" },
+           { id: "uniqueNumber", text: "Unique Number" },
+           { id: "nameGenre", text: "Genre name" },
+        ],
+
+        ua: [
+          { id: "genreHello", text: "Список жанрів" },
+          { id: "exitButton", text: "Вийти" },
+          { id: "updateButton", text: "Оновити" },
+          { id: "addButton", text: "Додавання" },
+          { id: "deleteButton", text: "Видалення" },
+          { id: "roleBackButton", text: "Відхилити" },
+          { id: "saveButton", text: "Зберегти" },
+          { id: "InputNameView", text: "Введіть назву жанра" },
+          { id: "InputDelView", text: "Введіть назву жанра" },
+          { id: "delButtonView", text: "Видалити" },
+          { id: "uniqueNumber", text: "Унікальний номер" },
+          { id: "nameGenre", text: "Назва жанру" },
+        ],
+      };
+
+function changeLanguage(lan) {
+    words[lan].forEach((item) => {
+        if(item.id=="InputNameView") {
+            $("#InputNameView").attr("placeholder",item.text);
+            return;
+        }
+        if(item.id=="InputDelView") {
+            $("#InputDelView").attr("placeholder",item.text);
+            return;
+        }
+        document.getElementById(item.id).innerText = item.text;
+    });
+}
+
 function addFunc() {
     displayAnother= document.getElementById("delDiv").style.display;
     if(displayAnother=='none') {

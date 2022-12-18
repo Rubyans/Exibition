@@ -1,18 +1,17 @@
 * {box-sizing: border-box}
 
-
 body {
     background-color:#BA94D1;
 }
 
-#UserAutorizedForm {
+#ArtForm {
     border:1px solid #ccc;
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     background-color:white;
 }
 
 button {
-    background-color: #8D72E1;
+    background-color: #6A67CE;
     color: white;
     padding: 8px 20px;
     margin: 8px 3px;
@@ -26,27 +25,43 @@ button:hover {
     opacity:1;
 }
 
+div.languageDiv {
+    display:flex;
+    width:99.5%;
+    justify-content: flex-end;
+    margin-top:0.5%;
+}
+
+.languageButton {
+    width:2.5%;
+    padding:0;
+    margin:0;
+    margin-left:1%;
+}
+
 .nameExit {
     display: flex;
     justify-content: center;
     align-items: baseline;
 }
+
 .exitButton {
-    margin-left:28%;
+    margin-left:31%;
     width:7%;
     background-color:#EB1D36;
 }
 
 .h3Add {
-    margin-left:35%;
+    margin-left:39%;
 }
 
-.buttonAuto {
+.buttonArt {
     display: flex;
     justify-content: space-between;
     margin-left:0.3%;
     width:30%;
 }
+
 
 div.wrapper {
    width:36%;
@@ -65,48 +80,41 @@ div.left_block {
 
 div.right_block {
     float:right;
-    width:43%;
-    margin-right: 2%;
+    width:50%;
+    margin-right: 1%;
     margin-top:1%;
 }
 
-#addDiv,#addDivUser,#addDivMoney {
+#addDiv{
     margin-left:5px;
 }
 
-
-.h6Add {
+.h6Add{
    margin:0px;
-   margin-bottom:1%;
    text-align:center;
 }
 
-input[type=text],input[type=number],input[type=email] {
+input[type=text],input[type=number] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 10px 4px;
+  margin: 5px 0 19px 4px;
   display: inline-block;
   border: none;
   background: #f1f1f1;
 }
 
-input[type=text]:focus,input[type=number]:focus,input[type=email]:focus {
+input[type=text]:focus,input[type=number]:focus {
   background-color: #ddd;
   outline: none;
 }
 
-div.SelectDiv {
-    margin-top:1%;
-}
-
-.SelectRole {
-    width: 30%;
+.SelectAdd {
+    width: 100%;
+    margin: 7px 4px 7px 0;
     border: none;
     background: #f1f1f1;
-    margin: 0 auto;
-    display: block;
+    overflow: scroll;
 }
-
 
 div.InputDelDiv {
     width:60%;
@@ -139,16 +147,6 @@ div.delDiv {
    margin-right: auto;
    width: 70%;
    background-color:#1C7947;
-}
-
-.buttonAdd {
-    display: flex;
-    justify-content: space-around;
-}
-
-.addButtonUser,.addButtonMoney {
-    width:45%;
-    background-color:#1C7947;
 }
 
 .pagination {
@@ -214,4 +212,5 @@ th:first-child, td:first-child {
 .text {
     text-align:center;
 }
+
 

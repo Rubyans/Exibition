@@ -51,63 +51,62 @@
 
 
   <servlet>
-    <servlet-name>adminSecondPage</servlet-name>
+    <servlet-name>AdminSecondPage</servlet-name>
     <servlet-class>app.servlets.admin.secondPage.AdminHallServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminSecondPage</servlet-name>
+    <servlet-name>AdminSecondPage</servlet-name>
     <url-pattern>/adminhall</url-pattern>
   </servlet-mapping>
 
-
   <servlet>
-    <servlet-name>adminThirdPage</servlet-name>
+    <servlet-name>AdminThirdPage</servlet-name>
     <servlet-class>app.servlets.admin.thirdPage.AdminAddressServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminThirdPage</servlet-name>
+    <servlet-name>AdminThirdPage</servlet-name>
     <url-pattern>/adminaddress</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminFouthPage</servlet-name>
+    <servlet-name>AdminFouthPage</servlet-name>
     <servlet-class>app.servlets.admin.fourthPage.AdminFourthServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminFouthPage</servlet-name>
+    <servlet-name>AdminFouthPage</servlet-name>
     <url-pattern>/adminauthor</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminFifthPage</servlet-name>
+    <servlet-name>AdminFifthPage</servlet-name>
     <servlet-class>app.servlets.admin.fifthPage.AdminFifthServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminFifthPage</servlet-name>
+    <servlet-name>AdminFifthPage</servlet-name>
     <url-pattern>/adminart</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminSixthPage</servlet-name>
+    <servlet-name>AdminSixthPage</servlet-name>
     <servlet-class>app.servlets.admin.sixthPage.AdminSixthServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminSixthPage</servlet-name>
+    <servlet-name>AdminSixthPage</servlet-name>
     <url-pattern>/adminview</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminSeventhPage</servlet-name>
+    <servlet-name>AdminSeventhPage</servlet-name>
     <servlet-class>app.servlets.admin.seventhPage.AdminSeventhServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminSeventhPage</servlet-name>
+    <servlet-name>AdminSeventhPage</servlet-name>
     <url-pattern>/userautorized</url-pattern>
   </servlet-mapping>
 
@@ -121,8 +120,6 @@
     <url-pattern>/user</url-pattern>
   </servlet-mapping>
 
-
-
   <servlet>
     <servlet-name>UserExhibitionMenu</servlet-name>
     <servlet-class>app.servlets.user.secondPage.UserExhibitionServlet</servlet-class>
@@ -133,7 +130,22 @@
     <url-pattern>/userexhibition</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>AdminStatisticsExhibition</servlet-name>
+    <servlet-class>app.servlets.admin.eighthPage.AdminEighthServlet</servlet-class>
+  </servlet>
 
+  <servlet-mapping>
+    <servlet-name>AdminStatisticsExhibition</servlet-name>
+    <url-pattern>/adminstatistics</url-pattern>
+  </servlet-mapping>
+
+
+
+  <taglib>
+    <taglib-uri>AmountTag</taglib-uri>
+    <taglib-location>/WEB-INF/settingsTags.tld</taglib-location>
+  </taglib>
 
   <filter>
     <filter-name>encodingFilter</filter-name>

@@ -1,6 +1,8 @@
 package app.database.admin.fourthPage;
 
 import app.entities.adminEntities.fourthPage.AuthorShow;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,12 +11,9 @@ import java.util.List;
 public class FourthPageDB {
     private static String url = "jdbc:mysql://localhost/exhibitiondb?user=root&password=root";
     private static Savepoint savepoint;
-
     private static Connection connAuthor;
 
-    public static Connection checkConnection() {
-        return connAuthor;
-    }
+    private static final Logger LOGGER = LogManager.getLogger(FourthPageDB.class);
 
     public static void startConnnection() //function creates connect with DB
     {
@@ -24,13 +23,17 @@ public class FourthPageDB {
                     connAuthor = DriverManager.getConnection(url);
                     connAuthor.setAutoCommit(false);
                     savepoint = connAuthor.setSavepoint("savepointMain");
+                    LOGGER.debug("startConnnection in debug");
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LOGGER.error("startConnnection " + e.getMessage());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                LOGGER.error("startConnnection " + ex.getMessage());
             }
         }
+    }
+    public static Connection checkConnection() {
+        return connAuthor;
     }
 
     public static void nullConnection() {
@@ -39,12 +42,8 @@ public class FourthPageDB {
 
     public static List<AuthorShow> authorShow() { //function shows author
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try {
-
                 List<AuthorShow> author = new ArrayList<>();
-
-
                 String firstName = null;
                 String lastName = null;
                 String email = null;
@@ -59,14 +58,13 @@ public class FourthPageDB {
                     author.add(new AuthorShow(firstName, lastName, email));
                 }
                 statement.close();
-
-
+                LOGGER.debug("authorShow in debug");
                 return author;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("authorShow " + e.getMessage());
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error("authorShow " + ex.getMessage());
         }
         return null;
     }
@@ -75,21 +73,20 @@ public class FourthPageDB {
         try {
             Savepoint savepointAdd = connAuthor.setSavepoint("SavepointAdd");
             try {
-
                 PreparedStatement AuthorAdd = connAuthor.prepareStatement("INSERT into exhibitiondb.author (first_name,last_name,email) values (?,?,?)");
                 AuthorAdd.setString(1, firstName);
                 AuthorAdd.setString(2, lastName);
                 AuthorAdd.setString(3, email);
                 AuthorAdd.execute();
                 AuthorAdd.close();
+                LOGGER.debug("authorAdd in debug");
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("authorAdd " + e.getMessage());
                 connAuthor.rollback(savepointAdd);
             }
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("authorAdd " + ex.getMessage());
         }
         return false;
     }
@@ -104,16 +101,18 @@ public class FourthPageDB {
                 int row = AuthorDel.executeUpdate();
                 AuthorDel.close();
 
-                if (row > 0)
+                if (row > 0) {
+                    LOGGER.debug("authorDel in debug");
                     return true;
+                }
+                LOGGER.debug("authorDel in debug");
                 return false;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("authorDel " + e.getMessage());
                 connAuthor.rollback(savepointDel);
             }
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.error("authorDel " + ex.getMessage());
         }
         return false;
     }
@@ -124,31 +123,33 @@ public class FourthPageDB {
                 connAuthor.rollback(savepoint);
                 connAuthor.commit();
                 connAuthor.close();
+                LOGGER.debug("exitConnection in debug");
                 return true;
             }
+            LOGGER.debug("exitConnection in debug");
             return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("exitConnection "+e.getMessage());
             return false;
         }
     }
-
     public static void saveCommit() { //function saves commit
         try {
             connAuthor.commit();
             savepoint = connAuthor.setSavepoint("savepointMain");
+            LOGGER.debug("saveCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("saveCommit "+e.getMessage());
         }
-
     }
 
     public static void RoleBackCommit() { //function roleback data
         try {
             if (savepoint != null)
                 connAuthor.rollback(savepoint);
+            LOGGER.debug("RoleBackCommit in debug");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("RoleBackCommit "+e.getMessage());
         }
 
     }
