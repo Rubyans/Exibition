@@ -1,10 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="v" uri="AmountTag" %>
-
 <html>
     <head>
-        <title>Квиток</title>
+        <title>${languageChange.get(0)}</title>
         <meta charset="UTF-8"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
@@ -14,32 +13,32 @@
 <body>
     <c:if test="${requestScope.TrueAdd}">
         <script>
-                sweetAlert("Purchase", "You have successfully purchased a ticket, confirm the ticket purchase!", "success");
+                sweetAlert("${languageChange.get(1)}", "${languageChange.get(3)}", "success");
         </script>
     </c:if>
     <c:if test="${requestScope.AddError}">
             <script>
-                sweetAlert("Error", "Insufficient money!", "error");
+                sweetAlert("${languageChange.get(2)}", "${languageChange.get(4)}", "error");
             </script>
     </c:if>
     <c:if test="${requestScope.SaveCommitError}">
             <script>
-                sweetAlert("Error", "Database problems!", "error");
+                sweetAlert("${languageChange.get(2)}", "${languageChange.get(5)}", "error");
             </script>
     </c:if>
     <c:if test="${requestScope.SaveCommitTrue}">
             <script>
-                sweetAlert("Purchase", "You have successfully confirmed your ticket purchase!", "success");
+                sweetAlert("${languageChange.get(1)}", "${languageChange.get(6)}", "success");
             </script>
     </c:if>
     <c:if test="${requestScope.RoleBackCommitError}">
             <script>
-                sweetAlert("Error", "Database problems!", "error");
+                sweetAlert("${languageChange.get(2)}", "${languageChange.get(5)}", "error");
             </script>
     </c:if>
     <c:if test="${requestScope.RoleBackCommitTrue}">
             <script>
-                sweetAlert("Purchase", "You have successfully declined your ticket purchase", "success");
+                sweetAlert("${languageChange.get(1)}", "${languageChange.get(7)}", "success");
             </script>
     </c:if>
     <form action="user"  id="userForm" class="userForm" method="POST">
@@ -48,11 +47,11 @@
             <button class="languageButton" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>
         </div>
         <div class="nameExit">
-             <h3 class="h3Add" id="ticketHello">Купівля квитка</p></h3>
-            <button class="exitButton" id="exitButton" name="exitButton">Вийти</button>
+             <h3 class="h3Add" id="ticketHello">${languageChange.get(8)}</p></h3>
+            <button class="exitButton" id="exitButton" name="exitButton">${languageChange.get(9)}</button>
         </div>
         <div class="moneyUser">
-            <h4 id="amount" class="h4Text">Ваш бюджет</h4>
+            <h4 id="amount" class="h4Text">${languageChange.get(10)}</h4>
             <h4 class="h4Money">
                 <v:virguleTag
                     amount="${Money.get(0).getAmount()} ₴"
@@ -60,32 +59,32 @@
             </h4>
         </div>
         <div class="buttonUser">
-            <button class="updateButton" name="updateButton" id="updateButton">Оновити</button>
-            <button class="addButton" type="Button" name="addButton" onclick="addFunc()" id="addButton">Квиток</button>
-            <button class="saveButton" name="saveButton" id="saveButton">Підтвердити</button>
-            <button class="roleBackButton" name="roleBackButton" id="roleBackButton">Відхилити</button>
+            <button class="updateButton" name="updateButton" id="updateButton">${languageChange.get(11)}</button>
+            <button class="addButton" type="Button" name="addButton" onclick="addFunc()" id="addButton">${languageChange.get(12)}</button>
+            <button class="saveButton" name="saveButton" id="saveButton">${languageChange.get(13)}</button>
+            <button class="roleBackButton" name="roleBackButton" id="roleBackButton">${languageChange.get(14)}</button>
         </div>
 
         <div id="addDiv" style="display: none;">
             <div class="wrapper">
-                 <h6 class="h6Add" id="nameEx">Оберіть виставку</h6>
+                 <h6 class="h6Add" id="nameEx">${languageChange.get(15)}</h6>
                  <select class="SelectExhibition" name="nameExhibition" id="SelectExhibition" multiple>
                     <c:forEach var="name" items="${AddShow}">
                         <option value="${name.getNameExhibition()}">${name.getNameExhibition()}</option>
                     </c:forEach>
                  </select>
                 <div class="buttonAdd">
-                    <button class="addButtonServlet" id="addButtonTicket" name="addButtonTicket">Придбати квиток</button>
+                    <button class="addButtonServlet" id="addButtonTicket" name="addButtonTicket">${languageChange.get(16)}</button>
                 </div>
             </div>
         </div>
         <table id="myTable">
             <tr>
-                <th id="nameExhibition">Назва виставки</th>
-                <th id="ticketPrice">Ціна білету</th>
-                <th id="dateStart">Дата початку</th>
-                <th id="dateEnd">Дата кінця</th>
-                <th id="boughtTicket">Придбані квитки</th>
+                <th id="nameExhibition">${languageChange.get(17)}</th>
+                <th id="ticketPrice">${languageChange.get(18)}</th>
+                <th id="dateStart">${languageChange.get(19)}</th>
+                <th id="dateEnd">${languageChange.get(20)}</th>
+                <th id="boughtTicket">${languageChange.get(21)}</th>
             </tr>
             <c:if test="${not requestScope.Error}">
                 <c:forEach var="user" items="${FirstPageUser}">
@@ -100,7 +99,7 @@
             </c:if>
             <c:if test="${requestScope.Error}">
                 <script>
-                    sweetAlert("Error", "Database problems, try again later!", "error");
+                    sweetAlert("${languageChange.get(2)}", "${languageChange.get(5)}", "error");
                 </script>
             </c:if>
         </table>
@@ -112,16 +111,6 @@
         </div>
     </form>
     <script src="./JS/userJS/firstPage/UserAutorized.js" type="text/javascript"></script>
-    <c:if test="${requestScope.languageEnglish}">
-        <script>
-            changeLanguage('en');
-        </script>
-    </c:if>
-    <c:if test="${requestScope.languageUkraine}">
-        <script>
-            changeLanguage('ua');
-        </script>
-    </c:if>
 </body>
 </html>
 

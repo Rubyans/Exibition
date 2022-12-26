@@ -1,8 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tagfile" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
     <head>
-        <title>Адміністратор</title>
+        <title>${languageChange.get(0)}</title>
         <meta charset="UTF-8"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
@@ -12,32 +13,32 @@
     <body>
         <c:if test="${requestScope.TrueAdd}">
             <script>
-                    sweetAlert("Addition", "You have successfully changed access. Save the changes!", "success");
+                    sweetAlert("${languageChange.get(1)}", "${languageChange.get(5)}", "success");
             </script>
         </c:if>
         <c:if test="${requestScope.TrueChange}">
             <script>
-                sweetAlert("Access", "You have successfully added data. Save the changes!", "success");
+                sweetAlert("${languageChange.get(2)}", "${languageChange.get(4)}", "success");
             </script>
         </c:if>
         <c:if test="${requestScope.TrueDel}">
             <script>
-                sweetAlert("Removal", "You have successfully deleted the data. Save the changes!", "success");
+                sweetAlert("${languageChange.get(3)}", "${languageChange.get(6)}", "success");
             </script>
         </c:if>
         <c:if test="${requestScope.AddError}">
                 <script>
-                    sweetAlert("Addition", "This exhibition name already exists, please enter another name!", "error");
+                    sweetAlert("${languageChange.get(1)}", "${languageChange.get(7)}", "error");
                 </script>
         </c:if>
         <c:if test="${requestScope.DelError}">
             <script>
-                sweetAlert("Removal", "There is no data for this name!", "error");
+                sweetAlert("${languageChange.get(3)}", "${languageChange.get(8)}", "error");
             </script>
         </c:if>
         <c:if test="${requestScope.ChangeError}">
             <script>
-                sweetAlert("Access", "There is no data for this exhibition!", "error");
+                sweetAlert("${languageChange.get(2)}", "${languageChange.get(9)}", "error");
             </script>
         </c:if>
         <form action="adminmain"  id="adminForm" class="adminForm" method="POST">
@@ -46,42 +47,42 @@
                 <button class="languageButton" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>
             </div>
             <div class="nameExit">
-                 <h3 class="h3Add" id="exhibitionHello">Список виставок</p></h3>
-                <button class="exitButton" id="exitButton" name="exitButton">Вийти</button>
+                 <h3 class="h3Add" id="exhibitionHello">${languageChange.get(10)}</p></h3>
+                <button class="exitButton" id="exitButton" name="exitButton">${languageChange.get(11)}</button>
             </div>
             <div class="buttonAdmin">
-                <button class="updateButton" name="updateButton" id="updateButton">Оновити</button>
-                <button class="addButton" name="addButton" id="addButton" onclick="addFunc()" type="Button">Додавання</button>
-                <button class="deleteButton" name="deleteButton" id="deleteButton" onclick="delFunc()" type="Button" >Видалення</button>
-                <button class="accessButton" name="accessButton" id="accessButton" onclick="accessFunc()" type="Button">Доступ</button>
-                <button class="roleBackButton" name="roleBackButton" id="roleBackButton">Відхилити</button>
-                <button class="saveButton" name="saveButton" id="saveButton">Зберегти</button>
+                <button class="updateButton" name="updateButton" id="updateButton">${languageChange.get(12)}</button>
+                <button class="addButton" name="addButton" id="addButton" onclick="addFunc()" type="Button">${languageChange.get(13)}</button>
+                <button class="deleteButton" name="deleteButton" id="deleteButton" onclick="delFunc()" type="Button" >${languageChange.get(14)}</button>
+                <button class="accessButton" name="accessButton" id="accessButton" onclick="accessFunc()" type="Button">${languageChange.get(15)}</button>
+                <button class="roleBackButton" name="roleBackButton" id="roleBackButton">${languageChange.get(16)}</button>
+                <button class="saveButton" name="saveButton" id="saveButton">${languageChange.get(17)}</button>
             </div>
 
             <div id="addDiv" style="display: none;">
                 <div class="wrapper">
                     <div class="left_block">
-                        <input type="text" id="InputNameEx" placeholder="Введіть назву виставки" name="nameExibition" >
-                        <br><input type="text" id="InputDescriptEx" placeholder="Введіть опис виставки" name="description" >
-                        <br><input type="number" id="InputPriceEx" placeholder="Введіть ціну квитка" step="any" name="price" >
-                        <br><input type="date" id="InputDatestartEx" placeholder="Введіть дату початку" name="start" >
-                        <br><input type="date" id="InputDateendEx" placeholder="Введіть дату кінця" name="end" >
+                        <input type="text" id="InputNameEx" placeholder="${languageChange.get(18)}" name="nameExibition" >
+                        <br><input type="text" id="InputDescriptEx" placeholder="${languageChange.get(19)}" name="description" >
+                        <br><input type="number" id="InputPriceEx" placeholder="${languageChange.get(20)}" step="any" name="price" >
+                        <br><input type="date" id="InputDatestartEx" placeholder="${languageChange.get(21)}" name="start" >
+                        <br><input type="date" id="InputDateendEx" placeholder="${languageChange.get(22)}" name="end" >
                     </div>
                     <div class="right_block">
                         <c:forEach var="addFirstPage" items="${AddShow}">
-                            <h6 class="h6Add" id="hallChange">Оберіть зал(и)</h6>
+                            <h6 class="h6Add" id="hallChange">${languageChange.get(23)}</h6>
                             <select class="SelectAdd" name="hall" id="SelectHall" multiple>
                                 <c:forEach var="hall" items="${addFirstPage.getHall()}">
                                     <option value="${hall}">${hall}</option>
                                      </c:forEach>
                             </select>
-                            <h6 class="h6Add" id="addressChange">Оберіть адресу(и)</h6>
+                            <h6 class="h6Add" id="addressChange">${languageChange.get(24)}</h6>
                             <select class="SelectAdd" name="address" id="SelectAddress" multiple>
                                 <c:forEach var="address" items="${addFirstPage.getAddress()}">
                                     <option value="${address}">${address}</option>
                                 </c:forEach>
                             </select>
-                                <h6 class="h6Add" id="expositionChange">Оберіть експозицію(ї)</h6>
+                                <h6 class="h6Add" id="expositionChange">${languageChange.get(25)}</h6>
                             <select class="SelectAdd" name="workArt" id="SelectArt" multiple>
                                 <c:forEach var="art" items="${addFirstPage.getArt()}">
                                     <option value="${art}">${art}</option>
@@ -90,43 +91,43 @@
                         </c:forEach>
                     </div>
                     <div class="buttonAdd">
-                        <button class="addButtonServlet" name="addButtonServlet" id="addButtonServlet">Додати</button>
+                        <button class="addButtonServlet" name="addButtonServlet" id="addButtonServlet">${languageChange.get(26)}</button>
                     </div>
                 </div>
             </div>
             <div class="delDiv" id="delDiv" style="display: none;">
                 <div class="InputDelDiv">
-                    <input class="inputDel" type="text" id="InputDelName" placeholder="Введіть назву виставки" name="nameExhibitionDel">
+                    <input class="inputDel" type="text" id="InputDelName" placeholder="${languageChange.get(27)}" name="nameExhibitionDel">
                 </div>
-                <button class="delButtonServlet" id="delButtonServlet" name="delButtonServlet">Видалити</button>
+                <button class="delButtonServlet" id="delButtonServlet" name="delButtonServlet">${languageChange.get(28)}</button>
             </div>
             <div class="accessDiv" id="accessDiv" style="display: none;">
                   <div class="checkAccess">
-                    <h6 class="h6Acc" id="exhibitionChange">Оберіть доступ</h6>
+                    <h6 class="h6Acc" id="exhibitionChange">${languageChange.get(29)}</h6>
                     <select class="SelectAccess" name="access" id="SelectAccess">
-                            <option value="1">Дозволити</option>
-                            <option value="2">Заборонити</option>
+                            <option value="1">${languageChange.get(30)}</option>
+                            <option value="2">${languageChange.get(31)}</option>
                     </select>
                   </div>
                  <div class="InputAccessDiv">
-                    <input class="inputAccess" type="text" id="InputAccessName" placeholder="Введіть назву виставки" name="nameExhibitionAccess">
+                    <input class="inputAccess" type="text" id="InputAccessName" placeholder="${languageChange.get(32)}" name="nameExhibitionAccess">
                  </div>
-                 <button class="accessButtonServlet" id="accessButtonServlet" name="accessButtonServlet">Змінити</button>
+                 <button class="accessButtonServlet" id="accessButtonServlet" name="accessButtonServlet">${languageChange.get(33)}</button>
             </div>
 
         <table id="myTable">
             <tr>
-                <th id="nameExhibition">Назва виставки</th>
-                <th id="description">Опис</th>
-                <th id="exposition">Експозиції</th>
-                <th id="price">Ціна</th>
-                <th id="dateStart">Дата початку</th>
-                <th id="dateEnd">Дата кінця</th>
-                <th id="hall">Зали</th>
-                <th id="author">Автори експозицій</th>
-                <th id="genre">Жанри</th>
-                <th id="address">Адреси</th>
-                <th id="access">Доступ</th>
+                <th id="nameExhibition">${languageChange.get(34)}</th>
+                <th id="description">${languageChange.get(35)}</th>
+                <th id="exposition">${languageChange.get(36)}</th>
+                <th id="price">${languageChange.get(37)}</th>
+                <th id="dateStart">${languageChange.get(38)}</th>
+                <th id="dateEnd">${languageChange.get(39)}</th>
+                <th id="hall">${languageChange.get(40)}</th>
+                <th id="author">${languageChange.get(41)}</th>
+                <th id="genre">${languageChange.get(42)}</th>
+                <th id="address">${languageChange.get(43)}</th>
+                <th id="access">${languageChange.get(44)}</th>
             </tr>
             <c:if test="${not requestScope.Error}">
                 <c:forEach var="admin" items="${FirstPage}">
@@ -161,18 +162,13 @@
                                 ${address}<br>
                             </c:forEach>
                         </td>
-                        <c:if test="${admin.getAccessExhibition().equals('Заборонено')}">
-                            <td style="background: #EB1D36;">${admin.getAccessExhibition()}</td>
-                        </c:if>
-                        <c:if test="${admin.getAccessExhibition().equals('Дозволено')}">
-                            <td>${admin.getAccessExhibition()}</td>
-                        </c:if>
+                        <tagfile:tableColor name="${admin.getAccessExhibition()}"></tagfile:tableColor>
                     </tr>
                 </c:forEach>
             </c:if>
             <c:if test="${requestScope.Error}">
                 <script>
-                    sweetAlert("Error", "Database problems, try again later!", "error");
+                    sweetAlert("${languageChange.get(45)}", "${languageChange.get(46)}", "error");
                 </script>
             </c:if>
         </table>
@@ -189,17 +185,7 @@
             <a><input class="buttonPagination" type="submit" name="AdminHallPagination" value="»"></a>
         </div>
     </form>
-    <script src="./JS/adminJS/firstPage/AdminFirstMenu1.js" type="text/javascript"></script>
-    <c:if test="${requestScope.languageEnglish}">
-        <script>
-            changeLanguage('en');
-        </script>
-    </c:if>
-    <c:if test="${requestScope.languageUkraine}">
-        <script>
-            changeLanguage('ua');
-        </script>
-    </c:if>
+    <script src="./JS/adminJS/firstPage/AdminFirstMenu.js" type="text/javascript"></script>
     </body>
 </html>
 

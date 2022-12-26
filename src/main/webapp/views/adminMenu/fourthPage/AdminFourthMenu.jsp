@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
     <head>
-        <title>Адміністратор</title>
+        <title>${languageChange.get(0)}</title>
         <meta charset="UTF-8"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
@@ -12,25 +12,25 @@
     <body>
         <c:if test="${requestScope.TrueAdd}">
             <script>
-                sweetAlert("Addition", "You have successfully added data. Save the changes!", "success");
+                sweetAlert("${languageChange.get(1)}", "${languageChange.get(3)}", "success");
             </script>
         </c:if>
 
         <c:if test="${requestScope.TrueDel}">
             <script>
-                sweetAlert("Removal", "You have successfully deleted the data. Save the changes!", "success");
+                sweetAlert("${languageChange.get(2)}", "${languageChange.get(4)}", "success");
             </script>
         </c:if>
 
         <c:if test="${requestScope.AddError}">
             <script>
-                sweetAlert("Addition", "This author already exists, enter other data!", "error");
+                sweetAlert("${languageChange.get(1)}", "${languageChange.get(5)}", "error");
             </script>
         </c:if>
 
         <c:if test="${requestScope.DelError}">
             <script>
-                sweetAlert("Removal", "Data for this mail does not exist!", "error");
+                sweetAlert("${languageChange.get(2)}", "${languageChange.get(6)}", "error");
             </script>
         </c:if>
 
@@ -40,42 +40,42 @@
                 <button class="languageButton" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>
             </div>
             <div class="nameExit">
-                <h3 class="h3Add" id="authorHello">Список авторів</p></h3>
-                <button class="exitButton" id="exitButton" name="exitButton">Вийти</button>
+                <h3 class="h3Add" id="authorHello">${languageChange.get(7)}</p></h3>
+                <button class="exitButton" id="exitButton" name="exitButton">${languageChange.get(8)}</button>
             </div>
             <div class="buttonAuthor">
-                <button class="updateButton" id="updateButton" name="updateButton" >Оновити</button>
-                <button class="addButton" id="addButton" name="addButton" onclick="addFunc()" type="Button">Додавання</button>
-                <button class="deleteButton" id="deleteButton" name="deleteButton" onclick="delFunc()" type="Button" >Видалення</button>
-                <button class="saveButton" id="roleBackButton" name="roleBackButton">Відхилити</button>
-                <button class="saveButton" id="saveButton" name="saveButton">Зберегти</button>
+                <button class="updateButton" id="updateButton" name="updateButton" >${languageChange.get(9)}</button>
+                <button class="addButton" id="addButton" name="addButton" onclick="addFunc()" type="Button">${languageChange.get(10)}</button>
+                <button class="deleteButton" id="deleteButton" name="deleteButton" onclick="delFunc()" type="Button" >${languageChange.get(11)}</button>
+                <button class="saveButton" id="roleBackButton" name="roleBackButton">${languageChange.get(12)}</button>
+                <button class="saveButton" id="saveButton" name="saveButton">${languageChange.get(13)}</button>
             </div>
 
             <div id="addDiv" style="display: none;">
                 <div class="wrapper">
                     <div class="left_block">
-                        <input type="text" id="InputFirstNameAd" placeholder="Введіть прізвище автора" name="firstNameAuthor" >
-                        <br><input type="text" id="InputLastNameAd" placeholder="Введіть ім`я автора" name="lastNameAuthor" >
-                        <br><input type="email" id="InputEmailAd" placeholder="Введіть поштову скриньку автора" name="emailAuthor" >
+                        <input type="text" id="InputFirstNameAd" placeholder="${languageChange.get(14)}" name="firstNameAuthor" >
+                        <br><input type="text" id="InputLastNameAd" placeholder="${languageChange.get(15)}" name="lastNameAuthor" >
+                        <br><input type="email" id="InputEmailAd" placeholder="${languageChange.get(16)}" name="emailAuthor" >
                     </div>
                     <div class="buttonAdd">
-                        <button class="addButtonServlet" id="addButtonAuthor" name="addButtonAuthor">Додати</button>
+                        <button class="addButtonServlet" id="addButtonAuthor" name="addButtonAuthor">${languageChange.get(17)}</button>
                     </div>
                 </div>
             </div>
 
             <div class="delDiv" id="delDiv" style="display: none;">
                     <div class="InputDelDiv">
-                        <input class="inputDel" type="email" id="InputDelAuthor" placeholder="Введіть поштову скриньку автора" name="authorDel">
+                        <input class="inputDel" type="email" id="InputDelAuthor" placeholder="${languageChange.get(16)}" name="authorDel">
                     </div>
-                    <button class="delButtonServlet" id="delButtonAuthor" name="delButtonAuthor">Видалити</button>
+                    <button class="delButtonServlet" id="delButtonAuthor" name="delButtonAuthor">${languageChange.get(18)}</button>
             </div>
 
             <table id="myTable">
                 <tr>
-                    <th id="firstName">Прізвище</th>
-                    <th id="lastName">Ім`я</th>
-                    <th id="email">Електронна адреса</th>
+                    <th id="firstName">${languageChange.get(19)}</th>
+                    <th id="lastName">${languageChange.get(20)}</th>
+                    <th id="email">${languageChange.get(21)}</th>
                 </tr>
                 <c:if test="${not requestScope.Error}">
                             <c:forEach var="author" items="${FouthPageShow}">
@@ -88,7 +88,7 @@
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>
-                        sweetAlert("Error", "Database problems, try again later!", "error");
+                        sweetAlert("${languageChange.get(22)}", "${languageChange.get(23)}", "error");
                     </script>
                 </c:if>
             </table>
@@ -106,15 +106,5 @@
             </div>
         </form>
     <script src="./JS/adminJS/fourthPage/AdminFourthMenu.js" type="text/javascript"></script>
-    <c:if test="${requestScope.languageEnglish}">
-        <script>
-            changeLanguage('en');
-        </script>
-    </c:if>
-    <c:if test="${requestScope.languageUkraine}">
-        <script>
-            changeLanguage('ua');
-        </script>
-    </c:if>
     </body>
 </html>

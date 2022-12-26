@@ -6,10 +6,11 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee" version="2.5">
 
   <display-name>Archetype Created Web Application</display-name>
+  
 
   <servlet>
     <servlet-name>autorized</servlet-name>
-    <servlet-class>app.servlets.AuthorizationServlet</servlet-class>
+    <servlet-class>app.controller.servlets.AuthorizationServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -19,7 +20,7 @@
 
   <servlet>
     <servlet-name>registration</servlet-name>
-    <servlet-class>app.servlets.RegistrationServlet</servlet-class>
+    <servlet-class>app.controller.servlets.RegistrationServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -30,7 +31,7 @@
 
   <servlet>
     <servlet-name>guest</servlet-name>
-    <servlet-class>app.servlets.GuestServlet</servlet-class>
+    <servlet-class>app.controller.servlets.GuestServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -41,7 +42,7 @@
 
   <servlet>
     <servlet-name>adminmain</servlet-name>
-    <servlet-class>app.servlets.admin.firstPage.AdminExhibitionServlet</servlet-class>
+    <servlet-class>app.controller.servlets.admin.firstPage.AdminExhibitionServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -52,7 +53,7 @@
 
   <servlet>
     <servlet-name>AdminSecondPage</servlet-name>
-    <servlet-class>app.servlets.admin.secondPage.AdminHallServlet</servlet-class>
+    <servlet-class>app.controller.servlets.admin.secondPage.AdminHallServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -62,7 +63,7 @@
 
   <servlet>
     <servlet-name>AdminThirdPage</servlet-name>
-    <servlet-class>app.servlets.admin.thirdPage.AdminAddressServlet</servlet-class>
+    <servlet-class>app.controller.servlets.admin.thirdPage.AdminAddressServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -72,7 +73,7 @@
 
   <servlet>
     <servlet-name>AdminFouthPage</servlet-name>
-    <servlet-class>app.servlets.admin.fourthPage.AdminFourthServlet</servlet-class>
+    <servlet-class>app.controller.servlets.admin.fourthPage.AdminFourthServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -82,7 +83,7 @@
 
   <servlet>
     <servlet-name>AdminFifthPage</servlet-name>
-    <servlet-class>app.servlets.admin.fifthPage.AdminFifthServlet</servlet-class>
+    <servlet-class>app.controller.servlets.admin.fifthPage.AdminFifthServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -92,7 +93,7 @@
 
   <servlet>
     <servlet-name>AdminSixthPage</servlet-name>
-    <servlet-class>app.servlets.admin.sixthPage.AdminSixthServlet</servlet-class>
+    <servlet-class>app.controller.servlets.admin.sixthPage.AdminSixthServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -102,7 +103,7 @@
 
   <servlet>
     <servlet-name>AdminSeventhPage</servlet-name>
-    <servlet-class>app.servlets.admin.seventhPage.AdminSeventhServlet</servlet-class>
+    <servlet-class>app.controller.servlets.admin.seventhPage.AdminSeventhServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -112,7 +113,7 @@
 
   <servlet>
     <servlet-name>UserMenu</servlet-name>
-    <servlet-class>app.servlets.user.firstPage.UserServlet</servlet-class>
+    <servlet-class>app.controller.servlets.user.firstPage.UserServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -122,7 +123,7 @@
 
   <servlet>
     <servlet-name>UserExhibitionMenu</servlet-name>
-    <servlet-class>app.servlets.user.secondPage.UserExhibitionServlet</servlet-class>
+    <servlet-class>app.controller.servlets.user.secondPage.UserExhibitionServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -132,7 +133,7 @@
 
   <servlet>
     <servlet-name>AdminStatisticsExhibition</servlet-name>
-    <servlet-class>app.servlets.admin.eighthPage.AdminEighthServlet</servlet-class>
+    <servlet-class>app.controller.servlets.admin.eighthPage.AdminEighthServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -141,15 +142,18 @@
   </servlet-mapping>
 
 
+  <listener>
+    <listener-class>app.controller.listners.SessionListener</listener-class>
+  </listener>
 
   <taglib>
     <taglib-uri>AmountTag</taglib-uri>
-    <taglib-location>/WEB-INF/settingsTags.tld</taglib-location>
+    <taglib-location>/WEB-INF/tlds/customTag.tld</taglib-location>
   </taglib>
 
   <filter>
     <filter-name>encodingFilter</filter-name>
-    <filter-class>app.filter.FilterEncoding</filter-class>
+    <filter-class>app.controller.filters.FilterEncoding</filter-class>
     <init-param>
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>

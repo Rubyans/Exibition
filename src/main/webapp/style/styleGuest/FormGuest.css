@@ -10,6 +10,43 @@ body {
     background-color:white;
 }
 
+#sortDiv {
+    margin-left:5px;
+}
+
+div.wrapper {
+    width:28.8%;
+    border: 1px solid #f1f1f1;
+    background-color:#6ECCAF;
+    margin-bottom:0.5%;
+    margin-left:0.2%;
+}
+
+.h6Add {
+    margin:0px;
+    text-align:center;
+    margin-bottom:0.5%;
+    margin-top:0.5%;
+}
+
+.selectSort {
+    width: 40%;
+    border: none;
+    background: #f1f1f1;
+    margin: 0 auto;
+    display: block;
+}
+
+
+.sortButtonServlet {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color:#1C7947;
+}
+
+
 button {
     background-color: #8D72E1;
     color: white;
