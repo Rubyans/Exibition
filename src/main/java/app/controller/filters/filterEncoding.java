@@ -2,7 +2,7 @@ package app.controller.filters;
 import javax.servlet.*;
 import java.io.IOException;
 
-public class FilterEncoding implements Filter { //the class is used to filter data in one encoding
+public class filterEncoding implements Filter { //the class is used to filter data in one encoding
 
     private String encoding;
     @Override

@@ -1,7 +1,7 @@
 package app.DAO.sqlFunctions;
 
 import app.DAO.connectionDAO.HikariConnectDB;
-import app.DAO.sqlFunctions.encrypt.EncryptforDB;
+import app.service.encrypt.Encrypt;
 import app.DAO.entities.UserRegistration;
 import org.apache.log4j.Logger;
 
@@ -14,7 +14,7 @@ public class UserRegistrationDB {
 
 
     public static UserRegistration registrationDB(String firstName, String lastName, String email, String login, String password) { //function insert users data in DB
-        final String HASH = EncryptforDB.encrypt(password);
+        final String HASH = Encrypt.encryptText(password);
         try {
             Connection connRegistration = HikariConnectDB.getConnection();
             Savepoint savepointAdd = connRegistration.setSavepoint("SaveAdd");

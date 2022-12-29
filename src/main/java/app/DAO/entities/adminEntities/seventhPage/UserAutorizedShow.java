@@ -41,11 +41,7 @@ public class UserAutorizedShow { //the class is used to display the data associa
     public Double getAmount() {
         return amount;
     }
-    public String getRole() {  //the function returns the text for better display in the table
-        if (role.equals("2"))
-            return "Administrator";
-        return "User";
-    }
+    public String getRole() { return role; }
     public String getAccess() {
         return access;
     }

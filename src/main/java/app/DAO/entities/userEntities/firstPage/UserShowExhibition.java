@@ -7,14 +7,16 @@ public class UserShowExhibition { //the class is used to display the data associ
     private Double price;
     private Date dateStart;
     private Date dateEnd;
+    private String hours;
     private Integer ticket;
 
-    public UserShowExhibition(String nameExhibition, Double price, Date dateStart, Date dateEnd, Integer ticket) {
+    public UserShowExhibition(String nameExhibition, Double price, Date dateStart, Date dateEnd,String hours, Integer ticket) {
         //the constructor receives data from the exhibition table to display to the authorized user
         this.nameExhibition = nameExhibition;
         this.price = price;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+        this.hours=hours;
         this.ticket = ticket;
     }
 
@@ -30,9 +32,12 @@ public class UserShowExhibition { //the class is used to display the data associ
     public Date getDateEnd() {
         return dateEnd;
     }
+    public String getHours() {
+        return hours;
+    }
     public String getTicket() { //the function outputs a string for better formatting in tables
         if (ticket == null)
-            return "Відсутні";
+            return "-";
         return String.valueOf(ticket);
     }
 
@@ -50,6 +55,7 @@ public class UserShowExhibition { //the class is used to display the data associ
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
+    public void setHours(String hours) { this.hours=hours; }
     public void setTicket(Integer ticket) {
         this.ticket = ticket;
     }

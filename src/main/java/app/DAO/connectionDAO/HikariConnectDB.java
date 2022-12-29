@@ -10,10 +10,12 @@ import java.util.Properties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HikariConnectDB {
 
     private static final Logger LOGGER = Logger.getLogger(HikariConnectDB.class);
+
     private static Connection connectionDB;
     private static Savepoint savepoint;
 
@@ -46,7 +48,7 @@ public class HikariConnectDB {
     public static boolean checkConnection() {
         try {
             if (connectionDB != null)
-                if(connectionDB.isClosed()!=true)
+                if (connectionDB.isClosed() != true)
                     return true;
             return false;
         } catch (Exception e) {
@@ -58,14 +60,18 @@ public class HikariConnectDB {
 
     public static void exitConnection() {
         try {
-            connectionDB.rollback(savepoint);
-            connectionDB.close();
+            if (connectionDB != null)
+                if (connectionDB.isClosed() != true) {
+                    connectionDB.rollback(savepoint);
+                    connectionDB.close();
+                }
             LOGGER.debug("exitConnection in debug");
         } catch (
                 SQLException e) {
             LOGGER.error("exitConnection " + e.getMessage());
         }
     }
+
     public static boolean saveCommit() { //function saves data
         try {
             connectionDB.commit();

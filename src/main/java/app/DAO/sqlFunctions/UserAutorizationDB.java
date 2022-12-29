@@ -1,7 +1,7 @@
 package app.DAO.sqlFunctions;
 
 import app.DAO.connectionDAO.HikariConnectDB;
-import app.DAO.sqlFunctions.encrypt.EncryptforDB;
+import app.service.encrypt.Encrypt;
 import app.DAO.entities.UserAutorization;
 import org.apache.log4j.Logger;
 
@@ -19,7 +19,7 @@ public class UserAutorizationDB {
         String lastName = null;
         String email = null;
         String access = null;
-        final String HASH = EncryptforDB.encrypt(password);
+        final String HASH = Encrypt.encryptText(password);
         String role = "false";
         try {
             Connection connUser = HikariConnectDB.getConnection();

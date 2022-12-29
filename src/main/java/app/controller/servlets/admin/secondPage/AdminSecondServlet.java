@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class AdminHallServlet extends HttpServlet {
+public class AdminSecondServlet extends HttpServlet {
 
-    private static final Logger LOGGER = Logger.getLogger(AdminHallServlet.class);
+    private static final Logger LOGGER = Logger.getLogger(AdminSecondServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

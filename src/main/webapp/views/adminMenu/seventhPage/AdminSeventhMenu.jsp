@@ -134,20 +134,20 @@
                 </select>
             </div>
             <div class="InputAccessDiv">
-                <input class="inputAccess" type="email" id="InputAccessEmail" placeholder="${languageChange.get(42)" name="emailExhibitionAccess">
+                <input class="inputAccess" type="email" id="InputAccessEmail" placeholder="${languageChange.get(42)}" name="emailExhibitionAccess">
             </div>
-            <button class="accessButtonServlet" id="accessButtonServlet" name="accessButtonServlet">${languageChange.get(43)</button>
+            <button class="accessButtonServlet" id="accessButtonServlet" name="accessButtonServlet">${languageChange.get(43)}</button>
         </div>
         <table id="myTable">
             <tr>
-                <th id="firstName">${languageChange.get(44)</th>
-                <th id="lastName">${languageChange.get(45)</th>
-                <th id="login">${languageChange.get(46)</th>
-                <th id="password">${languageChange.get(47)</th>
-                <th id="email">${languageChange.get(48)</th>
-                <th id="amount">${languageChange.get(49)</th>
-                <th id="role">${languageChange.get(50)</th>
-                <th id="access">${languageChange.get(51)</th>
+                <th id="firstName">${languageChange.get(44)}</th>
+                <th id="lastName">${languageChange.get(45)}</th>
+                <th id="login">${languageChange.get(46)}</th>
+                <th id="password">${languageChange.get(47)}</th>
+                <th id="email">${languageChange.get(48)}</th>
+                <th id="amount">${languageChange.get(49)}</th>
+                <th id="role">${languageChange.get(50)}</th>
+                <th id="access">${languageChange.get(51)}</th>
             </tr>
             <c:if test="${not requestScope.Error}">
                 <c:forEach var="autorized" items="${SeventhPageShow}">
@@ -158,14 +158,14 @@
                         <td>${autorized.getPassword()}</td>
                         <td>${autorized.getEmail()}</td>
                         <td>${autorized.getAmount()}</td>
-                        <td>${autorized.getRole()}</td>
+                        <tagfile:changeLanguageRole language="${languageChange.get(52)}" role="${autorized.getRole()}"></tagfile:changeLanguageRole>
                         <tagfile:tableColor name="${autorized.getAccess()}"></tagfile:tableColor>
                     </tr>
                 </c:forEach>
             </c:if>
             <c:if test="${requestScope.Error}">
                 <script>
-                        sweetAlert("${languageChange.get(52)", "${languageChange.get(53)", "error");
+                        sweetAlert("${languageChange.get(53)}", "${languageChange.get(54)}", "error");
                 </script>
             </c:if>
         </table>

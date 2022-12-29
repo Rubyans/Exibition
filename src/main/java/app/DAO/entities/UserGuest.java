@@ -11,8 +11,9 @@ public class UserGuest { //the class is used to store data from database exhibit
     private Double price;
     private Date dateStart;
     private Date dateEnd;
+    private String hours;
 
-    public UserGuest(String nameExibition,String descriptionExibition, List<String> expositionName,Double price,Date dateStart,Date dateEnd) {
+    public UserGuest(String nameExibition,String descriptionExibition, List<String> expositionName,Double price,Date dateStart,Date dateEnd,String hours) {
         //the constructor gets exhibition data for non-authorized user
         this.nameExibition=nameExibition;
         this.descriptionExibition=descriptionExibition;
@@ -20,6 +21,7 @@ public class UserGuest { //the class is used to store data from database exhibit
         this.price=price;
         this.dateStart=dateStart;
         this.dateEnd=dateEnd;
+        this.hours=hours;
     }
 
     ///////////////////getFunctions//////////////////////////
@@ -41,6 +43,9 @@ public class UserGuest { //the class is used to store data from database exhibit
     public Date getDateEnd() {
         return dateEnd;
     }
+    public String getHours() {
+        return hours;
+    }
 
     ///////////////////setFunctions//////////////////////////
 
@@ -60,4 +65,8 @@ public class UserGuest { //the class is used to store data from database exhibit
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
+    public void setHours(String hours) {
+        this.hours=hours;
+    }
+
 }

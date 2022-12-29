@@ -93,7 +93,6 @@ public class AuthorizationServlet extends HttpServlet {
             if (HikariConnectDB.checkConnection() == false) {
                 HikariConnectDB object = new HikariConnectDB();
             }
-
             String login = req.getParameter("loginUser");
             String password = req.getParameter("passwordUser");
 
@@ -111,4 +110,5 @@ public class AuthorizationServlet extends HttpServlet {
             resp.sendRedirect("/exhibition/auto");
         }
     }
+
 }

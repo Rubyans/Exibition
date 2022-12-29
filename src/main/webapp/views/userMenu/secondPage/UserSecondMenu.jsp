@@ -30,10 +30,11 @@
                     <th id="price">${languageChange.get(7)}</th>
                     <th id="dateStart">${languageChange.get(8)}</th>
                     <th id="dateEnd">${languageChange.get(9)}</th>
-                    <th id="hall">${languageChange.get(10)}</th>
-                    <th id="author">${languageChange.get(11)}</th>
-                    <th id="genre">${languageChange.get(12)}</th>
-                    <th id="address">${languageChange.get(13)}</th>
+                    <th id="hours">${languageChange.get(10)}</th>
+                    <th id="hall">${languageChange.get(11)}</th>
+                    <th id="author">${languageChange.get(12)}</th>
+                    <th id="genre">${languageChange.get(13)}</th>
+                    <th id="address">${languageChange.get(14)}</th>
                 </tr>
                 <c:if test="${not requestScope.Error}">
                     <c:forEach var="user" items="${SecondPage}">
@@ -48,6 +49,7 @@
                             <td>${user.getPrice()}</td>
                             <td>${user.getDateStart()}</td>
                             <td>${user.getDateEnd()}</td>
+                            <td>${user.getHours()}</td>
                             <td>
                                 <c:forEach var="hell" items="${user.getNameHall()}">
                                     ${hell}<br>
@@ -73,7 +75,7 @@
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>
-                        sweetAlert("${languageChange.get(14)}", "${languageChange.get(15)}", "error");
+                        sweetAlert("${languageChange.get(15)}", "${languageChange.get(16)}", "error");
                     </script>
                 </c:if>
             </table>

@@ -39,7 +39,7 @@ public class AdminSeventhServlet extends HttpServlet {
             }
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminSeventh"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminSeventh"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
                     req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminSeventh"));
                 }

@@ -84,7 +84,8 @@
                 <th id="ticketPrice">${languageChange.get(18)}</th>
                 <th id="dateStart">${languageChange.get(19)}</th>
                 <th id="dateEnd">${languageChange.get(20)}</th>
-                <th id="boughtTicket">${languageChange.get(21)}</th>
+                <th id="Hour">${languageChange.get(21)}</th>
+                <th id="boughtTicket">${languageChange.get(22)}</th>
             </tr>
             <c:if test="${not requestScope.Error}">
                 <c:forEach var="user" items="${FirstPageUser}">
@@ -93,6 +94,7 @@
                         <td>${user.getPrice()}</td>
                         <td>${user.getDateStart()}</td>
                         <td>${user.getDateEnd()}</td>
+                        <td>${user.getHours()}</td>
                         <td>${user.getTicket()}</td>
                     </tr>
                 </c:forEach>

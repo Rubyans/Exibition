@@ -12,6 +12,8 @@ public class AdminShow { //the class is used to store exhibition-related data.
     private String accessExhibition;
     private List<String> expositionName;
     private Double price;
+    private String hours;
+
     private Date dateStart;
     private Date dateEnd;
     private List<String> nameHall;
@@ -19,13 +21,14 @@ public class AdminShow { //the class is used to store exhibition-related data.
     private List<String> nameview;
     private List<String> addressExibition;
 
-    public AdminShow(String nameExibition, String descriptionExibition, List<String> expositionName, Double price,
+    public AdminShow(String nameExibition, String descriptionExibition, List<String> expositionName, Double price, String hours,
                      Date dateStart, Date dateEnd, String accessExhibition, List<String> nameHall, List<String> nameAuthor, List<String> nameview, List<String> addressExibition) {
         //the constructor stores lists and data fields that will be displayed in the table in the future
         this.nameExibition = nameExibition;
         this.descriptionExibition = descriptionExibition;
         this.expositionName = new ArrayList<>(expositionName);
         this.price = price;
+        this.hours=hours;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.accessExhibition = accessExhibition;
@@ -65,7 +68,7 @@ public class AdminShow { //the class is used to store exhibition-related data.
     public Double getPrice() {
         return price;
     }
-
+    public String getHours() { return hours;}
     public Date getDateStart() {
         return dateStart;
     }
@@ -154,6 +157,7 @@ public class AdminShow { //the class is used to store exhibition-related data.
     public void setExpositionName(List<String> expositionName) {
         this.expositionName = new ArrayList<>(expositionName);
     }
+    public void setHours(String hours) { this.hours=hours;}
 
     public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;

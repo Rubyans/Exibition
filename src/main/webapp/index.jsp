@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <html>
-    <c:if test="${requestScope.languageChange.equals(null)}">
+    <c:if test="${not empty requestScope.languageChange}">
         <head>
             <title>${languageChange.get(0)}</title>
             <meta charset="UTF-8"/>
@@ -56,7 +56,7 @@
             <script src="./JS/functionsAutorized.js"></script>
         </body>
     </c:if>
-    <c:if test="${not requestScope.languageChange.equals(null)}">
+    <c:if test="${empty requestScope.languageChange}">
         <head>
             <title>Авторизація</title>
             <meta charset="UTF-8"/>

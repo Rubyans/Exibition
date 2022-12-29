@@ -24,6 +24,7 @@ public class FirstPageDB {
             String nameExhibition = null;
             String descriptionExibition = null;
             String access = null;
+            String hours = null;
 
             Double price = null;
             Date dateStart = null;
@@ -51,16 +52,18 @@ public class FirstPageDB {
                     descriptionExibition = resultSet.getString(2);
                     expositionName.add(resultSet.getString(3));
                     price = resultSet.getDouble(4);
-                    dateStart = resultSet.getDate(5);
-                    dateEnd = resultSet.getDate(6);
-                    access = resultSet.getString(7);
-                    nameHell.add(resultSet.getString(8));
-                    nameAuthor.add(resultSet.getString(9) + " " + resultSet.getString(10));
-                    nameview.add(resultSet.getString(11));
-                    addressExibition.add(resultSet.getString(12) + ", " + resultSet.getString(13) + " " + resultSet.getString(14));
+                    hours=resultSet.getString(5);
+                    dateStart = resultSet.getDate(6);
+                    dateEnd = resultSet.getDate(7);
+                    access = resultSet.getString(8);
+                    nameHell.add(resultSet.getString(9));
+                    nameAuthor.add(resultSet.getString(10) + " " + resultSet.getString(11));
+                    nameview.add(resultSet.getString(12));
+                    addressExibition.add(resultSet.getString(13) + ", " + resultSet.getString(14) + " " + resultSet.getString(15));
                 }
                 if (nameExhibition != null)
-                    admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd, access, nameHell, nameAuthor, nameview, addressExibition));
+                    admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, hours, dateStart, dateEnd, access, nameHell, nameAuthor, nameview, addressExibition));
+                hours = null;
                 nameExhibition = null;
                 descriptionExibition = null;
                 access = null;
@@ -120,7 +123,7 @@ public class FirstPageDB {
         return null;
     }
 
-    public static Boolean addFirstPage(String nameExibition, String description, Double price, String start, String end, List<String> hall, List<String> address, List<String> workArt) { //function adds exhibitions-data
+    public static Boolean addFirstPage(String nameExibition, String description, Double price,String hours, String start, String end, List<String> hall, List<String> address, List<String> workArt) { //function adds exhibitions-data
         try {
             Connection connExhibition = HikariConnectDB.getConnection();
             Savepoint savepointAdd = connExhibition.setSavepoint("SavepointAdd");
@@ -134,9 +137,10 @@ public class FirstPageDB {
                 ExhibitionADD.setString(1, nameExibition);
                 ExhibitionADD.setString(2, description);
                 ExhibitionADD.setDouble(3, price);
-                ExhibitionADD.setString(4, start);
-                ExhibitionADD.setString(5, end);
-                ExhibitionADD.setInt(6, 1);
+                ExhibitionADD.setString(4,hours);
+                ExhibitionADD.setString(5, start);
+                ExhibitionADD.setString(6, end);
+                ExhibitionADD.setInt(7, 1);
                 ExhibitionADD.execute();
                 ExhibitionADD.close();
 

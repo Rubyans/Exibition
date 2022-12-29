@@ -4,7 +4,7 @@ public abstract class SQLRequests {
 
     public static class FirstPageAdmin {
         public static final String SELECT_NAME_EXHIBITION = "SELECT name FROM exhibitiondb.exhibition";
-        public static final String SELECT_EXHIBITION = "SELECT exhibition.name,description,work_art.name,price,date_start,date_end," +
+        public static final String SELECT_EXHIBITION = "SELECT exhibition.name,description,work_art.name,price,hours,date_start,date_end," +
                 "access,hall.name,author.first_name,author.last_name,nameview,city,street_or_square,number_home\n" +
                 "FROM exhibitiondb.exhibition INNER JOIN exhibitiondb.exposition ON exhibition.exhibition_id=exposition.exhibition_fk\n" +
                 "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id\n" +
@@ -24,7 +24,7 @@ public abstract class SQLRequests {
         public static final String SELECT_ID_HALL = "SELECT hall_id from exhibitiondb.hall where name=?";
         public static final String SELECT_ID_ADDRESS = "SELECT address_id from exhibitiondb.exhibition_address WHERE country=? and city=? and street_or_square=? and number_home=?";
         public static final String SELECT_ID_WORK_ART = "SELECT art_id from exhibitiondb.work_art where name=?";
-        public static final String INSERT_EXHIBITION = "INSERT INTO exhibitiondb.exhibition (name,description,price,date_start,date_end,access) VALUES (?,?,?,?,?,?)";
+        public static final String INSERT_EXHIBITION = "INSERT INTO exhibitiondb.exhibition (name,description,price,hours,date_start,date_end,access) VALUES (?,?,?,?,?,?,?)";
         public static final String INSERT_EXHIBITION_WITH_HALL = "INSERT INTO exhibitiondb.exhibition_with_hall (hall_fk,exhi_fk) VALUES (?,?)";
         public static final String INSERT_EXHIBITION_WITH_ADDRESS = "INSERT INTO exhibitiondb.exhibition_with_address (ex_fk,address_fk) VALUES (?,?)";
         public static final String INSERT_EXPOSITION = "INSERT INTO exhibitiondb.exposition (exhibition_fk,art_fk) VALUES (?,?)";
@@ -97,7 +97,7 @@ public abstract class SQLRequests {
                 "INNER JOIN exhibitiondb.ticket ON ticket_fk=exhibition_id\n" +
                 "INNER JOIN exhibitiondb.authorized_user ON user_id=user_fk\n" +
                 "WHERE authorized_user.user_id=";
-        public static final String SELECT_EXHIBITION = "SELECT name,price,date_start,date_end FROM exhibitiondb.exhibition WHERE exhibition.access='1';";
+        public static final String SELECT_EXHIBITION = "SELECT name,price,date_start,date_end,hours FROM exhibitiondb.exhibition WHERE exhibition.access='1';";
         public static final String SELECT_NAME_EXHIBITION = "SELECT name FROM exhibitiondb.exhibition";
         public static final String SELECT_AMOUNT = "SELECT amount FROM exhibitiondb.authorized_user where user_id=";
         public static final String SELECT_ID_EXHIBITION = "SELECT exhibition_id,price FROM exhibitiondb.exhibition WHERE name=";
@@ -112,7 +112,7 @@ public abstract class SQLRequests {
                 "INNER JOIN exhibitiondb.authorized_user ON authorized_user.user_id=ticket.user_fk\n" +
                 "WHERE authorized_user.user_id=";
         public static final String SELECT_EXHIBITION = "SELECT exhibition.name,description,work_art.name,price,\n" +
-                "date_start,date_end,hall.name,author.first_name,author.last_name,nameview,city,street_or_square,number_home\n" +
+                "date_start,date_end,hours,hall.name,author.first_name,author.last_name,nameview,city,street_or_square,number_home\n" +
                 "FROM exhibitiondb.exhibition INNER JOIN exhibitiondb.exposition ON exhibition.exhibition_id=exposition.exhibition_fK\n" +
                 "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id\n" +
                 "INNER JOIN exhibitiondb.view_workart ON view_workart.artview_fk=work_art.art_id\n" +
@@ -136,7 +136,7 @@ public abstract class SQLRequests {
     }
 
     public static class UserGuest {
-        public static final String SELECT_EXHIBITION = "SELECT exhibition.name,description,work_art.name,price,date_start,date_end\n" +
+        public static final String SELECT_EXHIBITION = "SELECT exhibition.name,description,work_art.name,price,date_start,date_end,hours\n" +
                 "FROM exhibitiondb.exhibition INNER JOIN exhibitiondb.exposition ON exhibition.exhibition_id=exposition.exhibition_fk \n" +
                 "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id WHERE exhibition.access='1';";
     }

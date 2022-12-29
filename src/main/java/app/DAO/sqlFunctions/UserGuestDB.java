@@ -34,6 +34,7 @@ public class UserGuestDB {
             Double price = null;
             Date dateStart = null;
             Date dateEnd = null;
+            String hours=null;
 
             List<UserGuest> guest = new ArrayList<>();
 
@@ -51,6 +52,7 @@ public class UserGuestDB {
                     dateStart = resultSet.getDate(5);
                     dateEnd = resultSet.getDate(6);
                     temp = resultSet.getString(1);
+                    hours=resultSet.getString(7);
                     resultSet.beforeFirst();
                     while (resultSet.next()) {
                         if (temp.equals(resultSet.getString(1)) == true) {
@@ -58,7 +60,7 @@ public class UserGuestDB {
                         }
                     }
                     resultSet.absolute(i + 1);
-                    guest.add(new UserGuest(nameExibition, descriptionExibition, expositionName, price, dateStart, dateEnd));
+                    guest.add(new UserGuest(nameExibition, descriptionExibition, expositionName, price, dateStart, dateEnd,hours));
                     expositionName.clear();
 
                 } else {
@@ -68,13 +70,14 @@ public class UserGuestDB {
                         price = resultSet.getDouble(4);
                         dateStart = resultSet.getDate(5);
                         dateEnd = resultSet.getDate(6);
+                        hours=resultSet.getString(7);
                         resultSet.beforeFirst();
                         while (resultSet.next()) {
                             if (temp.equals(resultSet.getString(1)) == true) {
                                 expositionName.add(resultSet.getString(3));
                             }
                         }
-                        guest.add(new UserGuest(nameExibition, descriptionExibition, expositionName, price, dateStart, dateEnd));
+                        guest.add(new UserGuest(nameExibition, descriptionExibition, expositionName, price, dateStart, dateEnd,hours));
                         resultSet.absolute(i + 1);
                         count++;
                         expositionName.clear();

@@ -130,6 +130,7 @@ public class AdminExhibitionServlet extends HttpServlet {
             String nameExibition = req.getParameter("nameExibition");
             String description = req.getParameter("description");
             String price = req.getParameter("price");
+            String hours = req.getParameter("hours");
             String start = req.getParameter("start");
             String end = req.getParameter("end");
             List<String> hall = List.of(req.getParameterValues("hall"));
@@ -138,7 +139,7 @@ public class AdminExhibitionServlet extends HttpServlet {
 
             ModelAddExhibition modelAddExhibition = ModelAddExhibition.getInstance();
 
-            boolean checkAdd = FirstPageDB.addFirstPage(nameExibition, description, Double.valueOf(price), start, end, hall, address, workArt);
+            boolean checkAdd = FirstPageDB.addFirstPage(nameExibition, description, Double.valueOf(price), hours, start, end, hall, address, workArt);
             if (checkAdd == true)
                 modelAddExhibition.add(true);
             else

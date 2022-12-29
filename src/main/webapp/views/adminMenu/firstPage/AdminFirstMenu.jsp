@@ -63,26 +63,29 @@
                 <div class="wrapper">
                     <div class="left_block">
                         <input type="text" id="InputNameEx" placeholder="${languageChange.get(18)}" name="nameExibition" >
-                        <br><input type="text" id="InputDescriptEx" placeholder="${languageChange.get(19)}" name="description" >
-                        <br><input type="number" id="InputPriceEx" placeholder="${languageChange.get(20)}" step="any" name="price" >
-                        <br><input type="date" id="InputDatestartEx" placeholder="${languageChange.get(21)}" name="start" >
-                        <br><input type="date" id="InputDateendEx" placeholder="${languageChange.get(22)}" name="end" >
+                        <input type="text" id="InputDescriptEx" placeholder="${languageChange.get(19)}" name="description" >
+                        <input type="number" id="InputPriceEx" placeholder="${languageChange.get(20)}" step="any" name="price" >
+                        <input type="text" id="InputHours" placeholder="${languageChange.get(21)}" name="hours" >
+                        <h6 class="h6Add" id="hallChange">${languageChange.get(22)}</h6>
+                        <input type="date" id="InputDatestartEx" name="start" >
+                        <h6 class="h6Add" id="hallChange">${languageChange.get(23)}</h6>
+                        <input type="date" id="InputDateendEx" name="end" >
                     </div>
                     <div class="right_block">
                         <c:forEach var="addFirstPage" items="${AddShow}">
-                            <h6 class="h6Add" id="hallChange">${languageChange.get(23)}</h6>
+                            <h6 class="h6Add" id="hallChange">${languageChange.get(24)}</h6>
                             <select class="SelectAdd" name="hall" id="SelectHall" multiple>
                                 <c:forEach var="hall" items="${addFirstPage.getHall()}">
                                     <option value="${hall}">${hall}</option>
                                      </c:forEach>
                             </select>
-                            <h6 class="h6Add" id="addressChange">${languageChange.get(24)}</h6>
+                            <h6 class="h6Add" id="addressChange">${languageChange.get(25)}</h6>
                             <select class="SelectAdd" name="address" id="SelectAddress" multiple>
                                 <c:forEach var="address" items="${addFirstPage.getAddress()}">
                                     <option value="${address}">${address}</option>
                                 </c:forEach>
                             </select>
-                                <h6 class="h6Add" id="expositionChange">${languageChange.get(25)}</h6>
+                                <h6 class="h6Add" id="expositionChange">${languageChange.get(26)}</h6>
                             <select class="SelectAdd" name="workArt" id="SelectArt" multiple>
                                 <c:forEach var="art" items="${addFirstPage.getArt()}">
                                     <option value="${art}">${art}</option>
@@ -91,43 +94,44 @@
                         </c:forEach>
                     </div>
                     <div class="buttonAdd">
-                        <button class="addButtonServlet" name="addButtonServlet" id="addButtonServlet">${languageChange.get(26)}</button>
+                        <button class="addButtonServlet" name="addButtonServlet" id="addButtonServlet">${languageChange.get(27)}</button>
                     </div>
                 </div>
             </div>
             <div class="delDiv" id="delDiv" style="display: none;">
                 <div class="InputDelDiv">
-                    <input class="inputDel" type="text" id="InputDelName" placeholder="${languageChange.get(27)}" name="nameExhibitionDel">
+                    <input class="inputDel" type="text" id="InputDelName" placeholder="${languageChange.get(28)}" name="nameExhibitionDel">
                 </div>
-                <button class="delButtonServlet" id="delButtonServlet" name="delButtonServlet">${languageChange.get(28)}</button>
+                <button class="delButtonServlet" id="delButtonServlet" name="delButtonServlet">${languageChange.get(29)}</button>
             </div>
             <div class="accessDiv" id="accessDiv" style="display: none;">
                   <div class="checkAccess">
-                    <h6 class="h6Acc" id="exhibitionChange">${languageChange.get(29)}</h6>
+                    <h6 class="h6Acc" id="exhibitionChange">${languageChange.get(30)}</h6>
                     <select class="SelectAccess" name="access" id="SelectAccess">
-                            <option value="1">${languageChange.get(30)}</option>
-                            <option value="2">${languageChange.get(31)}</option>
+                            <option value="1">${languageChange.get(31)}</option>
+                            <option value="2">${languageChange.get(32)}</option>
                     </select>
                   </div>
                  <div class="InputAccessDiv">
-                    <input class="inputAccess" type="text" id="InputAccessName" placeholder="${languageChange.get(32)}" name="nameExhibitionAccess">
+                    <input class="inputAccess" type="text" id="InputAccessName" placeholder="${languageChange.get(33)}" name="nameExhibitionAccess">
                  </div>
-                 <button class="accessButtonServlet" id="accessButtonServlet" name="accessButtonServlet">${languageChange.get(33)}</button>
+                 <button class="accessButtonServlet" id="accessButtonServlet" name="accessButtonServlet">${languageChange.get(34)}</button>
             </div>
 
         <table id="myTable">
             <tr>
-                <th id="nameExhibition">${languageChange.get(34)}</th>
-                <th id="description">${languageChange.get(35)}</th>
-                <th id="exposition">${languageChange.get(36)}</th>
-                <th id="price">${languageChange.get(37)}</th>
-                <th id="dateStart">${languageChange.get(38)}</th>
-                <th id="dateEnd">${languageChange.get(39)}</th>
-                <th id="hall">${languageChange.get(40)}</th>
-                <th id="author">${languageChange.get(41)}</th>
-                <th id="genre">${languageChange.get(42)}</th>
-                <th id="address">${languageChange.get(43)}</th>
-                <th id="access">${languageChange.get(44)}</th>
+                <th id="nameExhibition">${languageChange.get(35)}</th>
+                <th id="description">${languageChange.get(36)}</th>
+                <th id="exposition">${languageChange.get(37)}</th>
+                <th id="price">${languageChange.get(38)}</th>
+                <th id="hours">${languageChange.get(39)}</th>
+                <th id="dateStart">${languageChange.get(40)}</th>
+                <th id="dateEnd">${languageChange.get(41)}</th>
+                <th id="hall">${languageChange.get(42)}</th>
+                <th id="author">${languageChange.get(43)}</th>
+                <th id="genre">${languageChange.get(44)}</th>
+                <th id="address">${languageChange.get(45)}</th>
+                <th id="access">${languageChange.get(46)}</th>
             </tr>
             <c:if test="${not requestScope.Error}">
                 <c:forEach var="admin" items="${FirstPage}">
@@ -140,6 +144,7 @@
                             </c:forEach>
                         </td>
                         <td>${admin.getPrice()}</td>
+                        <td>${admin.getHours()}</td>
                         <td>${admin.getDateStart()}</td>
                         <td>${admin.getDateEnd()}</td>
                         <td>
@@ -168,7 +173,7 @@
             </c:if>
             <c:if test="${requestScope.Error}">
                 <script>
-                    sweetAlert("${languageChange.get(45)}", "${languageChange.get(46)}", "error");
+                    sweetAlert("${languageChange.get(47)}", "${languageChange.get(48)}", "error");
                 </script>
             </c:if>
         </table>
@@ -185,7 +190,7 @@
             <a><input class="buttonPagination" type="submit" name="AdminHallPagination" value="»"></a>
         </div>
     </form>
-    <script src="./JS/adminJS/firstPage/AdminFirstMenu.js" type="text/javascript"></script>
+    <script src="./JS/adminJS/firstPage/AdminFirstMenu1.js" type="text/javascript"></script>
     </body>
 </html>
 

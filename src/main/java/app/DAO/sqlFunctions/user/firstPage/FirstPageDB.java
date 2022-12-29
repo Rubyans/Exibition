@@ -24,6 +24,7 @@ public class FirstPageDB {
                 List<UserShowExhibition> user = new ArrayList<>();
 
                 String nameExhibition = null;
+                String hours=null;
                 Double price = null;
                 Date dataStart = null;
                 Date dateEnd = null;
@@ -53,11 +54,12 @@ public class FirstPageDB {
                     price = setUser.getDouble(2);
                     dataStart = setUser.getDate(3);
                     dateEnd = setUser.getDate(4);
+                    hours=setUser.getString(5);
                     for (String key : mapExhibition.keySet()) {
                         if (key.equals(nameExhibition))
                             valueTicket = mapExhibition.get(key);
                     }
-                    user.add(new UserShowExhibition(nameExhibition, price, dataStart, dateEnd, valueTicket));
+                    user.add(new UserShowExhibition(nameExhibition, price, dataStart, dateEnd,hours, valueTicket));
                     valueTicket = null;
                 }
                 statement.close();

@@ -5,7 +5,6 @@ import app.DAO.sqlFunctions.admin.fifthPage.FifthPageDB;
 import app.DAO.entities.adminEntities.fifthPage.ArtAddShow;
 import app.DAO.entities.adminEntities.fifthPage.ArtShow;
 import app.models.adminModels.fifthPage.*;
-import app.models.adminModels.fourthPage.ModelLanguageAdminFourth;
 
 import app.service.changeLanguage.ChangeLanguage;
 import org.apache.log4j.Logger;
@@ -96,7 +95,7 @@ public class AdminFifthServlet extends HttpServlet {
             ModelAddArt.delete();
             ModelDelArt.delete();
             ModelAddShow.delete();
-            ModelLanguageAdminFourth.delete();
+            ModelLanguageAdminFifth.delete();
         }
     }
 

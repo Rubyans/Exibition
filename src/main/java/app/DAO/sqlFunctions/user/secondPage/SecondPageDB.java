@@ -23,6 +23,7 @@ public class SecondPageDB {
 
             String nameExhibition = null;
             String descriptionExibition = null;
+            String hours=null;
             BigDecimal price = null;
             java.sql.Date dateStart = null;
             Date dateEnd = null;
@@ -54,13 +55,14 @@ public class SecondPageDB {
                     price = resultSet.getBigDecimal(4);
                     dateStart = resultSet.getDate(5);
                     dateEnd = resultSet.getDate(6);
-                    nameHell.add(resultSet.getString(7));
-                    nameAuthor.add(resultSet.getString(8) + " " + resultSet.getString(9));
-                    nameview.add(resultSet.getString(10));
-                    addressExibition.add(resultSet.getString(11) + ", " + resultSet.getString(12) + " " + resultSet.getString(13));
+                    hours=resultSet.getString(7);
+                    nameHell.add(resultSet.getString(8));
+                    nameAuthor.add(resultSet.getString(9) + " " + resultSet.getString(10));
+                    nameview.add(resultSet.getString(11));
+                    addressExibition.add(resultSet.getString(12) + ", " + resultSet.getString(13) + " " + resultSet.getString(14));
                 }
                 if (nameExhibition != null)
-                    user.add(new UserShowExhibition(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd, nameHell, nameAuthor, nameview, addressExibition));
+                    user.add(new UserShowExhibition(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd,hours, nameHell, nameAuthor, nameview, addressExibition));
                 nameExhibition = null;
                 descriptionExibition = null;
                 price = null;

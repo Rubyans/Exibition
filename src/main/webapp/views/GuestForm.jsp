@@ -42,6 +42,7 @@
                 <th id="price">${languageChange.get(12)}</th>
                 <th id="dataStart">${languageChange.get(13)}</th>
                 <th id="dataEnd">${languageChange.get(14)}</th>
+                <th id="Hours">${languageChange.get(15)}</th>
               </tr>
                 <c:if test="${not requestScope.Error}">
                         <c:forEach var="guest" items="${GuestList}">
@@ -56,12 +57,13 @@
                             <td>${guest.getPrice()}</td>
                             <td>${guest.getDateStart()}</td>
                             <td>${guest.getDateEnd()}</td>
+                            <td>${guest.getHours()}</td>
                             </tr>
                          </c:forEach>
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>
-                        sweetAlert("${languageChange.get(15)}", "${languageChange.get(16)}", "error");
+                        sweetAlert("${languageChange.get(16)}", "${languageChange.get(17)}", "error");
                     </script>
                 </c:if>
             </table>

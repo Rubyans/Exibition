@@ -3,6 +3,7 @@ package app.DAO.sqlFunctions.admin.seventhPage;
 
 import app.DAO.connectionDAO.HikariConnectDB;
 import app.DAO.entities.adminEntities.seventhPage.UserAutorizedShow;
+import app.service.encrypt.Encrypt;
 import org.apache.log4j.Logger;
 
 import static app.DAO.sqlFunctions.sqlRequests.SQLRequests.SeventhPageAdmin.*;
@@ -32,7 +33,7 @@ public class SeventhPageDB {
                 amount = setUser.getDouble(6);
                 role = setUser.getString(7);
                 access = setUser.getString(8);
-                userAuto.add(new UserAutorizedShow(fistName, lastName, login, password, email, amount, role, access));
+                userAuto.add(new UserAutorizedShow(fistName, lastName, login, Encrypt.decryptText(password), email, amount, role, access));
             }
             statement.close();
             LOGGER.debug("userAuto in debug");

@@ -25,6 +25,9 @@
             document.getElementById("InputDatestartEx").setAttribute("min", today);
             document.getElementById("InputDateendEx").setAttribute("min", today);
 
+            document.getElementById("InputDatestartEx").setAttribute("value", today);
+            document.getElementById("InputDateendEx").setAttribute("value", today);
+
             document.getElementById("InputDateendEx").required = true;
             document.getElementById("SelectHall").required = true;
             document.getElementById("SelectAddress").required = true;

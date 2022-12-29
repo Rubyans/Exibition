@@ -14,11 +14,12 @@ public class UserShowExhibition { //the class is used to display exhibitions for
     private BigDecimal price;
     private Date dateStart;
     private Date dateEnd;
+    private String hours;
     private List<String> nameHall;
     private List<String> nameAuthor;
     private List<String> nameview;
     private List<String> addressExibition;
-    public UserShowExhibition(String nameExibition, String descriptionExibition, List<String> expositionName, BigDecimal price, Date dateStart, Date dateEnd, List<String> nameHall, List<String> nameAuthor, List<String> nameview, List<String> addressExibition) {
+    public UserShowExhibition(String nameExibition, String descriptionExibition, List<String> expositionName, BigDecimal price, Date dateStart, Date dateEnd,String hours, List<String> nameHall, List<String> nameAuthor, List<String> nameview, List<String> addressExibition) {
         //the constructor receives data from several tables (authorized user, ticket, exhibition) of the database and makes it possible to work with them further
         this.nameExibition = nameExibition;
         this.descriptionExibition = descriptionExibition;
@@ -26,6 +27,7 @@ public class UserShowExhibition { //the class is used to display exhibitions for
         this.price = price;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+        this.hours=hours;
         this.nameHall = new ArrayList<>(nameHall);
         this.nameAuthor = new ArrayList<>(nameAuthor);
         this.nameview = new ArrayList<>(nameview);
@@ -47,6 +49,10 @@ public class UserShowExhibition { //the class is used to display exhibitions for
     public Date getDateEnd() {
         return dateEnd;
     }
+    public String getHours() {
+        return hours;
+    }
+
 
     public List<String> getExpositionName() { //the function removes the same data
 
@@ -145,6 +151,9 @@ public class UserShowExhibition { //the class is used to display exhibitions for
     }
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
+    }
+    public void setHours(String hours) {
+        this.hours = hours;
     }
     public void setNameview(List<String> nameview) {
         this.nameview = new ArrayList<>(nameview);
