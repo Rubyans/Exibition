@@ -8,183 +8,188 @@
   <display-name>Archetype Created Web Application</display-name>
 
 
+  <welcome-file-list>
+    <welcome-file>/index.jsp</welcome-file>
+  </welcome-file-list>
+
   <servlet>
     <servlet-name>autorized</servlet-name>
-    <servlet-class>app.controller.servlets.AuthorizationServlet</servlet-class>
+    <servlet-class>app.controllerFront.controller.FrontController</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>autorized</servlet-name>
-    <url-pattern>/auto</url-pattern>
+    <url-pattern>/exhibition</url-pattern>
   </servlet-mapping>
 
-  <filter>
-    <filter-name>filterAuto</filter-name>
-    <filter-class>app.controller.filters.filterAuthorization</filter-class>
-    <init-param>
-      <param-name>active</param-name>
-      <param-value>true</param-value>
-    </init-param>
-  </filter>
+<!--  <filter>-->
+<!--    <filter-name>filterAuto</filter-name>-->
+<!--    <filter-class>app.controllerFront.filters.filterAuthorization</filter-class>-->
+<!--    <init-param>-->
+<!--      <param-name>active</param-name>-->
+<!--      <param-value>true</param-value>-->
+<!--    </init-param>-->
+<!--  </filter>-->
 
-  <filter-mapping>
-    <filter-name>filterAuto</filter-name>
-    <servlet-name>autorized</servlet-name>
-  </filter-mapping>
-
-
-
-  <servlet>
-    <servlet-name>registration</servlet-name>
-    <servlet-class>app.controller.servlets.RegistrationServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>registration</servlet-name>
-    <url-pattern>/reg</url-pattern>
-  </servlet-mapping>
-
-  <filter>
-    <filter-name>filterReg</filter-name>
-    <filter-class>app.controller.filters.filterRegistration</filter-class>
-    <init-param>
-      <param-name>active</param-name>
-      <param-value>true</param-value>
-    </init-param>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>filterReg</filter-name>
-    <servlet-name>registration</servlet-name>
-  </filter-mapping>
+<!--  <filter-mapping>-->
+<!--    <filter-name>filterAuto</filter-name>-->
+<!--    <servlet-name>autorized</servlet-name>-->
+<!--  </filter-mapping>-->
 
 
 
-  <servlet>
-    <servlet-name>guest</servlet-name>
-    <servlet-class>app.controller.servlets.GuestServlet</servlet-class>
-  </servlet>
+<!--  <servlet>-->
+<!--    <servlet-name>registration</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.RegistrationServlet</servlet-class>-->
+<!--  </servlet>-->
 
-  <servlet-mapping>
-    <servlet-name>guest</servlet-name>
-    <url-pattern>/guest</url-pattern>
-  </servlet-mapping>
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>registration</servlet-name>-->
+<!--    <url-pattern>/reg</url-pattern>-->
+<!--  </servlet-mapping>-->
 
+<!--  <filter>-->
+<!--    <filter-name>filterReg</filter-name>-->
+<!--    <filter-class>app.controllerFront.filters.filterRegistration</filter-class>-->
+<!--    <init-param>-->
+<!--      <param-name>active</param-name>-->
+<!--      <param-value>true</param-value>-->
+<!--    </init-param>-->
+<!--  </filter>-->
 
-  <servlet>
-    <servlet-name>adminmain</servlet-name>
-    <servlet-class>app.controller.servlets.admin.firstPage.AdminExhibitionServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>adminmain</servlet-name>
-    <url-pattern>/adminmain</url-pattern>
-  </servlet-mapping>
-
-
-  <servlet>
-    <servlet-name>AdminSecondPage</servlet-name>
-    <servlet-class>app.controller.servlets.admin.secondPage.AdminSecondServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AdminSecondPage</servlet-name>
-    <url-pattern>/adminhall</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AdminThirdPage</servlet-name>
-    <servlet-class>app.controller.servlets.admin.thirdPage.AdminAddressServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AdminThirdPage</servlet-name>
-    <url-pattern>/adminaddress</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AdminFouthPage</servlet-name>
-    <servlet-class>app.controller.servlets.admin.fourthPage.AdminFourthServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AdminFouthPage</servlet-name>
-    <url-pattern>/adminauthor</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AdminFifthPage</servlet-name>
-    <servlet-class>app.controller.servlets.admin.fifthPage.AdminFifthServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AdminFifthPage</servlet-name>
-    <url-pattern>/adminart</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AdminSixthPage</servlet-name>
-    <servlet-class>app.controller.servlets.admin.sixthPage.AdminSixthServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AdminSixthPage</servlet-name>
-    <url-pattern>/adminview</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AdminSeventhPage</servlet-name>
-    <servlet-class>app.controller.servlets.admin.seventhPage.AdminSeventhServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AdminSeventhPage</servlet-name>
-    <url-pattern>/userautorized</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>UserMenu</servlet-name>
-    <servlet-class>app.controller.servlets.user.firstPage.UserServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>UserMenu</servlet-name>
-    <url-pattern>/user</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>UserExhibitionMenu</servlet-name>
-    <servlet-class>app.controller.servlets.user.secondPage.UserExhibitionServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>UserExhibitionMenu</servlet-name>
-    <url-pattern>/userexhibition</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AdminStatisticsExhibition</servlet-name>
-    <servlet-class>app.controller.servlets.admin.eighthPage.AdminEighthServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AdminStatisticsExhibition</servlet-name>
-    <url-pattern>/adminstatistics</url-pattern>
-  </servlet-mapping>
+<!--  <filter-mapping>-->
+<!--    <filter-name>filterReg</filter-name>-->
+<!--    <servlet-name>registration</servlet-name>-->
+<!--  </filter-mapping>-->
 
 
-  <listener>
-    <listener-class>app.controller.listners.SessionListener</listener-class>
-  </listener>
 
-  <taglib>
-    <taglib-uri>AmountTag</taglib-uri>
-    <taglib-location>/WEB-INF/tlds/customTag.tld</taglib-location>
-  </taglib>
+<!--  <servlet>-->
+<!--    <servlet-name>guest</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.GuestServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>guest</servlet-name>-->
+<!--    <url-pattern>/guest</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+
+<!--  <servlet>-->
+<!--    <servlet-name>adminmain</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.admin.firstPage.AdminExhibitionServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>adminmain</servlet-name>-->
+<!--    <url-pattern>/adminmain</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+
+<!--  <servlet>-->
+<!--    <servlet-name>AdminSecondPage</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.admin.secondPage.AdminSecondServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AdminSecondPage</servlet-name>-->
+<!--    <url-pattern>/adminhall</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>AdminThirdPage</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.admin.thirdPage.AdminAddressServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AdminThirdPage</servlet-name>-->
+<!--    <url-pattern>/adminaddress</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>AdminFouthPage</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.admin.fourthPage.AdminFourthServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AdminFouthPage</servlet-name>-->
+<!--    <url-pattern>/adminauthor</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>AdminFifthPage</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.admin.fifthPage.AdminFifthServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AdminFifthPage</servlet-name>-->
+<!--    <url-pattern>/adminart</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>AdminSixthPage</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.admin.sixthPage.AdminSixthServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AdminSixthPage</servlet-name>-->
+<!--    <url-pattern>/adminview</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>AdminSeventhPage</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.admin.seventhPage.AdminSeventhServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AdminSeventhPage</servlet-name>-->
+<!--    <url-pattern>/userautorized</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>UserMenu</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.user.firstPage.UserServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>UserMenu</servlet-name>-->
+<!--    <url-pattern>/user</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>UserExhibitionMenu</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.user.secondPage.UserExhibitionServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>UserExhibitionMenu</servlet-name>-->
+<!--    <url-pattern>/userexhibition</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>AdminStatisticsExhibition</servlet-name>-->
+<!--    <servlet-class>app.controllerFront.servlets.admin.eighthPage.AdminEighthServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AdminStatisticsExhibition</servlet-name>-->
+<!--    <url-pattern>/adminstatistics</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+
+<!--  <listener>-->
+<!--    <listener-class>app.controllerFront.listners.SessionListener</listener-class>-->
+<!--  </listener>-->
+
+<!--  <taglib>-->
+<!--    <taglib-uri>AmountTag</taglib-uri>-->
+<!--    <taglib-location>/WEB-INF/tlds/customTag.tld</taglib-location>-->
+<!--  </taglib>-->
 
   <filter>
     <filter-name>encodingFilter</filter-name>
-    <filter-class>app.controller.filters.filterEncoding</filter-class>
+    <filter-class>app.controllerFront.filters.filterEncoding</filter-class>
     <init-param>
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>

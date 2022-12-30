@@ -20,7 +20,7 @@
                 <c:when test="${requestScope.UserAddTrue}">
                     <script>
                         sweetAlert("${languageChange.get(0)}", "${languageChange.get(2)}", "success");
-                        setTimeout(() => document.location.href = "/exhibition/", 8000);
+                        setTimeout(() => document.location.href = "exhibition?command=auto", 8000);
                     </script>
                 </c:when>
                 <c:when test="${not requestScope.UserAdd}">
@@ -30,7 +30,7 @@
                 </c:when>
             </c:choose>
         </div>
-            <form action="reg"  id="regForm" method="POST">
+            <form action="exhibition?command=reg"  id="regForm" method="POST">
                 <div class="container" >
                     <div class="languageDiv">
                         <button class="languageButton" onclick="requiredFalse()" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>

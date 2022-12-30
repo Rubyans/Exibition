@@ -59,7 +59,7 @@
         </script>
     </c:if>
 
-    <form action="userautorized" id="UserAutorizedForm" class="UserAutorizedForm" method="POST">
+    <form action="exhibition?command=userautorized" id="UserAutorizedForm" class="UserAutorizedForm" method="POST">
         <div class="languageDiv">
             <button class="languageButton" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>
             <button class="languageButton" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>

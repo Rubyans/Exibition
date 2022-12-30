@@ -10,7 +10,7 @@
         <style> <%@include file="/style/styleAdmin/eighthPage/FormStatisticsExhibition.css"%> </style>
     </head>
     <body>
-        <form action="adminstatistics"  id="AdminStatistics" class="AdminStatistics" method="POST">
+        <form action="exhibition?command=adminstatistics"  id="AdminStatistics" class="AdminStatistics" method="POST">
             <div class="languageDiv">
                 <button class="languageButton" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>
                 <button class="languageButton" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>

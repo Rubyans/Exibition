@@ -34,7 +34,7 @@
             </script>
         </c:if>
 
-        <form action="adminauthor"  id="AuthorForm" class="AuthorForm" method="POST">
+        <form action="exhibition?command=adminauthor"  id="AuthorForm" class="AuthorForm" method="POST">
             <div class="languageDiv">
                 <button class="languageButton" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>
                 <button class="languageButton" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>

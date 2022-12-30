@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
 <html>
     <c:if test="${not empty requestScope.languageChange}">
         <head>
@@ -31,14 +30,14 @@
                     </c:when>
                 </c:choose>
             </div>
-            <form action="auto" class="autoForm" method="POST">
+            <form action="exhibition?command=auto" class="autoForm" method="POST">
                 <div class="container">
                     <div class="languageDiv">
                         <button class="languageButton" onclick="requiredFalse()" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>
                         <button class="languageButton" onclick="requiredFalse()" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>
                     </div>
                         <h1 id="authorization" name="authorization">${languageChange.get(0)}</h1>
-                    <a href="/exhibition/guest" class="hyperlink" id="hyper">${languageChange.get(5)}</a>
+                    <a href="exhibition?command=guest" class="hyperlink" id="hyper">${languageChange.get(5)}</a>
                     <p id="writeForm">${languageChange.get(6)}</p>
                     <hr>
                     <label for="login" id="login" class="labelChange">${languageChange.get(7)}</label>
@@ -47,7 +46,7 @@
                     <input type="password" placeholder="${languageChange.get(10)}" name="passwordUser" id="passwordCheck" required>
 
                     <input type="checkbox" onclick="checkPassword()"><spam id="checkPass">${languageChange.get(11)}</spam>
-                    <a href="/exhibition/reg" class="hyperlink" id="hyperReg">${languageChange.get(12)}</a>
+                    <a href="exhibition?command=reg" class="hyperlink" id="hyperReg">${languageChange.get(12)}</a>
                     <div class="clearfix">
                         <button type="submit" class="loginButton" name="loginButton" id="loginButton">${languageChange.get(13)}</button>
                     </div>
@@ -85,14 +84,14 @@
                     </c:when>
                 </c:choose>
             </div>
-            <form action="auto" class="autoForm" method="POST">
+            <form action="exhibition?command=auto" class="autoForm" method="POST">
                 <div class="container">
                     <div class="languageDiv">
                         <button class="languageButton" onclick="requiredFalse()" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>
                         <button class="languageButton" onclick="requiredFalse()" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>
                     </div>
                         <h1 id="authorization" name="authorization">Авторизація</h1>
-                    <a href="/exhibition/guest" class="hyperlink" id="hyper">Увійти як гість</a>
+                    <a href="exhibition?command=guest" class="hyperlink" id="hyper">Увійти як гість</a>
                     <p id="writeForm">Будь ласка заповніть форму.</p>
                     <hr>
                     <label for="login" id="login" class="labelChange">Логін</label>
@@ -101,7 +100,7 @@
                     <input type="password" placeholder="Введіть пароль" name="passwordUser" id="passwordCheck" required>
 
                     <input type="checkbox" onclick="checkPassword()"><spam id="checkPass">Переглянути пароль</spam>
-                    <a href="/exhibition/reg" class="hyperlink" id="hyperReg">Не зареєструвались?</a>
+                    <a href="exhibition?command=reg" class="hyperlink" id="hyperReg">Не зареєструвались?</a>
                     <div class="clearfix">
                         <button type="submit" class="loginButton" name="loginButton" id="loginButton">Увійти</button>
                     </div>

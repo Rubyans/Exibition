@@ -66,8 +66,7 @@ public class HikariConnectDB {
                     connectionDB.close();
                 }
             LOGGER.debug("exitConnection in debug");
-        } catch (
-                SQLException e) {
+        } catch (SQLException e) {
             LOGGER.error("exitConnection " + e.getMessage());
         }
     }

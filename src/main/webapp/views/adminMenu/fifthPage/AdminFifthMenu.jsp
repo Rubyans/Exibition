@@ -35,7 +35,7 @@
             </script>
         </c:if>
 
-        <form action="adminart" id="ArtForm" class="ArtForm" method="POST">
+        <form action="exhibition?command=adminart" id="ArtForm" class="ArtForm" method="POST">
             <div class="languageDiv">
                 <button class="languageButton" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>
                 <button class="languageButton" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>
@@ -96,25 +96,24 @@
                     <th id="genreArt">${languageChange.get(25)}</th>
                     <th id="authorArt">${languageChange.get(26)}</th>
                 </tr>
-
                 <c:if test="${not requestScope.Error}">
-                            <c:forEach var="art" items="${FifthPageShow}">
-                                <tr>
-                                    <td>${art.getName()}</td>
-                                    <td>${art.getCreation()}</td>
-                                    <td>${art.getPrice()}</td>
-                                    <td>
-                                        <c:forEach var="nameView" items="${art.getNameView()}">
-                                            ${nameView}<br>
-                                        </c:forEach>
-                                    </td>
-                                    <td>
-                                        <c:forEach var="author" items="${art.getFullName()}">
-                                            ${author}<br>
-                                        </c:forEach>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                    <c:forEach var="art" items="${FifthPageShow}">
+                        <tr>
+                            <td>${art.getName()}</td>
+                            <td>${art.getCreation()}</td>
+                            <td>${art.getPrice()}</td>
+                            <td>
+                                <c:forEach var="nameView" items="${art.getNameView()}">
+                                    ${nameView}<br>
+                                </c:forEach>
+                            </td>
+                            <td>
+                                <c:forEach var="author" items="${art.getFullName()}">
+                                    ${author}<br>
+                                </c:forEach>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>

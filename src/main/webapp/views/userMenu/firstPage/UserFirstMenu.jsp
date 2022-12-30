@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="v" uri="AmountTag" %>
+<%@ taglib prefix="v" uri="virguleTag" %>
 <html>
     <head>
         <title>${languageChange.get(0)}</title>
@@ -41,7 +41,7 @@
                 sweetAlert("${languageChange.get(1)}", "${languageChange.get(7)}", "success");
             </script>
     </c:if>
-    <form action="user"  id="userForm" class="userForm" method="POST">
+    <form action="exhibition?command=user"  id="userForm" class="userForm" method="POST">
         <div class="languageDiv">
             <button class="languageButton" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>
             <button class="languageButton" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>
