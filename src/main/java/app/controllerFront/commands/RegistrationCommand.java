@@ -4,7 +4,6 @@ import app.DAO.connectionDAO.HikariConnectDB;
 import app.DAO.entities.UserRegistration;
 import app.DAO.sqlFunctions.UserRegistrationDB;
 import app.controllerFront.commands.interfaceCommand.Command;
-import app.controllerFront.models.registrationModels.ModelLanguageRegistration;
 import app.controllerFront.models.registrationModels.ModelRegistration;
 import app.service.changeLanguage.ChangeLanguage;
 
@@ -21,15 +20,6 @@ public class RegistrationCommand implements Command {
         if (request == 1) {
 /////////////////////////////////////GET-Request/////////////////////////////////////////////////////////////////
             ModelRegistration modelRegistration = ModelRegistration.getInstance();
-            ModelLanguageRegistration modelLanguageRegistration = ModelLanguageRegistration.getInstance();
-            if (modelLanguageRegistration.modelCheck() != null) {
-                if (modelLanguageRegistration.modelCheck().equals("en")) {
-                    req.getSession().setAttribute("language", "en");
-                }
-                if (modelLanguageRegistration.modelCheck().equals("ua")) {
-                    req.getSession().setAttribute("language", "ua");
-                }
-            }
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
@@ -53,7 +43,6 @@ public class RegistrationCommand implements Command {
             req.removeAttribute("UserAddError");
             req.removeAttribute("languageChange");
             ModelRegistration.delete();
-            ModelLanguageRegistration.delete();
         } else {
 /////////////////////////////////////Post-Request///////////////////////////////////////////////////////////////
             if (req.getParameter("registrationButton") != null) {
@@ -73,14 +62,6 @@ public class RegistrationCommand implements Command {
                 resp.sendRedirect("exhibition?command=reg");
             } else if (req.getParameter("autorizedButton") != null) {
                 resp.sendRedirect("exhibition?command=auto");
-            } else if (req.getParameter("englishButton") != null) {
-                ModelLanguageRegistration modelLanguageRegistration = ModelLanguageRegistration.getInstance();
-                modelLanguageRegistration.add("en");
-                resp.sendRedirect("exhibition?command=reg");
-            } else if (req.getParameter("ukraineButton") != null) {
-                ModelLanguageRegistration modelLanguageRegistration = ModelLanguageRegistration.getInstance();
-                modelLanguageRegistration.add("ua");
-                resp.sendRedirect("exhibition?command=reg");
             }
         }
     }

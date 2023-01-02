@@ -101,7 +101,7 @@
                 <a><input class="buttonPagination" type="submit" name="AdminArtPagination" value="5"></a>
                 <a><input class="buttonPagination" type="submit" name="AdminViewPagination" value="6"></a>
                 <a><input class="buttonPagination" type="submit" name="UserAutorizedPagination" value="7"></a>
-                <a><input class="buttonPagination" type="submit" name="AdminStatisticsExhibition" value="8"></a>
+                <a><input class="buttonPagination" type="submit" name="AdminStatisticsPagination" value="8"></a>
                 <a><input class="buttonPagination" type="submit" name="AdminArtPagination" value="»"></a>
             </div>
         </form>

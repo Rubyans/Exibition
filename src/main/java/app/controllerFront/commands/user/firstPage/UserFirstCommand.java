@@ -26,102 +26,86 @@ public class UserFirstCommand implements Command {
 
         if (request == 1) {
 /////////////////////////////////////GET-Request/////////////////////////////////////////////////////////////////
-            if (req.getSession().getAttribute("UserRole") == null) {
-                resp.sendRedirect("exhibition?command=auto");
-            } else {
-                ModelShowExhibition modelShowExhibition = ModelShowExhibition.getInstance();
-                ModelShowAdd modelShowAdd = ModelShowAdd.getInstance();
-                ModelShowMoney modelShowMoney = ModelShowMoney.getInstance();
-                ModelAddTicket modelAddTicket = ModelAddTicket.getInstance();
-                ModelRoleBackCommit modelRoleBackCommit = ModelRoleBackCommit.getInstance();
-                ModelSaveCommit modelSaveCommit = ModelSaveCommit.getInstance();
-                ModelLanguageUserFirst modelLanguageUserFirst = ModelLanguageUserFirst.getInstance();
+            ModelShowExhibition modelShowExhibition = ModelShowExhibition.getInstance();
+            ModelShowAdd modelShowAdd = ModelShowAdd.getInstance();
+            ModelShowMoney modelShowMoney = ModelShowMoney.getInstance();
+            ModelAddTicket modelAddTicket = ModelAddTicket.getInstance();
+            ModelRoleBackCommit modelRoleBackCommit = ModelRoleBackCommit.getInstance();
+            ModelSaveCommit modelSaveCommit = ModelSaveCommit.getInstance();
 
-                if (modelLanguageUserFirst.modelCheck() != null) {
-                    if (modelLanguageUserFirst.modelCheck().equals("en")) {
-                        req.getSession().setAttribute("language", "en");
-                    }
-                    if (modelLanguageUserFirst.modelCheck().equals("ua")) {
-                        req.getSession().setAttribute("language", "ua");
-                    }
-                }
-
-                if (req.getSession().getAttribute("language") != null) {
-                    if (req.getSession().getAttribute("language").equals("en")) {
-                        req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "userFirst"));
-                    } else if (req.getSession().getAttribute("language").equals("ua")) {
-                        req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "userFirst"));
-                    }
-                } else {
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "userFirst"));
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
                     req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "userFirst"));
                 }
-
-                try {
-                    for (UserShowAdd showAdd : FirstPageDB.showAddExhibition()) {
-                        modelShowAdd.add(showAdd);
-                    }
-                    String userId = (String) req.getSession().getAttribute("UserId");
-                    for (UserShowMoney showMoney : FirstPageDB.showMoney(userId))
-                        modelShowMoney.add(showMoney);
-                    LOGGER.debug("doGet in debug");
-                } catch (Exception e) {
-                    modelShowAdd.add(null);
-                    modelShowMoney.add(null);
-                    LOGGER.error("doGet " + e.getMessage());
-                }
-
-                if (modelShowAdd.listShow() != null) {
-                    List<UserShowAdd> listAdd = modelShowAdd.listShow();
-                    req.setAttribute("AddShow", listAdd);
-                    List<UserShowMoney> listMoney = modelShowMoney.listShow();
-                    req.setAttribute("Money", listMoney);
-                } else {
-                    req.setAttribute("Error", true);
-                }
-                if (modelShowExhibition.listShow() != null) {
-                    if (modelShowExhibition.checkNull() == true) {
-                        req.setAttribute("Error", true);
-                    } else {
-                        List<UserShowExhibition> address = modelShowExhibition.listShow();
-                        req.setAttribute("FirstPageUser", address);
-                    }
-                } else if (modelAddTicket.modelCheck() != null) {
-                    if (modelAddTicket.modelCheck().equals("false"))
-                        req.setAttribute("AddError", true);
-                    else if (modelAddTicket.modelCheck().equals("true"))
-                        req.setAttribute("TrueAdd", true);
-                } else if (modelSaveCommit.modelCheck() != null) {
-                    if (modelSaveCommit.modelCheck().equals("false"))
-                        req.setAttribute("SaveCommitError", true);
-                    else if (modelSaveCommit.modelCheck().equals("true"))
-                        req.setAttribute("SaveCommitTrue", true);
-                } else if (modelRoleBackCommit.modelCheck() != null) {
-                    if (modelRoleBackCommit.modelCheck().equals("false"))
-                        req.setAttribute("RoleBackCommitError", true);
-                    else if (modelRoleBackCommit.modelCheck().equals("true"))
-                        req.setAttribute("RoleBackCommitTrue", true);
-                }
-                req.getRequestDispatcher("views/userMenu/firstPage/UserFirstMenu.jsp").forward(req, resp);
-                req.removeAttribute("FirstPageUser");
-                req.removeAttribute("Error");
-                req.removeAttribute("AddShow");
-                req.removeAttribute("Money");
-                req.removeAttribute("AddError");
-                req.removeAttribute("TrueAdd");
-                req.removeAttribute("SaveCommitError");
-                req.removeAttribute("SaveCommitTrue");
-                req.removeAttribute("RoleBackCommitError");
-                req.removeAttribute("RoleBackCommitTrue");
-                req.removeAttribute("languageChange");
-                ModelShowExhibition.delete();
-                ModelShowMoney.delete();
-                ModelShowAdd.delete();
-                ModelAddTicket.delete();
-                ModelRoleBackCommit.delete();
-                ModelSaveCommit.delete();
-                ModelLanguageUserFirst.delete();
+            } else {
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "userFirst"));
             }
 
+            try {
+                for (UserShowAdd showAdd : FirstPageDB.showAddExhibition()) {
+                    modelShowAdd.add(showAdd);
+                }
+                String userId = (String) req.getSession().getAttribute("UserId");
+                for (UserShowMoney showMoney : FirstPageDB.showMoney(userId))
+                    modelShowMoney.add(showMoney);
+                LOGGER.debug("doGet in debug");
+            } catch (Exception e) {
+                modelShowAdd.add(null);
+                modelShowMoney.add(null);
+                LOGGER.error("doGet " + e.getMessage());
+            }
+
+            if (modelShowAdd.listShow() != null) {
+                List<UserShowAdd> listAdd = modelShowAdd.listShow();
+                req.setAttribute("AddShow", listAdd);
+                List<UserShowMoney> listMoney = modelShowMoney.listShow();
+                req.setAttribute("Money", listMoney);
+            } else {
+                req.setAttribute("Error", true);
+            }
+            if (modelShowExhibition.listShow() != null) {
+                if (modelShowExhibition.checkNull() == true) {
+                    req.setAttribute("Error", true);
+                } else {
+                    List<UserShowExhibition> address = modelShowExhibition.listShow();
+                    req.setAttribute("FirstPageUser", address);
+                }
+            } else if (modelAddTicket.modelCheck() != null) {
+                if (modelAddTicket.modelCheck().equals("false"))
+                    req.setAttribute("AddError", true);
+                else if (modelAddTicket.modelCheck().equals("true"))
+                    req.setAttribute("TrueAdd", true);
+            } else if (modelSaveCommit.modelCheck() != null) {
+                if (modelSaveCommit.modelCheck().equals("false"))
+                    req.setAttribute("SaveCommitError", true);
+                else if (modelSaveCommit.modelCheck().equals("true"))
+                    req.setAttribute("SaveCommitTrue", true);
+            } else if (modelRoleBackCommit.modelCheck() != null) {
+                if (modelRoleBackCommit.modelCheck().equals("false"))
+                    req.setAttribute("RoleBackCommitError", true);
+                else if (modelRoleBackCommit.modelCheck().equals("true"))
+                    req.setAttribute("RoleBackCommitTrue", true);
+            }
+            req.getRequestDispatcher("views/userMenu/firstPage/UserFirstMenu.jsp").forward(req, resp);
+            req.removeAttribute("FirstPageUser");
+            req.removeAttribute("Error");
+            req.removeAttribute("AddShow");
+            req.removeAttribute("Money");
+            req.removeAttribute("AddError");
+            req.removeAttribute("TrueAdd");
+            req.removeAttribute("SaveCommitError");
+            req.removeAttribute("SaveCommitTrue");
+            req.removeAttribute("RoleBackCommitError");
+            req.removeAttribute("RoleBackCommitTrue");
+            req.removeAttribute("languageChange");
+            ModelShowExhibition.delete();
+            ModelShowMoney.delete();
+            ModelShowAdd.delete();
+            ModelAddTicket.delete();
+            ModelRoleBackCommit.delete();
+            ModelSaveCommit.delete();
         } else {
 /////////////////////////////////////POST-Request/////////////////////////////////////////////////////////////////
             if (req.getParameter("updateButton") != null) {
@@ -163,22 +147,6 @@ public class UserFirstCommand implements Command {
                     modelSaveCommit.add(true);
                 else
                     modelSaveCommit.add(false);
-                resp.sendRedirect("exhibition?command=user");
-            } else if (req.getParameter("exitButton") != null) {
-                req.getSession().removeAttribute("UserRole");
-                HikariConnectDB.exitConnection();
-                resp.sendRedirect("exhibition?command=user");
-            } else if (req.getParameter("UserPagination") != null) {
-                resp.sendRedirect("/exhibition/user");
-            } else if (req.getParameter("UserExhibitionPagination") != null) {
-                resp.sendRedirect("exhibition?command=userexhibition");
-            } else if (req.getParameter("englishButton") != null) {
-                ModelLanguageUserFirst modelLanguageUserFirst = ModelLanguageUserFirst.getInstance();
-                modelLanguageUserFirst.add("en");
-                resp.sendRedirect("exhibition?command=user");
-            } else if (req.getParameter("ukraineButton") != null) {
-                ModelLanguageUserFirst modelLanguageUserFirst = ModelLanguageUserFirst.getInstance();
-                modelLanguageUserFirst.add("ua");
                 resp.sendRedirect("exhibition?command=user");
             }
         }

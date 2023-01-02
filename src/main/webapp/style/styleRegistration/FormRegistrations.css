@@ -18,8 +18,8 @@ body {
 }
 
 .pCheck {
-    margin-top:10px;
-    margin-bottom:10px;
+    margin-top:0.5%;
+    margin-bottom:0.5%;
 }
 
 input[type=checkbox] {
@@ -109,7 +109,7 @@ div.languageDiv {
 }
 .h3Tx {
     margin:0px;
-    margin-bottom:7px;
+    margin-bottom:4px;
 }
 .valid {
     color: green;

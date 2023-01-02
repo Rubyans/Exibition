@@ -23,93 +23,79 @@ public class FirstPageCommand implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp, int request) throws ServletException, IOException {
         if (request == 1) {
 /////////////////////////////////////GET-Request/////////////////////////////////////////////////////////////////
-            if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("1")) {
-                resp.sendRedirect("exhibition?command=auto");
-            } else {
-                ModelShow showModel = ModelShow.getInstance();
-                ModelAddShow AddModelShow = ModelAddShow.getInstance();
-                ModelAddExhibition modelAddExhibition = ModelAddExhibition.getInstance();
-                ModelDel modelDel = ModelDel.getInstance();
-                ModelLanguageAdminFirst modelLanguageAdminFirst = ModelLanguageAdminFirst.getInstance();
-                ModelChangeAccess modelChangeAccess = ModelChangeAccess.getInstance();
-                if (modelLanguageAdminFirst.modelCheck() != null) {
-                    if (modelLanguageAdminFirst.modelCheck().equals("en")) {
-                        req.getSession().setAttribute("language", "en");
-                    }
-                    if (modelLanguageAdminFirst.modelCheck().equals("ua")) {
-                        req.getSession().setAttribute("language", "ua");
-                    }
-                }
+            ModelShow showModel = ModelShow.getInstance();
+            ModelAddShow AddModelShow = ModelAddShow.getInstance();
+            ModelAddExhibition modelAddExhibition = ModelAddExhibition.getInstance();
+            ModelDel modelDel = ModelDel.getInstance();
+            ModelChangeAccess modelChangeAccess = ModelChangeAccess.getInstance();
 
-                if (req.getSession().getAttribute("language") != null) {
-                    if (req.getSession().getAttribute("language").equals("en")) {
-                        req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminFirst"));
-                    } else if (req.getSession().getAttribute("language").equals("ua")) {
-                        req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFirst"));
-                    }
-                } else {
+            if (req.getSession().getAttribute("language") != null) {
+                if (req.getSession().getAttribute("language").equals("en")) {
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminFirst"));
+                } else if (req.getSession().getAttribute("language").equals("ua")) {
                     req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFirst"));
                 }
-
-                try {
-                    for (AdminAddShow addShow : FirstPageDB.showAddFirstPage())
-                        AddModelShow.add(addShow);
-                    LOGGER.debug("doGet in debug");
-                } catch (Exception e) {
-                    AddModelShow.add(null);
-                    LOGGER.error("doGet " + e.getMessage());
-                }
-
-                if (AddModelShow.listShow() != null) {
-                    List<AdminAddShow> add = AddModelShow.listShow();
-                    req.setAttribute("AddShow", add);
-
-                } else {
-                    req.setAttribute("Error", true);
-                }
-
-                if (showModel.listShow() != null) {
-                    if (showModel.checkNull() == true) {
-                        req.setAttribute("Error", true);
-                    } else {
-                        List<AdminShow> names = showModel.listShow();
-                        req.setAttribute("FirstPage", names);
-                        req.setAttribute("Error", false);
-                    }
-                } else if (modelChangeAccess.modelCheck() != null) {
-                    if (modelChangeAccess.modelCheck().equals("false"))
-                        req.setAttribute("ChangeError", true);
-                    else if (modelChangeAccess.modelCheck().equals("true"))
-                        req.setAttribute("TrueChange", true);
-                } else if (modelAddExhibition.modelCheck() != null) {
-                    if (modelAddExhibition.modelCheck().equals("false"))
-                        req.setAttribute("AddError", true);
-                    else if (modelAddExhibition.modelCheck().equals("true"))
-                        req.setAttribute("TrueAdd", true);
-                } else if (modelDel.modelCheck() != null) {
-                    if (modelDel.modelCheck().equals("false"))
-                        req.setAttribute("DelError", true);
-                    else if (modelDel.modelCheck().equals("true"))
-                        req.setAttribute("TrueDel", true);
-                }
-
-                req.getRequestDispatcher("views/adminMenu/firstPage/AdminFirstMenu.jsp").forward(req, resp);
-                req.removeAttribute("GuestList");
-                req.removeAttribute("Error");
-                req.removeAttribute("AddError");
-                req.removeAttribute("DelError");
-                req.removeAttribute("TrueAdd");
-                req.removeAttribute("TrueDel");
-                req.removeAttribute("ChangeError");
-                req.removeAttribute("TrueChange");
-                req.removeAttribute("languageChange");
-                ModelShow.delete();
-                ModelAddShow.delete();
-                ModelAddExhibition.delete();
-                ModelDel.delete();
-                ModelLanguageAdminFirst.delete();
-                ModelChangeAccess.delete();
+            } else {
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFirst"));
             }
+
+            try {
+                for (AdminAddShow addShow : FirstPageDB.showAddFirstPage())
+                    AddModelShow.add(addShow);
+                LOGGER.debug("doGet in debug");
+            } catch (Exception e) {
+                AddModelShow.add(null);
+                LOGGER.error("doGet " + e.getMessage());
+            }
+
+            if (AddModelShow.listShow() != null) {
+                List<AdminAddShow> add = AddModelShow.listShow();
+                req.setAttribute("AddShow", add);
+
+            } else {
+                req.setAttribute("Error", true);
+            }
+
+            if (showModel.listShow() != null) {
+                if (showModel.checkNull() == true) {
+                    req.setAttribute("Error", true);
+                } else {
+                    List<AdminShow> names = showModel.listShow();
+                    req.setAttribute("FirstPage", names);
+                    req.setAttribute("Error", false);
+                }
+            } else if (modelChangeAccess.modelCheck() != null) {
+                if (modelChangeAccess.modelCheck().equals("false"))
+                    req.setAttribute("ChangeError", true);
+                else if (modelChangeAccess.modelCheck().equals("true"))
+                    req.setAttribute("TrueChange", true);
+            } else if (modelAddExhibition.modelCheck() != null) {
+                if (modelAddExhibition.modelCheck().equals("false"))
+                    req.setAttribute("AddError", true);
+                else if (modelAddExhibition.modelCheck().equals("true"))
+                    req.setAttribute("TrueAdd", true);
+            } else if (modelDel.modelCheck() != null) {
+                if (modelDel.modelCheck().equals("false"))
+                    req.setAttribute("DelError", true);
+                else if (modelDel.modelCheck().equals("true"))
+                    req.setAttribute("TrueDel", true);
+            }
+
+            req.getRequestDispatcher("views/adminMenu/firstPage/AdminFirstMenu.jsp").forward(req, resp);
+            req.removeAttribute("GuestList");
+            req.removeAttribute("Error");
+            req.removeAttribute("AddError");
+            req.removeAttribute("DelError");
+            req.removeAttribute("TrueAdd");
+            req.removeAttribute("TrueDel");
+            req.removeAttribute("ChangeError");
+            req.removeAttribute("TrueChange");
+            req.removeAttribute("languageChange");
+            ModelShow.delete();
+            ModelAddShow.delete();
+            ModelAddExhibition.delete();
+            ModelDel.delete();
+            ModelChangeAccess.delete();
         } else {
 /////////////////////////////////////Post-Request///////////////////////////////////////////////////////////////
             if (req.getParameter("updateButton") != null) {
@@ -166,34 +152,6 @@ public class FirstPageCommand implements Command {
                 resp.sendRedirect("exhibition?command=adminmain");
             } else if (req.getParameter("saveButton") != null) {
                 HikariConnectDB.saveCommit();
-                resp.sendRedirect("exhibition?command=adminmain");
-            } else if (req.getParameter("exitButton") != null) {
-                req.getSession().removeAttribute("UserRole");
-                HikariConnectDB.exitConnection();
-                resp.sendRedirect("exhibition?command=adminmain");
-            } else if (req.getParameter("AdminMainPagination") != null) {
-                resp.sendRedirect("exhibition?command=adminmain");
-            } else if (req.getParameter("UserAutorizedPagination") != null) {
-                resp.sendRedirect("exhibition?command=userautorized");
-            } else if (req.getParameter("AdminHallPagination") != null) {
-                resp.sendRedirect("exhibition?command=adminhall");
-            } else if (req.getParameter("AdminAddressPagination") != null) {
-                resp.sendRedirect("exhibition?command=adminaddress");
-            } else if (req.getParameter("AdminAuthorPagination") != null) {
-                resp.sendRedirect("exhibition?command=adminauthor");
-            } else if (req.getParameter("AdminArtPagination") != null) {
-                resp.sendRedirect("exhibition?command=adminart");
-            } else if (req.getParameter("AdminViewPagination") != null) {
-                resp.sendRedirect("exhibition?command=adminview");
-            } else if (req.getParameter("AdminStatisticsExhibition") != null) {
-                resp.sendRedirect("exhibition?command=adminstatistics");
-            } else if (req.getParameter("englishButton") != null) {
-                ModelLanguageAdminFirst modelLanguageAdminFirst = ModelLanguageAdminFirst.getInstance();
-                modelLanguageAdminFirst.add("en");
-                resp.sendRedirect("exhibition?command=adminmain");
-            } else if (req.getParameter("ukraineButton") != null) {
-                ModelLanguageAdminFirst modelLanguageAdminFirst = ModelLanguageAdminFirst.getInstance();
-                modelLanguageAdminFirst.add("ua");
                 resp.sendRedirect("exhibition?command=adminmain");
             }
         }

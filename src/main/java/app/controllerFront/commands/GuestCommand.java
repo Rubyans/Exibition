@@ -6,7 +6,6 @@ import app.DAO.entities.UserGuest;
 import app.DAO.sqlFunctions.UserGuestDB;
 import app.controllerFront.commands.interfaceCommand.Command;
 import app.controllerFront.models.guestModels.ModelGuest;
-import app.controllerFront.models.guestModels.ModelLanguageGuest;
 import app.service.changeLanguage.ChangeLanguage;
 import app.service.sorting.SortGuest;
 import org.apache.log4j.Logger;
@@ -28,16 +27,6 @@ public class GuestCommand implements Command {
         if (request == 1) {
 /////////////////////////////////////GET-Request/////////////////////////////////////////////////////////////////
             ModelGuest modelGuest = ModelGuest.getInstance();
-            ModelLanguageGuest modelLanguageGuest = ModelLanguageGuest.getInstance();
-
-            if (modelLanguageGuest.modelCheck() != null) {
-                if (modelLanguageGuest.modelCheck().equals("en")) {
-                    req.getSession().setAttribute("language", "en");
-                }
-                if (modelLanguageGuest.modelCheck().equals("ua")) {
-                    req.getSession().setAttribute("language", "ua");
-                }
-            }
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
@@ -64,7 +53,6 @@ public class GuestCommand implements Command {
             req.removeAttribute("Error");
             req.removeAttribute("languageChange");
             ModelGuest.delete();
-            ModelLanguageGuest.delete();
         } else {
 /////////////////////////////////////Post-Request/////////////////////////////////////////////////////////////////
             if (HikariConnectDB.checkConnection() == false) {
@@ -102,14 +90,6 @@ public class GuestCommand implements Command {
                     modelGuest.add(null);
                     LOGGER.debug("doPost " + e.getMessage());
                 }
-                resp.sendRedirect("exhibition?command=guest");
-            } else if (req.getParameter("englishButton") != null) {
-                ModelLanguageGuest modelLanguageGuest = ModelLanguageGuest.getInstance();
-                modelLanguageGuest.add("en");
-                resp.sendRedirect("exhibition?command=guest");
-            } else if (req.getParameter("ukraineButton") != null) {
-                ModelLanguageGuest modelLanguageGuest = ModelLanguageGuest.getInstance();
-                modelLanguageGuest.add("ua");
                 resp.sendRedirect("exhibition?command=guest");
             }
         }

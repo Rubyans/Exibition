@@ -7,7 +7,7 @@
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <link href="./style/styleRegistration/FormRegistration.css" rel="stylesheet" type="text/css">
+        <link href="./style/styleRegistration/FormRegistrations.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div>
@@ -36,7 +36,7 @@
                         <button class="languageButton" onclick="requiredFalse()" name="englishButton"><img src="image/flagUK.png" alt="English" width="100%" height="100%"></button>
                         <button class="languageButton" onclick="requiredFalse()" name="ukraineButton"><img src="image/flagUA.png" alt="Ukraine" width="100%" height="100%"></button>
                     </div>
-                    <h1 class="hcheck" id="hReg">${languageChange.get(0)}</h1>
+                    <h2 class="hcheck" id="hReg">${languageChange.get(0)}</h2>
                     <p class="pCheck" id="pReg" >${languageChange.get(4)}</p>
                     <hr>
 

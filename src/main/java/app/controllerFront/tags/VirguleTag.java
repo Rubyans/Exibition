@@ -4,7 +4,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-public class virguleTag extends TagSupport {
+public class VirguleTag extends TagSupport {
 
     private String amount;
     @Override

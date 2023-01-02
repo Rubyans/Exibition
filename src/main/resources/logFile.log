@@ -1,0 +1,203 @@
+2023-01-02 00:22:05 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 17:46:41 [com.zaxxer.hikari.pool.HikariPool]-[ERROR] HikariPool-1 - Exception during pool initialization.
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:828)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:448)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at app.DAO.connectionDAO.HikariConnectDB.<init>(HikariConnectDB.java:35)
+	at app.controllerFront.commands.AuthorizedCommand.execute(AuthorizedCommand.java:91)
+	at app.controllerFront.controller.FrontController.process(FrontController.java:32)
+	at app.controllerFront.controller.FrontController.doPost(FrontController.java:25)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at app.controllerFront.filters.FilterEncoding.doFilter(filterEncoding.java:17)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at app.controllerFront.filters.FilterSession.doFilter(FilterSession.java:31)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:484)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:89)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:120)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:948)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:818)
+	... 44 more
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:535)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:585)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:63)
+	... 47 more
+2023-01-02 17:46:41 [app.DAO.connectionDAO.HikariConnectDB]-[ERROR] HikariConnectDB Failed to initialize pool: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2023-01-02 17:46:41 [app.DAO.sqlFunctions.UserAutorizationDB]-[ERROR] authorizationUser Cannot invoke "java.sql.Connection.setSavepoint(String)" because "connUser" is null
+2023-01-02 17:46:56 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 17:46:56 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 17:46:56 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 17:46:56 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:15:56 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:15:56 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:15:56 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:15:56 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:17:07 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:17:07 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:17:07 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:17:07 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:18:44 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:18:44 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:18:44 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:18:44 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:18:48 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:18:48 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:18:48 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:18:57 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:18:57 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:18:57 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:36:56 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:37:12 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:37:21 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:37:21 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:37:21 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:37:21 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:37:48 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] userShowEx in debug
+2023-01-02 18:37:48 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:37:48 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:37:48 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:37:48 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:37:50 [app.DAO.sqlFunctions.user.secondPage.SecondPageDB]-[DEBUG] ShowExhibition in debug
+2023-01-02 18:37:51 [app.DAO.sqlFunctions.user.secondPage.SecondPageDB]-[DEBUG] ShowExhibition in debug
+2023-01-02 18:37:54 [app.DAO.sqlFunctions.user.secondPage.SecondPageDB]-[DEBUG] ShowExhibition in debug
+2023-01-02 18:37:58 [app.DAO.sqlFunctions.user.secondPage.SecondPageDB]-[DEBUG] ShowExhibition in debug
+2023-01-02 18:37:58 [app.DAO.sqlFunctions.user.secondPage.SecondPageDB]-[DEBUG] ShowExhibition in debug
+2023-01-02 18:37:58 [app.DAO.sqlFunctions.user.secondPage.SecondPageDB]-[DEBUG] ShowExhibition in debug
+2023-01-02 18:37:58 [app.DAO.sqlFunctions.user.secondPage.SecondPageDB]-[DEBUG] ShowExhibition in debug
+2023-01-02 18:38:03 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:38:03 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:38:03 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:38:04 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] userShowEx in debug
+2023-01-02 18:38:04 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:38:04 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:38:04 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:38:04 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:38:06 [app.DAO.sqlFunctions.user.secondPage.SecondPageDB]-[DEBUG] ShowExhibition in debug
+2023-01-02 18:38:07 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:38:07 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:38:07 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:38:08 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:38:08 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:38:08 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:38:11 [app.DAO.connectionDAO.HikariConnectDB]-[DEBUG] exitConnection in debug
+2023-01-02 18:38:17 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:39:01 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:39:50 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:40:59 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:40:59 [app.DAO.sqlFunctions.admin.firstPage.FirstPageDB]-[DEBUG] ShowAddFirstPage in debug
+2023-01-02 18:40:59 [app.controllerFront.commands.admin.firstPage.FirstPageCommand]-[DEBUG] doGet in debug
+2023-01-02 18:41:03 [app.DAO.sqlFunctions.admin.firstPage.FirstPageDB]-[DEBUG] exibitionShow in debug
+2023-01-02 18:41:03 [app.controllerFront.commands.admin.firstPage.FirstPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:03 [app.DAO.sqlFunctions.admin.firstPage.FirstPageDB]-[DEBUG] ShowAddFirstPage in debug
+2023-01-02 18:41:03 [app.controllerFront.commands.admin.firstPage.FirstPageCommand]-[DEBUG] doGet in debug
+2023-01-02 18:41:06 [app.DAO.sqlFunctions.admin.secondPage.SecondPageDB]-[DEBUG] hallShow in debug
+2023-01-02 18:41:06 [app.controllerFront.commands.admin.secondPage.SecondPageCommand]-[DEBUG] dePost in debug
+2023-01-02 18:41:09 [app.DAO.sqlFunctions.admin.thirdPage.ThirdPageDB]-[DEBUG] addressShow in debug
+2023-01-02 18:41:09 [app.controllerFront.commands.admin.thirdPage.ThirdPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:11 [app.DAO.sqlFunctions.admin.fourthPage.FourthPageDB]-[DEBUG] authorShow in debug
+2023-01-02 18:41:11 [app.controllerFront.commands.admin.fourthPage.FourthPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:13 [app.DAO.sqlFunctions.admin.fifthPage.FifthPageDB]-[DEBUG] addArtShow in debug
+2023-01-02 18:41:13 [app.controllerFront.commands.admin.fifthPage.FifthPageCommand]-[DEBUG] doGet in debug
+2023-01-02 18:41:14 [app.DAO.sqlFunctions.admin.fifthPage.FifthPageDB]-[DEBUG] artShow in debug
+2023-01-02 18:41:14 [app.controllerFront.commands.admin.fifthPage.FifthPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:14 [app.DAO.sqlFunctions.admin.fifthPage.FifthPageDB]-[DEBUG] addArtShow in debug
+2023-01-02 18:41:14 [app.controllerFront.commands.admin.fifthPage.FifthPageCommand]-[DEBUG] doGet in debug
+2023-01-02 18:41:16 [app.DAO.sqlFunctions.admin.sixthPage.SixthPageDB]-[DEBUG] viewShow in debug
+2023-01-02 18:41:16 [app.controllerFront.commands.admin.sixthPage.SixthPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:19 [app.DAO.sqlFunctions.admin.seventhPage.SeventhPageDB]-[DEBUG] userAuto in debug
+2023-01-02 18:41:19 [app.controllerFront.commands.admin.seventhPage.SeventhPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:21 [app.DAO.sqlFunctions.admin.eighthPage.EighthPageDB]-[DEBUG] statisticsShow in debug
+2023-01-02 18:41:21 [app.controllerFront.commands.admin.eighthPage.EighthPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:25 [app.DAO.sqlFunctions.admin.seventhPage.SeventhPageDB]-[DEBUG] userAuto in debug
+2023-01-02 18:41:25 [app.controllerFront.commands.admin.seventhPage.SeventhPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:28 [app.DAO.sqlFunctions.admin.fifthPage.FifthPageDB]-[DEBUG] addArtShow in debug
+2023-01-02 18:41:28 [app.controllerFront.commands.admin.fifthPage.FifthPageCommand]-[DEBUG] doGet in debug
+2023-01-02 18:41:30 [app.DAO.sqlFunctions.admin.fourthPage.FourthPageDB]-[DEBUG] authorShow in debug
+2023-01-02 18:41:30 [app.controllerFront.commands.admin.fourthPage.FourthPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:41:31 [app.DAO.connectionDAO.HikariConnectDB]-[DEBUG] exitConnection in debug
+2023-01-02 18:58:40 [app.controllerFront.listners.SessionListener]-[DEBUG] null in valueBound()
+2023-01-02 18:58:43 [app.controllerFront.listners.SessionListener]-[DEBUG] ua in valueBound()
+2023-01-02 18:58:43 [app.controllerFront.listners.SessionListener]-[DEBUG] ua in valueUnbound()
+2023-01-02 18:58:48 [app.DAO.sqlFunctions.UserGuestDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:58:48 [app.controllerFront.commands.GuestCommand]-[DEBUG] doPost in debug
+2023-01-02 18:58:58 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:58:58 [app.DAO.sqlFunctions.admin.firstPage.FirstPageDB]-[DEBUG] ShowAddFirstPage in debug
+2023-01-02 18:58:58 [app.controllerFront.commands.admin.firstPage.FirstPageCommand]-[DEBUG] doGet in debug
+2023-01-02 18:58:59 [app.DAO.sqlFunctions.admin.firstPage.FirstPageDB]-[DEBUG] exibitionShow in debug
+2023-01-02 18:58:59 [app.controllerFront.commands.admin.firstPage.FirstPageCommand]-[DEBUG] doPost in debug
+2023-01-02 18:58:59 [app.DAO.sqlFunctions.admin.firstPage.FirstPageDB]-[DEBUG] ShowAddFirstPage in debug
+2023-01-02 18:58:59 [app.controllerFront.commands.admin.firstPage.FirstPageCommand]-[DEBUG] doGet in debug
+2023-01-02 18:59:07 [app.DAO.sqlFunctions.admin.secondPage.SecondPageDB]-[DEBUG] hallShow in debug
+2023-01-02 18:59:07 [app.controllerFront.commands.admin.secondPage.SecondPageCommand]-[DEBUG] dePost in debug
+2023-01-02 18:59:10 [app.DAO.sqlFunctions.admin.fifthPage.FifthPageDB]-[DEBUG] addArtShow in debug
+2023-01-02 18:59:10 [app.controllerFront.commands.admin.fifthPage.FifthPageCommand]-[DEBUG] doGet in debug
+2023-01-02 18:59:13 [app.DAO.connectionDAO.HikariConnectDB]-[DEBUG] exitConnection in debug
+2023-01-02 18:59:20 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:59:27 [app.DAO.sqlFunctions.UserAutorizationDB]-[DEBUG] authorizationUser in debug
+2023-01-02 18:59:27 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:59:27 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:59:27 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:59:29 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] userShowEx in debug
+2023-01-02 18:59:29 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:59:29 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:59:29 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:59:29 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:59:31 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowAddExhibition in debug
+2023-01-02 18:59:31 [app.DAO.sqlFunctions.user.firstPage.FirstPageDB]-[DEBUG] ShowMoney in debug
+2023-01-02 18:59:31 [app.controllerFront.commands.user.firstPage.UserFirstCommand]-[DEBUG] doGet in debug
+2023-01-02 18:59:34 [app.DAO.connectionDAO.HikariConnectDB]-[DEBUG] exitConnection in debug

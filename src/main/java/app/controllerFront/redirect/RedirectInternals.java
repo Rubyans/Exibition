@@ -27,6 +27,7 @@ public class RedirectInternals {
     }
 
     public Object redirect() {
+
         switch (modelController.showParametr()) {
 
             case "auto": {

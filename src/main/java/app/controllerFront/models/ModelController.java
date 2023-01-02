@@ -22,27 +22,22 @@ public class ModelController { //singleton pattern model
             return instance;
         }
     }
+
     private ModelController() {
         modelReq = null;
     }
 
 
     public void add(HttpServletRequest req) { //adds object
-        modelReq=req.getParameter("command");
+        if (req.getParameter("command") == null)
+            modelReq = "auto";
+        else
+            modelReq = req.getParameter("command");
     }
 
-
-
-    public String showParametr() { //returns list
+    public String showParametr() { //returns object
         if (modelReq == null)
             return null;
         return modelReq;
     }
-//    public Boolean checkNull() { //checks list for null values
-//        for (ArtShow art : model) {
-//            if (art != null)
-//                return false;
-//        }
-//        return true;
-//    }
 }

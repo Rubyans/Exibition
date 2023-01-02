@@ -10,7 +10,7 @@
 
     <tag>
         <name>virguleTag</name>
-        <tag-class>app.controllerFront.tags.virguleTag</tag-class>
+        <tag-class>app.controllerFront.tags.VirguleTag</tag-class>
         <attribute>
             <name>amount</name>
             <required>true</required>

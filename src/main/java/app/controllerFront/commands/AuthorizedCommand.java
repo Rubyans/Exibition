@@ -4,9 +4,7 @@ import app.DAO.connectionDAO.HikariConnectDB;
 import app.DAO.entities.UserAutorization;
 import app.DAO.sqlFunctions.UserAutorizationDB;
 import app.controllerFront.commands.interfaceCommand.Command;
-import app.controllerFront.listners.SessionListener;
 import app.controllerFront.models.authorizationModels.ModelAuthorization;
-import app.controllerFront.models.authorizationModels.ModelLanguageAuthorization;
 import app.service.changeLanguage.ChangeLanguage;
 
 import javax.servlet.ServletException;
@@ -21,20 +19,7 @@ public class AuthorizedCommand implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp, int request) throws ServletException, IOException {
 /////////////////////////////////////GET-Request/////////////////////////////////////////////////////////////////
         if (request == 1) {
-            SessionListener listener = new SessionListener();
-
             ModelAuthorization model = ModelAuthorization.getInstance();
-            ModelLanguageAuthorization modelLanguageAuthorization = ModelLanguageAuthorization.getInstance();
-
-            if (modelLanguageAuthorization.modelCheck() != null) {
-                if (modelLanguageAuthorization.modelCheck().equals("en")) {
-                    req.getSession().setAttribute("checkLanguage", listener);
-                    req.getSession().setAttribute("language", "en");
-                }
-                if (modelLanguageAuthorization.modelCheck().equals("ua")) {
-                    req.getSession().setAttribute("language", "ua");
-                }
-            }
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
@@ -82,28 +67,16 @@ public class AuthorizedCommand implements Command {
             req.removeAttribute("languageChange");
             req.removeAttribute("UserBlock");
             ModelAuthorization.delete();
-            ModelLanguageAuthorization.delete();
         } else {
 /////////////////////////////////////Post-Request///////////////////////////////////////////////////////////////
             if (req.getParameter("loginButton") != null) {
-
                 if (HikariConnectDB.checkConnection() == false) {
                     HikariConnectDB object = new HikariConnectDB();
                 }
                 String login = req.getParameter("loginUser");
                 String password = req.getParameter("passwordUser");
-
                 ModelAuthorization modelAuthorizationPost = ModelAuthorization.getInstance();
                 modelAuthorizationPost.add(UserAutorizationDB.authorizationUser(login, password));
-
-                resp.sendRedirect("exhibition?command=auto");
-            } else if (req.getParameter("englishButton") != null) {
-                ModelLanguageAuthorization modelLanguageAuthorizationPost = ModelLanguageAuthorization.getInstance();
-                modelLanguageAuthorizationPost.add("en");
-                resp.sendRedirect("exhibition?command=auto");
-            } else if (req.getParameter("ukraineButton") != null) {
-                ModelLanguageAuthorization modelLanguageAuthorizationPost = ModelLanguageAuthorization.getInstance();
-                modelLanguageAuthorizationPost.add("ua");
                 resp.sendRedirect("exhibition?command=auto");
             }
         }
