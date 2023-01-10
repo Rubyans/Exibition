@@ -44,11 +44,17 @@
                     <input type="text" placeholder="${languageChange.get(8)}" id="writeLogin" name="loginUser" required>
                     <label for="psw" id="password" class="labelChange">${languageChange.get(9)}</label>
                     <input type="password" placeholder="${languageChange.get(10)}" name="passwordUser" id="passwordCheck" required>
-
-                    <input type="checkbox" onclick="checkPassword()"><spam id="checkPass">${languageChange.get(11)}</spam>
-                    <a href="exhibition?command=reg" class="hyperlink" id="hyperReg">${languageChange.get(12)}</a>
+                    <div class="hypercheckDiv">
+                        <div>
+                            <input type="checkbox" onclick="checkPassword()"><spam id="checkPass">${languageChange.get(11)}</spam>
+                        </div>
+                        <div class="hyperDiv">
+                            <a href="exhibition?command=reg" class="hyperlink" id="hyperReg">${languageChange.get(12)}</a>
+                            <br><a href="exhibition?command=recovery" class="hyperlink hyperforget" id="hyperReg">${languageChange.get(13)}</a>
+                        </div>
+                    </div>
                     <div class="clearfix">
-                        <button type="submit" class="loginButton" name="loginButton" id="loginButton">${languageChange.get(13)}</button>
+                        <button type="submit" class="loginButton" name="loginButton" id="loginButton">${languageChange.get(14)}</button>
                     </div>
                 </div>
             </form>
@@ -98,9 +104,15 @@
                     <input type="text" placeholder="Введіть логін" id="writeLogin" name="loginUser" required>
                     <label for="psw" id="password" class="labelChange">Пароль</label>
                     <input type="password" placeholder="Введіть пароль" name="passwordUser" id="passwordCheck" required>
-
-                    <input type="checkbox" onclick="checkPassword()"><spam id="checkPass">Переглянути пароль</spam>
-                    <a href="exhibition?command=reg" class="hyperlink" id="hyperReg">Не зареєструвались?</a>
+                    <div class="hypercheckDiv">
+                        <div>
+                            <input type="checkbox" onclick="checkPassword()"><spam id="checkPass">Переглянути пароль</spam>
+                        </div>
+                        <div class="hyperDiv">
+                            <a href="exhibition?command=reg" class="hyperlink" id="hyperReg">Не зареєструвались?</a>
+                            <br><a href="exhibition?command=recovery" class="hyperlink hyperforget" id="hyperReg">Забули пароль?</a>
+                        </div>
+                    </div>
                     <div class="clearfix">
                         <button type="submit" class="loginButton" name="loginButton" id="loginButton">Увійти</button>
                     </div>

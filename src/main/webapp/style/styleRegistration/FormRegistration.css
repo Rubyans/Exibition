@@ -96,6 +96,7 @@ div.languageDiv {
     display: flex;
     justify-content: space-around;
 }
+
 #message {
     display:none;
     color: black;
@@ -107,10 +108,12 @@ div.languageDiv {
     font-size: 18px;
     margin: 0px;
 }
+
 .h3Tx {
     margin:0px;
     margin-bottom:4px;
 }
+
 .valid {
     color: green;
 }

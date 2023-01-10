@@ -45,29 +45,44 @@
                 <button class="exitButton" id="exitButton" name="exitButton">${languageChange.get(8)}</button>
             </div>
             <div class="buttonArt">
-                <button class="updateButton" id="updateButton" name="updateButton" >${languageChange.get(9)}</button>
+                <button class="updateButton" id="updateButton" name="updateButton" onclick="updateFunc()" type="Button">${languageChange.get(9)}</button>
                 <button class="addButton" id="addButton" name="addButton" onclick="addFunc()" type="Button">${languageChange.get(10)}</button>
                 <button class="deleteButton" id="deleteButton" name="deleteButton" onclick="delFunc()" type="Button" >${languageChange.get(11)}</button>
                 <button class="saveButton" id="roleBackButton" name="roleBackButton">${languageChange.get(12)}</button>
                 <button class="saveButton" id="saveButton" name="saveButton">${languageChange.get(13)}</button>
             </div>
 
+            <div class="updateDiv" id="updateDiv" style="display: none;">
+                <div class="wrapper">
+                    <h6 class="h6Upd" id="updateTxt">${languageChange.get(14)}</h6>
+                    <select class="UpdateSort" name="UpdateSort" id="UpdateSort">
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="all">${languageChange.get(15)}</option>
+                    </select>
+                    <div class="buttonAdd">
+                        <button class="updateButtonServlet" id="updateButton" name="updateButton">${languageChange.get(16)}</button>
+                    </div>
+                </div>
+            </div>
+
             <div id="addDiv" style="display: none;">
                 <div class="wrapper">
                     <div class="left_block">
-                        <input type="text" id="InputNameArt" placeholder="${languageChange.get(14)}" name="NameArt" >
-                        <br><input type="number" id="InputCreationArt" placeholder="${languageChange.get(15)}" name="CreationArt" >
-                        <br><input type="number" id="InputPriceArt" placeholder="${languageChange.get(16)}" step="any" name="PriceArt" >
+                        <input type="text" id="InputNameArt" placeholder="${languageChange.get(17)}" name="NameArt" >
+                        <br><input type="number" id="InputCreationArt" placeholder="${languageChange.get(18)}" name="CreationArt" >
+                        <br><input type="number" id="InputPriceArt" placeholder="${languageChange.get(19)}" step="any" name="PriceArt" >
                     </div>
                     <div class="right_block">
                         <c:forEach var="addFirstPage" items="${AddShow}">
-                            <h6 class="h6Add" id="authorChange">${languageChange.get(17)}</h6>
+                            <h6 class="h6Add" id="authorChange">${languageChange.get(20)}</h6>
                             <select class="SelectAdd" name="author" id="SelectAuthor" multiple>
                                 <c:forEach var="fullName" items="${addFirstPage.getFullName()}">
                                     <option value="${fullName}">${fullName}</option>
                                 </c:forEach>
                             </select>
-                            <h6 class="h6Add" id="genreChange">${languageChange.get(18)}</h6>
+                            <h6 class="h6Add" id="genreChange">${languageChange.get(21)}</h6>
                             <select class="SelectAdd" name="view" id="SelectView" multiple>
                                 <c:forEach var="viewArt" items="${addFirstPage.getView()}">
                                     <option value="${viewArt}">${viewArt}</option>
@@ -76,25 +91,25 @@
                         </c:forEach>
                     </div>
                     <div class="buttonAdd">
-                        <button class="addButtonServlet" id="addButtonArt" name="addButtonArt">${languageChange.get(19)}</button>
+                        <button class="addButtonServlet" id="addButtonArt" name="addButtonArt">${languageChange.get(22)}</button>
                     </div>
                 </div>
             </div>
 
             <div class="delDiv" id="delDiv" style="display: none;">
                     <div class="InputDelDiv">
-                        <input class="inputDel" id="InputDelArt" type="text" id="InputDelArt" placeholder="${languageChange.get(20)}" name="artDel">
+                        <input class="inputDel" id="InputDelArt" type="text" id="InputDelArt" placeholder="${languageChange.get(23)}" name="artDel">
                     </div>
-                    <button class="delButtonServlet" id="delButtonArt" name="delButtonArt">${languageChange.get(21)}</button>
+                    <button class="delButtonServlet" id="delButtonArt" name="delButtonArt">${languageChange.get(24)}</button>
             </div>
 
             <table id="myTable">
                 <tr>
-                    <th id="art">${languageChange.get(22)}</th>
-                    <th id="year">${languageChange.get(23)}</th>
-                    <th id="price">${languageChange.get(24)}</th>
-                    <th id="genreArt">${languageChange.get(25)}</th>
-                    <th id="authorArt">${languageChange.get(26)}</th>
+                    <th id="art">${languageChange.get(25)}</th>
+                    <th id="year">${languageChange.get(26)}</th>
+                    <th id="price">${languageChange.get(27)}</th>
+                    <th id="genreArt">${languageChange.get(28)}</th>
+                    <th id="authorArt">${languageChange.get(29)}</th>
                 </tr>
                 <c:if test="${not requestScope.Error}">
                     <c:forEach var="art" items="${FifthPageShow}">
@@ -117,7 +132,7 @@
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>
-                        sweetAlert("${languageChange.get(27)}", "${languageChange.get(28)}", "error");
+                        sweetAlert("${languageChange.get(30)}", "${languageChange.get(31)}", "error");
                     </script>
                 </c:if>
             </table>
@@ -134,6 +149,6 @@
                 <a><input class="buttonPagination" type="submit" name="AdminViewPagination" value="»"></a>
             </div>
         </form>
-    <script src="./JS/adminJS/fifthPage/AdminFifthMenu.js" type="text/javascript"></script>
+    <script src="./JS/adminJS/fifthPage/AdminFifthMenu1.js" type="text/javascript"></script>
     </body>
 </html>

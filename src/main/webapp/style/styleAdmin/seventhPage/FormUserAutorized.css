@@ -1,6 +1,5 @@
 * {box-sizing: border-box}
 
-
 body {
     background-color:#BA94D1;
 }
@@ -45,6 +44,7 @@ div.languageDiv {
     justify-content: center;
     align-items: baseline;
 }
+
 .exitButton {
     margin-left:32%;
     width:7%;
@@ -63,7 +63,7 @@ div.languageDiv {
 }
 
 div.wrapper {
-   width:42%;
+   width:43.8%;
    border: 1px solid #f1f1f1;
    background-color:#6ECCAF;
    margin-left:0.2%;
@@ -84,15 +84,21 @@ div.right_block {
     margin-top:1%;
 }
 
-#addDiv,#addDivUser,#addDivMoney {
+#addDiv,#addDivUser,#addDivMoney,#updateDiv {
     margin-left:5px;
 }
-
 
 .h6Add {
    margin:0px;
    margin-bottom:1%;
    text-align:center;
+}
+
+.h6Upd {
+    margin:0px;
+    margin-top:1%;
+    margin-bottom:1%;
+    text-align:center;
 }
 
 .h6Acc {
@@ -146,11 +152,27 @@ div.InputDelDiv,div.InputAccessDiv {
 div.delDiv {
     display: flex;
     justify-content: space-between;
-    width:42%;
+    width:43.8%;
     margin-left:0.43%;
     margin-bottom:0.6%;
     border: 1px solid #f1f1f1;
     background-color:#F38BA0;
+}
+
+.UpdateSort{
+    width: 40%;
+    border: none;
+    background: #f1f1f1;
+    margin: 0 auto;
+    display: block;
+}
+
+.updateButtonServlet {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color:#1C7947;
 }
 
 .delButtonServlet {

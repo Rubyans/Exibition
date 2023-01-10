@@ -13,7 +13,7 @@ import static app.DAO.sqlFunctions.sqlRequests.SQLRequests.ThirdPageAdmin.*;
 public class ThirdPageDB {
     private static final Logger LOGGER = Logger.getLogger(ThirdPageDB.class);
 
-    public static List<AddressShow> addressShow() { //function shows address
+    public static List<AddressShow> addressShow(String valueRows) { //function shows address
         try {
             Connection connAddress = HikariConnectDB.getConnection();
             List<AddressShow> address = new ArrayList<>();
@@ -23,6 +23,7 @@ public class ThirdPageDB {
             String city = null;
             String street = null;
             Integer numberHouse;
+            Integer countRows = 0;
 
             PreparedStatement statement = connAddress.prepareStatement(SELECT_ADDRESS, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet setAddress = statement.executeQuery();
@@ -32,7 +33,14 @@ public class ThirdPageDB {
                 city = setAddress.getString(3);
                 street = setAddress.getString(4);
                 numberHouse = setAddress.getInt(5);
-                address.add(new AddressShow(Unumber, country, city, street, numberHouse));
+                if (valueRows.equals("all"))
+                    address.add(new AddressShow(Unumber, country, city, street, numberHouse));
+                else {
+                    if (countRows < Integer.parseInt(valueRows)) {
+                        address.add(new AddressShow(Unumber, country, city, street, numberHouse));
+                        countRows++;
+                    }
+                }
             }
             statement.close();
             LOGGER.debug("addressShow in debug");

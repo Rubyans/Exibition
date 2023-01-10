@@ -24,11 +24,61 @@ button {
 button:hover {
     opacity:1;
 }
+
 .buttonStatistics {
     display: flex;
     justify-content: space-between;
     margin-left: 0.3%;
     width: 10%;
+}
+
+div.wrapper {
+   width:35%;
+   border: 1px solid #f1f1f1;
+   background-color:#6ECCAF;
+   margin-left:0.2%;
+   margin-bottom:0.6%;
+}
+
+#updateDiv {
+    margin-left:5px;
+}
+
+.h6Upd {
+    margin:0px;
+    margin-top:1%;
+    margin-bottom:1%;
+    text-align:center;
+}
+
+div.left_block {
+    float:left;
+    width:43%;
+    margin-left: 0.5%;
+    margin-top:1%;
+}
+
+div.right_block {
+    float:right;
+    width:43%;
+    margin-right: 2%;
+    margin-top:1%;
+}
+
+.UpdateSort{
+    width: 40%;
+    border: none;
+    background: #f1f1f1;
+    margin: 0 auto;
+    display: block;
+}
+
+.updateButtonServlet {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color:#1C7947;
 }
 
 div.languageDiv {

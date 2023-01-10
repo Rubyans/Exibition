@@ -62,9 +62,8 @@ div.languageDiv {
     width:30%;
 }
 
-
 div.wrapper {
-    width:36%;
+    width:37.7%;
     margin-left:0.2%;
     margin-bottom:0.6%;
     border: 1px solid #f1f1f1;
@@ -85,12 +84,19 @@ div.right_block {
     margin-top:1%;
 }
 
-#addDiv {
+#addDiv,#updateDiv {
     margin-left:5px;
 }
 
 .h6Add {
     margin:0px;
+    text-align:center;
+}
+
+.h6Upd {
+    margin:0px;
+    margin-top:1%;
+    margin-bottom:1%;
     text-align:center;
 }
 
@@ -107,7 +113,6 @@ input[type=text]:focus {
     background-color: #ddd;
     outline: none;
 }
-
 
 div.InputAddDiv{
     width:50%;
@@ -126,14 +131,28 @@ div.InputDelDiv {
 div.delDiv {
     display: flex;
     justify-content: space-between;
-    width:36%;
+    width:37.7%;
     margin-left:0.4%;
     margin-bottom:0.6%;
     border: 1px solid #f1f1f1;
     background-color:#F38BA0;
-
 }
 
+.UpdateSort{
+    width: 40%;
+    border: none;
+    background: #f1f1f1;
+    margin: 0 auto;
+    display: block;
+}
+
+.updateButtonServlet {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color:#1C7947;
+}
 
 .delButtonServlet {
     display: block;
@@ -150,7 +169,6 @@ div.delDiv {
     width: 70%;
     background-color:#1C7947;
 }
-
 
 .pagination {
     margin-top:5%;

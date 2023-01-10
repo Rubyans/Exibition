@@ -14,19 +14,27 @@ import static app.DAO.sqlFunctions.sqlRequests.SQLRequests.SecondPageAdmin.*;
 public class SecondPageDB {
     private static final Logger LOGGER = Logger.getLogger(SecondPageDB.class);
 
-    public static List<HallShow> hallShow() { //function show halls data
+    public static List<HallShow> hallShow(String valueRows) { //function show halls data
         try {
             Connection connHall = HikariConnectDB.getConnection();
             List<HallShow> hall = new ArrayList<>();
             String nameHall = null;
             BigDecimal square = null;
+            Integer countRows = 0;
 
             PreparedStatement statement = connHall.prepareStatement(SELECT_HALL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet setHall = statement.executeQuery();
             while (setHall.next()) {
                 nameHall = setHall.getString(1);
                 square = setHall.getBigDecimal(2);
-                hall.add(new HallShow(nameHall, square));
+                if (valueRows.equals("all"))
+                    hall.add(new HallShow(nameHall, square));
+                else {
+                    if (countRows < Integer.parseInt(valueRows)) {
+                        hall.add(new HallShow(nameHall, square));
+                        countRows++;
+                    }
+                }
             }
             statement.close();
             LOGGER.debug("hallShow in debug");

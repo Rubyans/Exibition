@@ -23,12 +23,12 @@ public class AuthorizedCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "authorization"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "authorization"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "authorization"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "authorization"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "authorization"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "authorization"));
             }
             if (model.listUser() != null) {
                 if (model.checkNull() == true) {

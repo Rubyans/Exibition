@@ -44,41 +44,56 @@
                 <button class="exitButton" id="exitButton" name="exitButton">${languageChange.get(8)}</button>
             </div>
             <div class="buttonAddress">
-                <button class="updateButton" id="updateButton" name="updateButton" >${languageChange.get(9)}</button>
+                <button class="updateButton" id="updateButton" name="updateButton" onclick="updateFunc()" type="Button">${languageChange.get(9)}</button>
                 <button class="addButton" id="addButton" name="addButton" onclick="addFunc()" type="Button">${languageChange.get(10)}</button>
                 <button class="deleteButton" id="deleteButton" name="deleteButton" onclick="delFunc()" type="Button" >${languageChange.get(11)}</button>
                 <button class="saveButton" id="roleBackButton" name="roleBackButton">${languageChange.get(12)}</button>
                 <button class="saveButton" id="saveButton" name="saveButton">${languageChange.get(13)}</button>
             </div>
 
+            <div class="updateDiv" id="updateDiv" style="display: none;">
+                <div class="wrapper">
+                    <h6 class="h6Upd" id="updateTxt">${languageChange.get(14)}</h6>
+                    <select class="UpdateSort" name="UpdateSort" id="UpdateSort">
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="all">${languageChange.get(15)}</option>
+                    </select>
+                    <div class="buttonAdd">
+                        <button class="updateButtonServlet" id="updateButton" name="updateButton">${languageChange.get(16)}</button>
+                    </div>
+                </div>
+            </div>
+
             <div id="addDiv" style="display: none;">
                 <div class="wrapper">
                     <div class="left_block">
-                        <input type="text" id="InputCountryAd" placeholder="${languageChange.get(14)}" name="countryAddress" >
-                        <br><input type="text" id="InputCityAd" placeholder="${languageChange.get(15)}" name="cityAddress" >
-                        <br><input type="text" id="InputStreetAd" placeholder="${languageChange.get(16)}" name="streetAddress" >
-                        <br><input type="number" id="InputHouseAd" placeholder="${languageChange.get(17)}" name="houseAddress" >
+                        <input type="text" id="InputCountryAd" placeholder="${languageChange.get(17)}" name="countryAddress" >
+                        <br><input type="text" id="InputCityAd" placeholder="${languageChange.get(18)}" name="cityAddress" >
+                        <br><input type="text" id="InputStreetAd" placeholder="${languageChange.get(19)}" name="streetAddress" >
+                        <br><input type="number" id="InputHouseAd" placeholder="${languageChange.get(20)}" name="houseAddress" >
                     </div>
                     <div class="buttonAdd">
-                        <button class="addButtonServlet" id="addButtonAddress" name="addButtonAddress">${languageChange.get(18)}</button>
+                        <button class="addButtonServlet" id="addButtonAddress" name="addButtonAddress">${languageChange.get(21)}</button>
                     </div>
                 </div>
             </div>
 
             <div class="delDiv" id="delDiv" style="display: none;">
                     <div class="InputDelDiv">
-                        <input class="inputDel" type="number" id="InputDelAddress" placeholder="${languageChange.get(19)}" name="addressDel">
+                        <input class="inputDel" type="number" id="InputDelAddress" placeholder="${languageChange.get(22)}" name="addressDel">
                     </div>
-                    <button class="delButtonServlet" id="delButtonAddress" name="delButtonAddress">${languageChange.get(20)}</button>
+                    <button class="delButtonServlet" id="delButtonAddress" name="delButtonAddress">${languageChange.get(23)}</button>
             </div>
 
             <table id="myTable">
                 <tr>
-                    <th id="keyUnique">${languageChange.get(21)}</th>
-                    <th id="country">${languageChange.get(22)}</th>
-                    <th id="city">${languageChange.get(23)}</th>
-                    <th id="street">${languageChange.get(24)}</th>
-                    <th id="house">${languageChange.get(25)}</th>
+                    <th id="keyUnique">${languageChange.get(24)}</th>
+                    <th id="country">${languageChange.get(25)}</th>
+                    <th id="city">${languageChange.get(26)}</th>
+                    <th id="street">${languageChange.get(27)}</th>
+                    <th id="house">${languageChange.get(28)}</th>
                 </tr>
                 <c:if test="${not requestScope.Error}">
                             <c:forEach var="address" items="${ThirdPageShow}">
@@ -93,7 +108,7 @@
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>
-                        sweetAlert("${languageChange.get(26)}", "${languageChange.get(27)}", "error");
+                        sweetAlert("${languageChange.get(29)}", "${languageChange.get(30)}", "error");
                     </script>
                 </c:if>
             </table>
@@ -110,6 +125,6 @@
                 <a><input class="buttonPagination" type="submit" name="AdminAuthorPagination" value="»"></a>
             </div>
         </form>
-    <script src="./JS/adminJS/thirdPage/AdminThirdMenu.js" type="text/javascript"></script>
+    <script src="./JS/adminJS/thirdPage/AdminThirdMenu1.js" type="text/javascript"></script>
     </body>
 </html>

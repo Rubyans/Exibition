@@ -13,13 +13,14 @@ import java.util.List;
 public class FourthPageDB {
     private static final Logger LOGGER = Logger.getLogger(FourthPageDB.class);
 
-    public static List<AuthorShow> authorShow() { //function shows author
+    public static List<AuthorShow> authorShow(String valueRows) { //function shows author
         try {
             Connection connAuthor = HikariConnectDB.getConnection();
             List<AuthorShow> author = new ArrayList<>();
             String firstName = null;
             String lastName = null;
             String email = null;
+            Integer countRows = 0;
 
             PreparedStatement statement = connAuthor.prepareStatement(SELECT_AUTHOR, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet setAuthor = statement.executeQuery();
@@ -27,8 +28,14 @@ public class FourthPageDB {
                 firstName = setAuthor.getString(1);
                 lastName = setAuthor.getString(2);
                 email = setAuthor.getString(3);
-
-                author.add(new AuthorShow(firstName, lastName, email));
+                if (valueRows.equals("all"))
+                    author.add(new AuthorShow(firstName, lastName, email));
+                else {
+                    if (countRows < Integer.parseInt(valueRows)) {
+                        author.add(new AuthorShow(firstName, lastName, email));
+                        countRows++;
+                    }
+                }
             }
             statement.close();
             LOGGER.debug("authorShow in debug");

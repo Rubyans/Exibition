@@ -44,38 +44,53 @@
                 <button class="exitButton" id="exitButton" name="exitButton">${languageChange.get(8)}</button>
             </div>
             <div class="buttonAuthor">
-                <button class="updateButton" id="updateButton" name="updateButton" >${languageChange.get(9)}</button>
+                <button class="updateButton" id="updateButton" name="updateButton" onclick="updateFunc()" type="Button">${languageChange.get(9)}</button>
                 <button class="addButton" id="addButton" name="addButton" onclick="addFunc()" type="Button">${languageChange.get(10)}</button>
                 <button class="deleteButton" id="deleteButton" name="deleteButton" onclick="delFunc()" type="Button" >${languageChange.get(11)}</button>
                 <button class="saveButton" id="roleBackButton" name="roleBackButton">${languageChange.get(12)}</button>
                 <button class="saveButton" id="saveButton" name="saveButton">${languageChange.get(13)}</button>
             </div>
 
+            <div class="updateDiv" id="updateDiv" style="display: none;">
+                <div class="wrapper">
+                    <h6 class="h6Upd" id="updateTxt">${languageChange.get(14)}</h6>
+                    <select class="UpdateSort" name="UpdateSort" id="UpdateSort">
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="all">${languageChange.get(15)}</option>
+                    </select>
+                    <div class="buttonAdd">
+                        <button class="updateButtonServlet" id="updateButton" name="updateButton">${languageChange.get(16)}</button>
+                    </div>
+                </div>
+            </div>
+
             <div id="addDiv" style="display: none;">
                 <div class="wrapper">
                     <div class="left_block">
-                        <input type="text" id="InputFirstNameAd" placeholder="${languageChange.get(14)}" name="firstNameAuthor" >
-                        <br><input type="text" id="InputLastNameAd" placeholder="${languageChange.get(15)}" name="lastNameAuthor" >
-                        <br><input type="email" id="InputEmailAd" placeholder="${languageChange.get(16)}" name="emailAuthor" >
+                        <input type="text" id="InputFirstNameAd" placeholder="${languageChange.get(17)}" name="firstNameAuthor" >
+                        <br><input type="text" id="InputLastNameAd" placeholder="${languageChange.get(18)}" name="lastNameAuthor" >
+                        <br><input type="email" id="InputEmailAd" placeholder="${languageChange.get(19)}" name="emailAuthor" >
                     </div>
                     <div class="buttonAdd">
-                        <button class="addButtonServlet" id="addButtonAuthor" name="addButtonAuthor">${languageChange.get(17)}</button>
+                        <button class="addButtonServlet" id="addButtonAuthor" name="addButtonAuthor">${languageChange.get(20)}</button>
                     </div>
                 </div>
             </div>
 
             <div class="delDiv" id="delDiv" style="display: none;">
                     <div class="InputDelDiv">
-                        <input class="inputDel" type="email" id="InputDelAuthor" placeholder="${languageChange.get(16)}" name="authorDel">
+                        <input class="inputDel" type="email" id="InputDelAuthor" placeholder="${languageChange.get(19)}" name="authorDel">
                     </div>
-                    <button class="delButtonServlet" id="delButtonAuthor" name="delButtonAuthor">${languageChange.get(18)}</button>
+                    <button class="delButtonServlet" id="delButtonAuthor" name="delButtonAuthor">${languageChange.get(21)}</button>
             </div>
 
             <table id="myTable">
                 <tr>
-                    <th id="firstName">${languageChange.get(19)}</th>
-                    <th id="lastName">${languageChange.get(20)}</th>
-                    <th id="email">${languageChange.get(21)}</th>
+                    <th id="firstName">${languageChange.get(22)}</th>
+                    <th id="lastName">${languageChange.get(23)}</th>
+                    <th id="email">${languageChange.get(24)}</th>
                 </tr>
                 <c:if test="${not requestScope.Error}">
                             <c:forEach var="author" items="${FouthPageShow}">
@@ -88,7 +103,7 @@
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>
-                        sweetAlert("${languageChange.get(22)}", "${languageChange.get(23)}", "error");
+                        sweetAlert("${languageChange.get(25)}", "${languageChange.get(26)}", "error");
                     </script>
                 </c:if>
             </table>
@@ -105,6 +120,6 @@
                 <a><input class="buttonPagination" type="submit" name="AdminArtPagination" value="»"></a>
             </div>
         </form>
-    <script src="./JS/adminJS/fourthPage/AdminFourthMenu.js" type="text/javascript"></script>
+    <script src="./JS/adminJS/fourthPage/AdminFourthMenu1.js" type="text/javascript"></script>
     </body>
 </html>

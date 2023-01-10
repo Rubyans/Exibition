@@ -15,15 +15,17 @@ import static app.DAO.sqlFunctions.sqlRequests.SQLRequests.SecondPageUser.*;
 public class SecondPageDB {
     private static final Logger LOGGER = Logger.getLogger(SecondPageDB.class);
 
-    public static List<UserShowExhibition> showExhibition(String userId) { //function shows exhibitions data
+    public static List<UserShowExhibition> showExhibition(String valueRows, String userId) { //function shows exhibitions data
         try {
             Connection connUserEx = HikariConnectDB.getConnection();
             List<UserShowExhibition> user = new ArrayList<>();
             List<String> nameEx = new ArrayList<>();
 
+            Integer countRows = 0;
+
             String nameExhibition = null;
             String descriptionExibition = null;
-            String hours=null;
+            String hours = null;
             BigDecimal price = null;
             java.sql.Date dateStart = null;
             Date dateEnd = null;
@@ -55,14 +57,22 @@ public class SecondPageDB {
                     price = resultSet.getBigDecimal(4);
                     dateStart = resultSet.getDate(5);
                     dateEnd = resultSet.getDate(6);
-                    hours=resultSet.getString(7);
+                    hours = resultSet.getString(7);
                     nameHell.add(resultSet.getString(8));
                     nameAuthor.add(resultSet.getString(9) + " " + resultSet.getString(10));
                     nameview.add(resultSet.getString(11));
                     addressExibition.add(resultSet.getString(12) + ", " + resultSet.getString(13) + " " + resultSet.getString(14));
                 }
-                if (nameExhibition != null)
-                    user.add(new UserShowExhibition(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd,hours, nameHell, nameAuthor, nameview, addressExibition));
+                if (nameExhibition != null) {
+                    if (valueRows.equals("all"))
+                        user.add(new UserShowExhibition(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd, hours, nameHell, nameAuthor, nameview, addressExibition));
+                    else {
+                        if (countRows < Integer.parseInt(valueRows)) {
+                            user.add(new UserShowExhibition(nameExhibition, descriptionExibition, expositionName, price, dateStart, dateEnd, hours, nameHell, nameAuthor, nameview, addressExibition));
+                            countRows++;
+                        }
+                    }
+                }
                 nameExhibition = null;
                 descriptionExibition = null;
                 price = null;

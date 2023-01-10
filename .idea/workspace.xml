@@ -4,11 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="343ac60a-8367-4fc8-91d9-9129c7ec50ec" name="Changes" comment="do filters pagination and session">
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterLanguage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterPagination.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logFile.log" afterDir="false" />
+    <list default="true" id="343ac60a-8367-4fc8-91d9-9129c7ec50ec" name="Changes" comment="mockito unit tests">
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/recoveryPassword/RecoveryUserDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/recoveryPassword/PasswordCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/recoveryPassword/RecoveryCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/recoveryModels/ModelRecovery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/recoveryModels/ModelRecoveryPassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/service/recoveryPassword/EmailSend.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/service/recoveryPassword/GeneratePassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/languageEN.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/languageUA.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mail.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/eighthPage/AdminEighthMenu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/secondPage/AdminSecondMenu1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/sixthPage/AdminSixthMenu1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/fubctionsRecovery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/functionsGuest12.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/functionsPassword.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/JS/userJS/secondPage/UserExhibition1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.mail-1.6.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/stylePassword/FormPassword.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/style/styleRecovery/FormRecovery.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/recoveryPassword/PasswordForm.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/recoveryPassword/RecoveryForm.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/connectionDAO/HikariConnectDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/connectionDAO/HikariConnectDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/UserGuestDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/UserGuestDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/eighthPage/EighthPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/eighthPage/EighthPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/fifthPage/FifthPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/fifthPage/FifthPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/firstPage/FirstPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/firstPage/FirstPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/fourthPage/FourthPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/fourthPage/FourthPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/secondPage/SecondPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/secondPage/SecondPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/seventhPage/SeventhPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/seventhPage/SeventhPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/sixthPage/SixthPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/sixthPage/SixthPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/thirdPage/ThirdPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/admin/thirdPage/ThirdPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/sqlRequests/SQLRequests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/sqlRequests/SQLRequests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/user/firstPage/FirstPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/user/firstPage/FirstPageDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/user/secondPage/SecondPageDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/DAO/sqlFunctions/user/secondPage/SecondPageDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/AuthorizedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/AuthorizedCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/GuestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/GuestCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/RegistrationCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/RegistrationCommand.java" afterDir="false" />
@@ -22,30 +56,40 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/admin/thirdPage/ThirdPageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/admin/thirdPage/ThirdPageCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/user/firstPage/UserFirstCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/user/firstPage/UserFirstCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/user/secondPage/UserSecondCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/commands/user/secondPage/UserSecondCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/controller/FrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/controller/FrontController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/filterAuthorization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/filterEncoding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterEncoding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/filterRegistration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/ModelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/adminModels/eighthPage/ModelLanguageAdminEighth.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/adminModels/fifthPage/ModelLanguageAdminFifth.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/adminModels/firstPage/ModelLanguageAdminFirst.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/adminModels/fourthPage/ModelLanguageAdminFourth.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/adminModels/secondPage/ModelLanguageAdminSecond.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/adminModels/seventhPage/ModelLanguageAdminSeventh.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/adminModels/sixthPage/ModelLanguageAdminSixth.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/adminModels/thirdPage/ModelLanguageAdminThird.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/authorizationModels/ModelLanguageAuthorization.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/guestModels/ModelLanguageGuest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/registrationModels/ModelLanguageRegistration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/userModels/firstPage/ModelLanguageUserFirst.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/models/userModels/secondPage/ModelLanguageUserSecond.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterLanguage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterLanguage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterPagination.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterPagination.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/filters/FilterSession.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/redirect/RedirectInternals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/redirect/RedirectInternals.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllerFront/tags/virguleTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllerFront/tags/VirguleTag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/service/changeLanguage/ChangeLanguage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/service/changeLanguage/ChangeLanguage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/service/sorting/SortGuest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/service/sorting/SortGuest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/language.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/tlds/customTag.tld" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/tlds/customTag.tld" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logFile.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/fifthPage/AdminFifthMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/fifthPage/AdminFifthMenu1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/firstPage/AdminFirstMenu1.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/firstPage/AdminFirstMenu1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/fourthPage/AdminFourthMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/fourthPage/AdminFourthMenu1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/secondPage/AdminSecondMenu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/seventhPage/AdminSeventhMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/seventhPage/AdminSeventhMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/sixthPage/AdminSixthMenu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/thirdPage/AdminThirdMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/adminJS/thirdPage/AdminThirdMenu1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/functionsGuest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/userJS/firstPage/UserAutorized.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/userJS/firstPage/UserAutorized1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleRegistration/FormRegistration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleRegistration/FormRegistrations.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/eighthPage/FormStatisticsExhibition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/eighthPage/FormStatisticsExhibition.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/fifthPage/FormArt.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/fifthPage/FormArt.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/firstPage/FormExhibition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/firstPage/FormExhibition.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/fourthPage/FormAuthor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/fourthPage/FormAuthor.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/secondPage/FormHall.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/secondPage/FormHall.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/seventhPage/FormUserAutorized.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/seventhPage/FormUserAutorized.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/sixthPage/FormView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/sixthPage/FormView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/thirdPage/FormAddress.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAdmin/thirdPage/FormAddress.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleAutorized/FormAutorized.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleAutorized/FormAutorized.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleGuest/FormGuest.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleGuest/FormGuest.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleRegistration/FormRegistrations.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleRegistration/FormRegistration.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleUser/firstPage/FormUser.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleUser/firstPage/FormUser.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/styleUser/secondPage/FormUserExhibition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style/styleUser/secondPage/FormUserExhibition.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/GuestForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/GuestForm.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/RegistrationForm.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/eighthPage/AdminEighthMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/eighthPage/AdminEighthMenu.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/fifthPage/AdminFifthMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/fifthPage/AdminFifthMenu.jsp" afterDir="false" />
@@ -55,6 +99,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/seventhPage/AdminSeventhMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/seventhPage/AdminSeventhMenu.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/sixthPage/AdminSixthMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/sixthPage/AdminSixthMenu.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/thirdPage/AdminThirdMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/adminMenu/thirdPage/AdminThirdMenu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/userMenu/firstPage/UserFirstMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/userMenu/firstPage/UserFirstMenu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/userMenu/secondPage/UserSecondMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/userMenu/secondPage/UserSecondMenu.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,8 +135,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/projectjava/Exibition/src/main/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/projectjava/Exibition/src/main/webapp/JS&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
@@ -98,28 +144,28 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projectjava\Exibition\src\main\webapp\JS" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\style" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\JS\userJS" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\JS\adminJS" />
       <recent name="D:\projectjava\Exibition\src\main\resources" />
-      <recent name="D:\projectjava\Exibition\src\main\resources\changeLanguage" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\JS\adminJS\eighthPage" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\views\adminMenu\eighthPage" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\style\styleAdmin\eighthPage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\projectjava\Exibition\src\main\resources" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\views\recoveryPassword" />
       <recent name="D:\projectjava\Exibition\src\main\webapp\WEB-INF\lib" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\META-INF" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\WEB-INF\tlds" />
-      <recent name="D:\projectjava\Exibition\src\main\webapp\WEB-INF\tags" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp\image" />
+      <recent name="D:\projectjava\Exibition\src\main\webapp" />
+      <recent name="D:\projectjava\Exibition\src\main\resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="app.servlets" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="app.controllerFront.models.recoveryModels" />
+      <recent name="app.controllerFront.commands" />
+      <recent name="app.controllerFront.models.recoveryModel" />
       <recent name="app.controllerFront.filters" />
       <recent name="app.controller.commands.admin.eighthPage" />
-      <recent name="app.controller.commands.admin.seventhPage" />
-      <recent name="app.controller.commands.admin.sixthPage" />
-      <recent name="app.controller.commands.admin.fifthPage" />
     </key>
   </component>
   <component name="RunManager">
@@ -228,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672436184991</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="will write tests">
+      <created>1672678801071</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1672678801071</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,6 +307,8 @@
     <MESSAGE value="languageCheck" />
     <MESSAGE value="will do filter" />
     <MESSAGE value="do filters pagination and session" />
-    <option name="LAST_COMMIT_MESSAGE" value="do filters pagination and session" />
+    <MESSAGE value="will write tests" />
+    <MESSAGE value="mockito unit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="mockito unit tests" />
   </component>
 </project>

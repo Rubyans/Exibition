@@ -22,12 +22,12 @@ public class UserSecondCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "userSecond"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "userSecond"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "userSecond"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "userSecond"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "userSecond"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "userSecond"));
             }
 
             if (modelShowExhibition.listShow() != null) {
@@ -50,7 +50,8 @@ public class UserSecondCommand implements Command {
                 ModelShowExhibition modelShowExhibition = ModelShowExhibition.getInstance();
                 try {
                     String userId = (String) req.getSession().getAttribute("UserId");
-                    for (UserShowExhibition userShow : SecondPageDB.showExhibition(userId)) {
+                    String valueRows=req.getParameter("UpdateSort");
+                    for (UserShowExhibition userShow : SecondPageDB.showExhibition(valueRows,userId)) {
                         modelShowExhibition.add(userShow);
                     }
                 } catch (Exception e) {

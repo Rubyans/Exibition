@@ -59,33 +59,48 @@
             </h4>
         </div>
         <div class="buttonUser">
-            <button class="updateButton" name="updateButton" id="updateButton">${languageChange.get(11)}</button>
+            <button class="updateButton" name="updateButton" id="updateButton" onclick="updateFunc()" type="Button">${languageChange.get(11)}</button>
             <button class="addButton" type="Button" name="addButton" onclick="addFunc()" id="addButton">${languageChange.get(12)}</button>
             <button class="saveButton" name="saveButton" id="saveButton">${languageChange.get(13)}</button>
             <button class="roleBackButton" name="roleBackButton" id="roleBackButton">${languageChange.get(14)}</button>
         </div>
 
+        <div id="updateDiv" style="display: none;">
+            <div class="wrapper">
+                <h6 class="h6Add" id="updateTxt">${languageChange.get(15)}</h6>
+                <select class="UpdateSort" name="UpdateSort" id="UpdateSort">
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="all">${languageChange.get(16)}</option>
+                </select>
+                <div class="buttonAdd">
+                    <button class="updateButtonServlet" id="updateButton" name="updateButton">${languageChange.get(17)}</button>
+                </div>
+            </div>
+        </div>
+
         <div id="addDiv" style="display: none;">
             <div class="wrapper">
-                 <h6 class="h6Add" id="nameEx">${languageChange.get(15)}</h6>
+                 <h6 class="h6Add" id="nameEx">${languageChange.get(18)}</h6>
                  <select class="SelectExhibition" name="nameExhibition" id="SelectExhibition" multiple>
                     <c:forEach var="name" items="${AddShow}">
                         <option value="${name.getNameExhibition()}">${name.getNameExhibition()}</option>
                     </c:forEach>
                  </select>
                 <div class="buttonAdd">
-                    <button class="addButtonServlet" id="addButtonTicket" name="addButtonTicket">${languageChange.get(16)}</button>
+                    <button class="addButtonServlet" id="addButtonTicket" name="addButtonTicket">${languageChange.get(19)}</button>
                 </div>
             </div>
         </div>
         <table id="myTable">
             <tr>
-                <th id="nameExhibition">${languageChange.get(17)}</th>
-                <th id="ticketPrice">${languageChange.get(18)}</th>
-                <th id="dateStart">${languageChange.get(19)}</th>
-                <th id="dateEnd">${languageChange.get(20)}</th>
-                <th id="Hour">${languageChange.get(21)}</th>
-                <th id="boughtTicket">${languageChange.get(22)}</th>
+                <th id="nameExhibition">${languageChange.get(20)}</th>
+                <th id="ticketPrice">${languageChange.get(21)}</th>
+                <th id="dateStart">${languageChange.get(22)}</th>
+                <th id="dateEnd">${languageChange.get(23)}</th>
+                <th id="Hour">${languageChange.get(24)}</th>
+                <th id="boughtTicket">${languageChange.get(25)}</th>
             </tr>
             <c:if test="${not requestScope.Error}">
                 <c:forEach var="user" items="${FirstPageUser}">
@@ -112,7 +127,7 @@
             <a><input class="buttonPagination" type="submit" name="UserExhibitionPagination" value="»"></a>
         </div>
     </form>
-    <script src="./JS/userJS/firstPage/UserAutorized.js" type="text/javascript"></script>
+    <script src="./JS/userJS/firstPage/UserAutorized1.js" type="text/javascript"></script>
 </body>
 </html>
 

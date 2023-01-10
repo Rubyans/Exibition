@@ -59,7 +59,8 @@ div.languageDiv {
     margin:0px;
     text-align:center;
 }
-.h6Acc {
+
+.h6Acc,.h6Upd {
     margin:0px;
     margin-top:1%;
     margin-bottom:1%;
@@ -72,7 +73,6 @@ div.languageDiv {
     margin-left:0.3%;
     width:30%;
 }
-
 
 div.wrapper {
     width:50%;
@@ -96,10 +96,25 @@ div.right_block {
     margin-top:1%;
 }
 
-#addDiv {
+#addDiv,#updateDiv {
     margin-left:5px;
 }
 
+.UpdateSort{
+    width: 40%;
+    border: none;
+    background: #f1f1f1;
+    margin: 0 auto;
+    display: block;
+}
+
+.updateButtonServlet {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color:#1C7947;
+}
 
 .SelectAdd {
     width: 100%;
@@ -138,7 +153,7 @@ div.InputDelDiv,div.InputAccessDiv {
 div.delDiv {
     display: flex;
     justify-content: space-between;
-    width:42%;
+    width:43.8%;
     margin-left:0.43%;
     margin-bottom:0.6%;
     border: 1px solid #f1f1f1;
@@ -154,10 +169,10 @@ div.delDiv {
     background-color:#EB1D36;
 }
 
-div.accessDiv {
+div.accessDiv,div.updateDiv {
     display: flex;
     justify-content: space-between;
-    width:42%;
+    width:43.8%;
     margin-left:0.43%;
     margin-bottom:0.6%;
     border: 1px solid #f1f1f1;

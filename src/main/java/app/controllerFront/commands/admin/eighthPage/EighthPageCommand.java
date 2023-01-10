@@ -24,12 +24,12 @@ public class EighthPageCommand implements Command {
             ModelShowStatistics modelShowStatistics = ModelShowStatistics.getInstance();
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminEighth"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "adminEighth"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminEighth"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminEighth"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminEighth"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminEighth"));
             }
 
             if (modelShowStatistics.listShow() != null) {
@@ -50,7 +50,8 @@ public class EighthPageCommand implements Command {
             if (req.getParameter("updateButton") != null) {
                 ModelShowStatistics modelShowStatistics = ModelShowStatistics.getInstance();
                 try {
-                    for (ExhibitionStatisticsShow exhibition : EighthPageDB.statisticsShow())
+                    String valueRows=req.getParameter("UpdateSort");
+                    for (ExhibitionStatisticsShow exhibition : EighthPageDB.statisticsShow(valueRows))
                         modelShowStatistics.add(exhibition);
                     LOGGER.debug("doPost in debug");
                 } catch (Exception e) {

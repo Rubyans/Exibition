@@ -29,12 +29,12 @@ public class SeventhPageCommand implements Command {
             ModelChangeAccess modelChangeAccess = ModelChangeAccess.getInstance();
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminSeventh"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "adminSeventh"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminSeventh"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminSeventh"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminSeventh"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminSeventh"));
             }
 
             if (modelShowUserAutorized.listShow() != null) {
@@ -87,7 +87,8 @@ public class SeventhPageCommand implements Command {
             if (req.getParameter("updateButton") != null) {
                 ModelShowUserAutorized modelShowUserAutorized = ModelShowUserAutorized.getInstance();
                 try {
-                    for (UserAutorizedShow userAuto : SeventhPageDB.userAuto())
+                    String valueRows=req.getParameter("UpdateSort");
+                    for (UserAutorizedShow userAuto : SeventhPageDB.userAuto(valueRows))
                         modelShowUserAutorized.add(userAuto);
                     LOGGER.debug("doPost in debug");
                 } catch (Exception e) {

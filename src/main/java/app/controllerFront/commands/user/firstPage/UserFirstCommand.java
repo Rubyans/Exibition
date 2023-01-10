@@ -35,12 +35,12 @@ public class UserFirstCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "userFirst"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "userFirst"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "userFirst"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "userFirst"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "userFirst"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "userFirst"));
             }
 
             try {
@@ -111,8 +111,9 @@ public class UserFirstCommand implements Command {
             if (req.getParameter("updateButton") != null) {
                 ModelShowExhibition modelShowExhibition = ModelShowExhibition.getInstance();
                 String userId = (String) req.getSession().getAttribute("UserId");
+                String valueRows=req.getParameter("UpdateSort");
                 try {
-                    for (UserShowExhibition user : FirstPageDB.userShowEx(userId)) {
+                    for (UserShowExhibition user : FirstPageDB.userShowEx(valueRows,userId)) {
                         modelShowExhibition.add(user);
                     }
                     LOGGER.debug("doGet in debug");

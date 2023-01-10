@@ -33,6 +33,7 @@ public class FilterLanguage implements Filter {
                 req.getSession().setAttribute("language", "en");
                 resp.sendRedirect("exhibition?command=" + command);
             } else if (req.getParameter("ukraineButton") != null) {
+                req.getSession().setAttribute("checkLanguage", listener);
                 req.getSession().setAttribute("language", "ua");
                 resp.sendRedirect("exhibition?command=" + command);
             } else {

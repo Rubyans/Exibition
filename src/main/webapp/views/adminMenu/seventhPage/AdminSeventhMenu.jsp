@@ -69,103 +69,84 @@
             <button class="exitButton" id="exitButton" name="exitButton">${languageChange.get(14)}</button>
         </div>
         <div class="buttonAuto">
-            <button class="updateButton" id="updateButton" name="updateButton">${languageChange.get(15)}</button>
-            <button class="addButton" id="addButton" name="addButton" onclick="addFunc()" type="Button">${languageChange.get(16)}</button>
+            <button class="updateButton" id="updateButton" name="updateButton" onclick="updateFunc()" type="Button">${languageChange.get(15)}</button>
+            <button class="addButton" id="addButton" name="addButton" onclick="addMoney()" type="Button">${languageChange.get(16)}</button>
             <button class="deleteButton" id="deleteButton" name="deleteButton" onclick="delFunc()" type="Button">${languageChange.get(17)}</button>
             <button class="accessButton" name="accessButton" id="accessButton" onclick="accessFunc()" type="Button">${languageChange.get(18)}</button>
             <button class="saveButton" id="roleBackButton" name="roleBackButton">${languageChange.get(19)}</button>
             <button class="saveButton" id="saveButton" name="saveButton">${languageChange.get(20)}</button>
         </div>
 
-        <div id="addDiv" style="display:none;">
+        <div class="updateDiv" id="updateDiv" style="display: none;">
             <div class="wrapper">
-                <h6 class="h6Add" id="addH6">${languageChange.get(21)}</h6>
+                <h6 class="h6Upd" id="updateTxt">${languageChange.get(21)}</h6>
+                <select class="UpdateSort" name="UpdateSort" id="UpdateSort">
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="all">${languageChange.get(22)}</option>
+                </select>
                 <div class="buttonAdd">
-                    <button type="Button" id="addButtonUser" class="addButtonUser" onclick="addUser()" name="addButtonUser">${languageChange.get(22)}</button>
-                    <button type="Button" id="addButtonMoney" class="addButtonMoney" onclick="addMoney()" name="addButtonMoney">${languageChange.get(23)}</button>
+                    <button class="updateButtonServlet" id="updateButton" name="updateButton">${languageChange.get(23)}</button>
                 </div>
             </div>
         </div>
-        <div id="addDivUser" style="display: none;">
-            <div class="wrapper">
-                <div class="SelectDiv">
-                    <h6 id="roleChange" class="h6Add">${languageChange.get(24)}</h6>
-                    <select class="SelectRole" name="role" id="SelectRole">
-                        <option value="1">${languageChange.get(25)}</option>
-                        <option value="2">${languageChange.get(26)}</option>
-                    </select>
-                </div>
-                <div class="left_block">
-                    <input type="text" id="InputFirstNameAuto" placeholder="${languageChange.get(27)}" name="firstName" >
-                    <input type="text" id="InputLastNameAuto" placeholder="${languageChange.get(28)}" name="lastName" >
-                    <input type="text" id="InputLoginAuto" placeholder="${languageChange.get(29)}" name="login" >
-                </div>
-                <div class="right_block">
-                    <input type="text" id="InputPasswordAuto" placeholder="${languageChange.get(30)}" name="password" >
-                    <input type="email" id="InputEmailAuto" placeholder="${languageChange.get(31)}" name="email" >
-                    <input type="number" id="InputAmountAuto" placeholder="${languageChange.get(32)}" step="any" name="amount" >
-                </div>
-                <button class="addButtonServlet" id="addButtonAuto" name="addButtonAuto">${languageChange.get(33)}</button>
-            </div>
-        </div>
+
         <div id="addDivMoney" style="display:none;">
             <div class="wrapper">
                 <div class="left_block">
-                    <input type="email" id="InputEmailUserAuto" placeholder="${languageChange.get(34)}" name="emailMoney" >
+                    <input type="email" id="InputEmailUserAuto" placeholder="${languageChange.get(37)}" name="emailMoney" >
                 </div>
                 <div class="right_block">
-                    <input type="number" id="InputAmountUserAuto" placeholder="${languageChange.get(35)}" step="any" name="money" >
+                    <input type="number" id="InputAmountUserAuto" placeholder="${languageChange.get(38)}" step="any" name="money" >
                 </div>
-                <button class="addButtonServlet" id="ButtonMoney" name="ButtonMoney">${languageChange.get(36)}</button>
+                <button class="addButtonServlet" id="ButtonMoney" name="ButtonMoney">${languageChange.get(39)}</button>
             </div>
         </div>
+
         <div class="delDiv" id="delDiv" style="display: none;">
             <div class="InputDelDiv">
-                <input class="inputDel" type="email" id="InputDelAuto" placeholder="${languageChange.get(37)}" name="autoDel">
+                <input class="inputDel" type="email" id="InputDelAuto" placeholder="${languageChange.get(40)}" name="autoDel">
             </div>
-            <button class="delButtonServlet" id="delButtonAuto" name="delButtonAuto">${languageChange.get(38)}</button>
+            <button class="delButtonServlet" id="delButtonAuto" name="delButtonAuto">${languageChange.get(41)}</button>
         </div>
         <div class="accessDiv" id="accessDiv" style="display: none;">
             <div class="checkAccess">
-                <h6 class="h6Acc" id="userChange">${languageChange.get(39)}</h6>
+                <h6 class="h6Acc" id="userChange">${languageChange.get(42)}</h6>
                 <select class="SelectAccess" name="access" id="SelectAccess">
-                    <option value="1">${languageChange.get(40)}</option>
-                    <option value="2">${languageChange.get(41)}</option>
+                    <option value="1">${languageChange.get(43)}</option>
+                    <option value="2">${languageChange.get(44)}</option>
                 </select>
             </div>
             <div class="InputAccessDiv">
-                <input class="inputAccess" type="email" id="InputAccessEmail" placeholder="${languageChange.get(42)}" name="emailExhibitionAccess">
+                <input class="inputAccess" type="email" id="InputAccessEmail" placeholder="${languageChange.get(45)}" name="emailExhibitionAccess">
             </div>
-            <button class="accessButtonServlet" id="accessButtonServlet" name="accessButtonServlet">${languageChange.get(43)}</button>
+            <button class="accessButtonServlet" id="accessButtonServlet" name="accessButtonServlet">${languageChange.get(46)}</button>
         </div>
         <table id="myTable">
             <tr>
-                <th id="firstName">${languageChange.get(44)}</th>
-                <th id="lastName">${languageChange.get(45)}</th>
-                <th id="login">${languageChange.get(46)}</th>
-                <th id="password">${languageChange.get(47)}</th>
-                <th id="email">${languageChange.get(48)}</th>
-                <th id="amount">${languageChange.get(49)}</th>
-                <th id="role">${languageChange.get(50)}</th>
-                <th id="access">${languageChange.get(51)}</th>
+                <th id="firstName">${languageChange.get(47)}</th>
+                <th id="lastName">${languageChange.get(48)}</th>
+                <th id="email">${languageChange.get(51)}</th>
+                <th id="amount">${languageChange.get(52)}</th>
+                <th id="role">${languageChange.get(53)}</th>
+                <th id="access">${languageChange.get(54)}</th>
             </tr>
             <c:if test="${not requestScope.Error}">
                 <c:forEach var="autorized" items="${SeventhPageShow}">
                     <tr>
                         <td>${autorized.getFirstName()}</td>
                         <td>${autorized.getLastName()}</td>
-                        <td>${autorized.getLogin()}</td>
-                        <td>${autorized.getPassword()}</td>
                         <td>${autorized.getEmail()}</td>
                         <td>${autorized.getAmount()}</td>
-                        <tagfile:changeLanguageRole language="${languageChange.get(52)}" role="${autorized.getRole()}"></tagfile:changeLanguageRole>
+                        <tagfile:changeLanguageRole language="${languageChange.get(55)}" role="${autorized.getRole()}"></tagfile:changeLanguageRole>
                         <tagfile:tableColor name="${autorized.getAccess()}"></tagfile:tableColor>
                     </tr>
                 </c:forEach>
             </c:if>
             <c:if test="${requestScope.Error}">
                 <script>
-                        sweetAlert("${languageChange.get(53)}", "${languageChange.get(54)}", "error");
+                        sweetAlert("${languageChange.get(56)}", "${languageChange.get(57)}", "error");
                 </script>
             </c:if>
         </table>

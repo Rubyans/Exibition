@@ -13,9 +13,7 @@ import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class HikariConnectDB {
-
     private static final Logger LOGGER = Logger.getLogger(HikariConnectDB.class);
-
     private static Connection connectionDB;
     private static Savepoint savepoint;
 

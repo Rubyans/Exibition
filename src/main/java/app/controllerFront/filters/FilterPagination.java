@@ -28,11 +28,10 @@ public class FilterPagination implements Filter {
         if (command == null) {
             resp.sendRedirect("exhibition?command=auto");
         } else {
-            if (command.equals("auto") || command.equals("reg") || command.equals("guest")) {
+            if (command.equals("auto") || command.equals("reg") || command.equals("guest") || command.equals("recovery") || command.equals("recoverypassword")) {
                 chain.doFilter(req, resp);
             } else {
                 if (command.equals("user") || command.equals("userexhibition")) { //check pagination for user
-                    System.out.println("filter");
                     if (req.getParameter("UserPagination") != null) {
                         resp.sendRedirect("exhibition?command=user");
                     } else if (req.getParameter("UserExhibitionPagination") != null) {

@@ -20,12 +20,28 @@
                 <button class="exitButton" id="exitButton" name="exitButton">${languageChange.get(2)}</button>
             </div>
             <div class="buttonStatistics">
-                <button class="updateButton" name="updateButton" id="updateButton">${languageChange.get(3)}</button>
+                <button class="updateButton" name="updateButton" id="updateButton" type="Button" onclick="updateFunc()">${languageChange.get(3)}</button>
             </div>
+
+            <div class="updateDiv" id="updateDiv" style="display: none;">
+                <div class="wrapper">
+                    <h6 class="h6Upd" id="updateTxt">${languageChange.get(4)}</h6>
+                    <select class="UpdateSort" name="UpdateSort" id="UpdateSort">
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="all">${languageChange.get(5)}</option>
+                    </select>
+                    <div class="buttonAdd">
+                        <button class="updateButtonServlet" id="updateButton" name="updateButton">${languageChange.get(6)}</button>
+                    </div>
+                </div>
+            </div>
+
             <table id="myTable">
                 <tr>
-                    <th id="nameExhibition">${languageChange.get(4)}</th>
-                    <th id="ticketExhibition">${languageChange.get(5)}</th>
+                    <th id="nameExhibition">${languageChange.get(7)}</th>
+                    <th id="ticketExhibition">${languageChange.get(8)}</th>
                 </tr>
                 <c:if test="${not requestScope.Error}">
                     <c:forEach var="statistics" items="${EighthPageShow}">
@@ -37,7 +53,7 @@
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>
-                        sweetAlert("${languageChange.get(6)}", "${languageChange.get(7)}", "error");
+                        sweetAlert("${languageChange.get(9)}", "${languageChange.get(10)}", "error");
                     </script>
                 </c:if>
             </table>
@@ -54,6 +70,7 @@
                 <a><input class="buttonPagination" type="submit" name="AdminStatisticsPagination" value="»"></a>
             </div>
         </form>
+        <script src="./JS/adminJS/eighthPage/AdminEighthMenu.js" type="text/javascript"></script>
     </body>
 </html>
 

@@ -13,19 +13,26 @@ import java.util.List;
 public class SixthPageDB {
     private static final Logger LOGGER = Logger.getLogger(SixthPageDB.class);
 
-    public static List<ViewShow> viewShow() { //function shows views data
+    public static List<ViewShow> viewShow(String valueRows) { //function shows views data
         try {
             Connection connView = HikariConnectDB.getConnection();
             List<ViewShow> view = new ArrayList<>();
             String name;
             Integer viewId;
-
+            Integer countRows = 0;
             PreparedStatement statement = connView.prepareStatement(SELECT_VIEW_ART, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet setView = statement.executeQuery();
             while (setView.next()) {
                 viewId = setView.getInt(1);
                 name = setView.getString(2);
-                view.add(new ViewShow(viewId, name));
+                if (valueRows.equals("all"))
+                    view.add(new ViewShow(viewId, name));
+                else {
+                    if (countRows < Integer.parseInt(valueRows)) {
+                        view.add(new ViewShow(viewId, name));
+                        countRows++;
+                    }
+                }
             }
             statement.close();
             LOGGER.debug("viewShow in debug");

@@ -28,12 +28,12 @@ public class SixthPageCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminSixth"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "adminSixth"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminSixth"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminSixth"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminSixth"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminSixth"));
             }
 
             if (modelShowView.listShow() != null) {
@@ -70,7 +70,8 @@ public class SixthPageCommand implements Command {
             if (req.getParameter("updateButton") != null) {
                 ModelShowView modelShowView = ModelShowView.getInstance();
                 try {
-                    for (ViewShow view : SixthPageDB.viewShow())
+                    String valueRows = req.getParameter("UpdateSort");
+                    for (ViewShow view : SixthPageDB.viewShow(valueRows))
                         modelShowView.add(view);
                     LOGGER.debug("doPost in debug");
                 } catch (Exception e) {

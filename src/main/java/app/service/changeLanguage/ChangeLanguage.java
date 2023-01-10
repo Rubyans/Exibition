@@ -11,29 +11,24 @@ public class ChangeLanguage {
 
     private static final Logger LOGGER = Logger.getLogger(ChangeLanguage.class);
 
-    public static List<String> changeEN(String property,String propText) {
-        List<String> listEn = new ArrayList<>();
+    public static List<String> changeEN(String property, String propText) {
+        List<String> listEN = new ArrayList<>();
 
         try (InputStream input = ChangeLanguage.class.getClassLoader().getResourceAsStream(property)) {
-
             Properties props = new Properties();
             props.load(input);
 
-            Integer countText = 0, count = 1;
-            Boolean stopWhile=true;
+            Integer count = 0;
+            Boolean stopWhile = true;
 
             while (stopWhile) {
                 count++;
-                if (props.getProperty("ua." + propText + "." + count) == null) {
-                    stopWhile=false;
-                }
-                countText++;
+                if (props.getProperty(propText + "." + count) == null)
+                    stopWhile = false;
+                else
+                    listEN.add(props.getProperty(propText + "." + count));
             }
-
-            for (int i = 1; i <= countText; i++) {
-                listEn.add(props.getProperty("en." + propText + "." + i));
-            }
-            return listEn;
+            return listEN;
         } catch (Exception e) {
             LOGGER.error("changeEN " + e.getMessage());
         }
@@ -42,26 +37,23 @@ public class ChangeLanguage {
     }
 
     public static List<String> changeUA(String property, String propText) {
-        List<String> listEn = new ArrayList<>();
+        List<String> listUA = new ArrayList<>();
 
         try (InputStream input = ChangeLanguage.class.getClassLoader().getResourceAsStream(property)) {
             Properties props = new Properties();
             props.load(input);
 
-            Integer countText = 0, count = 0;
-            Boolean stopWhile=true;
+            Integer count = 0;
+            Boolean stopWhile = true;
 
             while (stopWhile) {
                 count++;
-                if (props.getProperty("ua." + propText + "." + count) == null) {
-                    stopWhile=false;
-                }
-                countText++;
+                if (props.getProperty(propText + "." + count) == null)
+                    stopWhile = false;
+                else
+                    listUA.add(props.getProperty(propText + "." + count));
             }
-            for (int i = 1; i <= countText; i++) {
-                listEn.add(props.getProperty("ua." + propText + "." + i));
-            }
-            return listEn;
+            return listUA;
         } catch (Exception e) {
             LOGGER.error("changeUA " + e.getMessage());
         }

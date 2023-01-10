@@ -1,0 +1,105 @@
+* {box-sizing: border-box}
+
+body {
+    background-color:#BA94D1;
+}
+
+.recoveryForm {
+    border:1px solid #ccc;
+   position: fixed; top: 50%; left: 50%;
+     -webkit-transform: translate(-50%, -50%);
+     -ms-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%);
+     background-color:white;
+}
+
+input[type=checkbox] {
+    margin-bottom: 10px;
+}
+
+input[type=email] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=email]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+
+}
+
+button:hover {
+    opacity:1;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: flex;
+}
+
+div.languageDiv {
+    display:flex;
+    width:100%;
+    justify-content: flex-end;
+}
+
+.labelChange {
+    font-weight:bold;
+}
+
+.languageButton {
+    width:5%;
+    padding:0;
+    margin:0;
+    margin-left:1%;
+}
+
+.recoveryButton {
+    background-color: #7c4caf;
+    margin-left:4%;
+}
+
+.autoButton,.recoveryButton {
+    width:45%;
+}
+
+.hyperlink {
+    color: #9e9898;
+    float:right;
+}
+
+.hyperforget {
+    margin-top:2%;
+}
+
+.hypercheckDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container {
+    padding: 16px;
+}
+

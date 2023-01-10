@@ -27,12 +27,12 @@ public class FourthPageCommand implements Command {
             ModelDelAuthor modelDelAuthor = ModelDelAuthor.getInstance();
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminFourth"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "adminFourth"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFourth"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminFourth"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFourth"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminFourth"));
             }
 
             if (modelShowAuthor.listShow() != null) {
@@ -69,7 +69,8 @@ public class FourthPageCommand implements Command {
             if (req.getParameter("updateButton") != null) {
                 ModelShowAuthor modelShowAuthor = ModelShowAuthor.getInstance();
                 try {
-                    for (AuthorShow author : FourthPageDB.authorShow())
+                    String valueRows=req.getParameter("UpdateSort");
+                    for (AuthorShow author : FourthPageDB.authorShow(valueRows))
                         modelShowAuthor.add(author);
                     LOGGER.debug("doPost in debug");
                 } catch (Exception e) {

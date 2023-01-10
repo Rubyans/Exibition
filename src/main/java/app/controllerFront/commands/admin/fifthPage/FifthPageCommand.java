@@ -29,12 +29,12 @@ public class FifthPageCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminFifth"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "adminFifth"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFifth"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminFifth"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFifth"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminFifth"));
             }
             try {
                 for (ArtAddShow addShow : FifthPageDB.addArtShow())
@@ -89,7 +89,8 @@ public class FifthPageCommand implements Command {
             if (req.getParameter("updateButton") != null) {
                 ModelShowArt modelShowArt = ModelShowArt.getInstance();
                 try {
-                    for (ArtShow art : FifthPageDB.artShow())
+                    String valueRows=req.getParameter("UpdateSort");
+                    for (ArtShow art : FifthPageDB.artShow(valueRows))
                         modelShowArt.add(art);
                     LOGGER.debug("doPost in debug");
                 } catch (Exception e) {

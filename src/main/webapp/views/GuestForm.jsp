@@ -3,7 +3,7 @@
 
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8"/>
         <title>${languageChange.get(0)}</title>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
@@ -18,31 +18,47 @@
             </div>
             <h3 class="text"><p id="guestHello">${languageChange.get(1)}</p><h3>
             <div class="buttonAuto">
-                <button class="updateButton" name="updateButton" id="updateButton">${languageChange.get(2)}</button>
+                <button type="button" class="updateButton" name="updateButton" id="updateButton" onclick="updateFunc()">${languageChange.get(2)}</button>
                 <button type="button" class="sortButton" name="sortButton" id="sortButton" onclick="sortFunc()">${languageChange.get(3)}</button>
                 <button name="autoButton" class="autoButton" id="autoButton">${languageChange.get(4)}</button>
             </div>
-            <div id="sortDiv" style="display: none;">
+
+            <div id="updateDiv" style="display: none;">
                  <div class="wrapper">
-                    <h6 class="h6Add" id="sortTxt">${languageChange.get(5)}</h6>
-                    <select class="SelectSort" name="SelectSort" id="SelectSort">
-                        <option value="1">${languageChange.get(6)}</option>
-                        <option value="2">${languageChange.get(7)}</option>
+                    <h6 class="h6Add" id="updateTxt">${languageChange.get(5)}</h6>
+                    <select class="UpdateSort" name="UpdateSort" id="UpdateSort">
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="all">${languageChange.get(6)}</option>
                     </select>
                     <div class="buttonAdd">
-                        <button class="sortButtonServlet" id="sortButton" name="sortButton">${languageChange.get(8)}</button>
+                        <button class="updateButtonServlet" id="updateButton" name="updateButton">${languageChange.get(7)}</button>
+                    </div>
+                 </div>
+            </div>
+
+            <div id="sortDiv" style="display: none;">
+                 <div class="wrapper">
+                    <h6 class="h6Add" id="sortTxt">${languageChange.get(8)}</h6>
+                    <select class="SelectSort" name="SelectSort" id="SelectSort">
+                        <option value="1">${languageChange.get(9)}</option>
+                        <option value="2">${languageChange.get(10)}</option>
+                    </select>
+                    <div class="buttonAdd">
+                        <button class="sortButtonServlet" id="sortButton" name="sortButton">${languageChange.get(11)}</button>
                     </div>
                  </div>
             </div>
             <table id="myTable">
               <tr>
-                <th id="nameExhibition">${languageChange.get(9)}</th>
-                <th id="description">${languageChange.get(10)}</th>
-                <th id="art">${languageChange.get(11)}</th>
-                <th id="price">${languageChange.get(12)}</th>
-                <th id="dataStart">${languageChange.get(13)}</th>
-                <th id="dataEnd">${languageChange.get(14)}</th>
-                <th id="Hours">${languageChange.get(15)}</th>
+                <th id="nameExhibition">${languageChange.get(12)}</th>
+                <th id="description">${languageChange.get(13)}</th>
+                <th id="art">${languageChange.get(14)}</th>
+                <th id="price">${languageChange.get(15)}</th>
+                <th id="dataStart">${languageChange.get(16)}</th>
+                <th id="dataEnd">${languageChange.get(17)}</th>
+                <th id="Hours">${languageChange.get(18)}</th>
               </tr>
                 <c:if test="${not requestScope.Error}">
                         <c:forEach var="guest" items="${GuestList}">
@@ -63,11 +79,11 @@
                 </c:if>
                 <c:if test="${requestScope.Error}">
                     <script>
-                        sweetAlert("${languageChange.get(16)}", "${languageChange.get(17)}", "error");
+                        sweetAlert("${languageChange.get(19)}", "${languageChange.get(20)}", "error");
                     </script>
                 </c:if>
             </table>
         </form>
-        <script src="./JS/functionsGuest.js" type="text/javascript"></script>
+        <script src="./JS/functionsGuest12.js" type="text/javascript"></script>
     </body>
 </html>

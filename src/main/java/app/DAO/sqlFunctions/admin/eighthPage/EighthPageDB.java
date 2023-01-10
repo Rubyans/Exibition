@@ -14,7 +14,7 @@ import java.util.List;
 public class EighthPageDB { //class used to show statistics of exhibitions
     private static final Logger LOGGER = Logger.getLogger(EighthPageDB.class);
 
-    public static List<ExhibitionStatisticsShow> statisticsShow() { //function shows statisticsExhibition
+    public static List<ExhibitionStatisticsShow> statisticsShow(String valueRows) { //function shows statisticsExhibition
         try {
             Connection connUserAutorized = HikariConnectDB.getConnection();
             List<ExhibitionStatisticsShow> statisticsList = new ArrayList<>();
@@ -22,6 +22,7 @@ public class EighthPageDB { //class used to show statistics of exhibitions
             String ticketCount = null;
             PreparedStatement statementEx = connUserAutorized.prepareStatement(SELECT_NAME_EXHIBITION, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet setEx = statementEx.executeQuery();
+            Integer countRows=0;
             while (setEx.next()) {
                 nameExhibition.add(setEx.getString(1));
             }
@@ -33,7 +34,14 @@ public class EighthPageDB { //class used to show statistics of exhibitions
                 while ((setTicket.next())) {
                     ticketCount = setTicket.getString(1);
                 }
-                statisticsList.add(new ExhibitionStatisticsShow(nameExhibition.get(i), ticketCount));
+                if (valueRows.equals("all"))
+                    statisticsList.add(new ExhibitionStatisticsShow(nameExhibition.get(i), ticketCount));
+                else {
+                    if (countRows < Integer.parseInt(valueRows)) {
+                        statisticsList.add(new ExhibitionStatisticsShow(nameExhibition.get(i), ticketCount));
+                        countRows++;
+                    }
+                }
             }
             nameExhibition.clear();
             LOGGER.debug("statisticsShow in debug");

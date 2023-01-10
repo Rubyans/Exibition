@@ -14,7 +14,7 @@ import java.util.List;
 public class FifthPageDB {
     private static final Logger LOGGER = Logger.getLogger(FifthPageDB.class);
 
-    public static List<ArtShow> artShow() { //function shows art
+    public static List<ArtShow> artShow(String valueRows) { //function shows art
         try {
             Connection connArt = HikariConnectDB.getConnection();
             List<ArtShow> art = new ArrayList<>();
@@ -24,6 +24,7 @@ public class FifthPageDB {
             List<String> nameView = new ArrayList<>();
             List<String> fullName = new ArrayList<>();
             List<String> nameArt = new ArrayList<>();
+            Integer countRows = 0;
 
             PreparedStatement statementNameArt = connArt.prepareStatement(SELECT_WORK_ART);
             ResultSet setNameArt = statementNameArt.executeQuery();
@@ -41,8 +42,16 @@ public class FifthPageDB {
                     nameView.add(setArt.getString(4));
                     fullName.add(setArt.getString(5) + " " + setArt.getString(6) + " " + setArt.getString(7));
                 }
-                if (name != null)
-                    art.add(new ArtShow(name, yearCreation, price, nameView, fullName));
+                if (name != null) {
+                    if (valueRows.equals("all"))
+                        art.add(new ArtShow(name, yearCreation, price, nameView, fullName));
+                    else {
+                        if (countRows < Integer.parseInt(valueRows)) {
+                            art.add(new ArtShow(name, yearCreation, price, nameView, fullName));
+                            countRows++;
+                        }
+                    }
+                }
                 name = null;
                 yearCreation = 0;
                 price = null;

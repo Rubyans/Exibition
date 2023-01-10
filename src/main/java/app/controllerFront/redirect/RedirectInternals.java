@@ -1,8 +1,6 @@
 package app.controllerFront.redirect;
 
-import app.controllerFront.commands.AuthorizedCommand;
-import app.controllerFront.commands.GuestCommand;
-import app.controllerFront.commands.RegistrationCommand;
+import app.controllerFront.commands.*;
 import app.controllerFront.commands.admin.eighthPage.EighthPageCommand;
 import app.controllerFront.commands.admin.fifthPage.FifthPageCommand;
 import app.controllerFront.commands.admin.firstPage.FirstPageCommand;
@@ -11,6 +9,8 @@ import app.controllerFront.commands.admin.secondPage.SecondPageCommand;
 import app.controllerFront.commands.admin.seventhPage.SeventhPageCommand;
 import app.controllerFront.commands.admin.sixthPage.SixthPageCommand;
 import app.controllerFront.commands.admin.thirdPage.ThirdPageCommand;
+import app.controllerFront.commands.recoveryPassword.PasswordCommand;
+import app.controllerFront.commands.recoveryPassword.RecoveryCommand;
 import app.controllerFront.commands.user.firstPage.UserFirstCommand;
 import app.controllerFront.commands.user.secondPage.UserSecondCommand;
 import app.controllerFront.models.ModelController;
@@ -38,6 +38,12 @@ public class RedirectInternals {
             }
             case "guest": {
                 return new GuestCommand();
+            }
+            case "recovery": {
+                return new RecoveryCommand();
+            }
+            case "recoverypassword": {
+                return new PasswordCommand();
             }
             case "user": {
                 return new UserFirstCommand();

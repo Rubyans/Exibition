@@ -17,7 +17,7 @@ import static app.DAO.sqlFunctions.sqlRequests.SQLRequests.FirstPageUser.*;
 public class FirstPageDB {
     private static final Logger LOGGER = Logger.getLogger(FirstPageDB.class);
 
-    public static List<UserShowExhibition> userShowEx(String userId) { //function shows exhibition data
+    public static List<UserShowExhibition> userShowEx(String valueRows,String userId) { //function shows exhibition data
         try {
             try {
                 Connection connUserEx = HikariConnectDB.getConnection();
@@ -29,6 +29,7 @@ public class FirstPageDB {
                 Date dataStart = null;
                 Date dateEnd = null;
                 Integer valueTicket = null;
+                Integer countRows=0;
 
                 PreparedStatement statementTicket = connUserEx.prepareStatement(SELECT_NAME_EXHIBITION_INNER + "'" + userId + "';", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
@@ -59,7 +60,14 @@ public class FirstPageDB {
                         if (key.equals(nameExhibition))
                             valueTicket = mapExhibition.get(key);
                     }
-                    user.add(new UserShowExhibition(nameExhibition, price, dataStart, dateEnd,hours, valueTicket));
+                    if (valueRows.equals("all"))
+                        user.add(new UserShowExhibition(nameExhibition, price, dataStart, dateEnd,hours, valueTicket));
+                    else {
+                        if (countRows < Integer.parseInt(valueRows)) {
+                            user.add(new UserShowExhibition(nameExhibition, price, dataStart, dateEnd,hours, valueTicket));
+                            countRows++;
+                        }
+                    }
                     valueTicket = null;
                 }
                 statement.close();

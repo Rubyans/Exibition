@@ -30,12 +30,12 @@ public class GuestCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "guest"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "guest"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "guest"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "guest"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "guest"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "guest"));
             }
 
             if (modelGuest.listUserGuest() != null) {
@@ -64,7 +64,9 @@ public class GuestCommand implements Command {
             } else if (req.getParameter("updateButton") != null) {
                 ModelGuest modelGuest = ModelGuest.getInstance();
                 try {
-                    for (UserGuest guest : UserGuestDB.authorizationUser()) {
+                    String valueRows=req.getParameter("UpdateSort");
+                    SortGuest.setValueRows(valueRows);
+                    for (UserGuest guest : UserGuestDB.authorizationUser(valueRows)) {
                         modelGuest.add(guest);
                     }
                     LOGGER.debug("doPost in debug");
@@ -72,6 +74,7 @@ public class GuestCommand implements Command {
                     modelGuest.add(null);
                     LOGGER.debug("doPost " + e.getMessage());
                 }
+
                 resp.sendRedirect("exhibition?command=guest");
             } else if (req.getParameter("sortButton") != null) {
                 ModelGuest modelGuest = ModelGuest.getInstance();

@@ -14,7 +14,7 @@ import static app.DAO.sqlFunctions.sqlRequests.SQLRequests.FirstPageAdmin.*;
 public class FirstPageDB {
     private static final Logger LOGGER = Logger.getLogger(FirstPageDB.class);
 
-    public static List<AdminShow> exhibitionShow() { //function shows(SELECT) exhibitions data
+    public static List<AdminShow> exhibitionShow(String valueRows) { //function shows(SELECT) exhibitions data
         try {
             Connection connExhibition = HikariConnectDB.getConnection();
 
@@ -36,6 +36,8 @@ public class FirstPageDB {
             List<String> nameview = new ArrayList<>();
             List<String> addressExibition = new ArrayList<>();
 
+            Integer countRows = 0;
+
 
             PreparedStatement statement = connExhibition.prepareStatement(SELECT_NAME_EXHIBITION, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet setName = statement.executeQuery();
@@ -52,7 +54,7 @@ public class FirstPageDB {
                     descriptionExibition = resultSet.getString(2);
                     expositionName.add(resultSet.getString(3));
                     price = resultSet.getDouble(4);
-                    hours=resultSet.getString(5);
+                    hours = resultSet.getString(5);
                     dateStart = resultSet.getDate(6);
                     dateEnd = resultSet.getDate(7);
                     access = resultSet.getString(8);
@@ -61,8 +63,16 @@ public class FirstPageDB {
                     nameview.add(resultSet.getString(12));
                     addressExibition.add(resultSet.getString(13) + ", " + resultSet.getString(14) + " " + resultSet.getString(15));
                 }
-                if (nameExhibition != null)
-                    admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, hours, dateStart, dateEnd, access, nameHell, nameAuthor, nameview, addressExibition));
+                if (nameExhibition != null) {
+                    if (valueRows.equals("all"))
+                        admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, hours, dateStart, dateEnd, access, nameHell, nameAuthor, nameview, addressExibition));
+                    else {
+                        if (countRows < Integer.parseInt(valueRows)) {
+                            admin.add(new AdminShow(nameExhibition, descriptionExibition, expositionName, price, hours, dateStart, dateEnd, access, nameHell, nameAuthor, nameview, addressExibition));
+                            countRows++;
+                        }
+                    }
+                }
                 hours = null;
                 nameExhibition = null;
                 descriptionExibition = null;
@@ -123,7 +133,7 @@ public class FirstPageDB {
         return null;
     }
 
-    public static Boolean addFirstPage(String nameExibition, String description, Double price,String hours, String start, String end, List<String> hall, List<String> address, List<String> workArt) { //function adds exhibitions-data
+    public static Boolean addFirstPage(String nameExibition, String description, Double price, String hours, String start, String end, List<String> hall, List<String> address, List<String> workArt) { //function adds exhibitions-data
         try {
             Connection connExhibition = HikariConnectDB.getConnection();
             Savepoint savepointAdd = connExhibition.setSavepoint("SavepointAdd");
@@ -137,7 +147,7 @@ public class FirstPageDB {
                 ExhibitionADD.setString(1, nameExibition);
                 ExhibitionADD.setString(2, description);
                 ExhibitionADD.setDouble(3, price);
-                ExhibitionADD.setString(4,hours);
+                ExhibitionADD.setString(4, hours);
                 ExhibitionADD.setString(5, start);
                 ExhibitionADD.setString(6, end);
                 ExhibitionADD.setInt(7, 1);

@@ -31,12 +31,12 @@ public class FirstPageCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminFirst"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "adminFirst"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFirst"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminFirst"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminFirst"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminFirst"));
             }
 
             try {
@@ -100,8 +100,9 @@ public class FirstPageCommand implements Command {
 /////////////////////////////////////Post-Request///////////////////////////////////////////////////////////////
             if (req.getParameter("updateButton") != null) {
                 ModelShow showModel = ModelShow.getInstance();
+                String valueRows=req.getParameter("UpdateSort");
                 try {
-                    for (AdminShow show : FirstPageDB.exhibitionShow())
+                    for (AdminShow show : FirstPageDB.exhibitionShow(valueRows))
                         showModel.add(show);
                     LOGGER.debug("doPost in debug");
                 } catch (Exception e) {

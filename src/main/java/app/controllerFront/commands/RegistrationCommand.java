@@ -23,12 +23,12 @@ public class RegistrationCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "registration"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "registration"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "registration"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "registration"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "registration"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "registration"));
             }
 
             if (modelRegistration.checkString() != null) {

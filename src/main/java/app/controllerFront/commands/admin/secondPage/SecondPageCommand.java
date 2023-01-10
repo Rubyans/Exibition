@@ -27,12 +27,12 @@ public class SecondPageCommand implements Command {
             ModelDelHall modelDelHall = ModelDelHall.getInstance();
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminSecond"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "adminSecond"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminSecond"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminSecond"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminSecond"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminSecond"));
             }
             if (showHall.listShow() != null) {
                 if (showHall.checkNull() == true) {
@@ -70,7 +70,8 @@ public class SecondPageCommand implements Command {
             if (req.getParameter("updateButton") != null) {
                 ModelShowHall showHall = ModelShowHall.getInstance();
                 try {
-                    for (HallShow hall : SecondPageDB.hallShow())
+                    String valueRows=req.getParameter("UpdateSort");
+                    for (HallShow hall : SecondPageDB.hallShow(valueRows))
                         showHall.add(hall);
                     LOGGER.debug("dePost in debug");
                 } catch (Exception e) {

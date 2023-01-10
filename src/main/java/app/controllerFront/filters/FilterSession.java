@@ -26,7 +26,7 @@ public class FilterSession implements Filter {
         if (command == null) {
             resp.sendRedirect("exhibition?command=auto");
         } else {
-            if (command.equals("auto") || command.equals("reg") || command.equals("guest")) {
+            if (command.equals("auto") || command.equals("reg") || command.equals("guest") || command.equals("recovery")) {
                 chain.doFilter(req, resp);
             } else {
                 if (command.equals("user") || command.equals("userexhibition")) { //check session for user
@@ -35,12 +35,21 @@ public class FilterSession implements Filter {
                     } else {
                         resp.sendRedirect("exhibition?command=auto");
                     }
-                } else { //check session for admin
-                    if (req.getSession().getAttribute("UserRole") == null || req.getSession().getAttribute("UserRole").equals("2")) {
+                } else if (command.equals("recoverypassword")) { //check session for recovery password
+                    if (req.getSession().getAttribute("recovery") != null) {
                         chain.doFilter(req, resp);
                     } else {
                         resp.sendRedirect("exhibition?command=auto");
                     }
+                } else { //check session for admin
+
+                    if (req.getSession().getAttribute("UserRole") != null) {
+                        if (req.getSession().getAttribute("UserRole").equals("2"))
+                            chain.doFilter(req, resp);
+                        else
+                            resp.sendRedirect("exhibition?command=auto");
+                    } else
+                        resp.sendRedirect("exhibition?command=auto");
                 }
             }
         }

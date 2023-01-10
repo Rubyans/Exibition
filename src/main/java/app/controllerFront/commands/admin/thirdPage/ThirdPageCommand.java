@@ -28,12 +28,12 @@ public class ThirdPageCommand implements Command {
 
             if (req.getSession().getAttribute("language") != null) {
                 if (req.getSession().getAttribute("language").equals("en")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeEN("language.properties", "adminThird"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeEN("languageEN.properties", "adminThird"));
                 } else if (req.getSession().getAttribute("language").equals("ua")) {
-                    req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminThird"));
+                    req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminThird"));
                 }
             } else {
-                req.setAttribute("languageChange", ChangeLanguage.changeUA("language.properties", "adminThird"));
+                req.setAttribute("languageChange", ChangeLanguage.changeUA("languageUA.properties", "adminThird"));
             }
 
             if (modelShowAddress.listShow() != null) {
@@ -71,7 +71,8 @@ public class ThirdPageCommand implements Command {
             if (req.getParameter("updateButton") != null) {
                 ModelShowAddress modelShowAddress = ModelShowAddress.getInstance();
                 try {
-                    for (AddressShow address : ThirdPageDB.addressShow())
+                    String valueRows=req.getParameter("UpdateSort");
+                    for (AddressShow address : ThirdPageDB.addressShow(valueRows))
                         modelShowAddress.add(address);
                     LOGGER.debug("doPost in debug");
                 } catch (Exception e) {

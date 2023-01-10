@@ -3,11 +3,11 @@
 <html>
     <head>
         <title>${languageChange.get(0)}</title>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"/>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <link href="./style/styleRegistration/FormRegistrations.css" rel="stylesheet" type="text/css">
+        <link href="./style/styleRegistration/FormRegistration.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div>

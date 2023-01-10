@@ -15,13 +15,13 @@ import java.util.List;
 public class SeventhPageDB {
     private static final Logger LOGGER = Logger.getLogger(SeventhPageDB.class);
 
-    public static List<UserAutorizedShow> userAuto() { //function shows userAutorized
+    public static List<UserAutorizedShow> userAuto(String valueRows) { //function shows userAutorized
         try {
             Connection connUserAutorized = HikariConnectDB.getConnection();
             List<UserAutorizedShow> userAuto = new ArrayList<>();
             String fistName, lastName, login, password, email, role, access;
             Double amount;
-
+            Integer countRows = 0;
             PreparedStatement statement = connUserAutorized.prepareStatement(SELECT_USER_AUTHORIZED);
             ResultSet setUser = statement.executeQuery();
             while (setUser.next()) {
@@ -33,7 +33,14 @@ public class SeventhPageDB {
                 amount = setUser.getDouble(6);
                 role = setUser.getString(7);
                 access = setUser.getString(8);
-                userAuto.add(new UserAutorizedShow(fistName, lastName, login, Encrypt.decryptText(password), email, amount, role, access));
+                if (valueRows.equals("all"))
+                    userAuto.add(new UserAutorizedShow(fistName, lastName, login, Encrypt.decryptText(password), email, amount, role, access));
+                else {
+                    if (countRows < Integer.parseInt(valueRows)) {
+                        userAuto.add(new UserAutorizedShow(fistName, lastName, login, Encrypt.decryptText(password), email, amount, role, access));
+                        countRows++;
+                    }
+                }
             }
             statement.close();
             LOGGER.debug("userAuto in debug");
@@ -57,6 +64,7 @@ public class SeventhPageDB {
                 UserAdd.setString(5, email);
                 UserAdd.setDouble(6, amount);
                 UserAdd.setString(7, role);
+                UserAdd.setInt(8, 1);
                 UserAdd.execute();
                 UserAdd.close();
                 LOGGER.debug("UserAutoAdd in debug");

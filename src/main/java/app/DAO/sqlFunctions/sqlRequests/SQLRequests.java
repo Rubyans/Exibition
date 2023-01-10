@@ -79,7 +79,7 @@ public abstract class SQLRequests {
 
     public static class SeventhPageAdmin {
         public static final String SELECT_USER_AUTHORIZED = "SELECT first_name,last_name,login,password,email,amount,role,access FROM exhibitiondb.authorized_user";
-        public static final String INSERT_USER_AUTHORIZED = "INSERT INTO exhibitiondb.authorized_user (first_name,last_name,login,password,email,amount,role) VALUES (?,?,?,?,?,?,?)";
+        public static final String INSERT_USER_AUTHORIZED = "INSERT INTO exhibitiondb.authorized_user (first_name,last_name,login,password,email,amount,role,access) VALUES (?,?,?,?,?,?,?,?)";
         public static final String UPDATE_USER_AUTHORIZED = "UPDATE exhibitiondb.authorized_user SET amount = ? WHERE email = ?";
         public static final String DELETE_USER_AUTHORIZED = "DELETE FROM exhibitiondb.authorized_user WHERE email=?";
         public static final String UPDATE_USER_AUTHORIZED_ACCESS = "UPDATE exhibitiondb.authorized_user SET access = ? WHERE email = ?";
@@ -139,5 +139,17 @@ public abstract class SQLRequests {
         public static final String SELECT_EXHIBITION = "SELECT exhibition.name,description,work_art.name,price,date_start,date_end,hours\n" +
                 "FROM exhibitiondb.exhibition INNER JOIN exhibitiondb.exposition ON exhibition.exhibition_id=exposition.exhibition_fk \n" +
                 "INNER JOIN exhibitiondb.work_art ON exposition.art_fk=work_art.art_id WHERE exhibition.access='1';";
+    }
+
+    public static class RecoveryUser {
+        public static final String SELECT_NAME_RECOVERY = "SELECT first_name from exhibitiondb.authorized_user WHERE email = ?";
+        public static final String UPDATE_PIN_RECOVERY = "UPDATE exhibitiondb.authorized_user SET pin_code = ? WHERE email = ?";
+    }
+
+    public static class RecoveryUserPassword {
+        public static final String SELECT_NAME_PIN_RECOVERY = "SELECT first_name from exhibitiondb.authorized_user WHERE pin_code = ?";
+        public static final String UPDATE_PASSWORD_PIN_RECOVERY = "UPDATE exhibitiondb.authorized_user SET password = ? WHERE pin_code = ?";
+        public static final String DELETE_PIN_RECOVERY = "UPDATE exhibitiondb.authorized_user SET pin_code = ? WHERE password = ?";
+
     }
 }
